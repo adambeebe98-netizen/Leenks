@@ -4,277 +4,192 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Adam Beebe · Vivint Security Specialist · Austin TX</title>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --g: #05E5AF;
-    --gd: #03C090;
-    --dk: #10201F;
-    --dk2: #182E2C;
-    --dk3: #0A1614;
-    --w: #ffffff;
-    --g1: rgba(5,229,175,.08);
-    --g2: rgba(5,229,175,.15);
-    --g3: rgba(5,229,175,.25);
-  }
+:root{--g:#05E5AF;--gd:#03C090;--dk:#10201F;--dk2:#182E2C;--w:#fff;--g1:rgba(5,229,175,.08);--g2:rgba(5,229,175,.15);--g3:rgba(5,229,175,.25);}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dk);font-family:'Figtree',sans-serif;color:var(--w);overflow-x:hidden;}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(16,32,31,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(5,229,175,.12);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.nav-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;letter-spacing:.03em;}
+.nav-name span{color:var(--g);}
+.nav-links{display:flex;gap:22px;}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--g);}
+@media(max-width:600px){.nav-links{display:none;}}
 
-  body {
-    background: var(--dk);
-    font-family: 'Figtree', sans-serif;
-    color: var(--w);
-    overflow-x: hidden;
-  }
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(5,229,175,.1) 0%,transparent 60%);pointer-events:none;z-index:0;}
+.hero-content{position:relative;z-index:1;animation:fadeUp .8s ease both;}
+.avatar-ring{width:96px;height:96px;border-radius:50%;border:2px solid var(--g3);padding:4px;margin:0 auto 20px;position:relative;}
+.avatar-ring::before{content:'';position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--g2);}
+.avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--dk2);border:1px solid var(--g2);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:32px;font-weight:700;color:var(--g);}
+.badge{display:inline-flex;align-items:center;gap:7px;background:var(--g1);border:1px solid var(--g3);border-radius:20px;padding:5px 14px;margin-bottom:16px;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s infinite;}
+.badge-text{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--g);}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(36px,6vw,58px);font-weight:700;line-height:1.05;margin-bottom:10px;}
+.hero-role{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:28px;}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:.03em;padding:13px 26px;border-radius:30px;text-decoration:none;cursor:pointer;border:none;transition:all .2s;}
+.hero-cta:hover{background:var(--gd);transform:translateY(-2px);}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25);display:flex;flex-direction:column;align-items:center;gap:5px;animation:bounce 2.4s infinite;}
 
-  section { position: relative; padding: 80px 24px; max-width: 920px; margin: 0 auto; }
+/* SECTION COMMON */
+section.content{max-width:860px;margin:0 auto;padding:80px 24px;}
+.label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--g);display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.label::before{content:'';width:18px;height:1.5px;background:var(--g);border-radius:1px;}
+.section-title{font-family:'Rajdhani',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:32px;}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 50;
-    background: rgba(16,32,31,.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(5,229,175,.12);
-    padding: 14px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .03em; }
-  .nav-name span { color: var(--g); }
-  .nav-links { display: flex; gap: 22px; }
-  .nav-links a {
-    color: rgba(255,255,255,.5); text-decoration: none;
-    font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 500;
-    letter-spacing: .1em; text-transform: uppercase;
-    transition: color .2s;
-  }
-  .nav-links a:hover { color: var(--g); }
-  @media (max-width: 600px) { .nav-links { display: none; } }
+/* STATS */
+.stats-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(5,229,175,.12);border:1px solid rgba(5,229,175,.18);border-radius:14px;overflow:hidden;margin-bottom:24px;}
+.stat-cell{background:var(--dk2);padding:20px 16px;text-align:center;}
+.stat-num{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:var(--g);line-height:1;margin-bottom:4px;}
+.stat-lbl{font-size:11px;color:rgba(255,255,255,.4);}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center;
-    padding-top: 80px;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
-    width: 900px; height: 900px;
-    background: radial-gradient(circle, rgba(5,229,175,.1) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-content { position: relative; z-index: 1; animation: fadeUp .8s ease both; }
+/* ACCORDION */
+.accordion{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;margin-bottom:28px;}
+.accordion-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;background:none;border:none;cursor:pointer;text-align:left;}
+.accordion-btn:hover{background:rgba(5,229,175,.04);}
+.accordion-label{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;color:var(--w);line-height:1.3;}
+.accordion-icon{font-size:18px;color:var(--g);flex-shrink:0;transition:transform .3s;}
+.accordion-btn[aria-expanded="true"] .accordion-icon{transform:rotate(180deg);}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;padding:0 22px;}
+.accordion-body.open{max-height:500px;padding:0 22px 22px;}
+.accordion-body p{font-size:14px;line-height:1.8;color:rgba(255,255,255,.7);}
+.accordion-body p+p{margin-top:12px;}
+.accordion-body strong{color:var(--w);font-weight:500;}
 
-  .avatar-ring {
-    width: 100px; height: 100px;
-    border-radius: 50%;
-    border: 2px solid var(--g3);
-    padding: 4px;
-    margin: 0 auto 22px;
-    position: relative;
-  }
-  .avatar-ring::before {
-    content: ''; position: absolute; inset: -8px;
-    border-radius: 50%; border: 1px solid var(--g2);
-  }
-  .avatar-inner {
-    width: 100%; height: 100%; border-radius: 50%;
-    background: var(--dk2); border: 1px solid var(--g2);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Rajdhani', sans-serif; font-size: 34px; font-weight: 700;
-    color: var(--g); letter-spacing: .05em;
-  }
+/* MAP */
+.map-container{border-radius:14px;overflow:hidden;border:1px solid rgba(5,229,175,.15);height:400px;position:relative;}
+.map-container #about-map{width:100%;height:100%;}
+.mapboxgl-popup-content{background:#10201F!important;border:1px solid rgba(5,229,175,.3)!important;border-radius:10px!important;color:white!important;padding:10px 14px!important;font-family:'Figtree',sans-serif!important;}
+.mapboxgl-popup-tip{border-top-color:#10201F!important;border-bottom-color:#10201F!important;}
+.pop-name{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;margin-bottom:2px;}
+.pop-note{font-size:11px;color:rgba(255,255,255,.5);line-height:1.45;}
 
-  .badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: var(--g1); border: 1px solid var(--g3);
-    border-radius: 20px; padding: 5px 14px; margin-bottom: 18px;
-  }
-  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--g); animation: pulse 2s infinite; }
-  .badge-text {
-    font-family: 'Rajdhani', sans-serif; font-size: 10.5px; font-weight: 500;
-    letter-spacing: .14em; text-transform: uppercase; color: var(--g);
-  }
+/* LINK CARDS */
+.links-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:560px){.links-grid{grid-template-columns:1fr;}}
+.link-card{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;text-decoration:none;color:inherit;cursor:pointer;transition:all .2s;border:none;width:100%;text-align:left;}
+.link-card:hover{background:var(--g1);border:1px solid var(--g3);transform:translateY(-2px);}
+.link-card.primary{background:var(--g);border:none;grid-column:span 2;}
+.link-card.primary .link-title{color:var(--dk);}
+.link-card.primary .link-desc{color:rgba(16,32,31,.65);}
+.link-card.primary .link-icon{background:rgba(0,0,0,.12);border:none;}
+.link-card.primary:hover{background:var(--gd);transform:translateY(-2px);}
+@media(max-width:560px){.link-card.primary{grid-column:span 1;}}
+.link-icon{width:40px;height:40px;border-radius:10px;background:var(--g1);border:1px solid var(--g2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.link-content{flex:1;}
+.link-title{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;margin-bottom:3px;}
+.link-desc{font-size:12px;color:rgba(255,255,255,.42);line-height:1.4;}
 
-  .hero h1 {
-    font-family: 'Rajdhani', sans-serif; font-size: 52px; font-weight: 700;
-    letter-spacing: .01em; line-height: 1.05; margin-bottom: 10px;
-  }
-  .hero .role {
-    font-size: 15px; color: rgba(255,255,255,.45); margin-bottom: 28px;
-  }
+/* FOOTER */
+footer{border-top:1px solid rgba(5,229,175,.1);padding:40px 24px 56px;text-align:center;}
+.footer-brand{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(5,229,175,.3);margin-bottom:8px;}
+.footer-contact{font-size:12px;color:rgba(255,255,255,.25);}
 
-  .hero-cta {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--g); color: var(--dk);
-    font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 14px;
-    letter-spacing: .03em;
-    padding: 13px 26px; border-radius: 30px;
-    text-decoration: none;
-    transition: all .2s;
-  }
-  .hero-cta:hover { background: var(--gd); transform: translateY(-2px); }
+/* BACKDROP */
+#backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:50;opacity:0;pointer-events:none;transition:opacity .3s;}
+#backdrop.on{opacity:1;pointer-events:all;}
 
-  .scroll-hint {
-    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-    font-family: 'Rajdhani', sans-serif; font-size: 9.5px; letter-spacing: .16em;
-    text-transform: uppercase; color: rgba(255,255,255,.25);
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    animation: bounce 2.4s infinite;
-  }
-  .scroll-hint::after { content: '↓'; font-size: 14px; }
+/* POPUP SHEET */
+.popup{position:fixed;bottom:0;left:0;right:0;z-index:51;background:var(--dk);border-radius:20px 20px 0 0;padding:0;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .38s cubic-bezier(.32,.72,0,1);max-width:640px;margin:0 auto;}
+.popup.on{transform:translateY(0);}
+.popup-header{display:flex;align-items:center;justify-content:space-between;padding:20px 22px 16px;border-bottom:1px solid rgba(5,229,175,.1);flex-shrink:0;}
+.popup-title{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:var(--w);}
+.popup-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.6);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.popup-close:hover{background:rgba(255,255,255,.14);color:white;}
+.popup-body{overflow-y:auto;padding:20px 22px 32px;flex:1;}
 
-  /* ── SECTION LABEL ── */
-  .label {
-    font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 500;
-    letter-spacing: .2em; text-transform: uppercase; color: var(--g);
-    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
-  }
-  .label::before { content: ''; width: 18px; height: 1.5px; background: var(--g); border-radius: 1px; }
+/* FORM ELEMENTS */
+.form-label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:6px;display:block;}
+.form-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:11px 14px;color:white;font-family:'Figtree',sans-serif;font-size:14px;outline:none;transition:border-color .2s;margin-bottom:14px;}
+.form-input:focus{border-color:rgba(5,229,175,.5);}
+.form-input::placeholder{color:rgba(255,255,255,.25);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:480px){.form-row{grid-template-columns:1fr;}}
+.btn-primary{width:100%;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;padding:14px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;margin-top:8px;}
+.btn-primary:hover{background:var(--gd);}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;}
+.btn-secondary{width:100%;background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);cursor:pointer;transition:all .2s;margin-top:8px;}
 
-  .section-title {
-    font-family: 'Rajdhani', sans-serif; font-size: 30px; font-weight: 700;
-    letter-spacing: .01em; margin-bottom: 36px; max-width: 600px;
-  }
+/* DEVICE GRID */
+.dev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+@media(max-width:480px){.dev-grid{grid-template-columns:repeat(3,1fr);}}
+.dev-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-radius:10px;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);cursor:pointer;transition:all .2s;text-align:center;}
+.dev-card:hover{border-color:rgba(5,229,175,.35);background:var(--g1);}
+.dev-card.selected{border-color:var(--g);background:rgba(5,229,175,.12);}
+.dev-icon{width:28px;height:28px;color:rgba(255,255,255,.6);}
+.dev-card.selected .dev-icon{color:var(--g);}
+.dev-icon svg{width:100%;height:100%;}
+.dev-name{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:500;letter-spacing:.04em;color:rgba(255,255,255,.5);line-height:1.2;}
+.dev-card.selected .dev-name{color:var(--g);}
 
-  /* ── ABOUT ── */
-  .about-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
-  .about-card {
-    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
-    border-radius: 14px; padding: 24px 26px;
-    animation: fadeUp .6s ease both;
-  }
-  .about-card p { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,.7); }
-  .about-card p + p { margin-top: 14px; }
-  .about-card strong { color: var(--w); font-weight: 500; }
+/* TASK LIST */
+.task-add-row{display:flex;gap:8px;margin-bottom:14px;align-items:flex-start;}
+.task-add-row .form-input{margin-bottom:0;flex:1;}
+.task-add-btn{flex-shrink:0;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;padding:11px 14px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;}
+.task-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.task-item{display:flex;align-items:center;gap:10px;background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.2);border-radius:8px;padding:10px 12px;}
+.task-item-icon{width:20px;height:20px;color:var(--g);flex-shrink:0;}
+.task-item-icon svg{width:100%;height:100%;}
+.task-item-text{flex:1;font-size:13px;color:var(--w);}
+.task-item-dev{font-family:'Rajdhani',sans-serif;font-size:11px;color:var(--g);font-weight:600;}
+.task-item-del{background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:16px;padding:2px 4px;}
+.task-item-del:hover{color:rgba(255,100,100,.8);}
+.task-empty{text-align:center;padding:16px;color:rgba(255,255,255,.3);font-size:13px;font-style:italic;border:1px dashed rgba(255,255,255,.1);border-radius:8px;margin-bottom:16px;}
 
-  .stats {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px;
-    background: rgba(5,229,175,.12); border: 1px solid rgba(5,229,175,.18);
-    border-radius: 14px; overflow: hidden; margin-top: 22px;
-  }
-  .stat { background: var(--dk2); padding: 20px 14px; text-align: center; }
-  .stat-num { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; color: var(--g); line-height: 1; margin-bottom: 5px; }
-  .stat-label { font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: .04em; }
+/* STEP INDICATOR */
+.steps{display:flex;align-items:center;gap:0;margin-bottom:24px;}
+.step-dot{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;color:rgba(255,255,255,.3);flex-shrink:0;}
+.step-dot.active{border-color:var(--g);color:var(--g);background:rgba(5,229,175,.1);}
+.step-dot.done{border-color:var(--g);background:var(--g);color:var(--dk);}
+.step-line{flex:1;height:1px;background:rgba(255,255,255,.1);}
+.step-line.done{background:var(--g);}
 
-  /* ── JOURNEY MAP ── */
-  .journey-wrap {
-    background: rgba(255,255,255,.02);
-    border: 1px solid rgba(5,229,175,.15);
-    border-radius: 16px;
-    padding: 32px 24px 24px;
-    position: relative;
-    overflow: hidden;
-  }
-  .journey-wrap::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(5,229,175,.18) 1px, transparent 1px);
-    background-size: 26px 26px;
-    pointer-events: none;
-  }
-  .map-canvas {
-    position: relative;
-    width: 100%;
-    height: 420px;
-    z-index: 1;
-  }
-  .map-pin {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    display: flex; flex-direction: column; align-items: center;
-    cursor: default;
-  }
-  .map-pin-dot {
-    width: 11px; height: 11px; border-radius: 50%;
-    background: var(--g);
-    box-shadow: 0 0 0 4px rgba(5,229,175,.15), 0 0 14px rgba(5,229,175,.6);
-    position: relative;
-    z-index: 2;
-  }
-  .map-pin.home .map-pin-dot {
-    background: var(--w);
-    box-shadow: 0 0 0 5px rgba(5,229,175,.25), 0 0 18px rgba(5,229,175,.8);
-    width: 14px; height: 14px;
-  }
-  .map-pin-label {
-    margin-top: 7px;
-    font-family: 'Rajdhani', sans-serif; font-size: 10.5px; font-weight: 600;
-    color: var(--w); white-space: nowrap;
-    background: rgba(16,32,31,.9);
-    padding: 2px 7px; border-radius: 4px;
-    border: 1px solid rgba(5,229,175,.2);
-  }
-  .map-pin.home .map-pin-label { color: var(--g); border-color: rgba(5,229,175,.4); }
-  .map-pin-num {
-    font-family: 'Rajdhani', sans-serif; font-size: 8px; color: rgba(5,229,175,.5);
-    margin-top: 1px;
-  }
+/* REBOOT CARD */
+.reboot-card{background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.2);border-radius:12px;padding:18px;margin-bottom:16px;}
+.reboot-title{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:var(--w);margin-bottom:8px;}
+.reboot-body{font-size:13px;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:14px;}
+.reboot-details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--g);cursor:pointer;margin-bottom:8px;}
+.reboot-steps{font-size:13px;color:rgba(255,255,255,.6);line-height:1.8;padding-left:16px;}
+.reboot-steps li{margin-bottom:4px;}
 
-  .journey-path {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 0;
-  }
+/* AVAILABILITY */
+.avail-label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:8px;display:block;}
+.day-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;}
+.day-pill{padding:7px 12px;border-radius:20px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.6);font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;}
+.day-pill.on{border-color:var(--g);background:rgba(5,229,175,.12);color:var(--g);}
+.time-pills{display:flex;gap:8px;margin-bottom:20px;}
+.time-pill{flex:1;padding:10px;border-radius:10px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.6);font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;}
+.time-pill.on{border-color:var(--g);background:rgba(5,229,175,.12);color:var(--g);}
 
-  .journey-legend {
-    display: flex; align-items: center; justify-content: center;
-    gap: 24px; margin-top: 20px; flex-wrap: wrap;
-    position: relative; z-index: 1;
-  }
-  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: rgba(255,255,255,.45); }
-  .legend-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--g); }
-  .legend-dot.home { background: var(--w); }
+/* INTEREST GRID (quote/upgrade) */
+.interest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+@media(max-width:440px){.interest-grid{grid-template-columns:repeat(2,1fr);}}
+.int-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;border-radius:10px;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);cursor:pointer;transition:all .2s;text-align:center;}
+.int-card:hover{border-color:rgba(5,229,175,.35);background:var(--g1);}
+.int-card.on{border-color:var(--g);background:rgba(5,229,175,.12);}
+.int-card-icon{width:26px;height:26px;color:rgba(255,255,255,.55);}
+.int-card.on .int-card-icon{color:var(--g);}
+.int-card-icon svg{width:100%;height:100%;}
+.int-card-name{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;color:rgba(255,255,255,.5);line-height:1.2;}
+.int-card.on .int-card-name{color:var(--g);}
 
-  /* ── LINKS ── */
-  .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 600px) { .links-grid { grid-template-columns: 1fr; } }
+/* SUCCESS */
+.success-screen{text-align:center;padding:32px 20px;}
+.success-icon{font-size:48px;margin-bottom:16px;}
+.success-title{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--w);margin-bottom:8px;}
+.success-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;}
 
-  .link-card {
-    display: flex; align-items: flex-start; gap: 14px;
-    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
-    border-radius: 14px; padding: 18px;
-    text-decoration: none; color: inherit;
-    transition: all .2s ease;
-    animation: fadeUp .5s ease both;
-  }
-  .link-card:hover { background: var(--g1); border-color: var(--g3); transform: translateY(-2px); }
-  .link-card.primary { background: var(--g); border-color: transparent; grid-column: span 2; }
-  @media (max-width: 600px) { .link-card.primary { grid-column: span 1; } }
-  .link-card.primary .link-title { color: var(--dk); }
-  .link-card.primary .link-desc { color: rgba(16,32,31,.65); }
-  .link-card.primary .link-icon { background: rgba(0,0,0,.12); }
-  .link-card.primary:hover { background: var(--gd); }
-
-  .link-icon {
-    width: 38px; height: 38px; border-radius: 10px;
-    background: var(--g1); border: 1px solid var(--g2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 17px; flex-shrink: 0;
-  }
-  .link-title { font-family: 'Rajdhani', sans-serif; font-size: 14.5px; font-weight: 600; margin-bottom: 3px; }
-  .link-desc { font-size: 11.5px; color: rgba(255,255,255,.42); line-height: 1.4; }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid rgba(5,229,175,.1);
-    padding: 40px 24px 56px;
-    text-align: center;
-  }
-  .footer-vivint {
-    font-family: 'Rajdhani', sans-serif; font-size: 9.5px; font-weight: 500;
-    letter-spacing: .18em; text-transform: uppercase; color: rgba(5,229,175,.35);
-    margin-bottom: 8px;
-  }
-  .footer-contact { font-size: 12px; color: rgba(255,255,255,.3); }
-
-  /* ── ANIM ── */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
-  @keyframes bounce { 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,6px);} }
+/* ANIM */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+@keyframes bounce{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,7px);}}
 </style>
 </head>
 <body>
@@ -283,9 +198,9 @@
   <div class="nav-name">ADAM <span>BEEBE</span></div>
   <div class="nav-links">
     <a href="#about">About</a>
-    <a href="#journey">Journey</a>
     <a href="#links">Get Started</a>
-    <a href="#links">Contact</a>
+    <a href="tips.html">Tips</a>
+    <a href="troubleshoot.html">Troubleshoot</a>
   </div>
 </nav>
 
@@ -293,222 +208,644 @@
 <section class="hero">
   <div class="hero-content">
     <div class="avatar-ring"><div class="avatar-inner">AB</div></div>
-    <div class="badge">
-      <div class="badge-dot"></div>
-      <span class="badge-text">Authorized Vivint Pro · Austin, TX</span>
-    </div>
+    <div class="badge"><div class="badge-dot"></div><span class="badge-text">Authorized Vivint Pro · Austin, TX</span></div>
     <h1>Adam Beebe</h1>
-    <div class="role">Senior Security Specialist · Badge #131211</div>
-    <a class="hero-cta" href="#links">Get a Free Quote →</a>
+    <div class="hero-role">Senior Security Specialist · Badge #131211</div>
+    <button class="hero-cta" onclick="document.getElementById('links').scrollIntoView({behavior:'smooth'})">Get Started →</button>
   </div>
-  <div class="scroll-hint">Scroll</div>
+  <div class="scroll-hint">Scroll<span style="margin-top:2px">↓</span></div>
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section class="content" id="about">
   <div class="label">About Adam</div>
 
-  <!-- Stats always visible -->
-  <div class="stats" style="margin-bottom:20px;">
-    <div class="stat"><div class="stat-num">1000s</div><div class="stat-label">Homes Protected</div></div>
-    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Cities Worked</div></div>
-    <div class="stat"><div class="stat-num">2023</div><div class="stat-label">Austin Local</div></div>
+  <div class="stats-strip">
+    <div class="stat-cell"><div class="stat-num">3,000+</div><div class="stat-lbl">Homes Protected</div></div>
+    <div class="stat-cell"><div class="stat-num">2016</div><div class="stat-lbl">With Vivint Since</div></div>
+    <div class="stat-cell"><div class="stat-num">2023</div><div class="stat-lbl">Austin Local Since</div></div>
   </div>
 
-  <!-- Dropdown accordion -->
-  <div class="accordion" id="aboutAccordion">
-    <button class="accordion-trigger" onclick="toggleAbout()" aria-expanded="false">
+  <div class="accordion">
+    <button class="accordion-btn" aria-expanded="false" onclick="toggleAbout(this)">
       <span class="accordion-label">From the Utah innovation center, to thousands of doors across America.</span>
       <span class="accordion-icon">↓</span>
     </button>
-    <div class="accordion-body" id="aboutBody">
-      <p>I grew up a mile from <strong>Vivint's original HQ</strong> in Provo, Utah. My final year of high school, I landed an internship at the Vivint Innovation Center — where all the magic is created — in the Space Monkey division, now known as the Vivint Smart Drive.</p>
-      <p>After my internship, I went and knocked doors in Oklahoma City in 2017. That's when I realized installing was really my thing. Since then, I've visited <strong>many thousands of homes</strong> across the country, helping families and neighborhoods feel safe in the places they love most.</p>
-      <p>My first time in Austin was a short 10-day trip that just so happened to be the same time as the <strong>great freeze of 2021</strong> — Snowmageddon, some may call it. Somehow, after one more work trip to the area, I decided to call it home. I moved here spring of 2023, and I love the Austin community and the opportunity to help it achieve greater peace of mind through smart, convenient security.</p>
+    <div class="accordion-body" id="about-body">
+      <p>I grew up a mile from <strong>Vivint's original HQ</strong> in Provo, Utah. My final year of high school I landed an internship at the Vivint Innovation Center — in the Space Monkey division, now known as the Vivint Smart Drive.</p>
+      <p>After my internship, I knocked doors in Oklahoma City in 2017. That's when I realized installing was really my thing. Since then, I've visited <strong>many thousands of homes</strong> across the country, helping families and neighborhoods feel safe in the places they love most.</p>
+      <p>My first time in Austin was a 10-day trip that just so happened to coincide with the <strong>great freeze of 2021</strong> — Snowmageddon, some may call it. Somehow, after one more work trip to the area, I decided to call it home. I moved here spring of 2023, and I love the opportunity to help this community achieve greater peace of mind through smart, convenient security.</p>
     </div>
   </div>
 
-  <style>
-    .accordion {
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .accordion-trigger {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 18px 22px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-    }
-    .accordion-trigger:hover { background: rgba(5,229,175,.04); }
-    .accordion-label {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 17px; font-weight: 600;
-      color: var(--w);
-      letter-spacing: .01em;
-      line-height: 1.3;
-    }
-    .accordion-icon {
-      font-size: 18px;
-      color: var(--g);
-      flex-shrink: 0;
-      transition: transform .3s ease;
-    }
-    .accordion-trigger[aria-expanded="true"] .accordion-icon {
-      transform: rotate(180deg);
-    }
-    .accordion-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .4s ease, padding .3s ease;
-      padding: 0 22px;
-    }
-    .accordion-body.open {
-      max-height: 400px;
-      padding: 0 22px 20px;
-    }
-    .accordion-body p {
-      font-size: 15px; line-height: 1.75;
-      color: rgba(255,255,255,.7);
-    }
-    .accordion-body p + p { margin-top: 14px; }
-    .accordion-body strong { color: var(--w); font-weight: 500; }
-  </style>
-
-  <script>
-    function toggleAbout() {
-      const btn = document.querySelector('.accordion-trigger');
-      const body = document.getElementById('aboutBody');
-      const isOpen = body.classList.contains('open');
-      body.classList.toggle('open', !isOpen);
-      btn.setAttribute('aria-expanded', !isOpen);
-    }
-  </script>
+  <div class="label" style="margin-bottom:12px;">Every city I've ever worked.</div>
+  <div class="map-container">
+    <div id="about-map"></div>
+  </div>
 </section>
 
-<!-- JOURNEY MAP -->
-<section id="journey">
-  <div class="label">The Journey</div>
-  <h2 class="section-title">Every city I've ever worked.</h2>
-
-  <a href="adam_map.html" style="text-decoration:none;">
-    <div class="journey-wrap" style="cursor:pointer;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(5,229,175,.4)'" onmouseout="this.style.borderColor='rgba(5,229,175,.15)'">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-        <div>
-          <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:white;margin-bottom:3px;">Interactive Work Map</div>
-          <div style="font-size:12px;color:rgba(255,255,255,.4);">25+ regions · hover for city details · tap to explore</div>
-        </div>
-        <div style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;color:#05E5AF;display:flex;align-items:center;gap:6px;">
-          Open Map <span style="font-size:16px;">→</span>
-        </div>
-      </div>
-
-      <!-- Mini preview dots -->
-      <div style="position:relative;height:140px;background:rgba(5,229,175,.03);border-radius:8px;overflow:hidden;border:1px solid rgba(5,229,175,.08);">
-        <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(5,229,175,.15) 1px,transparent 1px);background-size:18px 18px;"></div>
-        <!-- Vivint green blobs roughly representing work areas -->
-        <div style="position:absolute;width:40px;height:40px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:35%;left:18%;transform:translate(-50%,-50%);"></div>
-        <div style="position:absolute;width:55px;height:55px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:38%;left:13%;transform:translate(-50%,-50%);"></div>
-        <div style="position:absolute;width:48px;height:48px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:55%;left:38%;transform:translate(-50%,-50%);"></div>
-        <div style="position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:52%;left:48%;transform:translate(-50%,-50%);"></div>
-        <div style="position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:58%;left:56%;transform:translate(-50%,-50%);"></div>
-        <div style="position:absolute;width:34px;height:34px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:72%;left:63%;transform:translate(-50%,-50%);"></div>
-        <div style="position:absolute;width:32px;height:32px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:58%;left:80%;transform:translate(-50%,-50%);"></div>
-        <div style="position:absolute;width:42px;height:42px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:32%;left:49%;transform:translate(-50%,-50%);"></div>
-        <!-- Home pins -->
-        <div style="position:absolute;width:10px;height:10px;border-radius:50%;background:white;border:2px solid #05E5AF;box-shadow:0 0 8px rgba(5,229,175,.8);top:35%;left:21%;transform:translate(-50%,-50%);"></div>
-        <div style="position:absolute;width:10px;height:10px;border-radius:50%;background:white;border:2px solid #05E5AF;box-shadow:0 0 8px rgba(5,229,175,.8);top:74%;left:45%;transform:translate(-50%,-50%);"></div>
-        <!-- Star for Beebe -->
-        <div style="position:absolute;font-size:14px;top:52%;left:56%;transform:translate(-50%,-50%);">⭐</div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-          <div style="font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(5,229,175,.3);">Click to open full interactive map</div>
-        </div>
-      </div>
-
-      <div class="journey-legend" style="margin-top:14px;">
-        <div class="legend-item"><div class="legend-dot home"></div>Home / HQ</div>
-        <div class="legend-item"><div class="legend-dot"></div>Work regions</div>
-        <div class="legend-item"><span style="font-size:12px;">⭐</span>Beebe, AR</div>
-      </div>
-    </div>
-  </a>
-</section>
-
-<!-- LINKS -->
-<section id="links">
+<!-- GET STARTED -->
+<section class="content" id="links">
   <div class="label">Get Started</div>
   <h2 class="section-title">Everything you need, one tap away.</h2>
-
   <div class="links-grid">
-    <a class="link-card primary" href="#">
-      <div class="link-icon">🔒</div>
-      <div>
-        <div class="link-title">Get a Free Quote</div>
-        <div class="link-desc">See what a protected home looks like for your neighborhood.</div>
-      </div>
-    </a>
 
-    <a class="link-card" href="#">
+    <button class="link-card primary" onclick="openPopup('popup-quote')">
+      <div class="link-icon">🔒</div>
+      <div class="link-content">
+        <div class="link-title">Get a Free Quote</div>
+        <div class="link-desc">Tell me what you're interested in and I'll reach out with pricing.</div>
+      </div>
+    </button>
+
+    <button class="link-card" onclick="openPopup('popup-referral')">
       <div class="link-icon">👋</div>
-      <div>
+      <div class="link-content">
         <div class="link-title">Refer a Neighbor</div>
         <div class="link-desc">You earn $200. They get a free doorbell camera.</div>
       </div>
-    </a>
+    </button>
 
     <a class="link-card" href="sms:+18013769296">
       <div class="link-icon">💬</div>
-      <div>
+      <div class="link-content">
         <div class="link-title">Text Adam Directly</div>
-        <div class="link-desc">Quickest way to reach me. I actually respond.</div>
+        <div class="link-desc">(801) 376-9296 · Quickest way to reach me. I actually respond.</div>
       </div>
     </a>
 
-    <a class="link-card" href="#">
-      <div class="link-icon">📅</div>
-      <div>
+    <button class="link-card" onclick="openPopup('popup-service')">
+      <div class="link-icon">🛠️</div>
+      <div class="link-content">
         <div class="link-title">Schedule a Service Visit</div>
-        <div class="link-desc">Book a check-in or upgrade walkthrough.</div>
+        <div class="link-desc">Having an issue? Let's get it sorted. I'll call to confirm timing.</div>
       </div>
-    </a>
+    </button>
 
-    <a class="link-card" href="#">
+    <a class="link-card" href="tips.html">
       <div class="link-icon">💡</div>
-      <div>
-        <div class="link-title">Tips & Tricks</div>
-        <div class="link-desc">Get more out of your Vivint system.</div>
+      <div class="link-content">
+        <div class="link-title">Tips &amp; Tricks</div>
+        <div class="link-desc">Get more out of your Vivint system. Updated regularly.</div>
       </div>
     </a>
 
-    <a class="link-card" href="#">
+    <a class="link-card" href="troubleshoot.html">
       <div class="link-icon">🔧</div>
-      <div>
+      <div class="link-content">
         <div class="link-title">Troubleshooting Guide</div>
-        <div class="link-desc">Common fixes before you call support.</div>
+        <div class="link-desc">Common fixes before you call support. Most solved in 2 minutes.</div>
       </div>
     </a>
 
-    <a class="link-card" href="#">
+    <button class="link-card" onclick="openPopup('popup-upgrade')">
       <div class="link-icon">⬆️</div>
-      <div>
+      <div class="link-content">
         <div class="link-title">Upgrade Your System</div>
-        <div class="link-desc">New cameras, smart locks, sensors.</div>
+        <div class="link-desc">New cameras, sensors, smart home — let's build it out.</div>
       </div>
-    </a>
+    </button>
+
   </div>
 </section>
 
 <footer>
-  <div class="footer-vivint">Authorized Vivint Pro · Austin TX</div>
+  <div class="footer-brand">Authorized Vivint Pro · Austin TX</div>
   <div class="footer-contact">(801) 376-9296 &nbsp;·&nbsp; Adam.Beebe@vivint.com</div>
 </footer>
 
+<!-- BACKDROP -->
+<div id="backdrop" onclick="closePopup()"></div>
+
+<!-- POPUP: QUOTE -->
+<div id="popup-quote" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">Get a Free Quote</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body" id="quote-body">
+    <div id="quote-form-wrap">
+      <div class="form-row">
+        <div><label class="form-label">Name</label><input class="form-input" id="q-name" placeholder="Your name" required></div>
+        <div><label class="form-label">Phone</label><input class="form-input" id="q-phone" placeholder="(xxx) xxx-xxxx" required></div>
+      </div>
+      <label class="form-label">Address</label>
+      <input class="form-input" id="q-address" placeholder="Service address">
+      <label class="form-label" style="margin-bottom:10px;">What are you interested in? <span style="color:rgba(255,255,255,.3);font-weight:400;text-transform:none;letter-spacing:0;">(select all that apply)</span></label>
+      <div class="interest-grid" id="quote-interests"></div>
+      <button class="btn-primary" onclick="submitQuote()">Request Quote →</button>
+    </div>
+    <div id="quote-success" class="success-screen" style="display:none;">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Quote Request Sent!</div>
+      <div class="success-sub">I'll reach out to you shortly with pricing and options.<br><br><strong style="color:var(--g);">Adam</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP: REFERRAL -->
+<div id="popup-referral" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">Refer a Neighbor</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <div id="ref-form-wrap">
+      <p style="font-size:13px;color:rgba(255,255,255,.55);margin-bottom:18px;line-height:1.6;">You earn <strong style="color:var(--g);">$200</strong> when your neighbor activates. They get a free doorbell camera installed.</p>
+      <label class="form-label">Your Name &amp; Phone</label>
+      <div class="form-row">
+        <input class="form-input" id="ref-your-name" placeholder="Your name">
+        <input class="form-input" id="ref-your-phone" placeholder="Your phone">
+      </div>
+      <label class="form-label">Neighbor's Name &amp; Phone</label>
+      <div class="form-row">
+        <input class="form-input" id="ref-nbr-name" placeholder="Neighbor's name">
+        <input class="form-input" id="ref-nbr-phone" placeholder="Neighbor's phone">
+      </div>
+      <label class="form-label">Relationship / Notes (optional)</label>
+      <input class="form-input" id="ref-notes" placeholder="e.g. next door neighbor, coworker...">
+      <button class="btn-primary" onclick="submitReferral()">Submit Referral →</button>
+    </div>
+    <div id="ref-success" class="success-screen" style="display:none;">
+      <div class="success-icon">🤝</div>
+      <div class="success-title">Referral Received!</div>
+      <div class="success-sub">I'll reach out to your neighbor soon. Your $200 credit will be applied once they activate.<br><br><strong style="color:var(--g);">— Adam</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP: SERVICE -->
+<div id="popup-service" class="popup">
+  <div class="popup-header">
+    <div class="popup-title" id="svc-title">Schedule a Service Visit</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+
+    <div class="steps" id="svc-steps">
+      <div class="step-dot active" id="sd1">1</div>
+      <div class="step-line" id="sl1"></div>
+      <div class="step-dot" id="sd2">2</div>
+      <div class="step-line" id="sl2"></div>
+      <div class="step-dot" id="sd3">3</div>
+    </div>
+
+    <!-- STEP 1: Build task list -->
+    <div id="svc-step1">
+      <label class="form-label" style="margin-bottom:10px;">Which device is having issues?</label>
+      <div class="dev-grid" id="svc-dev-grid"></div>
+      <label class="form-label">Describe the issue</label>
+      <div class="task-add-row">
+        <input class="form-input" id="svc-issue" placeholder="e.g. offline, not responding, false alarm...">
+        <button class="task-add-btn" onclick="addTask()">+ Add</button>
+      </div>
+      <div id="task-list-wrap">
+        <div class="task-empty" id="task-empty">No issues added yet. Select a device and describe the issue above.</div>
+        <div class="task-list" id="task-list"></div>
+      </div>
+      <button class="btn-primary" id="svc-next1" onclick="svcStep(2)" disabled>Next Step →</button>
+    </div>
+
+    <!-- STEP 2: Reboot -->
+    <div id="svc-step2" style="display:none;">
+      <div class="reboot-card">
+        <div class="reboot-title">👋 Hey! Happy to help.</div>
+        <div class="reboot-body">Before we schedule a visit, let's try the easiest fix first — a full reboot of everything on your issue list, including the panel. This resolves most issues in under 5 minutes.</div>
+        <details class="reboot-details">
+          <summary>How to reboot my system</summary>
+          <ol class="reboot-steps">
+            <li>Unplug the panel from the wall</li>
+            <li>If it has a battery backup, hold the power button for 10 seconds</li>
+            <li>Wait 30 seconds</li>
+            <li>Plug back in and wait 2 minutes for it to reconnect</li>
+            <li>For cameras and sensors — remove and reinsert the battery, or power cycle at the breaker</li>
+          </ol>
+        </details>
+      </div>
+      <div id="task-review" style="margin-bottom:16px;"></div>
+      <button class="btn-primary" onclick="svcStep(3)">I've Rebooted Everything — Continue →</button>
+      <button class="btn-secondary" onclick="svcStep(1)">← Back</button>
+    </div>
+
+    <!-- STEP 3: Availability + contact -->
+    <div id="svc-step3" style="display:none;">
+      <label class="avail-label">What days work for you? (select all that apply)</label>
+      <div class="day-pills" id="day-pills"></div>
+      <label class="avail-label">Preferred time of day</label>
+      <div class="time-pills">
+        <div class="time-pill" onclick="toggleTime(this)" data-val="Morning">🌅 Morning</div>
+        <div class="time-pill" onclick="toggleTime(this)" data-val="Afternoon">☀️ Afternoon</div>
+        <div class="time-pill" onclick="toggleTime(this)" data-val="Evening">🌆 Evening</div>
+      </div>
+      <div class="form-row">
+        <div><label class="form-label">Your Name</label><input class="form-input" id="svc-name" placeholder="Name"></div>
+        <div><label class="form-label">Phone</label><input class="form-input" id="svc-phone" placeholder="(xxx) xxx-xxxx"></div>
+      </div>
+      <button class="btn-primary" onclick="submitService()">Submit Request →</button>
+      <button class="btn-secondary" onclick="svcStep(2)">← Back</button>
+    </div>
+
+    <!-- SUCCESS -->
+    <div id="svc-success" class="success-screen" style="display:none;">
+      <div class="success-icon">📅</div>
+      <div class="success-title">Request Received!</div>
+      <div class="success-sub">I'll text or call you to confirm the best time. Usually within a few hours.<br><br><strong style="color:var(--g);">— Adam</strong></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- POPUP: UPGRADE -->
+<div id="popup-upgrade" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">Upgrade Your System</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <div id="upg-form-wrap">
+      <p style="font-size:13px;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.6;">Select what you're interested in adding — I'll reach out with options and pricing.</p>
+      <div class="interest-grid" id="upg-interests"></div>
+      <div class="form-row" style="margin-top:8px;">
+        <div><label class="form-label">Name</label><input class="form-input" id="upg-name" placeholder="Your name"></div>
+        <div><label class="form-label">Phone</label><input class="form-input" id="upg-phone" placeholder="(xxx) xxx-xxxx"></div>
+      </div>
+      <button class="btn-primary" onclick="submitUpgrade()">Request Upgrade Info →</button>
+    </div>
+    <div id="upg-success" class="success-screen" style="display:none;">
+      <div class="success-icon">⬆️</div>
+      <div class="success-title">Got It!</div>
+      <div class="success-sub">I'll reach out with upgrade options and pricing for what you selected.<br><br><strong style="color:var(--g);">— Adam</strong></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const W3KEY = 'c410be27-9cf8-48c5-9ec1-72c4652ad3ba';
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiYWRhbWJlZWJlIiwiYSI6ImNtcm1ncWZzZDMyOWkyem9kZGxqbzI3aDYifQ.TzSOQU3Vfy8Zl-8KjohMLw';
+
+// ── SVG DATA ────────────────────────────────────────────────
+const SVGS = {
+  door:`<svg viewBox="0 0 24 24" fill="none"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z" fill="currentColor"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z" fill="currentColor"/></svg>`,
+  window:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z" fill="currentColor"/></svg>`,
+  glass:`<svg viewBox="0 0 24 24" fill="none"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  motion:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  doorbell:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  outdoor:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  spotlight:`<svg viewBox="0 0 24 24" fill="none"><path d="M7.34 16.1a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 3.81a2.55 2.55 0 1 1 0 5.1 2.55 2.55 0 0 1 0-5.1Zm0 1.5a1.05 1.05 0 1 0 0 2.1 1.05 1.05 0 0 0 0-2.1Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 .95c1.15 0 2.07 0 2.78.08.7.07 1.35.24 1.83.72.48.48.65 1.13.72 1.83.08.71.08 1.63.08 2.78s0 2.07-.08 2.78c-.07.7-.24 1.35-.72 1.83a2.6 2.6 0 0 1-1.26.63l.01.14c0 .63 0 1.17-.05 1.58-.07.36-6.24.36-6.24.36-.06-.36-.11-1.31-.11-1.74l.01-.14a2.6 2.6 0 0 1-1.26-.63c-.48-.48-.65-1.13-.72-1.83C6.99 8.43 6.99 7.51 6.99 6.36s0-2.07.08-2.78c.07-.7.24-1.35.72-1.83.48-.48 1.13-.65 1.83-.72C10.33.95 11.25.95 12 .95Z" fill="currentColor"/></svg>`,
+  indoor:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12.167 6.375a2.872 2.872 0 1 1 0 5.744 2.872 2.872 0 0 1 0-5.744Zm0 1.5a1.372 1.372 0 1 0 0 2.744 1.372 1.372 0 0 0 0-2.744Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z" fill="currentColor"/></svg>`,
+  lock:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 10.25A4.75 4.75 0 1 1 12 19.75 4.75 4.75 0 0 1 12 10.25Zm0 1.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Z" fill="currentColor"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  thermo:`<svg viewBox="0 0 24 24" fill="none"><path d="M11.87 10.12C11.24 10.68 9.67 12.33 9.41 15.33H7.9C8.17 11.9 10.28 10.06 10.31 10.03H7V8.8H11.87V10.12Z" fill="currentColor"/><path d="M14.64 8.67C16.09 8.67 17 9.64 17 10.8C17 11.63 16.59 12.33 15.73 12.82L14.44 13.56C14.19 13.7 14.01 13.89 13.95 14.11H16.98V15.33H12.2C12.21 14.15 12.54 13.18 13.72 12.51L14.78 11.9C15.33 11.59 15.54 11.29 15.54 10.83C15.54 10.34 15.16 9.97 14.64 9.97C14.04 9.97 13.65 10.38 13.65 10.99L12.31 10.95V10.83C12.31 9.68 13.16 8.67 14.64 8.67Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  plug:`<svg viewBox="0 0 24 24" fill="none"><path d="M9 8.25A.75.75 0 0 1 9.75 9v2a.75.75 0 0 1-1.5 0V9A.75.75 0 0 1 9 8.25Zm6 0a.75.75 0 0 1 .75.75v2a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm-2 6a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h2Z" fill="currentColor"/><rect x="2.75" y="4.75" width="18.5" height="14.5" rx="2.25" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>`,
+  garage:`<svg viewBox="0 0 24 24" fill="none"><path d="M11.05 4.64a2.75 2.75 0 0 1 1.9 0l7.3 1.9a1.75 1.75 0 0 1 1.124 1.454V19.04h-1.5V9.289a.75.75 0 0 0-.75-.75H4.874a.75.75 0 0 0-.75.75V19.04h-1.5V7.994A1.75 1.75 0 0 1 3.748 6.54l7.302-1.9Z" fill="currentColor"/><path d="M17.25 17.378H6.75v1.5h10.5v-1.5Zm0-3.375H6.75v1.5h10.5v-1.5Zm0-3.375H6.75v1.5h10.5v-1.5Z" fill="currentColor"/></svg>`,
+  smoke:`<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.25" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25C17.937 1.25 22.75 6.063 22.75 12S17.937 22.75 12 22.75 1.25 17.937 1.25 12 6.063 1.25 12 1.25Zm0 1.5a9.25 9.25 0 1 0 0 18.5 9.25 9.25 0 0 0 0-18.5Z" fill="currentColor"/></svg>`,
+  water:`<svg viewBox="0 0 24 24" fill="none"><path d="M11 3.25a.75.75 0 0 1 0 1.5C9.24 4.75 7.99 4.78 7.07 4.92c-.91.14-1.35.38-1.62.7-.29.34-.49.91-.59 1.98C4.75 8.66 4.75 10.07 4.75 12c0 2.02.001 3.47.12 4.54.12 1.08.35 1.61.66 1.93.31.31.85.54 1.93.66 1.07.12 2.52.12 4.54.12 1.6 0 2.84-.002 3.83-.062 1-.061 1.66-.18 2.11-.377a2.04 2.04 0 0 0 .99-.813c.2-.434.33-1.071.39-2.049l1.5.102c-.07 1.021-.21 1.884-.53 2.576-.32.733-.84 1.24-1.59 1.561-.7.304-1.58.435-2.62.498C16.68 22.24 15.38 22.25 12 22.25c-2.02 0-3.57-.002-4.74-.134C6.09 21.986 5.12 21.712 4.44 21.026c-.69-.686-.96-1.652-1.09-2.822C3.25 17.024 3.25 15.473 3.25 13.492c0-1.897-.001-3.397.113-4.55.113-1.143.349-2.096.938-2.797.607-.72 1.477-1.046 2.537-1.211C7.9 4.766 9.26 4.742 11 4.739v-.01a.75.75 0 0 1 0-1.479Z" fill="currentColor"/><path fill-rule="evenodd" d="M17.5 3.853c-.395.305-1.005.823-1.553 1.488C15.266 6.168 14.75 7.136 14.75 8.143c0 1.786 1.298 3.107 2.75 3.107s2.75-1.321 2.75-3.107c0-1.007-.516-1.975-1.197-2.802-.548-.665-1.158-1.183-1.553-1.488Z" fill="currentColor"/></svg>`,
+  panic:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 7.25A4.75 4.75 0 1 1 12 16.75 4.75 4.75 0 0 1 12 7.25Zm0 1.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.977 0 3.54-.002 4.729.163 1.202.167 2.181.524 2.857 1.368.647.809.909 1.941 1.036 3.392.128 1.458.128 3.373.128 5.827s.001 4.37-.128 5.828c-.127 1.451-.389 2.583-1.036 3.392-.676.844-1.655 1.201-2.857 1.368-1.19.165-2.752.162-4.729.162s-3.54.003-4.729-.162c-1.202-.167-2.181-.524-2.857-1.368-.647-.809-.909-1.941-1.036-3.392-.128-1.458-.128-3.373-.128-5.828s-.001-4.369.128-5.827c.127-1.451.389-2.583 1.036-3.392.676-.844 1.655-1.201 2.857-1.368C8.46 1.248 10.023 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  keyfob:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 10.25c1.245 0 2.197 0 2.916.023.7.024 1.258.071 1.674.196a2.14 2.14 0 0 1 1.41 1.41c.125.416.172.974.196 1.675.023.718.054 1.67.054 2.916 0 1.245 0 2.197-.054 2.916-.024.7-.071 1.258-.196 1.674a2.14 2.14 0 0 1-1.41 1.41c-.416.125-.974.172-1.674.196-.719.023-1.671.054-2.916.054s-2.197 0-2.916-.054c-.7-.024-1.258-.071-1.674-.196a2.14 2.14 0 0 1-1.41-1.41c-.125-.416-.172-.974-.196-1.674-.023-.719-.054-1.671-.054-2.916s.031-2.197.054-2.916c.024-.7.071-1.259.196-1.675a2.14 2.14 0 0 1 1.41-1.41c.416-.125.974-.172 1.674-.196.719-.023 1.671-.023 2.916-.023Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.977 0 3.54-.002 4.729.163 1.202.167 2.181.524 2.857 1.368.647.809.909 1.941 1.036 3.392.128 1.458.128 3.373.128 5.827s.001 4.37-.128 5.828c-.127 1.451-.389 2.583-1.036 3.392-.676.844-1.655 1.201-2.857 1.368-1.19.165-2.752.162-4.729.162s-3.54.003-4.729-.162c-1.202-.167-2.181-.524-2.857-1.368-.647-.809-.909-1.941-1.036-3.392-.128-1.458-.128-3.373-.128-5.828s-.001-4.369.128-5.827c.127-1.451.389-2.583 1.036-3.392.676-.844 1.655-1.201 2.857-1.368C8.46 1.248 10.023 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  keypad:`<svg viewBox="0 0 24 24" fill="none"><path d="M9 9.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V10A.75.75 0 0 1 9 9.25Zm3 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V10a.75.75 0 0 1 .75-.75Zm3 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V10a.75.75 0 0 1 .75-.75ZM9 12.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V13A.75.75 0 0 1 9 12.25Zm3 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V13a.75.75 0 0 1 .75-.75Zm3 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V13a.75.75 0 0 1 .75-.75Zm-3 3a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V16a.75.75 0 0 1 .75-.75Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.977 0 3.54-.002 4.729.163 1.202.167 2.181.524 2.857 1.368.647.809.909 1.941 1.036 3.392.128 1.458.128 3.373.128 5.827s.001 4.37-.128 5.828c-.127 1.451-.389 2.583-1.036 3.392-.676.844-1.655 1.201-2.857 1.368-1.19.165-2.752.162-4.729.162s-3.54.003-4.729-.162c-1.202-.167-2.181-.524-2.857-1.368-.647-.809-.909-1.941-1.036-3.392-.128-1.458-.128-3.373-.128-5.828s-.001-4.369.128-5.827c.127-1.451.389-2.583 1.036-3.392.676-.844 1.655-1.201 2.857-1.368C8.46 1.248 10.023 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+};
+
+const DEVICES = [
+  {id:'door',     name:'Door Sensor',      cat:'perimeter'},
+  {id:'window',   name:'Window Sensor',    cat:'perimeter'},
+  {id:'glass',    name:'Glass Break',      cat:'perimeter'},
+  {id:'motion',   name:'Motion Detector',  cat:'perimeter'},
+  {id:'doorbell', name:'Doorbell Camera',  cat:'cameras'},
+  {id:'outdoor',  name:'Outdoor Camera',   cat:'cameras'},
+  {id:'spotlight',name:'Spotlight Camera', cat:'cameras'},
+  {id:'indoor',   name:'Indoor Camera',    cat:'cameras'},
+  {id:'lock',     name:'Smart Lock',       cat:'smarthome'},
+  {id:'thermo',   name:'Thermostat',       cat:'smarthome'},
+  {id:'plug',     name:'Smart Plug',       cat:'smarthome'},
+  {id:'garage',   name:'Garage Access',    cat:'smarthome'},
+  {id:'smoke',    name:'Smoke / CO',       cat:'safety'},
+  {id:'water',    name:'Water Sensor',     cat:'safety'},
+  {id:'panic',    name:'Panic Pendant',    cat:'safety'},
+  {id:'keyfob',   name:'Key Fob',          cat:'safety'},
+  {id:'keypad',   name:'Keypad',           cat:'safety'},
+];
+
+const INTERESTS = [
+  {id:'doorbell', name:'Doorbell Camera'},
+  {id:'outdoor',  name:'Outdoor Cameras'},
+  {id:'indoor',   name:'Indoor Camera'},
+  {id:'door',     name:'Door Protection'},
+  {id:'window',   name:'Window Protection'},
+  {id:'motion',   name:'Motion Detection'},
+  {id:'glass',    name:'Glass Break'},
+  {id:'lock',     name:'Smart Locks'},
+  {id:'thermo',   name:'Thermostat'},
+  {id:'garage',   name:'Garage Access'},
+  {id:'smoke',    name:'Smoke / CO'},
+  {id:'water',    name:'Water Sensor'},
+];
+
+// ── STATE ────────────────────────────────────────────────────
+let currentPopup = null;
+let selectedDev = null;
+let tasks = [];
+let selDays = [];
+let selTimes = [];
+
+// ── POPUP ────────────────────────────────────────────────────
+function openPopup(id) {
+  closePopup();
+  currentPopup = id;
+  document.getElementById('backdrop').classList.add('on');
+  document.getElementById(id).classList.add('on');
+  document.body.style.overflow = 'hidden';
+  if (id === 'popup-service') initService();
+  if (id === 'popup-quote') buildInterests('quote-interests', INTERESTS);
+  if (id === 'popup-upgrade') buildInterests('upg-interests', INTERESTS);
+}
+function closePopup() {
+  if (currentPopup) {
+    document.getElementById(currentPopup).classList.remove('on');
+    currentPopup = null;
+  }
+  document.getElementById('backdrop').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+// ── ACCORDION ────────────────────────────────────────────────
+function toggleAbout(btn) {
+  const body = document.getElementById('about-body');
+  const open = body.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+}
+
+// ── DEVICE GRIDS ─────────────────────────────────────────────
+function buildDevGrid(containerId, devices, onSelect) {
+  const c = document.getElementById(containerId);
+  c.innerHTML = devices.map(d => `
+    <div class="dev-card" data-id="${d.id}" data-name="${d.name}" onclick="(${onSelect})('${d.id}','${d.name}',this)">
+      <div class="dev-icon">${SVGS[d.id]||''}</div>
+      <div class="dev-name">${d.name}</div>
+    </div>`).join('');
+}
+
+function buildInterests(containerId, items) {
+  const c = document.getElementById(containerId);
+  c.innerHTML = items.map(d => `
+    <div class="int-card" data-id="${d.id}" onclick="toggleInterest(this)">
+      <div class="int-card-icon">${SVGS[d.id]||''}</div>
+      <div class="int-card-name">${d.name}</div>
+    </div>`).join('');
+}
+
+function toggleInterest(el) {
+  el.classList.toggle('on');
+}
+
+function getSelectedInterests(containerId) {
+  return [...document.querySelectorAll(`#${containerId} .int-card.on`)].map(el => el.querySelector('.int-card-name').textContent);
+}
+
+// ── SERVICE FLOW ─────────────────────────────────────────────
+function initService() {
+  tasks = []; selDays = []; selTimes = [];
+  svcStep(1);
+  buildDevGrid('svc-dev-grid', DEVICES, function(id, name, el) {
+    document.querySelectorAll('#svc-dev-grid .dev-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedDev = {id, name};
+  }.toString().slice(9,-1));
+  renderTaskList();
+  buildDayPills();
+}
+
+function addTask() {
+  if (!selectedDev) { alert('Please select a device first.'); return; }
+  const issue = document.getElementById('svc-issue').value.trim();
+  if (!issue) { alert('Please describe the issue.'); return; }
+  tasks.push({id: selectedDev.id, name: selectedDev.name, issue});
+  document.getElementById('svc-issue').value = '';
+  selectedDev = null;
+  document.querySelectorAll('#svc-dev-grid .dev-card').forEach(c => c.classList.remove('selected'));
+  renderTaskList();
+  document.getElementById('svc-next1').disabled = tasks.length === 0;
+}
+
+function removeTask(idx) {
+  tasks.splice(idx, 1);
+  renderTaskList();
+  document.getElementById('svc-next1').disabled = tasks.length === 0;
+}
+
+function renderTaskList() {
+  const list = document.getElementById('task-list');
+  const empty = document.getElementById('task-empty');
+  if (tasks.length === 0) {
+    empty.style.display = 'block';
+    list.innerHTML = '';
+    return;
+  }
+  empty.style.display = 'none';
+  list.innerHTML = tasks.map((t,i) => `
+    <div class="task-item">
+      <div class="task-item-icon">${SVGS[t.id]||''}</div>
+      <div class="task-item-text"><div class="task-item-dev">${t.name}</div>${t.issue}</div>
+      <button class="task-item-del" onclick="removeTask(${i})">✕</button>
+    </div>`).join('');
+  
+  const review = document.getElementById('task-review');
+  if (review) review.innerHTML = `<div style="font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:10px;">Issues to address</div>` + tasks.map(t => `<div class="task-item" style="margin-bottom:8px;"><div class="task-item-icon">${SVGS[t.id]||''}</div><div class="task-item-text"><div class="task-item-dev">${t.name}</div>${t.issue}</div></div>`).join('');
+}
+
+function svcStep(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById(`svc-step${i}`).style.display = i===n ? 'block' : 'none';
+    const dot = document.getElementById(`sd${i}`);
+    dot.className = 'step-dot' + (i<n?' done':i===n?' active':'');
+    if (i < 3) document.getElementById(`sl${i}`).className = 'step-line' + (i<n?' done':'');
+  });
+  document.getElementById('svc-success').style.display = 'none';
+}
+
+function buildDayPills() {
+  const c = document.getElementById('day-pills');
+  const today = new Date();
+  c.innerHTML = Array.from({length:14},(_,i) => {
+    const d = new Date(today); d.setDate(d.getDate()+i+1);
+    const label = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    const val = d.toISOString().split('T')[0];
+    return `<div class="day-pill" data-val="${val}" onclick="toggleDay(this)">${label}</div>`;
+  }).join('');
+}
+
+function toggleDay(el) {
+  el.classList.toggle('on');
+  const v = el.dataset.val;
+  selDays = selDays.includes(v) ? selDays.filter(d=>d!==v) : [...selDays, v];
+}
+function toggleTime(el) {
+  el.classList.toggle('on');
+  const v = el.dataset.val;
+  selTimes = selTimes.includes(v) ? selTimes.filter(t=>t!==v) : [...selTimes, v];
+}
+
+// ── STORAGE + EMAIL ──────────────────────────────────────────
+function saveToStorage(type, data) {
+  const key = 'ab_submissions';
+  const all = JSON.parse(localStorage.getItem(key)||'[]');
+  all.unshift({id:Date.now(), type, status:'new', ts:new Date().toISOString(), ...data});
+  localStorage.setItem(key, JSON.stringify(all));
+}
+
+async function sendW3(subject, message) {
+  const fd = new FormData();
+  fd.append('access_key', W3KEY);
+  fd.append('subject', subject);
+  fd.append('message', message);
+  fd.append('from_name', 'Adam Beebe Website');
+  try {
+    await fetch('https://api.web3forms.com/submit', {method:'POST', body:fd});
+  } catch(e) {}
+}
+
+// ── FORM SUBMISSIONS ─────────────────────────────────────────
+async function submitQuote() {
+  const name = document.getElementById('q-name').value.trim();
+  const phone = document.getElementById('q-phone').value.trim();
+  const address = document.getElementById('q-address').value.trim();
+  const interests = getSelectedInterests('quote-interests');
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  const data = {name, phone, address, interests};
+  saveToStorage('quote', data);
+  await sendW3('New Quote Request', `Name: ${name}\nPhone: ${phone}\nAddress: ${address}\nInterested in: ${interests.join(', ')}`);
+  document.getElementById('quote-form-wrap').style.display='none';
+  document.getElementById('quote-success').style.display='block';
+}
+
+async function submitReferral() {
+  const yourName = document.getElementById('ref-your-name').value.trim();
+  const yourPhone = document.getElementById('ref-your-phone').value.trim();
+  const nbrName = document.getElementById('ref-nbr-name').value.trim();
+  const nbrPhone = document.getElementById('ref-nbr-phone').value.trim();
+  const notes = document.getElementById('ref-notes').value.trim();
+  if (!yourName || !nbrName) { alert('Please fill in at least your name and your neighbor\'s name.'); return; }
+  const data = {yourName, yourPhone, nbrName, nbrPhone, notes};
+  saveToStorage('referral', data);
+  await sendW3('New Referral Submitted', `From: ${yourName} (${yourPhone})\nNeighbor: ${nbrName} (${nbrPhone})\nNotes: ${notes}`);
+  document.getElementById('ref-form-wrap').style.display='none';
+  document.getElementById('ref-success').style.display='block';
+}
+
+async function submitService() {
+  const name = document.getElementById('svc-name').value.trim();
+  const phone = document.getElementById('svc-phone').value.trim();
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  if (selDays.length===0) { alert('Please select at least one available day.'); return; }
+  const data = {name, phone, tasks, days:selDays, times:selTimes};
+  saveToStorage('service', data);
+  const taskSummary = tasks.map(t=>`${t.name}: ${t.issue}`).join('\n');
+  await sendW3('New Service Request', `Name: ${name}\nPhone: ${phone}\nIssues:\n${taskSummary}\nAvailable: ${selDays.join(', ')}\nTimes: ${selTimes.join(', ')}`);
+  [1,2,3].forEach(i=>document.getElementById(`svc-step${i}`).style.display='none');
+  document.getElementById('svc-steps').style.display='none';
+  document.getElementById('svc-success').style.display='block';
+}
+
+async function submitUpgrade() {
+  const name = document.getElementById('upg-name').value.trim();
+  const phone = document.getElementById('upg-phone').value.trim();
+  const interests = getSelectedInterests('upg-interests');
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  const data = {name, phone, interests};
+  saveToStorage('upgrade', data);
+  await sendW3('New Upgrade Request', `Name: ${name}\nPhone: ${phone}\nInterested in: ${interests.join(', ')}`);
+  document.getElementById('upg-form-wrap').style.display='none';
+  document.getElementById('upg-success').style.display='block';
+}
+
+// ── MAP ───────────────────────────────────────────────────────
+const REGIONS = [
+  {lat:31.5,  lng:-102.5,  r:140, name:'West Texas / SE New Mexico',    note:'Jal NM · Kermit · Pecos · Fort Stockton · Rankin · Seagraves · Midland metro'},
+  {lat:33.56, lng:-101.90, r:28,  name:'Lubbock Area',                  note:'Lubbock · Wolfforth'},
+  {lat:35.22, lng:-101.83, r:38,  name:'Amarillo',                      note:'Amarillo metro'},
+  {lat:33.45, lng:-112.07, r:65,  name:'Phoenix Metro',                 note:'Phoenix metro area'},
+  {lat:40.50, lng:-111.89, r:115, name:'Utah — Wasatch Front',          note:'Springville to Ogden · all cities in between'},
+  {lat:40.97, lng:-117.74, r:22,  name:'Winnemucca NV',                 note:'Winnemucca area'},
+  {lat:36.17, lng:-115.14, r:55,  name:'Las Vegas Metro',               note:'Las Vegas metro area'},
+  {lat:39.06, lng:-108.55, r:22,  name:'Grand Junction CO',             note:'Grand Junction area'},
+  {lat:38.42, lng:-105.19, r:18,  name:'Florence / Canon City CO',      note:'Florence · Canon City'},
+  {lat:40.76, lng:-98.37,  r:38,  name:'Grand Island / Hastings NE',    note:'Grand Island · Hastings'},
+  {lat:40.81, lng:-96.70,  r:32,  name:'Lincoln NE',                    note:'Lincoln metro'},
+  {lat:41.26, lng:-96.00,  r:38,  name:'Omaha / Council Bluffs',        note:'Omaha metro · Council Bluffs IA'},
+  {lat:35.25, lng:-97.05,  r:90,  name:'Central Oklahoma',              note:'OKC east metro · Shawnee · Seminole · Cushing · Guthrie · Pauls Valley · Ada'},
+  {lat:36.50, lng:-97.18,  r:42,  name:'N Oklahoma',                    note:'Ponca City · Perry'},
+  {lat:34.87, lng:-92.15,  r:75,  name:'Little Rock Metro',             note:'Little Rock metro · northeast toward Beebe AR'},
+  {lat:30.53, lng:-87.65,  r:62,  name:'Mobile AL / Pensacola FL',      note:'Mobile · Pensacola · surrounding communities'},
+  {lat:33.62, lng:-88.72,  r:18,  name:'Chesterfield MS',               note:'Chesterfield area'},
+  {lat:39.73, lng:-84.06,  r:22,  name:'Beavercreek OH',                note:'Beavercreek · Dayton area'},
+  {lat:30.84, lng:-93.29,  r:22,  name:'DeRidder LA',                   note:'DeRidder area'},
+  {lat:28.78, lng:-81.80,  r:52,  name:'Central Florida',               note:'The Villages · Lady Lake · Apopka'},
+  {lat:34.34, lng:-77.80,  r:38,  name:'Wilmington / Topsail Beach NC', note:'Wilmington · Topsail Beach · coastal towns'},
+  {lat:27.80, lng:-97.40,  r:38,  name:'Corpus Christi TX',             note:'Corpus Christi metro'},
+  {lat:31.76, lng:-106.49, r:42,  name:'El Paso TX',                    note:'El Paso metro'},
+  {lat:30.36, lng:-103.66, r:18,  name:'Alpine TX',                     note:'Alpine area'},
+  {lat:29.42, lng:-98.49,  r:52,  name:'San Antonio Metro',             note:'San Antonio metro area'},
+  {lat:30.27, lng:-97.74,  r:48,  name:'Austin Metro',                  note:'Austin metro · home base since 2023'},
+  {lat:31.12, lng:-97.73,  r:25,  name:'Killeen TX',                    note:'Killeen area'},
+  {lat:29.87, lng:-97.95,  r:32,  name:'SA to Austin Corridor',         note:'New Braunfels · San Marcos · Kyle · Buda'},
+  {lat:30.65, lng:-96.35,  r:18,  name:'Bryan / College Station TX',    note:'Bryan · College Station'}
+];
+const PINS = [
+  {lat:40.23, lng:-111.66, name:'Provo UT',         note:'Hometown · Vivint HQ internship', type:'home'},
+  {lat:30.27, lng:-97.74,  name:'Austin TX',         note:'Home base since 2023',            type:'home'},
+  {lat:35.47, lng:-97.52,  name:'Oklahoma City OK',  note:'First year knocking doors 2017',  type:'city'},
+  {lat:30.69, lng:-88.04,  name:'Mobile AL',         note:'',                                type:'city'},
+  {lat:34.23, lng:-77.94,  name:'Wilmington NC',     note:'',                                type:'city'},
+  {lat:36.17, lng:-115.14, name:'Las Vegas NV',      note:'',                                type:'city'},
+  {lat:34.75, lng:-92.29,  name:'Little Rock AR',    note:'',                                type:'city'},
+  {lat:30.63, lng:-96.33,  name:'College Station TX',note:'Bryan · College Station',         type:'city'},
+  {lat:35.07, lng:-91.88,  name:'Beebe AR',          note:"One install. A life's mission — completed.", type:'star'}
+];
+
+function circleGeo(lat, lng, rKm, steps=56) {
+  const pts = [];
+  for (let i=0;i<=steps;i++) {
+    const a=(i/steps)*2*Math.PI;
+    pts.push([lng+(rKm/111.32/Math.cos(lat*Math.PI/180))*Math.cos(a), lat+(rKm/111.32)*Math.sin(a)]);
+  }
+  return {type:'Feature',geometry:{type:'Polygon',coordinates:[pts]}};
+}
+
+mapboxgl.accessToken = MAPBOX_TOKEN;
+const map = new mapboxgl.Map({
+  container:'about-map',
+  style:'mapbox://styles/mapbox/dark-v11',
+  bounds:[[-125,24],[-66,50]],
+  fitBoundsOptions:{padding:20},
+  scrollZoom:true,
+  interactive:true
+});
+map.addControl(new mapboxgl.NavigationControl({showCompass:false}), 'bottom-right');
+
+map.on('load',()=>{
+  const features = REGIONS.map(r=>{const f=circleGeo(r.lat,r.lng,r.r);f.properties={name:r.name,note:r.note};return f;});
+  map.addSource('regions',{type:'geojson',data:{type:'FeatureCollection',features}});
+  map.addLayer({id:'regions-fill',type:'fill',source:'regions',paint:{'fill-color':'#05E5AF','fill-opacity':0.12}});
+  map.addLayer({id:'regions-line',type:'line',source:'regions',paint:{'line-color':'#05E5AF','line-width':1.4,'line-opacity':0.55}});
+
+  map.on('mouseenter','regions-fill',()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave','regions-fill',()=>map.getCanvas().style.cursor='');
+  map.on('click','regions-fill',e=>{
+    const {name,note}=e.features[0].properties;
+    new mapboxgl.Popup({closeButton:false,maxWidth:'240px'})
+      .setLngLat(e.lngLat)
+      .setHTML(`<div class="pop-name">${name}</div><div class="pop-note">${note}</div>`)
+      .addTo(map);
+  });
+
+  PINS.forEach(p=>{
+    const el=document.createElement('div');
+    if(p.type==='star'){el.innerHTML='⭐';el.style.cssText='font-size:20px;cursor:pointer;filter:drop-shadow(0 0 5px gold);';}
+    else if(p.type==='home'){el.style.cssText='width:13px;height:13px;background:white;border-radius:50%;border:2.5px solid #05E5AF;box-shadow:0 0 10px rgba(5,229,175,.9);cursor:pointer;';}
+    else{el.style.cssText='width:9px;height:9px;background:#05E5AF;border-radius:50%;border:2px solid rgba(5,229,175,.3);box-shadow:0 0 7px rgba(5,229,175,.6);cursor:pointer;';}
+    const popup=new mapboxgl.Popup({offset:12,closeButton:false,maxWidth:'220px'})
+      .setHTML(`<div class="pop-name">${p.name}</div>${p.note?`<div class="pop-note">${p.note}</div>`:''}`);
+    new mapboxgl.Marker({element:el}).setLngLat([p.lng,p.lat]).setPopup(popup).addTo(map);
+  });
+});
+</script>
 </body>
 </html>

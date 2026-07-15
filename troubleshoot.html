@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troubleshooting · Adam Beebe</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--g:#05E5AF;--dk:#10201F;--dk2:#182E2C;--w:#fff;}
+body{background:var(--dk);font-family:'Figtree',sans-serif;color:var(--w);min-height:100vh;}
+.top-bar{position:sticky;top:0;background:rgba(16,32,31,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(5,229,175,.12);padding:14px 20px;display:flex;align-items:center;gap:14px;z-index:10;}
+.back-btn{display:flex;align-items:center;gap:6px;color:rgba(5,229,175,.7);text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.back-btn:hover{color:var(--g);}
+.page-title{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;}
+.content{max-width:760px;margin:0 auto;padding:32px 20px 60px;}
+.label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--g);display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.label::before{content:'';width:16px;height:1.5px;background:var(--g);border-radius:1px;}
+h1{font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;margin-bottom:8px;}
+.intro{font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:32px;}
+
+/* DEVICE GRID */
+.dev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:32px;}
+@media(max-width:480px){.dev-grid{grid-template-columns:repeat(3,1fr);}}
+.dev-card{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 8px;border-radius:12px;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);cursor:pointer;transition:all .2s;text-align:center;}
+.dev-card:hover{border-color:rgba(5,229,175,.4);background:rgba(5,229,175,.07);}
+.dev-card.active{border-color:var(--g);background:rgba(5,229,175,.12);}
+.dev-icon{width:30px;height:30px;color:rgba(255,255,255,.55);}
+.dev-card.active .dev-icon{color:var(--g);}
+.dev-icon svg{width:100%;height:100%;}
+.dev-name{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;color:rgba(255,255,255,.45);line-height:1.2;}
+.dev-card.active .dev-name{color:var(--g);}
+
+/* TROUBLESHOOT PANEL */
+#ts-panel{display:none;}
+.ts-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.ts-icon{width:36px;height:36px;color:var(--g);}
+.ts-icon svg{width:100%;height:100%;}
+.ts-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;}
+.ts-card{background:var(--dk2);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;margin-bottom:10px;}
+.ts-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:none;border:none;cursor:pointer;text-align:left;}
+.ts-btn:hover{background:rgba(5,229,175,.04);}
+.ts-q{font-size:14px;font-weight:500;color:var(--w);}
+.ts-arr{font-size:16px;color:var(--g);flex-shrink:0;transition:transform .3s;}
+.ts-btn.open .ts-arr{transform:rotate(180deg);}
+.ts-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;}
+.ts-body.open{max-height:600px;padding:0 18px 16px;}
+.ts-body p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;}
+.ts-body p+p{margin-top:8px;}
+.ts-body ol,.ts-body ul{padding-left:18px;margin-top:8px;}
+.ts-body li{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:3px;}
+.ts-body strong{color:var(--g);font-weight:500;}
+.still-stuck{background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.18);border-radius:12px;padding:18px;text-align:center;margin-top:20px;}
+.still-stuck-title{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;}
+.still-stuck-sub{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:12px;}
+.sms-btn{display:inline-block;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;padding:10px 20px;border-radius:20px;text-decoration:none;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a class="back-btn" href="index.html">← Back</a>
+  <div class="page-title">Troubleshooting Guide</div>
+</div>
+
+<div class="content">
+  <div class="label">Self-Service Support</div>
+  <h1>What's giving you trouble?</h1>
+  <div class="intro">Tap a device below to see common issues and fixes. Most problems resolve in under 5 minutes. If not — text me.</div>
+
+  <div class="dev-grid" id="dev-grid"></div>
+  <div id="ts-panel"></div>
+</div>
+
+<script>
+const SVGS = {
+  door:`<svg viewBox="0 0 24 24" fill="none"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z" fill="currentColor"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z" fill="currentColor"/></svg>`,
+  window:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z" fill="currentColor"/></svg>`,
+  motion:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  doorbell:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  outdoor:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  lock:`<svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12 10.25A4.75 4.75 0 1 1 12 19.75 4.75 4.75 0 0 1 12 10.25Zm0 1.5a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Z" fill="currentColor"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  thermo:`<svg viewBox="0 0 24 24" fill="none"><path d="M11.87 10.12C11.24 10.68 9.67 12.33 9.41 15.33H7.9C8.17 11.9 10.28 10.06 10.31 10.03H7V8.8H11.87V10.12Z" fill="currentColor"/><path d="M14.64 8.67C16.09 8.67 17 9.64 17 10.8C17 11.63 16.59 12.33 15.73 12.82L14.44 13.56C14.19 13.7 14.01 13.89 13.95 14.11H16.98V15.33H12.2C12.21 14.15 12.54 13.18 13.72 12.51L14.78 11.9C15.33 11.59 15.54 11.29 15.54 10.83C15.54 10.34 15.16 9.97 14.64 9.97C14.04 9.97 13.65 10.38 13.65 10.99L12.31 10.95V10.83C12.31 9.68 13.16 8.67 14.64 8.67Z" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z" fill="currentColor"/></svg>`,
+  smoke:`<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.25" fill="currentColor"/><path fill-rule="evenodd" d="M12 1.25C17.937 1.25 22.75 6.063 22.75 12S17.937 22.75 12 22.75 1.25 17.937 1.25 12 6.063 1.25 12 1.25Zm0 1.5a9.25 9.25 0 1 0 0 18.5 9.25 9.25 0 0 0 0-18.5Z" fill="currentColor"/></svg>`,
+};
+
+const DEVICES = [
+  {id:'door',     name:'Door Sensor'},
+  {id:'window',   name:'Window Sensor'},
+  {id:'motion',   name:'Motion Detector'},
+  {id:'doorbell', name:'Doorbell Camera'},
+  {id:'outdoor',  name:'Outdoor Camera'},
+  {id:'lock',     name:'Smart Lock'},
+  {id:'thermo',   name:'Thermostat'},
+  {id:'smoke',    name:'Smoke / CO'},
+];
+
+const TS_DATA = {
+  door: {
+    title:'Door Sensor',
+    issues:[
+      {q:'Showing "Open" when the door is closed.',a:`<p>The magnet and sensor are probably misaligned. The two pieces need to be within <strong>about 1 inch</strong> of each other to register as closed.</p><ol><li>Open and close the door slowly — feel if the magnet is catching</li><li>Check that neither piece has shifted since install</li><li>If they're close, try adjusting the magnet piece up or down slightly</li><li>Still not working? Text me — easy fix in person</li></ol>`},
+      {q:'Sensor shows "Offline" or not communicating.',a:`<p>First try a <strong>panel reboot</strong> — unplug, wait 30 seconds, plug back in. Give it 2 minutes to reconnect.</p><p>If still offline, pull the sensor off the frame and check the battery. If the red LED on the sensor flashes when you remove it, battery is likely fine. If there's no LED response, replace the battery (CR2032).</p>`},
+      {q:'Getting false alarms from this sensor.',a:`<p>Usually caused by the door itself vibrating (from HVAC, wind, etc.) enough to briefly separate from the magnet.</p><ul><li>Check if your weatherstripping is tight — a loose door can flex</li><li>Try increasing the alarm delay in your settings (gives you more time to disarm)</li><li>If the door is warped or drafty, that's the root cause — the sensor is working correctly</li></ul>`},
+    ]
+  },
+  window: {
+    title:'Window Sensor',
+    issues:[
+      {q:'Showing "Open" when window is closed.',a:`<p>Same as door sensors — alignment is the culprit. The two pieces need to be within an inch of each other.</p><ol><li>Check if the window frame has shifted (common in older homes, especially after Texas summers)</li><li>Re-seat the magnet piece closer to the sensor</li><li>If it's a sliding window, make sure there's no debris in the track keeping it from fully closing</li></ol>`},
+      {q:'Sensor keeps dropping offline.',a:`<p>Window sensors can lose signal if they're too far from the panel or if there's interference. First do a panel reboot.</p><p>If that doesn't fix it, the sensor may need a range extender. Text me and I can assess signal strength on my next visit.</p>`},
+    ]
+  },
+  motion: {
+    title:'Motion Detector',
+    issues:[
+      {q:'Triggering constantly when no one is home.',a:`<p>Most common causes:</p><ul><li><strong>Pets</strong> — enable Pet Immune mode in settings if you have animals under 40lbs</li><li><strong>HVAC air flow</strong> — hot or cold air blowing across the sensor reads as movement</li><li><strong>Sunlight moving</strong> — afternoon sun shifting across the sensor's field can trigger it</li><li><strong>Curtains or plants</strong> — anything that moves near a window</li></ul><p>Try repositioning the sensor to avoid these. I can also adjust sensitivity in person.</p>`},
+      {q:'Not detecting motion when someone walks by.',a:`<p>Check that nothing is blocking the sensor's view — the lens can be obstructed by furniture, shelving, or even cobwebs.</p><p>Also verify the sensor is in active mode, not bypassed. Check the app under device status.</p>`},
+    ]
+  },
+  doorbell: {
+    title:'Doorbell Camera',
+    issues:[
+      {q:'Not getting notifications when someone rings.',a:`<ol><li>Check your app notification settings — toggle off and back on for doorbell alerts</li><li>Make sure the Vivint app has notification permissions on your phone (iOS: Settings → Vivint → Notifications)</li><li>Check that your phone isn't in Do Not Disturb or Focus mode</li><li>Try signing out of the app and back in</li></ol>`},
+      {q:'Video is choppy or there\'s a lag when I answer.',a:`<p>WiFi signal strength is the most common cause. The doorbell needs a strong 2.4GHz connection.</p><ol><li>In the app, check signal strength under camera settings — should be above 60%</li><li>If below that, your router may be too far away. A WiFi extender near the front door helps significantly</li><li>Also check your internet upload speed — should be at least 10Mbps for smooth video</li></ol>`},
+      {q:'Camera is offline.',a:`<ol><li>Check that your doorbell is getting power — try pressing the button and see if it lights up</li><li>Reboot your home router</li><li>Reboot the panel</li><li>If still offline after 5 minutes, there may be a wiring issue — text me</li></ol>`},
+    ]
+  },
+  outdoor: {
+    title:'Outdoor Camera',
+    issues:[
+      {q:'Camera is offline or showing a gray screen.',a:`<ol><li>Power cycle the camera — unplug or flip the breaker for the outlet it uses</li><li>Wait 60 seconds and restore power</li><li>If it's PoE (powered over ethernet), reseat the ethernet cable</li><li>Reboot the panel</li><li>Still offline after 5 min? Text me — may be a hardware issue</li></ol>`},
+      {q:'Too many false motion alerts.',a:`<p>Draw <strong>activity zones</strong> in the app to limit detection to areas you actually care about. This is the single most effective fix.</p><p>Also adjust motion sensitivity down one notch — camera settings → sensitivity.</p><p>If trees or bushes are in frame, they'll trigger alerts in the wind. Try repositioning or drawing the zone to exclude them.</p>`},
+      {q:'Night vision looks blurry or foggy.',a:`<p>Check for <strong>spider webs or dust</strong> on the lens — this is extremely common outdoors and makes night vision look terrible. Wipe the lens with a microfiber cloth.</p><p>Also check that the camera isn't pointing directly at a bright outdoor light, which can wash out the night vision.</p>`},
+    ]
+  },
+  lock: {
+    title:'Smart Lock',
+    issues:[
+      {q:'Lock won\'t respond to the app.',a:`<ol><li>Check that your door is fully closed — the lock won't engage if the latch doesn't align</li><li>Reboot the panel</li><li>Check the lock battery — most locks give a low battery warning in the app before failing. Replace with fresh AAs</li><li>Try removing and re-adding the lock in the app</li></ol>`},
+      {q:'My keypad code isn\'t working.',a:`<p>Codes sometimes get wiped after a lock firmware update or panel reboot.</p><ol><li>Try adding your code again through the app: Settings → Users → select user → set door lock code</li><li>Make sure you're entering the code you set — they're user-specific</li><li>If the keypad itself isn't responding at all, check the battery</li></ol>`},
+    ]
+  },
+  thermo: {
+    title:'Smart Thermostat',
+    issues:[
+      {q:'Thermostat isn\'t controlling the temperature correctly.',a:`<p>First verify your schedule in the app — an existing schedule override may be fighting your manual settings.</p><p>Check that the thermostat is set to the correct mode (Heat/Cool/Auto). In Texas, most of us run Cool mode all year. Auto mode switches automatically but can cause issues if your system isn't calibrated for it.</p>`},
+      {q:'Thermostat shows offline in the app.',a:`<ol><li>Check that the thermostat screen is on and responsive</li><li>Reboot your router and panel</li><li>On the thermostat itself, go to Settings → WiFi and confirm it's connected to your network</li><li>If it dropped off your network, reconnect it like you would any smart device</li></ol>`},
+    ]
+  },
+  smoke: {
+    title:'Smoke / CO Detector',
+    issues:[
+      {q:'False alarm — went off for no reason.',a:`<p>Common causes for smoke detector false alarms:</p><ul><li><strong>Cooking smoke or steam</strong> — even light cooking can trigger it if the detector is near the kitchen. Consider relocating</li><li><strong>Dust buildup</strong> — vacuum the detector gently with a soft brush</li><li><strong>Insects</strong> — bugs inside the chamber trigger sensors. Tap the case to dislodge</li><li><strong>Low battery</strong> — a dying battery causes random chirps and sometimes full alarms</li></ul>`},
+      {q:'Chirping or beeping periodically.',a:`<p>Periodic chirping (every 30-60 seconds) almost always means <strong>low battery</strong>. Replace the batteries even if the low battery light isn't on.</p><p>If it chirps after fresh batteries, the unit may have reached end of life (typically 10 years). Text me and I can replace it.</p>`},
+      {q:'How do I test my smoke detector?',a:`<p>Put your system in <strong>Test Mode</strong> first (app → Settings → Test Mode). Then hold the test button on the detector for 5 seconds. You should hear a loud alarm and see it register in the app.</p><p>I recommend testing all detectors quarterly. Set a calendar reminder for January, April, July, and October.</p>`},
+    ]
+  },
+};
+
+let activeDevice = null;
+
+function buildGrid() {
+  const grid = document.getElementById('dev-grid');
+  grid.innerHTML = DEVICES.map(d => `
+    <div class="dev-card" data-id="${d.id}" onclick="selectDevice('${d.id}')">
+      <div class="dev-icon">${SVGS[d.id]||''}</div>
+      <div class="dev-name">${d.name}</div>
+    </div>`).join('');
+}
+
+function selectDevice(id) {
+  document.querySelectorAll('.dev-card').forEach(c=>c.classList.toggle('active',c.dataset.id===id));
+  activeDevice = id;
+  const data = TS_DATA[id];
+  if (!data) return;
+  const panel = document.getElementById('ts-panel');
+  panel.style.display = 'block';
+  panel.innerHTML = `
+    <div class="ts-header">
+      <div class="ts-icon">${SVGS[id]||''}</div>
+      <div class="ts-title">${data.title} — Common Issues</div>
+    </div>
+    ${data.issues.map((issue,i)=>`
+      <div class="ts-card">
+        <button class="ts-btn" onclick="toggleTs(this)">
+          <span class="ts-q">${issue.q}</span>
+          <span class="ts-arr">↓</span>
+        </button>
+        <div class="ts-body">${issue.a}</div>
+      </div>`).join('')}
+    <div class="still-stuck">
+      <div class="still-stuck-title">Still stuck?</div>
+      <div class="still-stuck-sub">Text me directly — I'll walk you through it or come take a look.</div>
+      <a class="sms-btn" href="sms:+18013769296">Text Adam →</a>
+    </div>`;
+  panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function toggleTs(btn) {
+  const body = btn.nextElementSibling;
+  btn.classList.toggle('open',!body.classList.contains('open'));
+  body.classList.toggle('open');
+}
+
+buildGrid();
+</script>
+</body>
+</html>
