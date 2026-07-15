@@ -40,6 +40,6 @@
     { "lat": 36.17, "lng": -115.14, "name": "Las Vegas, NV",      "note": "",                                       "type": "city" },
     { "lat": 34.75, "lng": -92.29,  "name": "Little Rock, AR",    "note": "",                                       "type": "city" },
     { "lat": 30.63, "lng": -96.33,  "name": "College Station, TX","note": "Bryan · College Station — Aggieland",    "type": "city" },
-    { "lat": 35.07, "lng": -91.88,  "name": "Beebe, AR",          "note": "One install. A life's mission — completed.", "type": "star" }
+    { "lat": 35.07, "lng": -91.88,  "name": "Beebe, AR",          "note": "One install. A life's mission — completed.", "type": "city" }
   ]
 }
