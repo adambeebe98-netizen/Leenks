@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Beebe · Vivint Security Specialist · Austin TX</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --g: #05E5AF;
+    --gd: #03C090;
+    --dk: #10201F;
+    --dk2: #182E2C;
+    --dk3: #0A1614;
+    --w: #ffffff;
+    --g1: rgba(5,229,175,.08);
+    --g2: rgba(5,229,175,.15);
+    --g3: rgba(5,229,175,.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dk);
+    font-family: 'Figtree', sans-serif;
+    color: var(--w);
+    overflow-x: hidden;
+  }
+
+  section { position: relative; padding: 80px 24px; max-width: 920px; margin: 0 auto; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(16,32,31,.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(5,229,175,.12);
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .03em; }
+  .nav-name span { color: var(--g); }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a {
+    color: rgba(255,255,255,.5); text-decoration: none;
+    font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--g); }
+  @media (max-width: 600px) { .nav-links { display: none; } }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding-top: 80px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 900px;
+    background: radial-gradient(circle, rgba(5,229,175,.1) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; animation: fadeUp .8s ease both; }
+
+  .avatar-ring {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    border: 2px solid var(--g3);
+    padding: 4px;
+    margin: 0 auto 22px;
+    position: relative;
+  }
+  .avatar-ring::before {
+    content: ''; position: absolute; inset: -8px;
+    border-radius: 50%; border: 1px solid var(--g2);
+  }
+  .avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--dk2); border: 1px solid var(--g2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Rajdhani', sans-serif; font-size: 34px; font-weight: 700;
+    color: var(--g); letter-spacing: .05em;
+  }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--g1); border: 1px solid var(--g3);
+    border-radius: 20px; padding: 5px 14px; margin-bottom: 18px;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--g); animation: pulse 2s infinite; }
+  .badge-text {
+    font-family: 'Rajdhani', sans-serif; font-size: 10.5px; font-weight: 500;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--g);
+  }
+
+  .hero h1 {
+    font-family: 'Rajdhani', sans-serif; font-size: 52px; font-weight: 700;
+    letter-spacing: .01em; line-height: 1.05; margin-bottom: 10px;
+  }
+  .hero .role {
+    font-size: 15px; color: rgba(255,255,255,.45); margin-bottom: 28px;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--g); color: var(--dk);
+    font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 14px;
+    letter-spacing: .03em;
+    padding: 13px 26px; border-radius: 30px;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .hero-cta:hover { background: var(--gd); transform: translateY(-2px); }
+
+  .scroll-hint {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    font-family: 'Rajdhani', sans-serif; font-size: 9.5px; letter-spacing: .16em;
+    text-transform: uppercase; color: rgba(255,255,255,.25);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    animation: bounce 2.4s infinite;
+  }
+  .scroll-hint::after { content: '↓'; font-size: 14px; }
+
+  /* ── SECTION LABEL ── */
+  .label {
+    font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 500;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--g);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .label::before { content: ''; width: 18px; height: 1.5px; background: var(--g); border-radius: 1px; }
+
+  .section-title {
+    font-family: 'Rajdhani', sans-serif; font-size: 30px; font-weight: 700;
+    letter-spacing: .01em; margin-bottom: 36px; max-width: 600px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .about-card {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+    border-radius: 14px; padding: 24px 26px;
+    animation: fadeUp .6s ease both;
+  }
+  .about-card p { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,.7); }
+  .about-card p + p { margin-top: 14px; }
+  .about-card strong { color: var(--w); font-weight: 500; }
+
+  .stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px;
+    background: rgba(5,229,175,.12); border: 1px solid rgba(5,229,175,.18);
+    border-radius: 14px; overflow: hidden; margin-top: 22px;
+  }
+  .stat { background: var(--dk2); padding: 20px 14px; text-align: center; }
+  .stat-num { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; color: var(--g); line-height: 1; margin-bottom: 5px; }
+  .stat-label { font-size: 10px; color: rgba(255,255,255,.4); letter-spacing: .04em; }
+
+  /* ── JOURNEY MAP ── */
+  .journey-wrap {
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(5,229,175,.15);
+    border-radius: 16px;
+    padding: 32px 24px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .journey-wrap::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(5,229,175,.18) 1px, transparent 1px);
+    background-size: 26px 26px;
+    pointer-events: none;
+  }
+  .map-canvas {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    z-index: 1;
+  }
+  .map-pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex; flex-direction: column; align-items: center;
+    cursor: default;
+  }
+  .map-pin-dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--g);
+    box-shadow: 0 0 0 4px rgba(5,229,175,.15), 0 0 14px rgba(5,229,175,.6);
+    position: relative;
+    z-index: 2;
+  }
+  .map-pin.home .map-pin-dot {
+    background: var(--w);
+    box-shadow: 0 0 0 5px rgba(5,229,175,.25), 0 0 18px rgba(5,229,175,.8);
+    width: 14px; height: 14px;
+  }
+  .map-pin-label {
+    margin-top: 7px;
+    font-family: 'Rajdhani', sans-serif; font-size: 10.5px; font-weight: 600;
+    color: var(--w); white-space: nowrap;
+    background: rgba(16,32,31,.9);
+    padding: 2px 7px; border-radius: 4px;
+    border: 1px solid rgba(5,229,175,.2);
+  }
+  .map-pin.home .map-pin-label { color: var(--g); border-color: rgba(5,229,175,.4); }
+  .map-pin-num {
+    font-family: 'Rajdhani', sans-serif; font-size: 8px; color: rgba(5,229,175,.5);
+    margin-top: 1px;
+  }
+
+  .journey-path {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+  }
+
+  .journey-legend {
+    display: flex; align-items: center; justify-content: center;
+    gap: 24px; margin-top: 20px; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: rgba(255,255,255,.45); }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--g); }
+  .legend-dot.home { background: var(--w); }
+
+  /* ── LINKS ── */
+  .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .links-grid { grid-template-columns: 1fr; } }
+
+  .link-card {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px; padding: 18px;
+    text-decoration: none; color: inherit;
+    transition: all .2s ease;
+    animation: fadeUp .5s ease both;
+  }
+  .link-card:hover { background: var(--g1); border-color: var(--g3); transform: translateY(-2px); }
+  .link-card.primary { background: var(--g); border-color: transparent; grid-column: span 2; }
+  @media (max-width: 600px) { .link-card.primary { grid-column: span 1; } }
+  .link-card.primary .link-title { color: var(--dk); }
+  .link-card.primary .link-desc { color: rgba(16,32,31,.65); }
+  .link-card.primary .link-icon { background: rgba(0,0,0,.12); }
+  .link-card.primary:hover { background: var(--gd); }
+
+  .link-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--g1); border: 1px solid var(--g2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .link-title { font-family: 'Rajdhani', sans-serif; font-size: 14.5px; font-weight: 600; margin-bottom: 3px; }
+  .link-desc { font-size: 11.5px; color: rgba(255,255,255,.42); line-height: 1.4; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(5,229,175,.1);
+    padding: 40px 24px 56px;
+    text-align: center;
+  }
+  .footer-vivint {
+    font-family: 'Rajdhani', sans-serif; font-size: 9.5px; font-weight: 500;
+    letter-spacing: .18em; text-transform: uppercase; color: rgba(5,229,175,.35);
+    margin-bottom: 8px;
+  }
+  .footer-contact { font-size: 12px; color: rgba(255,255,255,.3); }
+
+  /* ── ANIM ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+  @keyframes bounce { 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,6px);} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">ADAM <span>BEEBE</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#journey">Journey</a>
+    <a href="#links">Get Started</a>
+    <a href="#links">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="avatar-ring"><div class="avatar-inner">AB</div></div>
+    <div class="badge">
+      <div class="badge-dot"></div>
+      <span class="badge-text">Authorized Vivint Pro · Austin, TX</span>
+    </div>
+    <h1>Adam Beebe</h1>
+    <div class="role">Senior Security Specialist · Badge #131211</div>
+    <a class="hero-cta" href="#links">Get a Free Quote →</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="label">About Adam</div>
+
+  <!-- Stats always visible -->
+  <div class="stats" style="margin-bottom:20px;">
+    <div class="stat"><div class="stat-num">1000s</div><div class="stat-label">Homes Protected</div></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Cities Worked</div></div>
+    <div class="stat"><div class="stat-num">2023</div><div class="stat-label">Austin Local</div></div>
+  </div>
+
+  <!-- Dropdown accordion -->
+  <div class="accordion" id="aboutAccordion">
+    <button class="accordion-trigger" onclick="toggleAbout()" aria-expanded="false">
+      <span class="accordion-label">From the Utah innovation center, to thousands of doors across America.</span>
+      <span class="accordion-icon">↓</span>
+    </button>
+    <div class="accordion-body" id="aboutBody">
+      <p>I grew up a mile from <strong>Vivint's original HQ</strong> in Provo, Utah. My final year of high school, I landed an internship at the Vivint Innovation Center — where all the magic is created — in the Space Monkey division, now known as the Vivint Smart Drive.</p>
+      <p>After my internship, I went and knocked doors in Oklahoma City in 2017. That's when I realized installing was really my thing. Since then, I've visited <strong>many thousands of homes</strong> across the country, helping families and neighborhoods feel safe in the places they love most.</p>
+      <p>My first time in Austin was a short 10-day trip that just so happened to be the same time as the <strong>great freeze of 2021</strong> — Snowmageddon, some may call it. Somehow, after one more work trip to the area, I decided to call it home. I moved here spring of 2023, and I love the Austin community and the opportunity to help it achieve greater peace of mind through smart, convenient security.</p>
+    </div>
+  </div>
+
+  <style>
+    .accordion {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+    .accordion-trigger:hover { background: rgba(5,229,175,.04); }
+    .accordion-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 17px; font-weight: 600;
+      color: var(--w);
+      letter-spacing: .01em;
+      line-height: 1.3;
+    }
+    .accordion-icon {
+      font-size: 18px;
+      color: var(--g);
+      flex-shrink: 0;
+      transition: transform .3s ease;
+    }
+    .accordion-trigger[aria-expanded="true"] .accordion-icon {
+      transform: rotate(180deg);
+    }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease, padding .3s ease;
+      padding: 0 22px;
+    }
+    .accordion-body.open {
+      max-height: 400px;
+      padding: 0 22px 20px;
+    }
+    .accordion-body p {
+      font-size: 15px; line-height: 1.75;
+      color: rgba(255,255,255,.7);
+    }
+    .accordion-body p + p { margin-top: 14px; }
+    .accordion-body strong { color: var(--w); font-weight: 500; }
+  </style>
+
+  <script>
+    function toggleAbout() {
+      const btn = document.querySelector('.accordion-trigger');
+      const body = document.getElementById('aboutBody');
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', !isOpen);
+    }
+  </script>
+</section>
+
+<!-- JOURNEY MAP -->
+<section id="journey">
+  <div class="label">The Journey</div>
+  <h2 class="section-title">Every city I've ever worked.</h2>
+
+  <a href="adam_map.html" style="text-decoration:none;">
+    <div class="journey-wrap" style="cursor:pointer;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(5,229,175,.4)'" onmouseout="this.style.borderColor='rgba(5,229,175,.15)'">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:white;margin-bottom:3px;">Interactive Work Map</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);">25+ regions · hover for city details · tap to explore</div>
+        </div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;color:#05E5AF;display:flex;align-items:center;gap:6px;">
+          Open Map <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+
+      <!-- Mini preview dots -->
+      <div style="position:relative;height:140px;background:rgba(5,229,175,.03);border-radius:8px;overflow:hidden;border:1px solid rgba(5,229,175,.08);">
+        <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(5,229,175,.15) 1px,transparent 1px);background-size:18px 18px;"></div>
+        <!-- Vivint green blobs roughly representing work areas -->
+        <div style="position:absolute;width:40px;height:40px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:35%;left:18%;transform:translate(-50%,-50%);"></div>
+        <div style="position:absolute;width:55px;height:55px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:38%;left:13%;transform:translate(-50%,-50%);"></div>
+        <div style="position:absolute;width:48px;height:48px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:55%;left:38%;transform:translate(-50%,-50%);"></div>
+        <div style="position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:52%;left:48%;transform:translate(-50%,-50%);"></div>
+        <div style="position:absolute;width:30px;height:30px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:58%;left:56%;transform:translate(-50%,-50%);"></div>
+        <div style="position:absolute;width:34px;height:34px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:72%;left:63%;transform:translate(-50%,-50%);"></div>
+        <div style="position:absolute;width:32px;height:32px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:58%;left:80%;transform:translate(-50%,-50%);"></div>
+        <div style="position:absolute;width:42px;height:42px;border-radius:50%;background:rgba(5,229,175,.18);border:1.5px solid rgba(5,229,175,.5);top:32%;left:49%;transform:translate(-50%,-50%);"></div>
+        <!-- Home pins -->
+        <div style="position:absolute;width:10px;height:10px;border-radius:50%;background:white;border:2px solid #05E5AF;box-shadow:0 0 8px rgba(5,229,175,.8);top:35%;left:21%;transform:translate(-50%,-50%);"></div>
+        <div style="position:absolute;width:10px;height:10px;border-radius:50%;background:white;border:2px solid #05E5AF;box-shadow:0 0 8px rgba(5,229,175,.8);top:74%;left:45%;transform:translate(-50%,-50%);"></div>
+        <!-- Star for Beebe -->
+        <div style="position:absolute;font-size:14px;top:52%;left:56%;transform:translate(-50%,-50%);">⭐</div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div style="font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(5,229,175,.3);">Click to open full interactive map</div>
+        </div>
+      </div>
+
+      <div class="journey-legend" style="margin-top:14px;">
+        <div class="legend-item"><div class="legend-dot home"></div>Home / HQ</div>
+        <div class="legend-item"><div class="legend-dot"></div>Work regions</div>
+        <div class="legend-item"><span style="font-size:12px;">⭐</span>Beebe, AR</div>
+      </div>
+    </div>
+  </a>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+  <div class="label">Get Started</div>
+  <h2 class="section-title">Everything you need, one tap away.</h2>
+
+  <div class="links-grid">
+    <a class="link-card primary" href="#">
+      <div class="link-icon">🔒</div>
+      <div>
+        <div class="link-title">Get a Free Quote</div>
+        <div class="link-desc">See what a protected home looks like for your neighborhood.</div>
+      </div>
+    </a>
+
+    <a class="link-card" href="#">
+      <div class="link-icon">👋</div>
+      <div>
+        <div class="link-title">Refer a Neighbor</div>
+        <div class="link-desc">You earn $200. They get a free doorbell camera.</div>
+      </div>
+    </a>
+
+    <a class="link-card" href="sms:+18013769296">
+      <div class="link-icon">💬</div>
+      <div>
+        <div class="link-title">Text Adam Directly</div>
+        <div class="link-desc">Quickest way to reach me. I actually respond.</div>
+      </div>
+    </a>
+
+    <a class="link-card" href="#">
+      <div class="link-icon">📅</div>
+      <div>
+        <div class="link-title">Schedule a Service Visit</div>
+        <div class="link-desc">Book a check-in or upgrade walkthrough.</div>
+      </div>
+    </a>
+
+    <a class="link-card" href="#">
+      <div class="link-icon">💡</div>
+      <div>
+        <div class="link-title">Tips & Tricks</div>
+        <div class="link-desc">Get more out of your Vivint system.</div>
+      </div>
+    </a>
+
+    <a class="link-card" href="#">
+      <div class="link-icon">🔧</div>
+      <div>
+        <div class="link-title">Troubleshooting Guide</div>
+        <div class="link-desc">Common fixes before you call support.</div>
+      </div>
+    </a>
+
+    <a class="link-card" href="#">
+      <div class="link-icon">⬆️</div>
+      <div>
+        <div class="link-title">Upgrade Your System</div>
+        <div class="link-desc">New cameras, smart locks, sensors.</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-vivint">Authorized Vivint Pro · Austin TX</div>
+  <div class="footer-contact">(801) 376-9296 &nbsp;·&nbsp; Adam.Beebe@vivint.com</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Beebe — Work Map</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #10201F; font-family: 'Figtree', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+  #header {
+    padding: 14px 24px;
+    background: #10201F;
+    border-bottom: 1px solid rgba(5,229,175,.15);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .eyebrow {
+    font-family: 'Rajdhani', sans-serif; font-size: 10px; font-weight: 500;
+    letter-spacing: .2em; text-transform: uppercase; color: rgba(5,229,175,.5);
+    display: flex; align-items: center; gap: 7px; margin-bottom: 2px;
+  }
+  .eyebrow::before { content:''; width:12px; height:1.5px; background:rgba(5,229,175,.5); border-radius:1px; }
+  .header-title { font-family:'Rajdhani',sans-serif; font-size:20px; font-weight:700; color:white; }
+  .header-sub { font-size:11px; color:rgba(255,255,255,.4); margin-top:1px; }
+  .stats-row { display:flex; gap:10px; }
+  .stat-pill { background:rgba(5,229,175,.08); border:1px solid rgba(5,229,175,.2); border-radius:20px; padding:5px 14px; text-align:center; }
+  .stat-num { font-family:'Rajdhani',sans-serif; font-size:15px; font-weight:700; color:#05E5AF; line-height:1; }
+  .stat-lbl { font-size:9px; color:rgba(255,255,255,.4); }
+
+  #map-wrap { flex:1; position:relative; overflow:hidden; }
+  #map-svg { width:100%; height:100%; }
+
+  .state { fill:#182E2C; stroke:#0d1f1e; stroke-width:0.5; }
+  .border { fill:none; stroke:rgba(5,229,175,.15); stroke-width:0.8; }
+
+  .region {
+    fill:#05E5AF; fill-opacity:0.14;
+    stroke:#05E5AF; stroke-width:1.3; stroke-opacity:0.55;
+    cursor:pointer; transition: fill-opacity .2s, stroke-opacity .2s;
+  }
+  .region:hover { fill-opacity:0.26; stroke-opacity:0.9; }
+
+  .pin-city { fill:#05E5AF; stroke:rgba(5,229,175,.3); stroke-width:2; cursor:pointer; filter:drop-shadow(0 0 4px rgba(5,229,175,.7)); }
+  .pin-home { fill:white; stroke:#05E5AF; stroke-width:2.5; cursor:pointer; filter:drop-shadow(0 0 6px rgba(5,229,175,.9)); }
+  .pin-star { font-size:16px; cursor:pointer; }
+
+  /* Tooltip */
+  #tooltip {
+    position:absolute; pointer-events:none;
+    background:#10201F; border:1px solid rgba(5,229,175,.35);
+    border-radius:10px; padding:10px 14px;
+    font-size:12px; color:white;
+    opacity:0; transition:opacity .15s;
+    max-width:240px; z-index:10;
+    box-shadow:0 8px 32px rgba(0,0,0,.7);
+  }
+  #tooltip.show { opacity:1; }
+  .tt-city { font-family:'Rajdhani',sans-serif; font-size:14px; font-weight:700; margin-bottom:3px; }
+  .tt-note { font-size:11px; color:rgba(255,255,255,.5); line-height:1.5; }
+  .tt-star { font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:600; color:#05E5AF; margin-top:4px; }
+
+  /* Legend */
+  .legend {
+    position:absolute; bottom:20px; left:16px; z-index:5;
+    background:rgba(16,32,31,.92); border:1px solid rgba(5,229,175,.2);
+    border-radius:10px; padding:10px 14px;
+  }
+  .legend-title { font-family:'Rajdhani',sans-serif; font-size:9px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:rgba(5,229,175,.5); margin-bottom:7px; }
+  .legend-row { display:flex; align-items:center; gap:7px; margin-bottom:5px; font-size:11px; color:rgba(255,255,255,.6); }
+  .l-circle { width:14px; height:14px; border-radius:50%; background:rgba(5,229,175,.2); border:1.5px solid rgba(5,229,175,.7); flex-shrink:0; }
+  .l-dot { width:8px; height:8px; border-radius:50%; background:#05E5AF; flex-shrink:0; }
+  .l-home { width:10px; height:10px; border-radius:50%; background:white; border:2px solid #05E5AF; flex-shrink:0; }
+
+  #loading { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:rgba(5,229,175,.6); font-family:'Rajdhani',sans-serif; font-size:14px; letter-spacing:.1em; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div>
+    <div class="eyebrow">The Journey</div>
+    <div class="header-title">Every city I've worked.</div>
+    <div class="header-sub">Hover any region or pin for details</div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-pill"><div class="stat-num">25+</div><div class="stat-lbl">Regions</div></div>
+    <div class="stat-pill"><div class="stat-num">1000s</div><div class="stat-lbl">Homes</div></div>
+    <div class="stat-pill"><div class="stat-num">2017</div><div class="stat-lbl">Since</div></div>
+  </div>
+</div>
+
+<div id="map-wrap">
+  <div id="loading">Loading map...</div>
+  <svg id="map-svg"></svg>
+  <div class="legend">
+    <div class="legend-title">Map Key</div>
+    <div class="legend-row"><div class="l-circle"></div>Work region</div>
+    <div class="legend-row"><div class="l-dot"></div>City</div>
+    <div class="legend-row"><div class="l-home"></div>Home / HQ</div>
+    <div class="legend-row"><span style="font-size:13px;">⭐</span>Beebe, AR</div>
+  </div>
+</div>
+<div id="tooltip"></div>
+
+<script>
+const REGIONS = [
+  { lat:31.5,  lng:-102.5,  r:140, name:'West Texas / SE New Mexico',    note:'Jal NM · Kermit · Pecos · Fort Stockton · Rankin · Seagraves · Midland metro' },
+  { lat:33.56, lng:-101.90, r:28,  name:'Lubbock Area',                  note:'Lubbock · Wolfforth' },
+  { lat:35.22, lng:-101.83, r:38,  name:'Amarillo',                      note:'Amarillo metro' },
+  { lat:33.45, lng:-112.07, r:65,  name:'Phoenix Metro',                  note:'Phoenix metro area' },
+  { lat:40.50, lng:-111.89, r:115, name:'Utah — Wasatch Front',           note:'Springville · Provo · Orem · Lehi · Salt Lake City · Bountiful · Ogden and all cities in between' },
+  { lat:40.97, lng:-117.74, r:22,  name:'Winnemucca, NV',                note:'Winnemucca area' },
+  { lat:36.17, lng:-115.14, r:55,  name:'Las Vegas Metro',               note:'Las Vegas metro area' },
+  { lat:39.06, lng:-108.55, r:22,  name:'Grand Junction, CO',            note:'Grand Junction area' },
+  { lat:38.42, lng:-105.19, r:18,  name:'Florence / Cañon City, CO',     note:'Florence · Cañon City' },
+  { lat:40.76, lng:-98.37,  r:38,  name:'Grand Island / Hastings, NE',   note:'Grand Island · Hastings' },
+  { lat:40.81, lng:-96.70,  r:32,  name:'Lincoln, NE',                   note:'Lincoln metro area' },
+  { lat:41.26, lng:-96.00,  r:38,  name:'Omaha / Council Bluffs',        note:'Omaha metro · Council Bluffs, IA' },
+  { lat:35.25, lng:-97.05,  r:90,  name:'Central Oklahoma',              note:'OKC east metro · Shawnee · Seminole · Cushing · Guthrie · Pauls Valley · Ada' },
+  { lat:36.50, lng:-97.18,  r:42,  name:'N. Oklahoma',                   note:'Ponca City · Perry' },
+  { lat:34.87, lng:-92.15,  r:75,  name:'Little Rock Metro',             note:'Little Rock metro · extending northeast toward Beebe, AR' },
+  { lat:30.53, lng:-87.65,  r:62,  name:'Mobile, AL / Pensacola, FL',    note:'Mobile · Pensacola · surrounding communities' },
+  { lat:33.62, lng:-88.72,  r:18,  name:'Chesterfield, MS',              note:'Chesterfield area' },
+  { lat:39.73, lng:-84.06,  r:22,  name:'Beavercreek, OH',               note:'Beavercreek · Dayton area' },
+  { lat:30.84, lng:-93.29,  r:22,  name:'DeRidder, LA',                  note:'DeRidder area' },
+  { lat:28.78, lng:-81.80,  r:52,  name:'Central Florida',               note:'The Villages · Lady Lake · Apopka' },
+  { lat:34.34, lng:-77.80,  r:38,  name:'Wilmington / Topsail Beach, NC',note:'Wilmington · Topsail Beach · coastal towns in between' },
+  { lat:27.80, lng:-97.40,  r:38,  name:'Corpus Christi, TX',            note:'Corpus Christi metro' },
+  { lat:31.76, lng:-106.49, r:42,  name:'El Paso, TX',                   note:'El Paso metro' },
+  { lat:30.36, lng:-103.66, r:18,  name:'Alpine, TX',                    note:'Alpine area' },
+  { lat:29.42, lng:-98.49,  r:52,  name:'San Antonio Metro',             note:'San Antonio metro area' },
+  { lat:30.27, lng:-97.74,  r:48,  name:'Austin Metro',                  note:'Austin metro · home base since 2023' },
+  { lat:31.12, lng:-97.73,  r:25,  name:'Killeen, TX',                   note:'Killeen area' },
+  { lat:29.87, lng:-97.95,  r:32,  name:'SA → Austin Corridor',          note:'New Braunfels · San Marcos · Kyle · Buda' },
+];
+
+const PINS = [
+  { lat:40.23, lng:-111.66, name:'Provo, UT',         note:'Hometown · Vivint HQ internship', type:'home' },
+  { lat:30.27, lng:-97.74,  name:'Austin, TX',         note:'Home base since 2023',             type:'home' },
+  { lat:35.47, lng:-97.52,  name:'Oklahoma City, OK',  note:'First year knocking doors — 2017', type:'city' },
+  { lat:30.69, lng:-88.04,  name:'Mobile, AL',         note:'',                                 type:'city' },
+  { lat:34.23, lng:-77.94,  name:'Wilmington, NC',     note:'',                                 type:'city' },
+  { lat:36.17, lng:-115.14, name:'Las Vegas, NV',      note:'',                                 type:'city' },
+  { lat:34.75, lng:-92.29,  name:'Little Rock, AR',    note:'',                                 type:'city' },
+  { lat:35.07, lng:-91.88,  name:'⭐ Beebe, AR',       note:'One install. A life\'s mission — completed.', type:'star' },
+];
+
+// Build circle as GeoJSON
+function circleGeo(lat, lng, radiusKm, steps=60) {
+  const coords = [];
+  for (let i = 0; i <= steps; i++) {
+    const a = (i / steps) * 2 * Math.PI;
+    const dlng = (radiusKm / 111.32) / Math.cos(lat * Math.PI / 180);
+    const dlat = radiusKm / 111.32;
+    coords.push([lng + dlng * Math.cos(a), lat + dlat * Math.sin(a)]);
+  }
+  return { type:'Feature', geometry:{ type:'Polygon', coordinates:[coords] } };
+}
+
+const tooltip = document.getElementById('tooltip');
+function showTip(html, x, y) {
+  tooltip.innerHTML = html;
+  tooltip.classList.add('show');
+  const wrap = document.getElementById('map-wrap');
+  const rect = wrap.getBoundingClientRect();
+  let tx = x - rect.left + 14;
+  let ty = y - rect.top - 20;
+  if (tx + 260 > rect.width) tx -= 280;
+  if (ty < 0) ty = 10;
+  tooltip.style.left = tx + 'px';
+  tooltip.style.top = ty + 'px';
+}
+function hideTip() { tooltip.classList.remove('show'); }
+
+async function buildMap() {
+  const wrap = document.getElementById('map-wrap');
+  const W = wrap.clientWidth, H = wrap.clientHeight;
+  const svg = d3.select('#map-svg').attr('width', W).attr('height', H);
+
+  const proj = d3.geoAlbersUsa().fitSize([W, H], { type:'Sphere' });
+  const path = d3.geoPath(proj);
+
+  // Try loading US map data
+  let us;
+  try {
+    us = await d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json');
+  } catch(e) {
+    try {
+      us = await d3.json('https://raw.githubusercontent.com/topojson/us-atlas/master/states-10m.json');
+    } catch(e2) {
+      document.getElementById('loading').textContent = 'Open this file in your browser to view the full map.';
+      return;
+    }
+  }
+
+  document.getElementById('loading').style.display = 'none';
+
+  // Adjust projection to actual US bounds
+  const nation = topojson.feature(us, us.objects.nation);
+  const states = topojson.feature(us, us.objects.states);
+  const stateMesh = topojson.mesh(us, us.objects.states, (a, b) => a !== b);
+
+  proj.fitSize([W * 0.97, H * 0.95], nation);
+  const g = svg.append('g').attr('transform', `translate(${W*0.015}, ${H*0.025})`);
+
+  // States
+  g.selectAll('.state')
+    .data(states.features)
+    .join('path')
+    .attr('class', 'state')
+    .attr('d', path);
+
+  // State borders
+  g.append('path')
+    .datum(stateMesh)
+    .attr('class', 'border')
+    .attr('d', path);
+
+  // Regions
+  REGIONS.forEach(reg => {
+    const geo = circleGeo(reg.lat, reg.lng, reg.r);
+    const projected = path(geo);
+    if (!projected) return;
+    g.append('path')
+      .attr('class', 'region')
+      .attr('d', projected)
+      .on('mousemove', (e) => showTip(`<div class="tt-city">${reg.name}</div><div class="tt-note">${reg.note}</div>`, e.clientX, e.clientY))
+      .on('mouseleave', hideTip);
+  });
+
+  // Pins
+  PINS.forEach(pin => {
+    const pt = proj([pin.lng, pin.lat]);
+    if (!pt) return;
+    const [px, py] = pt;
+    const html = `<div class="tt-city">${pin.name}</div>${pin.note ? `<div class="tt-note">${pin.note}</div>` : ''}${pin.type==='star'?'<div class="tt-star">⭐ Life mission completed.</div>':''}`;
+
+    if (pin.type === 'star') {
+      g.append('text')
+        .attr('class', 'pin-star')
+        .attr('x', px - 8).attr('y', py + 6)
+        .text('⭐')
+        .on('mousemove', (e) => showTip(html, e.clientX, e.clientY))
+        .on('mouseleave', hideTip);
+    } else {
+      g.append('circle')
+        .attr('class', pin.type === 'home' ? 'pin-home' : 'pin-city')
+        .attr('cx', px).attr('cy', py)
+        .attr('r', pin.type === 'home' ? 7 : 5)
+        .on('mousemove', (e) => showTip(html, e.clientX, e.clientY))
+        .on('mouseleave', hideTip);
+    }
+  });
+}
+
+buildMap();
+</script>
+</body>
+</html>

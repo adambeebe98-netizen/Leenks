@@ -1,0 +1,45 @@
+{
+  "regions": [
+    { "lat": 31.5,  "lng": -102.5,  "radiusKm": 140, "name": "West Texas / SE New Mexico",     "note": "Jal NM · Kermit · Pecos · Fort Stockton · Rankin · Seagraves · Midland metro" },
+    { "lat": 33.56, "lng": -101.90, "radiusKm": 28,  "name": "Lubbock Area",                   "note": "Lubbock · Wolfforth" },
+    { "lat": 35.22, "lng": -101.83, "radiusKm": 38,  "name": "Amarillo",                       "note": "Amarillo metro" },
+    { "lat": 33.45, "lng": -112.07, "radiusKm": 65,  "name": "Phoenix Metro",                  "note": "Phoenix metro area" },
+    { "lat": 40.50, "lng": -111.89, "radiusKm": 115, "name": "Utah — Wasatch Front",            "note": "Springville · Provo · Orem · Lehi · Salt Lake City · Bountiful · Ogden and all cities in between" },
+    { "lat": 40.97, "lng": -117.74, "radiusKm": 22,  "name": "Winnemucca, NV",                 "note": "Winnemucca area" },
+    { "lat": 36.17, "lng": -115.14, "radiusKm": 55,  "name": "Las Vegas Metro",                "note": "Las Vegas metro area" },
+    { "lat": 39.06, "lng": -108.55, "radiusKm": 22,  "name": "Grand Junction, CO",             "note": "Grand Junction area" },
+    { "lat": 38.42, "lng": -105.19, "radiusKm": 18,  "name": "Florence / Canon City, CO",      "note": "Florence · Canon City" },
+    { "lat": 40.76, "lng": -98.37,  "radiusKm": 38,  "name": "Grand Island / Hastings, NE",    "note": "Grand Island · Hastings" },
+    { "lat": 40.81, "lng": -96.70,  "radiusKm": 32,  "name": "Lincoln, NE",                    "note": "Lincoln metro area" },
+    { "lat": 41.26, "lng": -96.00,  "radiusKm": 38,  "name": "Omaha / Council Bluffs",         "note": "Omaha metro · Council Bluffs, IA" },
+    { "lat": 35.25, "lng": -97.05,  "radiusKm": 90,  "name": "Central Oklahoma",               "note": "OKC east metro · Shawnee · Seminole · Cushing · Guthrie · Pauls Valley · Ada" },
+    { "lat": 36.50, "lng": -97.18,  "radiusKm": 42,  "name": "N. Oklahoma",                    "note": "Ponca City · Perry" },
+    { "lat": 34.87, "lng": -92.15,  "radiusKm": 75,  "name": "Little Rock Metro",              "note": "Little Rock metro · extending northeast toward Beebe, AR" },
+    { "lat": 30.53, "lng": -87.65,  "radiusKm": 62,  "name": "Mobile, AL / Pensacola, FL",     "note": "Mobile · Pensacola · surrounding communities" },
+    { "lat": 33.62, "lng": -88.72,  "radiusKm": 18,  "name": "Chesterfield, MS",               "note": "Chesterfield area" },
+    { "lat": 39.73, "lng": -84.06,  "radiusKm": 22,  "name": "Beavercreek, OH",                "note": "Beavercreek · Dayton area" },
+    { "lat": 30.84, "lng": -93.29,  "radiusKm": 22,  "name": "DeRidder, LA",                   "note": "DeRidder area" },
+    { "lat": 28.78, "lng": -81.80,  "radiusKm": 52,  "name": "Central Florida",                "note": "The Villages · Lady Lake · Apopka" },
+    { "lat": 34.34, "lng": -77.80,  "radiusKm": 38,  "name": "Wilmington / Topsail Beach, NC", "note": "Wilmington · Topsail Beach · coastal towns in between" },
+    { "lat": 27.80, "lng": -97.40,  "radiusKm": 38,  "name": "Corpus Christi, TX",             "note": "Corpus Christi metro" },
+    { "lat": 31.76, "lng": -106.49, "radiusKm": 42,  "name": "El Paso, TX",                    "note": "El Paso metro" },
+    { "lat": 30.36, "lng": -103.66, "radiusKm": 18,  "name": "Alpine, TX",                     "note": "Alpine area" },
+    { "lat": 29.42, "lng": -98.49,  "radiusKm": 52,  "name": "San Antonio Metro",              "note": "San Antonio metro area" },
+    { "lat": 30.27, "lng": -97.74,  "radiusKm": 48,  "name": "Austin Metro",                   "note": "Austin metro · home base since 2023" },
+    { "lat": 31.12, "lng": -97.73,  "radiusKm": 25,  "name": "Killeen, TX",                    "note": "Killeen area" },
+    { "lat": 29.87, "lng": -97.95,  "radiusKm": 32,  "name": "SA to Austin Corridor",          "note": "New Braunfels · San Marcos · Kyle · Buda" },
+    { "lat": 30.65, "lng": -96.35,  "radiusKm": 18,  "name": "Bryan / College Station, TX",    "note": "Bryan · College Station — Aggieland" }
+  ],
+
+  "pins": [
+    { "lat": 40.23, "lng": -111.66, "name": "Provo, UT",         "note": "Hometown · Vivint HQ internship",       "type": "home" },
+    { "lat": 30.27, "lng": -97.74,  "name": "Austin, TX",         "note": "Home base since 2023",                  "type": "home" },
+    { "lat": 35.47, "lng": -97.52,  "name": "Oklahoma City, OK",  "note": "First year knocking doors — 2017",      "type": "city" },
+    { "lat": 30.69, "lng": -88.04,  "name": "Mobile, AL",         "note": "",                                       "type": "city" },
+    { "lat": 34.23, "lng": -77.94,  "name": "Wilmington, NC",     "note": "",                                       "type": "city" },
+    { "lat": 36.17, "lng": -115.14, "name": "Las Vegas, NV",      "note": "",                                       "type": "city" },
+    { "lat": 34.75, "lng": -92.29,  "name": "Little Rock, AR",    "note": "",                                       "type": "city" },
+    { "lat": 30.63, "lng": -96.33,  "name": "College Station, TX","note": "Bryan · College Station — Aggieland",    "type": "city" },
+    { "lat": 35.07, "lng": -91.88,  "name": "Beebe, AR",          "note": "One install. A life's mission — completed.", "type": "star" }
+  ]
+}
