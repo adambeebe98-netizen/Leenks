@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Adam Beebe · Vivint Security Specialist · Austin TX</title>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--g:#05E5AF;--gd:#03C090;--dk:#10201F;--dk2:#182E2C;--w:#fff;--g1:rgba(5,229,175,.08);--g2:rgba(5,229,175,.15);--g3:rgba(5,229,175,.25);}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{overflow-x:hidden;max-width:100vw;scroll-behavior:smooth;}
+body{background:var(--dk);font-family:'Figtree',sans-serif;color:var(--w);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(16,32,31,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(5,229,175,.12);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.nav-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;letter-spacing:.03em;}
+.nav-name span{color:var(--g);}
+.nav-links{display:flex;gap:20px;}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--g);}
+@media(max-width:600px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 20px 60px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(800px,120vw);height:min(800px,120vw);background:radial-gradient(circle,rgba(5,229,175,.1) 0%,transparent 60%);pointer-events:none;z-index:0;}
+.hero-content{position:relative;z-index:1;animation:fadeUp .8s ease both;width:100%;}
+.avatar-ring{width:88px;height:88px;border-radius:50%;border:2px solid var(--g3);padding:4px;margin:0 auto 18px;position:relative;}
+.avatar-ring::before{content:'';position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--g2);}
+.avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--dk2);border:1px solid var(--g2);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;color:var(--g);}
+.badge{display:inline-flex;align-items:center;gap:7px;background:var(--g1);border:1px solid var(--g3);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s infinite;}
+.badge-text{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--g);}
+.hero h1{font-family:'Rajdhani',sans-serif;font-size:clamp(32px,8vw,56px);font-weight:700;line-height:1.05;margin-bottom:8px;}
+.hero-role{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:24px;}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:.03em;padding:13px 28px;border-radius:30px;text-decoration:none;cursor:pointer;border:none;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.hero-cta:hover{background:var(--gd);}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Rajdhani',sans-serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25);display:flex;flex-direction:column;align-items:center;gap:5px;animation:bounce 2.4s infinite;}
+
+/* CONTENT SECTIONS */
+.section{max-width:860px;margin:0 auto;padding:64px 20px;}
+.label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--g);display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.label::before{content:'';width:16px;height:1.5px;background:var(--g);border-radius:1px;}
+.section-title{font-family:'Rajdhani',sans-serif;font-size:clamp(20px,5vw,30px);font-weight:700;margin-bottom:28px;}
+
+/* STATS */
+.stats-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(5,229,175,.12);border:1px solid rgba(5,229,175,.18);border-radius:14px;overflow:hidden;margin-bottom:22px;}
+.stat-cell{background:var(--dk2);padding:18px 10px;text-align:center;}
+.stat-num{font-family:'Rajdhani',sans-serif;font-size:clamp(18px,4vw,26px);font-weight:700;color:var(--g);line-height:1;margin-bottom:3px;}
+.stat-lbl{font-size:11px;color:rgba(255,255,255,.4);}
+
+/* ACCORDION */
+.accordion{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;margin-bottom:24px;}
+.accordion-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent;}
+.accordion-btn:active{background:rgba(5,229,175,.04);}
+.accordion-label{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;color:var(--w);line-height:1.3;}
+.accordion-icon{font-size:16px;color:var(--g);flex-shrink:0;transition:transform .3s;}
+.accordion-btn[aria-expanded="true"] .accordion-icon{transform:rotate(180deg);}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;padding:0 20px;}
+.accordion-body.open{max-height:600px;padding:0 20px 20px;}
+.accordion-body p{font-size:14px;line-height:1.8;color:rgba(255,255,255,.7);}
+.accordion-body p+p{margin-top:12px;}
+.accordion-body strong{color:var(--w);font-weight:500;}
+
+/* MAP */
+.map-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(5,229,175,.15);height:clamp(280px,50vw,420px);}
+.map-wrap #about-map{width:100%;height:100%;}
+.mapboxgl-popup-content{background:#10201F!important;border:1px solid rgba(5,229,175,.3)!important;border-radius:10px!important;color:white!important;padding:10px 14px!important;font-family:'Figtree',sans-serif!important;font-size:13px!important;}
+.mapboxgl-popup-tip{border-top-color:#10201F!important;border-bottom-color:#10201F!important;}
+.pop-name{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;margin-bottom:2px;}
+.pop-note{font-size:11px;color:rgba(255,255,255,.5);line-height:1.4;}
+
+/* LINK CARDS */
+.links-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.links-grid{grid-template-columns:1fr;}}
+.link-card{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;cursor:pointer;transition:all .2s;border:none;width:100%;text-align:left;color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent;}
+.link-card:active{background:var(--g1);transform:scale(.98);}
+.link-card:hover{background:var(--g1);border-color:var(--g3);}
+.link-card.primary{background:var(--g);grid-column:span 2;}
+@media(max-width:500px){.link-card.primary{grid-column:span 1;}}
+.link-card.primary .link-title{color:var(--dk);}
+.link-card.primary .link-desc{color:rgba(16,32,31,.65);}
+.link-card.primary .link-icon{background:rgba(0,0,0,.12);}
+.link-card.primary:hover{background:var(--gd);}
+.link-icon{width:38px;height:38px;border-radius:10px;background:var(--g1);border:1px solid var(--g2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.link-title{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;margin-bottom:3px;}
+.link-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.4;}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(5,229,175,.1);padding:36px 20px 52px;text-align:center;}
+.footer-brand{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(5,229,175,.3);margin-bottom:8px;}
+.footer-contact{font-size:12px;color:rgba(255,255,255,.25);}
+
+/* BACKDROP */
+#backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;opacity:0;pointer-events:none;transition:opacity .3s;}
+#backdrop.on{opacity:1;pointer-events:all;}
+
+/* POPUP — MOBILE FIRST */
+.popup{position:fixed;bottom:0;left:0;right:0;width:100%;max-width:640px;margin:0 auto;z-index:51;background:#0F1D1C;border-radius:20px 20px 0 0;max-height:92vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .38s cubic-bezier(.32,.72,0,1);overflow:hidden;}
+.popup.on{transform:translateY(0);}
+.popup-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px;border-bottom:1px solid rgba(5,229,175,.1);flex-shrink:0;}
+.popup-title{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;}
+.popup-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.55);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
+.popup-body{overflow-y:auto;overflow-x:hidden;padding:18px 20px 36px;flex:1;-webkit-overflow-scrolling:touch;}
+
+/* FORM */
+.form-label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:5px;display:block;}
+.form-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:11px 13px;color:white;font-family:'Figtree',sans-serif;font-size:15px;outline:none;transition:border-color .2s;margin-bottom:12px;-webkit-appearance:none;}
+.form-input:focus{border-color:rgba(5,229,175,.5);background:rgba(255,255,255,.08);}
+.form-input::placeholder{color:rgba(255,255,255,.22);}
+select.form-input{cursor:pointer;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:380px){.form-row{grid-template-columns:1fr;}}
+.field-group{margin-bottom:14px;}
+.btn-primary{width:100%;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;padding:14px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;margin-top:8px;-webkit-tap-highlight-color:transparent;}
+.btn-primary:hover{background:var(--gd);}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;}
+.btn-secondary{width:100%;background:rgba(255,255,255,.06);color:rgba(255,255,255,.65);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);cursor:pointer;margin-top:8px;-webkit-tap-highlight-color:transparent;}
+
+/* RADIO / CHECKBOX */
+.radio-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
+.radio-opt{display:flex;align-items:center;gap:7px;font-size:14px;color:rgba(255,255,255,.75);cursor:pointer;padding:8px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);-webkit-tap-highlight-color:transparent;}
+.radio-opt:has(input:checked){border-color:var(--g);background:rgba(5,229,175,.1);color:var(--g);}
+.radio-opt input{accent-color:var(--g);}
+.checkbox-row{display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.75);margin-bottom:10px;cursor:pointer;}
+.checkbox-row input{accent-color:var(--g);width:16px;height:16px;}
+.hint-text{font-size:11px;color:rgba(255,255,255,.4);line-height:1.6;padding:10px 12px;background:rgba(5,229,175,.05);border-radius:8px;border-left:2px solid rgba(5,229,175,.3);margin-bottom:12px;}
+.plan-hint{font-size:12px;color:rgba(5,229,175,.7);padding:8px 12px;background:rgba(5,229,175,.06);border-radius:8px;margin-top:6px;display:none;}
+
+/* DEVICE GRID */
+.dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+@media(max-width:340px){.dev-grid{grid-template-columns:repeat(2,1fr);}}
+.dev-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border-radius:10px;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);cursor:pointer;transition:all .2s;text-align:center;-webkit-tap-highlight-color:transparent;user-select:none;}
+.dev-card:active,.dev-card:hover{border-color:rgba(5,229,175,.4);background:rgba(5,229,175,.07);}
+.dev-card.selected{border-color:var(--g) !important;background:rgba(5,229,175,.15) !important;}
+.dev-icon{width:26px;height:26px;color:rgba(255,255,255,.5);}
+.dev-card.selected .dev-icon{color:var(--g);}
+.dev-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.dev-name{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:500;color:rgba(255,255,255,.45);line-height:1.2;}
+.dev-card.selected .dev-name{color:var(--g);}
+
+/* INTEREST GRID */
+.int-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+@media(max-width:380px){.int-grid{grid-template-columns:repeat(2,1fr);}}
+.int-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:11px 6px;border-radius:10px;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);cursor:pointer;transition:all .2s;text-align:center;-webkit-tap-highlight-color:transparent;user-select:none;}
+.int-card:active,.int-card:hover{border-color:rgba(5,229,175,.4);background:rgba(5,229,175,.07);}
+.int-card.on{border-color:var(--g) !important;background:rgba(5,229,175,.15) !important;}
+.int-card-icon{width:24px;height:24px;color:rgba(255,255,255,.5);}
+.int-card.on .int-card-icon{color:var(--g);}
+.int-card-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.int-card-name{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:500;color:rgba(255,255,255,.45);line-height:1.2;}
+.int-card.on .int-card-name{color:var(--g);}
+
+/* TASK LIST */
+.task-add-row{display:flex;gap:8px;margin-bottom:12px;align-items:flex-start;}
+.task-add-row .form-input{margin-bottom:0;flex:1;font-size:14px;}
+.task-add-btn{flex-shrink:0;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;padding:11px 12px;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+.task-list{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
+.task-item{display:flex;align-items:center;gap:8px;background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.2);border-radius:8px;padding:9px 11px;}
+.task-item-icon{width:18px;height:18px;color:var(--g);flex-shrink:0;}
+.task-item-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.task-item-text{flex:1;min-width:0;}
+.task-item-dev{font-family:'Rajdhani',sans-serif;font-size:10px;color:var(--g);font-weight:600;}
+.task-item-issue{font-size:12px;color:rgba(255,255,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.task-item-del{background:none;border:none;color:rgba(255,255,255,.25);cursor:pointer;font-size:16px;padding:2px 4px;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
+.task-empty{text-align:center;padding:14px;color:rgba(255,255,255,.25);font-size:12px;font-style:italic;border:1px dashed rgba(255,255,255,.1);border-radius:8px;margin-bottom:14px;}
+
+/* STEPS */
+.steps{display:flex;align-items:center;margin-bottom:20px;}
+.step-dot{width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.3);flex-shrink:0;}
+.step-dot.active{border-color:var(--g);color:var(--g);background:rgba(5,229,175,.1);}
+.step-dot.done{border-color:var(--g);background:var(--g);color:var(--dk);}
+.step-line{flex:1;height:1px;background:rgba(255,255,255,.1);}
+.step-line.done{background:var(--g);}
+
+/* REBOOT */
+.reboot-card{background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.2);border-radius:12px;padding:16px;margin-bottom:14px;}
+.reboot-title{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;}
+.reboot-body{font-size:13px;color:rgba(255,255,255,.65);line-height:1.65;margin-bottom:12px;}
+details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--g);cursor:pointer;margin-bottom:8px;-webkit-tap-highlight-color:transparent;}
+.reboot-steps{font-size:12px;color:rgba(255,255,255,.6);line-height:1.8;padding-left:14px;}
+.reboot-steps li{margin-bottom:3px;}
+
+/* AVAILABILITY */
+.avail-label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:8px;display:block;}
+.day-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.day-pill{padding:7px 11px;border-radius:20px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.6);font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.day-pill.on{border-color:var(--g);background:rgba(5,229,175,.12);color:var(--g);}
+.time-pills{display:flex;gap:7px;margin-bottom:18px;flex-wrap:wrap;}
+.time-pill{flex:1;min-width:80px;padding:10px 8px;border-radius:10px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.6);font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.time-pill.on{border-color:var(--g);background:rgba(5,229,175,.12);color:var(--g);}
+
+/* SUCCESS */
+.success-screen{text-align:center;padding:28px 16px;}
+.success-icon{font-size:44px;margin-bottom:14px;}
+.success-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px;}
+.success-sub{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65;}
+
+/* TIPS CONTENT */
+.tips-cat{margin-bottom:24px;}
+.tips-cat-title{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--g);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+.tip-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.tip-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent;}
+.tip-q{font-size:13px;font-weight:500;color:var(--w);}
+.tip-arr{font-size:14px;color:var(--g);flex-shrink:0;transition:transform .3s;}
+.tip-btn.open .tip-arr{transform:rotate(180deg);}
+.tip-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding:0 16px;}
+.tip-body.open{max-height:400px;padding:0 16px 14px;}
+.tip-body p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;}
+.tip-body p+p{margin-top:8px;}
+.tip-body ul,.tip-body ol{padding-left:16px;margin-top:6px;}
+.tip-body li{font-size:12px;color:rgba(255,255,255,.6);line-height:1.7;}
+.tip-body strong{color:var(--g);font-weight:500;}
+.tips-cta{background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.2);border-radius:12px;padding:16px;text-align:center;margin-top:16px;}
+
+/* TROUBLESHOOT CONTENT */
+.ts-dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+@media(max-width:340px){.ts-dev-grid{grid-template-columns:repeat(2,1fr);}}
+.ts-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.ts-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent;}
+.ts-q{font-size:13px;font-weight:500;color:var(--w);}
+.ts-arr{font-size:14px;color:var(--g);flex-shrink:0;transition:transform .3s;}
+.ts-btn.open .ts-arr{transform:rotate(180deg);}
+.ts-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding:0 16px;}
+.ts-body.open{max-height:500px;padding:0 16px 14px;}
+.ts-body p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;}
+.ts-body p+p{margin-top:8px;}
+.ts-body ol,.ts-body ul{padding-left:16px;margin-top:6px;}
+.ts-body li{font-size:12px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:3px;}
+.ts-body strong{color:var(--g);font-weight:500;}
+.stuck-strip{background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.18);border-radius:12px;padding:16px;text-align:center;margin-top:16px;}
+.stuck-title{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;}
+.stuck-sub{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:12px;}
+.stuck-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.stuck-btn{padding:9px 16px;border-radius:20px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;cursor:pointer;border:none;-webkit-tap-highlight-color:transparent;}
+.stuck-btn-sms{background:var(--g);color:var(--dk);text-decoration:none;display:inline-block;}
+.stuck-btn-svc{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12) !important;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+@keyframes bounce{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,7px);}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">ADAM <span>BEEBE</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#links">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="avatar-ring"><div class="avatar-inner">AB</div></div>
+    <div class="badge"><div class="badge-dot"></div><span class="badge-text">Authorized Vivint Pro · Austin, TX</span></div>
+    <h1>Adam Beebe</h1>
+    <div class="hero-role">Senior Security Specialist · Badge #131211</div>
+    <button class="hero-cta" onclick="document.getElementById('links').scrollIntoView({behavior:'smooth'})">Get Started →</button>
+  </div>
+  <div class="scroll-hint">Scroll<span style="margin-top:2px">↓</span></div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="label">About Adam</div>
+
+  <div class="stats-strip">
+    <div class="stat-cell"><div class="stat-num">3,000+</div><div class="stat-lbl">Homes Protected</div></div>
+    <div class="stat-cell"><div class="stat-num">2016</div><div class="stat-lbl">With Vivint Since</div></div>
+    <div class="stat-cell"><div class="stat-num">2023</div><div class="stat-lbl">Austin Local Since</div></div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" aria-expanded="false" onclick="toggleAccordion(this,'about-body')">
+      <span class="accordion-label">From the Utah innovation center, to thousands of doors across America.</span>
+      <span class="accordion-icon">↓</span>
+    </button>
+    <div class="accordion-body" id="about-body">
+      <p>I grew up a mile from <strong>Vivint's original HQ</strong> in Provo, Utah. My final year of high school I landed an internship at the Vivint Innovation Center — in the Space Monkey division, now known as the Vivint Smart Drive.</p>
+      <p>After my internship, I knocked doors in Oklahoma City in 2017. That's when I realized installing was really my thing. Since then, I've visited <strong>many thousands of homes</strong> across the country, helping families and neighborhoods feel safe in the places they love most.</p>
+      <p>My first time in Austin was a 10-day trip that just so happened to be the same time as the <strong>great freeze of 2021</strong> — Snowmageddon, some may call it. Somehow, after one more work trip to the area, I decided to call it home. I moved here spring of 2023 and I love the opportunity to help this community achieve greater peace of mind through smart, convenient security.</p>
+    </div>
+  </div>
+
+  <div class="label" style="margin-bottom:10px;">Every city I've ever worked.</div>
+  <div class="map-wrap"><div id="about-map"></div></div>
+</section>
+
+<!-- GET STARTED -->
+<section class="section" id="links">
+  <div class="label">Get Started</div>
+  <h2 class="section-title">Everything you need, one tap away.</h2>
+  <div class="links-grid">
+
+    <button class="link-card primary" onclick="openPopup('popup-quote')">
+      <div class="link-icon">🔒</div>
+      <div class="link-content">
+        <div class="link-title">Get a Free Quote</div>
+        <div class="link-desc">Tell me what you're interested in and I'll reach out with options and pricing.</div>
+      </div>
+    </button>
+
+    <button class="link-card" onclick="openPopup('popup-referral')">
+      <div class="link-icon">👋</div>
+      <div class="link-content">
+        <div class="link-title">Refer a Neighbor</div>
+        <div class="link-desc">You earn $200. They get a free doorbell camera.</div>
+      </div>
+    </button>
+
+    <a class="link-card" href="sms:+18013769296">
+      <div class="link-icon">💬</div>
+      <div class="link-content">
+        <div class="link-title">Text Adam Directly</div>
+        <div class="link-desc">(801) 376-9296 · My personal cell. Quickest way to reach me — I actually respond.</div>
+      </div>
+    </a>
+
+    <button class="link-card" onclick="openPopup('popup-service')">
+      <div class="link-icon">🛠️</div>
+      <div class="link-content">
+        <div class="link-title">Schedule a Service Visit</div>
+        <div class="link-desc">Having an issue? Let's get it sorted. I'll confirm timing with you directly.</div>
+      </div>
+    </button>
+
+    <button class="link-card" onclick="openPopup('popup-tips')">
+      <div class="link-icon">💡</div>
+      <div class="link-content">
+        <div class="link-title">Tips &amp; Tricks</div>
+        <div class="link-desc">Get more out of your Vivint system. Updated regularly.</div>
+      </div>
+    </button>
+
+    <button class="link-card" onclick="openPopup('popup-ts')">
+      <div class="link-icon">🔧</div>
+      <div class="link-content">
+        <div class="link-title">Troubleshooting Guide</div>
+        <div class="link-desc">Common fixes before you call support. Most solved in 2 minutes.</div>
+      </div>
+    </button>
+
+    <button class="link-card" onclick="openPopup('popup-upgrade')">
+      <div class="link-icon">⬆️</div>
+      <div class="link-content">
+        <div class="link-title">Upgrade Your System</div>
+        <div class="link-desc">New cameras, sensors, smart home — let's build it out.</div>
+      </div>
+    </button>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Authorized Vivint Pro · Austin TX</div>
+  <div class="footer-contact">(801) 376-9296 &nbsp;·&nbsp; Adam.Beebe@vivint.com</div>
+</footer>
+
+<!-- BACKDROP -->
+<div id="backdrop" onclick="closePopup()"></div>
+
+<!-- ── POPUP: QUOTE ── -->
+<div id="popup-quote" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">Get a Free Quote</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <div id="quote-form">
+      <div class="form-row" style="margin-bottom:0;">
+        <div><label class="form-label">First Name</label><input class="form-input" id="q-first" placeholder="First" oninput="autoNickname()"></div>
+        <div><label class="form-label">Last Name</label><input class="form-input" id="q-last" placeholder="Last"></div>
+      </div>
+      <label class="form-label">What should I call you?</label>
+      <input class="form-input" id="q-nickname" placeholder="Nickname" oninput="nicknameEdited=true">
+      <label class="form-label">Phone Number</label>
+      <input class="form-input" id="q-phone" placeholder="(512) 000-0000" inputmode="tel" oninput="fmtPhone(this)">
+      <label class="form-label">Street Address</label>
+  <input class="form-input" id="q-street" placeholder="123 Main St">
+  <div class="form-row">
+    <div><label class="form-label">City</label><input class="form-input" id="q-city" placeholder="City"></div>
+    <div><label class="form-label">State</label><select class="form-input" id="q-state"><option value="AL">Alabama</option>
+<option value="AK">Alaska</option>
+<option value="AZ">Arizona</option>
+<option value="AR">Arkansas</option>
+<option value="CA">California</option>
+<option value="CO">Colorado</option>
+<option value="CT">Connecticut</option>
+<option value="DE">Delaware</option>
+<option value="FL">Florida</option>
+<option value="GA">Georgia</option>
+<option value="HI">Hawaii</option>
+<option value="ID">Idaho</option>
+<option value="IL">Illinois</option>
+<option value="IN">Indiana</option>
+<option value="IA">Iowa</option>
+<option value="KS">Kansas</option>
+<option value="KY">Kentucky</option>
+<option value="LA">Louisiana</option>
+<option value="ME">Maine</option>
+<option value="MD">Maryland</option>
+<option value="MA">Massachusetts</option>
+<option value="MI">Michigan</option>
+<option value="MN">Minnesota</option>
+<option value="MS">Mississippi</option>
+<option value="MO">Missouri</option>
+<option value="MT">Montana</option>
+<option value="NE">Nebraska</option>
+<option value="NV">Nevada</option>
+<option value="NH">New Hampshire</option>
+<option value="NJ">New Jersey</option>
+<option value="NM">New Mexico</option>
+<option value="NY">New York</option>
+<option value="NC">North Carolina</option>
+<option value="ND">North Dakota</option>
+<option value="OH">Ohio</option>
+<option value="OK">Oklahoma</option>
+<option value="OR">Oregon</option>
+<option value="PA">Pennsylvania</option>
+<option value="RI">Rhode Island</option>
+<option value="SC">South Carolina</option>
+<option value="SD">South Dakota</option>
+<option value="TN">Tennessee</option>
+<option value="TX" selected>Texas</option>
+<option value="UT">Utah</option>
+<option value="VT">Vermont</option>
+<option value="VA">Virginia</option>
+<option value="WA">Washington</option>
+<option value="WV">West Virginia</option>
+<option value="WI">Wisconsin</option>
+<option value="WY">Wyoming</option></select></div>
+  </div>
+  <label class="form-label">ZIP Code</label>
+  <input class="form-input" id="q-zip" placeholder="78701" maxlength="5" oninput="this.value=this.value.replace(/\D/g,'')">
+      <div style="margin-bottom:14px;">
+        <label class="form-label" style="margin-bottom:10px;">What are you interested in? <span style="color:rgba(255,255,255,.3);font-weight:400;text-transform:none;letter-spacing:0;">(select all that apply)</span></label>
+        <div class="int-grid" id="quote-ints"><div class="int-card" data-id="doorbell" data-name="Doorbell Camera" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Doorbell Camera</div>
+    </div>
+<div class="int-card" data-id="outdoor" data-name="Outdoor Cameras" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Outdoor Cameras</div>
+    </div>
+<div class="int-card" data-id="indoor" data-name="Indoor Camera" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12.167" cy="9.247" r="2.872"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z"/></svg></div>
+      <div class="int-card-name">Indoor Camera</div>
+    </div>
+<div class="int-card" data-id="door" data-name="Door Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z"/></svg></div>
+      <div class="int-card-name">Door Protection</div>
+    </div>
+<div class="int-card" data-id="window" data-name="Window Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z"/></svg></div>
+      <div class="int-card-name">Window Protection</div>
+    </div>
+<div class="int-card" data-id="motion" data-name="Motion Detection" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Motion Detection</div>
+    </div>
+<div class="int-card" data-id="glass" data-name="Glass Break" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Glass Break</div>
+    </div>
+<div class="int-card" data-id="lock" data-name="Smart Locks" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="3.25"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Smart Locks</div>
+    </div>
+<div class="int-card" data-id="thermo" data-name="Thermostat" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M9 9h3M9 12h3M9 15h6M14 9h1M14 12h1"/></svg></div>
+      <div class="int-card-name">Thermostat</div>
+    </div>
+<div class="int-card" data-id="garage" data-name="Garage Access" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3L20 7v1H4V7L12 3Z"/><rect x="4" y="8" width="16" height="13" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="15.5" x2="20" y2="15.5"/></svg></div>
+      <div class="int-card-name">Garage Access</div>
+    </div>
+<div class="int-card" data-id="smoke" data-name="Smoke / CO" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="3.25"/></svg></div>
+      <div class="int-card-name">Smoke / CO</div>
+    </div>
+<div class="int-card" data-id="water" data-name="Water Sensor" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3C12 3 5 10 5 15a7 7 0 0 0 14 0C19 10 12 3 12 3Z"/></svg></div>
+      <div class="int-card-name">Water Sensor</div>
+    </div></div>
+      </div>
+      <div class="field-group">
+        <label class="checkbox-row"><input type="checkbox" id="q-referred" onchange="toggleQReferred()"> &nbsp;Did someone refer you?</label>
+        <div id="q-referred-wrap" style="display:none;">
+          <div class="radio-row">
+            <label class="radio-opt"><input type="radio" name="qref" value="code" checked onchange="toggleQRefType()"> I have a referral code</label>
+            <label class="radio-opt"><input type="radio" name="qref" value="none" onchange="toggleQRefType()"> I don't have one</label>
+          </div>
+          <div id="q-ref-code-wrap"><input class="form-input" id="q-ref-code" placeholder="Referral code"></div>
+          <div id="q-no-code-msg" class="hint-text" style="display:none;">No worries! A referral code speeds things up, but if you don't have one I can help track down the right referral and make sure everyone who should get credit does.</div>
+        </div>
+      </div>
+      <div class="field-group">
+    <label class="form-label">Do you have the Vivint Protection Plan?</label>
+    <div class="radio-row">
+      <label class="radio-opt"><input type="radio" name="q-plan" value="yes"> Yes</label>
+      <label class="radio-opt"><input type="radio" name="q-plan" value="no"> No</label>
+      <label class="radio-opt"><input type="radio" name="q-plan" value="notsure" onchange="showPlanHint(this)"> Not Sure</label>
+    </div>
+    <div class="plan-hint" id="q-plan-hint">No worries — I can look that up on my end.</div>
+  </div>
+      <button class="btn-primary" onclick="submitQuote()">Request Quote →</button>
+    </div>
+    <div id="quote-success" class="success-screen" style="display:none;">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Quote Request Sent!</div>
+      <div class="success-sub">I'll reach out to you shortly with pricing and options.<br><br><strong style="color:var(--g);">— Adam</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── POPUP: REFERRAL ── -->
+<div id="popup-referral" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">Refer a Neighbor</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <div id="ref-form">
+      <p style="font-size:13px;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.6;">You earn <strong style="color:var(--g);">$200</strong> when your neighbor activates. They get a free doorbell camera installed.</p>
+      <div class="form-row" style="margin-bottom:0;">
+        <div><label class="form-label">Your First Name</label><input class="form-input" id="ref-first" placeholder="First"></div>
+        <div><label class="form-label">Your Last Name</label><input class="form-input" id="ref-last" placeholder="Last"></div>
+      </div>
+      <label class="form-label">Your Phone</label>
+      <input class="form-input" id="ref-phone" placeholder="(512) 000-0000" inputmode="tel" oninput="fmtPhone(this)">
+      <div class="form-row" style="margin-bottom:0;">
+        <div><label class="form-label">Neighbor First Name</label><input class="form-input" id="ref-nbr-first" placeholder="First"></div>
+        <div><label class="form-label">Neighbor Last Name</label><input class="form-input" id="ref-nbr-last" placeholder="Last"></div>
+      </div>
+      <label class="form-label">Neighbor's Phone</label>
+      <input class="form-input" id="ref-nbr-phone" placeholder="(512) 000-0000" inputmode="tel" oninput="fmtPhone(this)">
+      <label class="form-label">Relationship / Notes</label>
+      <input class="form-input" id="ref-notes" placeholder="e.g. next door neighbor, coworker, family...">
+      <div class="field-group">
+        <label class="form-label">How should I give you credit?</label>
+        <div class="radio-row">
+          <label class="radio-opt"><input type="radio" name="ref-credit" value="code" checked onchange="toggleRefCredit()"> Referral Code</label>
+          <label class="radio-opt"><input type="radio" name="ref-credit" value="address" onchange="toggleRefCredit()"> My Address</label>
+        </div>
+        <div id="ref-code-wrap">
+          <input class="form-input" id="ref-code" placeholder="Your referral code">
+          <div class="hint-text">Find your code in the Vivint app → tap the ☰ menu (top left) → scroll down to find your referral code.</div>
+        </div>
+        <div id="ref-addr-wrap" style="display:none;">
+          <input class="form-input" id="ref-street" placeholder="Your street address">
+          <div class="form-row">
+            <div><label class="form-label">City</label><input class="form-input" id="ref-city" placeholder="City"></div>
+            <div><label class="form-label">State</label><select class="form-input" id="ref-state"><option value="AL">Alabama</option>
+<option value="AK">Alaska</option>
+<option value="AZ">Arizona</option>
+<option value="AR">Arkansas</option>
+<option value="CA">California</option>
+<option value="CO">Colorado</option>
+<option value="CT">Connecticut</option>
+<option value="DE">Delaware</option>
+<option value="FL">Florida</option>
+<option value="GA">Georgia</option>
+<option value="HI">Hawaii</option>
+<option value="ID">Idaho</option>
+<option value="IL">Illinois</option>
+<option value="IN">Indiana</option>
+<option value="IA">Iowa</option>
+<option value="KS">Kansas</option>
+<option value="KY">Kentucky</option>
+<option value="LA">Louisiana</option>
+<option value="ME">Maine</option>
+<option value="MD">Maryland</option>
+<option value="MA">Massachusetts</option>
+<option value="MI">Michigan</option>
+<option value="MN">Minnesota</option>
+<option value="MS">Mississippi</option>
+<option value="MO">Missouri</option>
+<option value="MT">Montana</option>
+<option value="NE">Nebraska</option>
+<option value="NV">Nevada</option>
+<option value="NH">New Hampshire</option>
+<option value="NJ">New Jersey</option>
+<option value="NM">New Mexico</option>
+<option value="NY">New York</option>
+<option value="NC">North Carolina</option>
+<option value="ND">North Dakota</option>
+<option value="OH">Ohio</option>
+<option value="OK">Oklahoma</option>
+<option value="OR">Oregon</option>
+<option value="PA">Pennsylvania</option>
+<option value="RI">Rhode Island</option>
+<option value="SC">South Carolina</option>
+<option value="SD">South Dakota</option>
+<option value="TN">Tennessee</option>
+<option value="TX" selected>Texas</option>
+<option value="UT">Utah</option>
+<option value="VT">Vermont</option>
+<option value="VA">Virginia</option>
+<option value="WA">Washington</option>
+<option value="WV">West Virginia</option>
+<option value="WI">Wisconsin</option>
+<option value="WY">Wyoming</option></select></div>
+          </div>
+          <input class="form-input" id="ref-zip" placeholder="ZIP" maxlength="5" oninput="this.value=this.value.replace(/\D/g,'')">
+        </div>
+      </div>
+      <button class="btn-primary" onclick="submitReferral()">Submit Referral →</button>
+    </div>
+    <div id="ref-success" class="success-screen" style="display:none;">
+      <div class="success-icon">🤝</div>
+      <div class="success-title">Referral Submitted!</div>
+      <div class="success-sub">I'll reach out to your neighbor soon. A pre-drafted text to them should have opened — feel free to send it!<br><br>Your $200 credit will be applied once they activate.<br><br><strong style="color:var(--g);">— Adam</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── POPUP: SERVICE ── -->
+<div id="popup-service" class="popup">
+  <div class="popup-header">
+    <div class="popup-title" id="svc-popup-title">Schedule a Service Visit</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <div class="steps" id="svc-steps">
+      <div class="step-dot active" id="sd1">1</div>
+      <div class="step-line" id="sl1"></div>
+      <div class="step-dot" id="sd2">2</div>
+      <div class="step-line" id="sl2"></div>
+      <div class="step-dot" id="sd3">3</div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div id="svc-s1">
+      <label class="form-label" style="margin-bottom:8px;">Which device is having issues?</label>
+      <div class="dev-grid" id="svc-dev-grid"><div class="dev-card" data-id="door" data-name="Door Sensor" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z"/></svg></div>
+      <div class="dev-name">Door Sensor</div>
+    </div>
+<div class="dev-card" data-id="window" data-name="Window Sensor" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z"/></svg></div>
+      <div class="dev-name">Window Sensor</div>
+    </div>
+<div class="dev-card" data-id="glass" data-name="Glass Break" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="dev-name">Glass Break</div>
+    </div>
+<div class="dev-card" data-id="motion" data-name="Motion Detector" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z"/></svg></div>
+      <div class="dev-name">Motion Detector</div>
+    </div>
+<div class="dev-card" data-id="doorbell" data-name="Doorbell Camera" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z"/></svg></div>
+      <div class="dev-name">Doorbell Camera</div>
+    </div>
+<div class="dev-card" data-id="outdoor" data-name="Outdoor Camera" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z"/></svg></div>
+      <div class="dev-name">Outdoor Camera</div>
+    </div>
+<div class="dev-card" data-id="spotlight" data-name="Spotlight Camera" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M7.34 16.1a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Z"/><circle cx="12" cy="6.36" r="2.55"/><rect x="6.99" y=".95" width="10.02" height="10.2" rx="2"/></svg></div>
+      <div class="dev-name">Spotlight Camera</div>
+    </div>
+<div class="dev-card" data-id="indoor" data-name="Indoor Camera" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><circle cx="12.167" cy="9.247" r="2.872"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z"/></svg></div>
+      <div class="dev-name">Indoor Camera</div>
+    </div>
+<div class="dev-card" data-id="lock" data-name="Smart Lock" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="3.25"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="dev-name">Smart Lock</div>
+    </div>
+<div class="dev-card" data-id="thermo" data-name="Thermostat" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M9 9h3M9 12h3M9 15h6M14 9h1M14 12h1"/></svg></div>
+      <div class="dev-name">Thermostat</div>
+    </div>
+<div class="dev-card" data-id="plug" data-name="Smart Plug" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><rect x="2.75" y="4.75" width="18.5" height="14.5" rx="2.25"/><path d="M9 8v3M15 8v3M11 14.25h2"/></svg></div>
+      <div class="dev-name">Smart Plug</div>
+    </div>
+<div class="dev-card" data-id="garage" data-name="Garage Access" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M12 3L20 7v1H4V7L12 3Z"/><rect x="4" y="8" width="16" height="13" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="15.5" x2="20" y2="15.5"/></svg></div>
+      <div class="dev-name">Garage Access</div>
+    </div>
+<div class="dev-card" data-id="smoke" data-name="Smoke / CO" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="3.25"/></svg></div>
+      <div class="dev-name">Smoke / CO</div>
+    </div>
+<div class="dev-card" data-id="water" data-name="Water Sensor" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M12 3C12 3 5 10 5 15a7 7 0 0 0 14 0C19 10 12 3 12 3Z"/></svg></div>
+      <div class="dev-name">Water Sensor</div>
+    </div>
+<div class="dev-card" data-id="panic" data-name="Panic Pendant" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="4.75"/></svg></div>
+      <div class="dev-name">Panic Pendant</div>
+    </div>
+<div class="dev-card" data-id="keyfob" data-name="Key Fob" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><rect x="5.75" y="4.75" width="12.5" height="14.5" rx="3"/><circle cx="12" cy="10" r="2"/><line x1="12" y1="13" x2="12" y2="16"/></svg></div>
+      <div class="dev-name">Key Fob</div>
+    </div>
+<div class="dev-card" data-id="keypad" data-name="Keypad" onclick="selectSvcDev(this)">
+      <div class="dev-icon"><svg viewBox="0 0 24 24"><rect x="3" y="2" width="18" height="20" rx="2"/><circle cx="9" cy="7" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="15" cy="7" r="1"/><circle cx="9" cy="11" r="1"/><circle cx="12" cy="11" r="1"/><circle cx="15" cy="11" r="1"/><circle cx="9" cy="15" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="12" cy="19" r="1"/></svg></div>
+      <div class="dev-name">Keypad</div>
+    </div></div>
+      <label class="form-label">Describe the issue</label>
+      <div class="task-add-row">
+        <input class="form-input" id="svc-issue-txt" placeholder="e.g. offline, false alarm, won't respond...">
+        <button class="task-add-btn" onclick="addTask()">+ Add</button>
+      </div>
+      <div class="task-empty" id="task-empty-msg">Select a device above, describe the issue, then tap + Add.</div>
+      <div class="task-list" id="task-list"></div>
+      <button class="btn-primary" id="svc-next1" onclick="svcGo(2)" disabled>Next →</button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="svc-s2" style="display:none;">
+      <div class="reboot-card">
+        <div class="reboot-title">👋 Hey! Happy to help.</div>
+        <div class="reboot-body">Before we schedule, let's try the easiest fix — a full reboot of everything on your list, including the panel. This resolves most issues in under 5 minutes.</div>
+        <details>
+          <summary>How to reboot my system</summary>
+          <ol class="reboot-steps">
+            <li>Unplug the panel from the wall</li>
+            <li>If it has a battery, hold the power button for 10 seconds</li>
+            <li>Wait 30 seconds</li>
+            <li>Plug back in, wait 2 minutes for reconnection</li>
+            <li>For cameras & sensors — power cycle or remove/reinsert battery</li>
+          </ol>
+        </details>
+      </div>
+      <div id="task-review"></div>
+      <div class="field-group">
+    <label class="form-label">Do you have the Vivint Protection Plan?</label>
+    <div class="radio-row">
+      <label class="radio-opt"><input type="radio" name="svc-plan" value="yes"> Yes</label>
+      <label class="radio-opt"><input type="radio" name="svc-plan" value="no"> No</label>
+      <label class="radio-opt"><input type="radio" name="svc-plan" value="notsure" onchange="showPlanHint(this)"> Not Sure</label>
+    </div>
+    <div class="plan-hint" id="svc-plan-hint">No worries — I can look that up on my end.</div>
+  </div>
+      <button class="btn-primary" onclick="svcGo(3)">I've Rebooted — Continue →</button>
+      <button class="btn-secondary" onclick="svcGo(1)">← Back</button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="svc-s3" style="display:none;">
+      <label class="avail-label">What days work for you?</label>
+      <div class="day-pills" id="day-pills"></div>
+      <label class="avail-label">Preferred time of day</label>
+      <div class="time-pills">
+        <div class="time-pill" onclick="toggleTime(this)" data-v="Morning">🌅 Morning</div>
+        <div class="time-pill" onclick="toggleTime(this)" data-v="Afternoon">☀️ Afternoon</div>
+        <div class="time-pill" onclick="toggleTime(this)" data-v="Evening">🌆 Evening</div>
+      </div>
+      <div class="form-row" style="margin-bottom:0;">
+        <div><label class="form-label">Name</label><input class="form-input" id="svc-name" placeholder="Your name"></div>
+        <div><label class="form-label">Phone</label><input class="form-input" id="svc-phone" placeholder="(512) 000-0000" inputmode="tel" oninput="fmtPhone(this)"></div>
+      </div>
+      <button class="btn-primary" onclick="submitService()">Submit Request →</button>
+      <button class="btn-secondary" onclick="svcGo(2)">← Back</button>
+    </div>
+
+    <!-- SUCCESS -->
+    <div id="svc-success" class="success-screen" style="display:none;">
+      <div class="success-icon">📅</div>
+      <div class="success-title">Request Received!</div>
+      <div class="success-sub">I'll text or call you to confirm the best time. Usually within a few hours.<br><br><strong style="color:var(--g);">— Adam</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── POPUP: TIPS ── -->
+<div id="popup-tips" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">Tips &amp; Tricks</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;line-height:1.6;">Tips to get the most out of your Vivint system. Tap any question to expand.</p>
+
+    <div class="tips-cat">
+      <div class="tips-cat-title">📱 The App</div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I arm and disarm remotely?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Open the Vivint app → tap the <strong>shield icon</strong>. You'll see Disarmed, Away, and Stay. Away arms everything including motion. Stay arms perimeter only — perfect for nighttime when you're home.</p></div></div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I add a family member?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Settings → Users → Add User. Set permission levels — Full Control, Arm/Disarm only, or Guest. Give each person their own unique PIN so you can track who armed and when.</p></div></div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I save camera clips?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Tap the camera → Clips. Filter by camera or date. Tap any clip → download icon to save to your phone. Clips are stored for <strong>30 days</strong> — download anything important before then.</p></div></div>
+    </div>
+
+    <div class="tips-cat">
+      <div class="tips-cat-title">📹 Cameras</div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Camera triggers at night for no reason.</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Almost always insects flying past the IR glow. Fix: lower motion sensitivity slightly, draw a custom <strong>activity zone</strong> that excludes the area closest to the lens, or move the camera away from outdoor lights.</p></div></div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I set up activity zones?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Tap a camera → gear icon → Activity Zones. Draw a box around the area you care about — driveway, front door, etc. Camera only triggers clips within that zone. This is the biggest thing you can do to reduce false alerts.</p></div></div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Doorbell camera lags when I answer it.</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>WiFi signal issue. The doorbell needs strong 2.4GHz signal.<ul><li>Check signal strength under camera settings</li><li>Below 60%? Consider a WiFi extender near the front door</li><li>Make sure internet upload is at least 10Mbps</li></ul></p></div></div>
+    </div>
+
+    <div class="tips-cat">
+      <div class="tips-cat-title">🚪 Sensors</div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I test sensors without triggering an alarm?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Put the system in <strong>Test Mode</strong> first: app → Settings → Test Mode. Walk through every door and window — the panel beeps to confirm each sensor. Auto-disables after 30 minutes.</p></div></div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Motion sensor triggers when no one is home.</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Common causes: <strong>pets</strong> (enable Pet Immune mode), HVAC air flow blowing across sensor, afternoon sunlight shifting across field of view, or curtains moving near a window. Try repositioning slightly.</p></div></div>
+    </div>
+
+    <div class="tips-cat">
+      <div class="tips-cat-title">🔒 Smart Home</div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Can I set locks to auto-lock at a certain time?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Yes — Automations → Add Rule → Smart Lock. Set it to lock at a specific time, or trigger when system arms Away. Recommended: <strong>when system arms Away → lock all doors</strong>. You'll never leave the house unlocked.</p></div></div>
+      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I use the thermostat to save energy?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Set a schedule: cooler when away, comfortable when home. Link it to the security system — when you arm Away, it adjusts automatically. In Austin summers, 78-80°F away and 72-74°F home adds up to real savings.</p></div></div>
+    </div>
+
+    <div class="tips-cta">
+      <div style="font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;">Have a question not covered here?</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.45);margin-bottom:12px;">Text me directly — I respond to all customers.</div>
+      <a style="display:inline-block;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;padding:10px 20px;border-radius:20px;text-decoration:none;" href="sms:+18013769296">Text Adam →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── POPUP: TROUBLESHOOT ── -->
+<div id="popup-ts" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">Troubleshooting Guide</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px;line-height:1.6;">Tap a device to see common issues and fixes.</p>
+    <div class="ts-dev-grid" id="ts-dev-grid"></div>
+    <div id="ts-issues-wrap"></div>
+  </div>
+</div>
+
+<!-- ── POPUP: UPGRADE ── -->
+<div id="popup-upgrade" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">Upgrade Your System</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <div id="upg-form">
+      <p style="font-size:13px;color:rgba(255,255,255,.55);margin-bottom:14px;line-height:1.6;">Select what you're interested in — I'll reach out with options and pricing.</p>
+      <div class="int-grid" id="upg-ints"><div class="int-card" data-id="doorbell" data-name="Doorbell Camera" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Doorbell Camera</div>
+    </div>
+<div class="int-card" data-id="outdoor" data-name="Outdoor Cameras" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Outdoor Cameras</div>
+    </div>
+<div class="int-card" data-id="indoor" data-name="Indoor Camera" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12.167" cy="9.247" r="2.872"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z"/></svg></div>
+      <div class="int-card-name">Indoor Camera</div>
+    </div>
+<div class="int-card" data-id="door" data-name="Door Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z"/></svg></div>
+      <div class="int-card-name">Door Protection</div>
+    </div>
+<div class="int-card" data-id="window" data-name="Window Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z"/></svg></div>
+      <div class="int-card-name">Window Protection</div>
+    </div>
+<div class="int-card" data-id="motion" data-name="Motion Detection" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Motion Detection</div>
+    </div>
+<div class="int-card" data-id="glass" data-name="Glass Break" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Glass Break</div>
+    </div>
+<div class="int-card" data-id="lock" data-name="Smart Locks" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="3.25"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-name">Smart Locks</div>
+    </div>
+<div class="int-card" data-id="thermo" data-name="Thermostat" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M9 9h3M9 12h3M9 15h6M14 9h1M14 12h1"/></svg></div>
+      <div class="int-card-name">Thermostat</div>
+    </div>
+<div class="int-card" data-id="garage" data-name="Garage Access" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3L20 7v1H4V7L12 3Z"/><rect x="4" y="8" width="16" height="13" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="15.5" x2="20" y2="15.5"/></svg></div>
+      <div class="int-card-name">Garage Access</div>
+    </div>
+<div class="int-card" data-id="smoke" data-name="Smoke / CO" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="3.25"/></svg></div>
+      <div class="int-card-name">Smoke / CO</div>
+    </div>
+<div class="int-card" data-id="water" data-name="Water Sensor" onclick="toggleInt(this)">
+      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3C12 3 5 10 5 15a7 7 0 0 0 14 0C19 10 12 3 12 3Z"/></svg></div>
+      <div class="int-card-name">Water Sensor</div>
+    </div></div>
+      <div class="form-row" style="margin-bottom:0;">
+        <div><label class="form-label">Name</label><input class="form-input" id="upg-name" placeholder="Your name"></div>
+        <div><label class="form-label">Phone</label><input class="form-input" id="upg-phone" placeholder="(512) 000-0000" inputmode="tel" oninput="fmtPhone(this)"></div>
+      </div>
+      <label class="form-label">Street Address</label>
+  <input class="form-input" id="upg-street" placeholder="123 Main St">
+  <div class="form-row">
+    <div><label class="form-label">City</label><input class="form-input" id="upg-city" placeholder="City"></div>
+    <div><label class="form-label">State</label><select class="form-input" id="upg-state"><option value="AL">Alabama</option>
+<option value="AK">Alaska</option>
+<option value="AZ">Arizona</option>
+<option value="AR">Arkansas</option>
+<option value="CA">California</option>
+<option value="CO">Colorado</option>
+<option value="CT">Connecticut</option>
+<option value="DE">Delaware</option>
+<option value="FL">Florida</option>
+<option value="GA">Georgia</option>
+<option value="HI">Hawaii</option>
+<option value="ID">Idaho</option>
+<option value="IL">Illinois</option>
+<option value="IN">Indiana</option>
+<option value="IA">Iowa</option>
+<option value="KS">Kansas</option>
+<option value="KY">Kentucky</option>
+<option value="LA">Louisiana</option>
+<option value="ME">Maine</option>
+<option value="MD">Maryland</option>
+<option value="MA">Massachusetts</option>
+<option value="MI">Michigan</option>
+<option value="MN">Minnesota</option>
+<option value="MS">Mississippi</option>
+<option value="MO">Missouri</option>
+<option value="MT">Montana</option>
+<option value="NE">Nebraska</option>
+<option value="NV">Nevada</option>
+<option value="NH">New Hampshire</option>
+<option value="NJ">New Jersey</option>
+<option value="NM">New Mexico</option>
+<option value="NY">New York</option>
+<option value="NC">North Carolina</option>
+<option value="ND">North Dakota</option>
+<option value="OH">Ohio</option>
+<option value="OK">Oklahoma</option>
+<option value="OR">Oregon</option>
+<option value="PA">Pennsylvania</option>
+<option value="RI">Rhode Island</option>
+<option value="SC">South Carolina</option>
+<option value="SD">South Dakota</option>
+<option value="TN">Tennessee</option>
+<option value="TX" selected>Texas</option>
+<option value="UT">Utah</option>
+<option value="VT">Vermont</option>
+<option value="VA">Virginia</option>
+<option value="WA">Washington</option>
+<option value="WV">West Virginia</option>
+<option value="WI">Wisconsin</option>
+<option value="WY">Wyoming</option></select></div>
+  </div>
+  <label class="form-label">ZIP Code</label>
+  <input class="form-input" id="upg-zip" placeholder="78701" maxlength="5" oninput="this.value=this.value.replace(/\D/g,'')">
+      <div class="field-group">
+    <label class="form-label">Do you have the Vivint Protection Plan?</label>
+    <div class="radio-row">
+      <label class="radio-opt"><input type="radio" name="upg-plan" value="yes"> Yes</label>
+      <label class="radio-opt"><input type="radio" name="upg-plan" value="no"> No</label>
+      <label class="radio-opt"><input type="radio" name="upg-plan" value="notsure" onchange="showPlanHint(this)"> Not Sure</label>
+    </div>
+    <div class="plan-hint" id="upg-plan-hint">No worries — I can look that up on my end.</div>
+  </div>
+      <button class="btn-primary" onclick="submitUpgrade()">Request Upgrade Info →</button>
+    </div>
+    <div id="upg-success" class="success-screen" style="display:none;">
+      <div class="success-icon">⬆️</div>
+      <div class="success-title">Got It!</div>
+      <div class="success-sub">I'll reach out with upgrade options and pricing for what you selected.<br><br><strong style="color:var(--g);">— Adam</strong></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONSTANTS ─────────────────────────────────────────────────
+const W3KEY = 'c410be27-9cf8-48c5-9ec1-72c4652ad3ba';
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiYWRhbWJlZWJlIiwiYSI6ImNtcm1ncWZzZDMyOWkyem9kZGxqbzI3aDYifQ.TzSOQU3Vfy8Zl-8KjohMLw';
+
+// ── SVG + DEVICE DATA ─────────────────────────────────────────
+const SVGS = {
+  door:`<svg viewBox="0 0 24 24"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z"/></svg>`,
+  window:`<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z"/></svg>`,
+  glass:`<svg viewBox="0 0 24 24"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg>`,
+  motion:`<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z"/></svg>`,
+  doorbell:`<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z"/></svg>`,
+  outdoor:`<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z"/></svg>`,
+  spotlight:`<svg viewBox="0 0 24 24"><path d="M7.34 16.1a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Z"/><circle cx="12" cy="6.36" r="2.55"/><rect x="6.99" y=".95" width="10.02" height="10.2" rx="2"/></svg>`,
+  indoor:`<svg viewBox="0 0 24 24"><circle cx="12.167" cy="9.247" r="2.872"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z"/></svg>`,
+  lock:`<svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="3.25"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg>`,
+  thermo:`<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M9 9h3M9 12h3M9 15h6M14 9h1M14 12h1"/></svg>`,
+  plug:`<svg viewBox="0 0 24 24"><rect x="2.75" y="4.75" width="18.5" height="14.5" rx="2.25"/><path d="M9 8v3M15 8v3M11 14.25h2"/></svg>`,
+  garage:`<svg viewBox="0 0 24 24"><path d="M12 3L20 7v1H4V7L12 3Z"/><rect x="4" y="8" width="16" height="13" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="15.5" x2="20" y2="15.5"/></svg>`,
+  smoke:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="3.25"/></svg>`,
+  water:`<svg viewBox="0 0 24 24"><path d="M12 3C12 3 5 10 5 15a7 7 0 0 0 14 0C19 10 12 3 12 3Z"/></svg>`,
+  panic:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="4.75"/></svg>`,
+  keyfob:`<svg viewBox="0 0 24 24"><rect x="5.75" y="4.75" width="12.5" height="14.5" rx="3"/><circle cx="12" cy="10" r="2"/><line x1="12" y1="13" x2="12" y2="16"/></svg>`,
+  keypad:`<svg viewBox="0 0 24 24"><rect x="3" y="2" width="18" height="20" rx="2"/><circle cx="9" cy="7" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="15" cy="7" r="1"/><circle cx="9" cy="11" r="1"/><circle cx="12" cy="11" r="1"/><circle cx="15" cy="11" r="1"/><circle cx="9" cy="15" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="12" cy="19" r="1"/></svg>`
+};
+const DEVICES = [
+  {id:'door',name:'Door Sensor'},
+  {id:'window',name:'Window Sensor'},
+  {id:'glass',name:'Glass Break'},
+  {id:'motion',name:'Motion Detector'},
+  {id:'doorbell',name:'Doorbell Camera'},
+  {id:'outdoor',name:'Outdoor Camera'},
+  {id:'spotlight',name:'Spotlight Camera'},
+  {id:'indoor',name:'Indoor Camera'},
+  {id:'lock',name:'Smart Lock'},
+  {id:'thermo',name:'Thermostat'},
+  {id:'plug',name:'Smart Plug'},
+  {id:'garage',name:'Garage Access'},
+  {id:'smoke',name:'Smoke / CO'},
+  {id:'water',name:'Water Sensor'},
+  {id:'panic',name:'Panic Pendant'},
+  {id:'keyfob',name:'Key Fob'},
+  {id:'keypad',name:'Keypad'}
+];
+const INTERESTS = [
+  {id:'doorbell',name:'Doorbell Camera'},
+  {id:'outdoor',name:'Outdoor Cameras'},
+  {id:'indoor',name:'Indoor Camera'},
+  {id:'door',name:'Door Protection'},
+  {id:'window',name:'Window Protection'},
+  {id:'motion',name:'Motion Detection'},
+  {id:'glass',name:'Glass Break'},
+  {id:'lock',name:'Smart Locks'},
+  {id:'thermo',name:'Thermostat'},
+  {id:'garage',name:'Garage Access'},
+  {id:'smoke',name:'Smoke / CO'},
+  {id:'water',name:'Water Sensor'}
+];
+
+// ── PHONE FORMAT ──────────────────────────────────────────────
+function fmtPhone(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,10);
+  if (v.length >= 7) v = '(' + v.slice(0,3) + ') ' + v.slice(3,6) + '-' + v.slice(6);
+  else if (v.length >= 4) v = '(' + v.slice(0,3) + ') ' + v.slice(3);
+  else if (v.length >= 1) v = '(' + v;
+  el.value = v;
+}
+
+// ── POPUP SYSTEM ──────────────────────────────────────────────
+let currentPopup = null;
+function openPopup(id) {
+  if (currentPopup) closePopup();
+  currentPopup = id;
+  document.getElementById('backdrop').classList.add('on');
+  const el = document.getElementById(id);
+  el.classList.add('on');
+  document.body.style.overflow = 'hidden';
+  if (id === 'popup-service') initService();
+  if (id === 'popup-ts') initTS();
+}
+function closePopup() {
+  if (!currentPopup) return;
+  document.getElementById(currentPopup).classList.remove('on');
+  currentPopup = null;
+  document.getElementById('backdrop').classList.remove('on');
+  document.body.style.overflow = '';
+}
+function switchPopup(from, to) {
+  document.getElementById(from).classList.remove('on');
+  currentPopup = to;
+  document.getElementById(to).classList.add('on');
+  if (to === 'popup-service') initService();
+}
+
+// ── ACCORDION ─────────────────────────────────────────────────
+function toggleAccordion(btn, bodyId) {
+  const body = document.getElementById(bodyId);
+  const open = body.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+}
+
+// ── QUOTE FORM ────────────────────────────────────────────────
+let nicknameEdited = false;
+function autoNickname() {
+  if (!nicknameEdited) document.getElementById('q-nickname').value = document.getElementById('q-first').value;
+}
+function toggleQReferred() {
+  const w = document.getElementById('q-referred-wrap');
+  w.style.display = document.getElementById('q-referred').checked ? 'block' : 'none';
+}
+function toggleQRefType() {
+  const isCode = document.querySelector('input[name="qref"]:checked').value === 'code';
+  document.getElementById('q-ref-code-wrap').style.display = isCode ? 'block' : 'none';
+  document.getElementById('q-no-code-msg').style.display = isCode ? 'none' : 'block';
+}
+function toggleRefCredit() {
+  const isCode = document.querySelector('input[name="ref-credit"]:checked').value === 'code';
+  document.getElementById('ref-code-wrap').style.display = isCode ? 'block' : 'none';
+  document.getElementById('ref-addr-wrap').style.display = isCode ? 'none' : 'block';
+}
+
+// ── PLAN HINT ────────────────────────────────────────────────
+function showPlanHint(el) {
+  const name = el.name.replace('-plan','');
+  const hint = document.getElementById(name + '-plan-hint');
+  if (hint) hint.style.display = el.value === 'notsure' ? 'block' : 'none';
+}
+
+// ── INTEREST TOGGLES ─────────────────────────────────────────
+function toggleInt(el) { el.classList.toggle('on'); }
+function getInts(containerId) {
+  return [...document.querySelectorAll('#'+containerId+' .int-card.on')].map(c => c.dataset.name);
+}
+
+// ── SERVICE FLOW ──────────────────────────────────────────────
+let selDevId = null, selDevName = null, tasks = [], selDays = [], selTimes = [];
+
+function selectSvcDev(el) {
+  document.querySelectorAll('#svc-dev-grid .dev-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selDevId = el.dataset.id;
+  selDevName = el.dataset.name;
+}
+
+function initService() {
+  tasks = []; selDays = []; selTimes = []; selDevId = null; selDevName = null;
+  svcGo(1);
+  document.getElementById('svc-success').style.display = 'none';
+  document.getElementById('svc-steps').style.display = 'flex';
+  renderTasks();
+  buildDayPills();
+}
+
+function addTask() {
+  if (!selDevId) { alert('Please select a device first.'); return; }
+  const issue = document.getElementById('svc-issue-txt').value.trim();
+  if (!issue) { alert('Please describe the issue.'); return; }
+  tasks.push({id: selDevId, name: selDevName, issue});
+  document.getElementById('svc-issue-txt').value = '';
+  selDevId = null; selDevName = null;
+  document.querySelectorAll('#svc-dev-grid .dev-card').forEach(c => c.classList.remove('selected'));
+  renderTasks();
+  document.getElementById('svc-next1').disabled = false;
+}
+
+function removeTask(i) {
+  tasks.splice(i, 1);
+  renderTasks();
+  document.getElementById('svc-next1').disabled = tasks.length === 0;
+}
+
+function renderTasks() {
+  const list = document.getElementById('task-list');
+  const empty = document.getElementById('task-empty-msg');
+  empty.style.display = tasks.length ? 'none' : 'block';
+  list.innerHTML = tasks.map((t,i) => `
+    <div class="task-item">
+      <div class="task-item-icon">${SVGS[t.id]||''}</div>
+      <div class="task-item-text"><div class="task-item-dev">${t.name}</div><div class="task-item-issue">${t.issue}</div></div>
+      <button class="task-item-del" onclick="removeTask(${i})">✕</button>
+    </div>`).join('');
+  const rev = document.getElementById('task-review');
+  if (rev) rev.innerHTML = tasks.length ? '<div style="font-family:Rajdhani,sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:8px;">Issues to address</div>' + tasks.map(t=>`<div class="task-item" style="margin-bottom:6px;"><div class="task-item-icon">${SVGS[t.id]||''}</div><div class="task-item-text"><div class="task-item-dev">${t.name}</div><div class="task-item-issue">${t.issue}</div></div></div>`).join('') : '';
+}
+
+function svcGo(n) {
+  [1,2,3].forEach(i => {
+    const s = document.getElementById('svc-s'+i);
+    if (s) s.style.display = i===n ? 'block' : 'none';
+    const dot = document.getElementById('sd'+i);
+    if (dot) dot.className = 'step-dot' + (i<n?' done':i===n?' active':'');
+    if (i<3) { const line = document.getElementById('sl'+i); if(line) line.className = 'step-line'+(i<n?' done':''); }
+  });
+}
+
+function buildDayPills() {
+  const c = document.getElementById('day-pills');
+  const today = new Date();
+  c.innerHTML = Array.from({length:14},(_,i) => {
+    const d = new Date(today); d.setDate(d.getDate()+i+1);
+    const lbl = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    const val = d.toISOString().split('T')[0];
+    return `<div class="day-pill" data-v="${val}" onclick="toggleDay(this)">${lbl}</div>`;
+  }).join('');
+}
+
+function toggleDay(el) {
+  el.classList.toggle('on');
+  const v = el.dataset.v;
+  selDays = el.classList.contains('on') ? [...selDays, v] : selDays.filter(d=>d!==v);
+}
+function toggleTime(el) {
+  el.classList.toggle('on');
+  const v = el.dataset.v;
+  selTimes = el.classList.contains('on') ? [...selTimes, v] : selTimes.filter(t=>t!==v);
+}
+
+// ── TROUBLESHOOT ──────────────────────────────────────────────
+const TS_DATA = {
+  door:{title:'Door Sensor',issues:[
+    {q:'Shows "Open" when door is closed.',a:'<p>Magnet and sensor are misaligned — need to be within about 1 inch of each other. Open/close slowly and feel if the magnet is catching. Adjust the magnet piece up or down slightly. Still not working? Text me — easy fix in person.</p>'},
+    {q:'Shows "Offline" or not communicating.',a:'<p>Try a <strong>panel reboot</strong> first — unplug, wait 30 seconds, plug back in. Give it 2 minutes. If still offline, pull the sensor and check the battery (CR2032).</p>'},
+    {q:'Getting false alarms.',a:'<p>Usually the door vibrating from HVAC or wind. Check if weatherstripping is tight. Try increasing alarm delay in settings. If the door is warped or drafty, that is the root cause.</p>'},
+  ]},
+  window:{title:'Window Sensor',issues:[
+    {q:'Shows "Open" when window is closed.',a:'<p>Alignment issue — same as door sensors. Window frames shift in older homes, especially after Texas summers. Re-seat the magnet piece closer to the sensor. Check the track for debris on sliding windows.</p>'},
+    {q:'Sensor keeps dropping offline.',a:'<p>May be too far from the panel or interference. Reboot the panel first. If it keeps happening, a range extender may help — text me and I can assess signal strength.</p>'},
+  ]},
+  motion:{title:'Motion Detector',issues:[
+    {q:'Triggers constantly when no one is home.',a:'<p>Common causes: <strong>pets</strong> (enable Pet Immune mode), HVAC air flow, afternoon sunlight shifting across the sensor, or curtains/plants near a window. Try repositioning slightly.</p>'},
+    {q:'Not detecting motion when someone walks by.',a:'<p>Check for obstructions — furniture, shelving, or cobwebs on the lens. Also verify the sensor is not bypassed in the app under device status.</p>'},
+  ]},
+  doorbell:{title:'Doorbell Camera',issues:[
+    {q:'Not getting notifications when someone rings.',a:'<ol><li>Toggle doorbell alerts off and back on in app settings</li><li>Check Vivint app has notification permissions on your phone</li><li>Check for Do Not Disturb or Focus mode</li><li>Try signing out of the app and back in</li></ol>'},
+    {q:'Video is choppy or has a lag.',a:'<p>WiFi signal issue. Check signal strength in app → camera settings. Below 60% means your router is too far — a WiFi extender near the front door helps a lot. Also check that internet upload speed is at least 10Mbps.</p>'},
+    {q:'Camera is offline.',a:'<ol><li>Press the doorbell button — see if it lights up</li><li>Reboot your router</li><li>Reboot the panel</li><li>Still offline after 5 minutes — text me, may be a wiring issue</li></ol>'},
+  ]},
+  outdoor:{title:'Outdoor Camera',issues:[
+    {q:'Camera is offline or showing a gray screen.',a:'<ol><li>Power cycle the camera — unplug or flip the breaker</li><li>Wait 60 seconds and restore power</li><li>Reboot the panel</li><li>Still offline after 5 min — text me</li></ol>'},
+    {q:'Too many false motion alerts.',a:'<p>Draw <strong>activity zones</strong> in the app to limit detection to areas you care about. Also adjust motion sensitivity down one notch in camera settings. Trees/bushes in frame will trigger in the wind — try to exclude them from the zone.</p>'},
+    {q:'Night vision looks blurry or foggy.',a:'<p>Check for <strong>spider webs or dust</strong> on the lens — extremely common outdoors and ruins night vision. Wipe with a microfiber cloth. Also make sure the camera is not pointing directly at a bright outdoor light.</p>'},
+  ]},
+  lock:{title:'Smart Lock',issues:[
+    {q:"Lock won't respond to the app.",a:'<ol><li>Make sure the door is fully closed — lock will not engage if latch does not align</li><li>Reboot the panel</li><li>Check battery — replace with fresh AAs</li><li>Try removing and re-adding the lock in the app</li></ol>'},
+    {q:"My keypad code isn't working.",a:'<p>Codes can get wiped after firmware updates or panel reboots. Re-add your code: app → Settings → Users → select user → set door lock code. If the keypad does not respond at all, check the battery.</p>'},
+  ]},
+  thermo:{title:'Thermostat',issues:[
+    {q:"Thermostat isn't controlling temperature correctly.",a:'<p>First check your schedule in the app — a schedule override may be fighting manual settings. Also verify the thermostat is in the correct mode (Heat/Cool/Auto). In Texas, most people run Cool all year.</p>'},
+    {q:'Thermostat shows offline in the app.',a:'<ol><li>Check that the thermostat screen is on and responsive</li><li>Reboot your router and panel</li><li>On the thermostat, go to Settings → WiFi and reconnect to your network</li></ol>'},
+  ]},
+  smoke:{title:'Smoke / CO Detector',issues:[
+    {q:'False alarm — went off for no reason.',a:'<p>Common causes: cooking smoke or steam, dust buildup (vacuum gently), insects inside the chamber (tap the case), or low battery causing erratic behavior.</p>'},
+    {q:'Chirping or beeping periodically.',a:'<p>Periodic chirping (every 30-60 seconds) almost always means <strong>low battery</strong>. Replace batteries even if the low battery light is not on. If it chirps after fresh batteries, the unit may be at end of life (10 years) — text me and I can replace it.</p>'},
+    {q:'How do I test my smoke detector?',a:'<p>Put system in <strong>Test Mode</strong> first (app → Settings → Test Mode). Hold the test button on the detector for 5 seconds. You should hear an alarm and see it register in the app. Test quarterly — January, April, July, October.</p>'},
+  ]},
+};
+
+function initTS() {
+  const grid = document.getElementById('ts-dev-grid');
+  const tsDevices = ['door','window','motion','doorbell','outdoor','lock','thermo','smoke'];
+  const names = {door:'Door Sensor',window:'Window Sensor',motion:'Motion Detector',doorbell:'Doorbell Camera',outdoor:'Outdoor Camera',lock:'Smart Lock',thermo:'Thermostat',smoke:'Smoke / CO'};
+  grid.innerHTML = tsDevices.map(id => `
+    <div class="dev-card" data-id="${id}" onclick="selectTSDev('${id}',this)">
+      <div class="dev-icon">${SVGS[id]||''}</div>
+      <div class="dev-name">${names[id]}</div>
+    </div>`).join('');
+  document.getElementById('ts-issues-wrap').innerHTML = '';
+}
+
+function selectTSDev(id, el) {
+  document.querySelectorAll('#ts-dev-grid .dev-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  const data = TS_DATA[id];
+  if (!data) return;
+  const wrap = document.getElementById('ts-issues-wrap');
+  wrap.innerHTML = `
+    <div style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--g);margin-bottom:12px;">${data.title} — Common Issues</div>
+    ${data.issues.map((issue,i)=>`
+      <div class="ts-card">
+        <button class="ts-btn" onclick="toggleTS(this)"><span class="ts-q">${issue.q}</span><span class="ts-arr">↓</span></button>
+        <div class="ts-body">${issue.a}</div>
+      </div>`).join('')}
+    <div class="stuck-strip">
+      <div class="stuck-title">Still stuck?</div>
+      <div class="stuck-sub">Text me directly or schedule a visit — I'll take care of it.</div>
+      <div class="stuck-btns">
+        <a class="stuck-btn stuck-btn-sms" href="sms:+18013769296">Text Adam →</a>
+        <button class="stuck-btn stuck-btn-svc" onclick="switchPopup('popup-ts','popup-service')">Schedule a Service Visit →</button>
+      </div>
+    </div>`;
+  wrap.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function toggleTS(btn) {
+  const body = btn.nextElementSibling;
+  const open = !body.classList.contains('open');
+  btn.classList.toggle('open', open);
+  body.classList.toggle('open', open);
+}
+
+function toggleTip(btn) {
+  const body = btn.nextElementSibling;
+  const open = !body.classList.contains('open');
+  btn.classList.toggle('open', open);
+  body.classList.toggle('open', open);
+}
+
+// ── STORAGE + WEB3FORMS ──────────────────────────────────────
+function saveLocal(type, data) {
+  const all = JSON.parse(localStorage.getItem('ab_submissions')||'[]');
+  all.unshift({id:Date.now(),type,status:'new',ts:new Date().toISOString(),...data});
+  localStorage.setItem('ab_submissions', JSON.stringify(all));
+}
+
+async function sendW3(subject, message) {
+  try {
+    const fd = new FormData();
+    fd.append('access_key', W3KEY);
+    fd.append('subject', subject);
+    fd.append('message', message);
+    fd.append('from_name', 'Vivint Pro Website');
+    await fetch('https://api.web3forms.com/submit', {method:'POST',body:fd});
+  } catch(e) {}
+}
+
+// ── FORM SUBMISSIONS ─────────────────────────────────────────
+async function submitQuote() {
+  const first = document.getElementById('q-first').value.trim();
+  const last = document.getElementById('q-last').value.trim();
+  const nick = document.getElementById('q-nickname').value.trim();
+  const phone = document.getElementById('q-phone').value.trim();
+  if (!first || !phone) { alert('Please enter your name and phone number.'); return; }
+  const interests = getInts('quote-ints');
+  const referred = document.getElementById('q-referred').checked;
+  const refType = referred ? document.querySelector('input[name="qref"]:checked')?.value : null;
+  const refCode = document.getElementById('q-ref-code').value.trim();
+  const plan = document.querySelector('input[name="q-plan"]:checked')?.value || '';
+  const data = {
+    name: `${first} ${last}`, nickname: nick, phone,
+    street: document.getElementById('q-street').value,
+    city: document.getElementById('q-city').value,
+    state: document.getElementById('q-state').value,
+    zip: document.getElementById('q-zip').value,
+    interests, referred, refType, refCode, plan
+  };
+  saveLocal('quote', data);
+  await sendW3('New Quote Request', `Name: ${first} ${last} (${nick})\nPhone: ${phone}\nAddress: ${data.street}, ${data.city}, ${data.state} ${data.zip}\nInterested in: ${interests.join(', ')}\nReferred: ${referred ? refType + (refCode ? ' / ' + refCode : '') : 'No'}\nProtection Plan: ${plan}`);
+  document.getElementById('quote-form').style.display = 'none';
+  document.getElementById('quote-success').style.display = 'block';
+}
+
+async function submitReferral() {
+  const yourName = (document.getElementById('ref-first').value + ' ' + document.getElementById('ref-last').value).trim();
+  const yourPhone = document.getElementById('ref-phone').value.trim();
+  const nbrFirst = document.getElementById('ref-nbr-first').value.trim();
+  const nbrLast = document.getElementById('ref-nbr-last').value.trim();
+  const nbrName = (nbrFirst + ' ' + nbrLast).trim();
+  const nbrPhone = document.getElementById('ref-nbr-phone').value.trim();
+  const notes = document.getElementById('ref-notes').value.trim();
+  const creditType = document.querySelector('input[name="ref-credit"]:checked').value;
+  const refCode = document.getElementById('ref-code').value.trim();
+  if (!yourName || !nbrName) { alert('Please enter your name and your neighbor\'s name.'); return; }
+  const data = {yourName, yourPhone, nbrName, nbrPhone, notes, creditType, refCode};
+  saveLocal('referral', data);
+  await sendW3('New Referral', `From: ${yourName} (${yourPhone})\nNeighbor: ${nbrName} (${nbrPhone})\nNotes: ${notes}\nCredit via: ${creditType === 'code' ? 'Code: ' + refCode : 'Address'}`);
+  document.getElementById('ref-form').style.display = 'none';
+  document.getElementById('ref-success').style.display = 'block';
+  // Auto-open pre-drafted SMS to neighbor
+  if (nbrPhone) {
+    const rawPhone = nbrPhone.replace(/\D/g,'');
+    const msg = encodeURIComponent(`Hey ${nbrFirst || nbrName}! I just submitted your information for a Vivint referral. If you sign up, you get a big discount and I get referral credits. I submitted this to my alarm guy Adam and he will reach out to you shortly! His number is (801) 376-9296.`);
+    setTimeout(() => window.open(`sms:${rawPhone}?body=${msg}`), 800);
+  }
+}
+
+async function submitService() {
+  const name = document.getElementById('svc-name').value.trim();
+  const phone = document.getElementById('svc-phone').value.trim();
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  if (selDays.length === 0) { alert('Please select at least one available day.'); return; }
+  const plan = document.querySelector('input[name="svc-plan"]:checked')?.value || '';
+  const data = {name, phone, tasks, days:selDays, times:selTimes, plan};
+  saveLocal('service', data);
+  const taskSummary = tasks.map(t=>`${t.name}: ${t.issue}`).join('\n');
+  await sendW3('New Service Request', `Name: ${name}\nPhone: ${phone}\nIssues:\n${taskSummary}\nAvailable: ${selDays.join(', ')}\nTimes: ${selTimes.join(', ')}\nProtection Plan: ${plan}`);
+  [1,2,3].forEach(i => { const s = document.getElementById('svc-s'+i); if(s) s.style.display='none'; });
+  document.getElementById('svc-steps').style.display = 'none';
+  document.getElementById('svc-success').style.display = 'block';
+}
+
+async function submitUpgrade() {
+  const name = document.getElementById('upg-name').value.trim();
+  const phone = document.getElementById('upg-phone').value.trim();
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  const interests = getInts('upg-ints');
+  const plan = document.querySelector('input[name="upg-plan"]:checked')?.value || '';
+  const data = {name, phone, interests,
+    street: document.getElementById('upg-street').value,
+    city: document.getElementById('upg-city').value,
+    state: document.getElementById('upg-state').value,
+    zip: document.getElementById('upg-zip').value,
+    plan
+  };
+  saveLocal('upgrade', data);
+  await sendW3('New Upgrade Request', `Name: ${name}\nPhone: ${phone}\nAddress: ${data.street}, ${data.city}, ${data.state} ${data.zip}\nInterested in: ${interests.join(', ')}\nProtection Plan: ${plan}`);
+  document.getElementById('upg-form').style.display = 'none';
+  document.getElementById('upg-success').style.display = 'block';
+}
+
+// ── MAP ────────────────────────────────────────────────────────
+const REGIONS = [
+  {lat:31.5,lng:-102.5,r:140,name:'West Texas / SE New Mexico',note:'Jal NM · Kermit · Pecos · Fort Stockton · Rankin · Seagraves · Midland metro'},
+  {lat:33.56,lng:-101.90,r:28,name:'Lubbock Area',note:'Lubbock · Wolfforth'},
+  {lat:35.22,lng:-101.83,r:38,name:'Amarillo',note:'Amarillo metro'},
+  {lat:33.45,lng:-112.07,r:65,name:'Phoenix Metro',note:'Phoenix metro area'},
+  {lat:40.50,lng:-111.89,r:115,name:'Utah — Wasatch Front',note:'Springville to Ogden · all cities in between'},
+  {lat:40.97,lng:-117.74,r:22,name:'Winnemucca NV',note:'Winnemucca area'},
+  {lat:36.17,lng:-115.14,r:55,name:'Las Vegas Metro',note:'Las Vegas metro area'},
+  {lat:39.06,lng:-108.55,r:22,name:'Grand Junction CO',note:'Grand Junction area'},
+  {lat:38.42,lng:-105.19,r:18,name:'Florence / Canon City CO',note:'Florence · Canon City'},
+  {lat:40.76,lng:-98.37,r:38,name:'Grand Island / Hastings NE',note:'Grand Island · Hastings'},
+  {lat:40.81,lng:-96.70,r:32,name:'Lincoln NE',note:'Lincoln metro'},
+  {lat:41.26,lng:-96.00,r:38,name:'Omaha / Council Bluffs',note:'Omaha metro · Council Bluffs IA'},
+  {lat:35.25,lng:-97.05,r:90,name:'Central Oklahoma',note:'OKC east metro · Shawnee · Seminole · Cushing · Guthrie · Pauls Valley · Ada'},
+  {lat:36.50,lng:-97.18,r:42,name:'N Oklahoma',note:'Ponca City · Perry'},
+  {lat:34.87,lng:-92.15,r:75,name:'Little Rock Metro',note:'Little Rock metro · northeast toward Beebe AR'},
+  {lat:30.53,lng:-87.65,r:62,name:'Mobile AL / Pensacola FL',note:'Mobile · Pensacola · surrounding communities'},
+  {lat:33.62,lng:-88.72,r:18,name:'Chesterfield MS',note:'Chesterfield area'},
+  {lat:39.73,lng:-84.06,r:22,name:'Beavercreek OH',note:'Beavercreek · Dayton area'},
+  {lat:30.84,lng:-93.29,r:22,name:'DeRidder LA',note:'DeRidder area'},
+  {lat:28.78,lng:-81.80,r:52,name:'Central Florida',note:'The Villages · Lady Lake · Apopka'},
+  {lat:34.34,lng:-77.80,r:38,name:'Wilmington / Topsail Beach NC',note:'Wilmington · Topsail Beach · coastal towns'},
+  {lat:27.80,lng:-97.40,r:38,name:'Corpus Christi TX',note:'Corpus Christi metro'},
+  {lat:31.76,lng:-106.49,r:42,name:'El Paso TX',note:'El Paso metro'},
+  {lat:30.36,lng:-103.66,r:18,name:'Alpine TX',note:'Alpine area'},
+  {lat:29.42,lng:-98.49,r:52,name:'San Antonio Metro',note:'San Antonio metro area'},
+  {lat:30.27,lng:-97.74,r:48,name:'Austin Metro',note:'Austin metro · home base since 2023'},
+  {lat:31.12,lng:-97.73,r:25,name:'Killeen TX',note:'Killeen area'},
+  {lat:29.87,lng:-97.95,r:32,name:'SA to Austin Corridor',note:'New Braunfels · San Marcos · Kyle · Buda'},
+  {lat:30.65,lng:-96.35,r:18,name:'Bryan / College Station TX',note:'Bryan · College Station'}
+];
+const PINS = [
+  {lat:40.23,lng:-111.66,name:'Provo UT',note:'Hometown · Vivint HQ internship',type:'home'},
+  {lat:30.27,lng:-97.74,name:'Austin TX',note:'Home base since 2023',type:'home'},
+  {lat:35.47,lng:-97.52,name:'Oklahoma City OK',note:'First year knocking doors 2017',type:'city'},
+  {lat:30.69,lng:-88.04,name:'Mobile AL',note:'',type:'city'},
+  {lat:34.23,lng:-77.94,name:'Wilmington NC',note:'',type:'city'},
+  {lat:36.17,lng:-115.14,name:'Las Vegas NV',note:'',type:'city'},
+  {lat:34.75,lng:-92.29,name:'Little Rock AR',note:'',type:'city'},
+  {lat:30.63,lng:-96.33,name:'College Station TX',note:'Bryan · College Station',type:'city'},
+  {lat:35.07,lng:-91.88,name:'Beebe AR',note:"One install. A life's mission — completed.",type:'star'}
+];
+
+function circleGeo(lat, lng, rKm, steps=52) {
+  const pts = [];
+  for(let i=0;i<=steps;i++){
+    const a=(i/steps)*2*Math.PI;
+    pts.push([lng+(rKm/111.32/Math.cos(lat*Math.PI/180))*Math.cos(a),lat+(rKm/111.32)*Math.sin(a)]);
+  }
+  return {type:'Feature',geometry:{type:'Polygon',coordinates:[pts]}};
+}
+
+mapboxgl.accessToken = MAPBOX_TOKEN;
+const map = new mapboxgl.Map({
+  container:'about-map',
+  style:'mapbox://styles/mapbox/dark-v11',
+  bounds:[[-125,24],[-66,50]],
+  fitBoundsOptions:{padding:16},
+  interactive:true
+});
+map.addControl(new mapboxgl.NavigationControl({showCompass:false}),'bottom-right');
+
+map.on('load',()=>{
+  const features = REGIONS.map(r=>{const f=circleGeo(r.lat,r.lng,r.r);f.properties={name:r.name,note:r.note};return f;});
+  map.addSource('r',{type:'geojson',data:{type:'FeatureCollection',features}});
+  map.addLayer({id:'rf',type:'fill',source:'r',paint:{'fill-color':'#05E5AF','fill-opacity':0.12}});
+  map.addLayer({id:'rl',type:'line',source:'r',paint:{'line-color':'#05E5AF','line-width':1.4,'line-opacity':0.55}});
+  map.on('mouseenter','rf',()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave','rf',()=>map.getCanvas().style.cursor='');
+  map.on('click','rf',e=>{
+    const {name,note}=e.features[0].properties;
+    new mapboxgl.Popup({closeButton:false,maxWidth:'220px'})
+      .setLngLat(e.lngLat)
+      .setHTML(`<div class="pop-name">${name}</div><div class="pop-note">${note}</div>`)
+      .addTo(map);
+  });
+  PINS.forEach(p=>{
+    const el=document.createElement('div');
+    if(p.type==='star'){el.textContent='⭐';el.style.cssText='font-size:18px;cursor:pointer;filter:drop-shadow(0 0 4px gold);';}
+    else if(p.type==='home'){el.style.cssText='width:12px;height:12px;background:white;border-radius:50%;border:2.5px solid #05E5AF;box-shadow:0 0 10px rgba(5,229,175,.9);cursor:pointer;';}
+    else{el.style.cssText='width:8px;height:8px;background:#05E5AF;border-radius:50%;border:2px solid rgba(5,229,175,.3);box-shadow:0 0 6px rgba(5,229,175,.7);cursor:pointer;';}
+    const popup=new mapboxgl.Popup({offset:10,closeButton:false,maxWidth:'210px'})
+      .setHTML(`<div class="pop-name">${p.name}</div>${p.note?`<div class="pop-note">${p.note}</div>`:''}`);
+    new mapboxgl.Marker({element:el}).setLngLat([p.lng,p.lat]).setPopup(popup).addTo(map);
+  });
+});
+</script>
+</body>
+</html>
