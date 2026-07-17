@@ -2137,193 +2137,335 @@ const TS_TREE = [
 // Keys match device ids in TS_TREE. Gemini content drops directly here.
 // Format per device: { issues: [{q:'Question?', a:'<p>HTML fix</p>'}] }
 const TS_DATA = {
-  // ── Panels ──────────────────────────────────────────────────
-  'smart-hub-pro2':{issues:[
-    {q:'Panel offline or showing a red light.',a:'<ol><li>Unplug the panel from the wall outlet</li><li>If it has a battery backup, hold the power button 10 seconds to fully power down</li><li>Wait 30 seconds</li><li>Plug back in — give it 2–3 minutes to reconnect</li><li>Status light should cycle red → yellow → solid green</li></ol>'},
-    {q:'Panel beeping or making noise.',a:'<p>Common causes:</p><ul><li><strong>Low battery</strong> — backup battery needs replacing (every 3–5 years)</li><li><strong>Power outage</strong> — running on battery backup, beeps until power restored</li><li><strong>Alarm triggered</strong> — disarm with your PIN on panel or in app</li><li><strong>Tamper alert</strong> — panel cover not fully seated, press firmly until it clicks</li></ul>'},
-    {q:'Touchscreen unresponsive or frozen.',a:'<ol><li>Hold power button 3 seconds for a soft reset</li><li>If still frozen: unplug from wall, hold power button 10 sec, wait 30 sec, plug back in</li><li>Screen stays black after restart — text me, may need a replacement panel</li></ol>'},
-  ]},
-  'smart-hub':{issues:[
-    {q:'Panel offline or showing a red light.',a:'<ol><li>Unplug from wall outlet</li><li>Hold power button 10 seconds if battery backup present</li><li>Wait 30 seconds, plug back in</li><li>Allow 2–3 minutes to reconnect — status should go red → yellow → green</li></ol>'},
-    {q:'Panel beeping or sounding an alert.',a:'<ul><li><strong>Low battery</strong> — backup battery needs replacing</li><li><strong>Power loss</strong> — running on battery, will resolve when power returns</li><li><strong>Alarm active</strong> — disarm with PIN or app</li><li><strong>Tamper</strong> — press panel cover firmly until seated</li></ul>'},
-    {q:'Touchscreen frozen or not responding.',a:'<ol><li>Hold power button 3 seconds for soft restart</li><li>Full cycle: unplug, hold power 10 sec, wait 30 sec, plug back in</li><li>Still black or frozen after restart — text me</li></ol>'},
-  ]},
-  'keypad-std':{issues:[
-    {q:'Keypad not responding to button presses.',a:'<ol><li>Check battery if battery-powered</li><li>If hardwired, check connection at back of keypad</li><li>Reboot the panel</li><li>Locked out after too many wrong attempts — usually unlocks in 5 minutes</li></ol>'},
-    {q:'PIN code stopped working.',a:'<p>Codes can wipe after panel firmware updates. Re-add through app: Settings → Users → select user → assign keypad code. Text me if keypad shows an error message — may need to re-pair.</p>'},
-  ]},
-  'keypad-lr':{issues:[
-    {q:'Long range keypad losing connection intermittently.',a:'<p>Long range keypads still have distance limits. If it keeps dropping, the panel may be too far or there is too much interference between them. Try repositioning the keypad closer to the panel, or text me to assess signal.</p>'},
-    {q:'PIN not accepted at the keypad.',a:'<p>Re-add the code through app: Settings → Users → select user → assign code. If keypad shows an error, it may need to be re-paired — text me.</p>'},
-  ]},
-  // ── Cameras ─────────────────────────────────────────────────
-  'outdoor-pro-3':{issues:[
-    {q:'Camera is offline or showing a gray screen.',a:'<ol><li>Power cycle the camera — cut power at the breaker or outlet, wait 60 seconds, restore</li><li>Reboot the panel</li><li>Still offline after 5 minutes — text me, may be a hardware issue</li></ol>'},
-    {q:'Too many false motion alerts.',a:'<p>Draw <strong>activity zones</strong> in the app to limit detection to areas you care about. Lower motion sensitivity one notch in camera settings. If trees or bushes are in frame, exclude them from the zone.</p>'},
-    {q:'Night vision looks blurry or foggy.',a:'<p>Check for <strong>spider webs or dust</strong> on the lens — extremely common outdoors and ruins night vision. Wipe with a microfiber cloth. Make sure the camera is not pointing directly at a bright outdoor light.</p>'},
-  ]},
-  'outdoor-pro-2':{issues:[
-    {q:'Camera offline or gray screen.',a:'<ol><li>Power cycle at breaker or outlet — wait 60 seconds</li><li>Reboot panel</li><li>Still offline after 5 minutes — text me</li></ol>'},
-    {q:'Excessive false motion triggers.',a:'<p>Set activity zones in app to target only relevant areas. Lower sensitivity one notch. Ensure the camera is not aimed at moving branches or street traffic.</p>'},
-  ]},
-  'outdoor-pro-1':{issues:[
-    {q:'Camera offline or gray screen.',a:'<ol><li>Power cycle at breaker or outlet — wait 60 seconds</li><li>Reboot panel</li><li>Still offline after 5 minutes — text me</li></ol>'},
-    {q:'Poor video quality.',a:'<p>Clean the lens with a microfiber cloth. Check WiFi signal strength in app — below 60% will cause quality issues. A WiFi extender near the camera helps if signal is weak.</p>'},
-  ]},
-  'outdoor-cam':{issues:[
-    {q:'Camera offline.',a:'<ol><li>Power cycle at outlet or breaker</li><li>Wait 60 seconds and restore power</li><li>Reboot panel</li><li>Still offline — text me</li></ol>'},
-    {q:'Too many false alerts.',a:'<p>Draw activity zones in the app. Lower sensitivity. Exclude areas with moving objects like trees or traffic.</p>'},
-  ]},
-  'spotlight-pro':{issues:[
-    {q:'Spotlights not triggering on motion.',a:'<p>In app → camera settings → Light Settings. Make sure spotlight is set to trigger on motion. Check that the time schedule is not restricting it to night-only if you want daytime triggers too.</p>'},
-    {q:'Camera offline.',a:'<ol><li>Check the outlet or junction box it is powered from</li><li>Power cycle by cutting and restoring power</li><li>Reboot panel</li><li>Still offline after 5 min — text me</li></ol>'},
-  ]},
-  'doorbell-pro-2':{issues:[
-    {q:'Not getting notifications when someone rings.',a:'<ol><li>Toggle doorbell alerts off/on in app notification settings</li><li>Check Vivint app has notification permissions on your phone (iOS: Settings → Vivint → Notifications)</li><li>Check for Do Not Disturb or Focus mode</li><li>Sign out of app and back in</li></ol>'},
-    {q:'Video choppy or lags when answering.',a:'<p>WiFi signal issue. Check signal strength in app → camera settings. Below 60% — router is too far. A WiFi extender near the front door makes a big difference. Upload speed should be at least 10Mbps.</p>'},
-    {q:'Camera offline.',a:'<ol><li>Press doorbell button — see if it lights up</li><li>Reboot router</li><li>Reboot panel</li><li>Still offline after 5 minutes — may be a wiring issue, text me</li></ol>'},
-  ]},
-  'doorbell-pro-1':{issues:[
-    {q:'Not receiving ring notifications.',a:'<ol><li>Check app notification permissions on your phone</li><li>Toggle doorbell alerts in app settings</li><li>Check Do Not Disturb mode</li><li>Sign out and back into the app</li></ol>'},
-    {q:'Live video laggy or choppy.',a:'<p>WiFi signal — check strength in app. Below 60% add a WiFi extender near the front door. Also verify upload speed is at least 10Mbps.</p>'},
-  ]},
-  'doorbell-cam':{issues:[
-    {q:'Not getting ring alerts.',a:'<ol><li>Check app notification permissions</li><li>Toggle alerts off/on in app settings</li><li>Restart the Vivint app</li></ol>'},
-    {q:'Video quality poor.',a:'<p>Clean lens with microfiber. Check WiFi signal in app. Below 60% — consider a WiFi extender near the front door.</p>'},
-  ]},
-  'indoor-pro':{issues:[
-    {q:'Camera offline or gray screen.',a:'<ol><li>Unplug and plug back in</li><li>Verify WiFi is working on other devices</li><li>Reboot panel</li><li>Re-add camera in app if still not appearing</li></ol>'},
-    {q:'Blurry or pixelated image.',a:'<p>WiFi signal issue. Check signal strength in app — below 60% causes video quality problems. Move camera closer to router or add a WiFi extender.</p>'},
-  ]},
-  'indoor-cam':{issues:[
-    {q:'Camera offline.',a:'<ol><li>Unplug camera, wait 15 seconds, plug back in</li><li>Reboot panel</li><li>If still offline, re-add in app under devices</li></ol>'},
-    {q:'Keeps dropping connection intermittently.',a:'<p>Almost always WiFi instability — signal is strong enough to connect but not maintain a stream. A 2.4GHz extender in the same room helps significantly.</p>'},
-  ]},
-  // ── Sensors ─────────────────────────────────────────────────
-  'door-window-sensor':{issues:[
-    {q:'Shows Open when door or window is closed.',a:'<p>Magnet and sensor are misaligned — need to be within about 1 inch of each other. Open and close slowly, feel if the magnet is catching. Adjust the magnet piece slightly. Still not working — text me, easy in-person fix.</p>'},
-    {q:'Showing offline.',a:'<p>Reboot panel. Still offline — pull the sensor and check the battery (CR2032). The sensor should flash an LED when you press the test button. No response means replace battery.</p>'},
-  ]},
-  'door-window-lr':{issues:[
-    {q:'Shows Open when closed.',a:'<p>Long range sensor still needs the magnet within about 1 inch. Check alignment. Also verify the door or window is fully closing — gaps in the frame can prevent a clean read.</p>'},
-    {q:'Keeps dropping offline.',a:'<p>Long range sensors extend the network but can still have signal gaps. Reboot panel. If it keeps dropping, text me — may need a range extender or repositioning.</p>'},
-  ]},
-  'door-sensor':{issues:[
-    {q:'Shows Open when door is closed.',a:'<p>Magnet misalignment. The two pieces need to be within about 1 inch. Adjust up or down slightly. Still wrong — text me.</p>'},
-    {q:'False alarms.',a:'<p>Usually the door vibrating from HVAC or wind. Check if weatherstripping is tight. Try increasing alarm delay in settings. If the door is warped or drafty, that is the root cause.</p>'},
-  ]},
-  'motion-sensor':{issues:[
-    {q:'Triggers constantly when no one is home.',a:'<p>Common causes: <strong>pets</strong> (enable Pet Immune mode), HVAC airflow blowing across sensor, afternoon sunlight shifting across field of view, curtains or plants near a window. Try repositioning slightly.</p>'},
-    {q:'Not detecting motion.',a:'<p>Check for obstructions — furniture, shelving, or cobwebs on the lens. Verify sensor is not bypassed in app under device status.</p>'},
-  ]},
-  'motion-lr':{issues:[
-    {q:'Frequent false triggers.',a:'<p>Long range motion sensors cover a larger area and can pick up more background movement. Lower sensitivity in app settings. Set activity zones if available. Common culprits: HVAC vents, pets, sunlight movement.</p>'},
-    {q:'Sensor offline.',a:'<p>Reboot panel. Check battery. Long range sensors communicate differently — if they keep dropping, the path to the panel may need a repeater. Text me to assess.</p>'},
-  ]},
-  'glass-break':{issues:[
-    {q:'Going off when no glass broke.',a:'<p>Glass break detectors are sensitive to frequencies similar to breaking glass. Common false triggers: TV audio with glass sounds, jingling keys, high-pitched music, clanging dishes. Lower sensitivity in app if false alarms are frequent.</p>'},
-    {q:'Sensor offline.',a:'<p>Reboot panel. Check battery (CR123A). Sensor should flash LED when you press test button. No response — replace battery.</p>'},
-    {q:'How do I test it?',a:'<p>Put system in <strong>Test Mode</strong> (app → Settings → Test Mode). A glass break tester (small clapper device) will confirm it is working. Text me — I carry them and can test on my next visit.</p>'},
-  ]},
-  'tilt-sensor':{issues:[
-    {q:'Garage door showing wrong status in app.',a:'<p>The tilt sensor has shifted. It sits flat on the door panel. Re-seat it level against the door, then open and close the door manually once to recalibrate the status.</p>'},
-    {q:'Sensor offline.',a:'<p>Reboot panel. Check battery (CR2032). Vibration from the garage door can drain batteries faster than other sensors — replace more frequently if needed.</p>'},
-  ]},
-  'smoke-det':{issues:[
-    {q:'False alarm — went off for no reason.',a:'<p>Common causes: cooking smoke or steam near detector, dust buildup (vacuum gently), insects inside the chamber (tap case), low battery causing erratic behavior.</p>'},
-    {q:'Chirping periodically.',a:'<p>Almost always <strong>low battery</strong>. Replace batteries even if the low battery indicator is not on. Chirps after fresh batteries — unit may be at end of life (10 years). Text me and I can replace it.</p>'},
-    {q:'How do I test it?',a:'<p>Put system in <strong>Test Mode</strong> (app → Settings → Test Mode). Hold test button on detector 5 seconds — you should hear alarm and see it register in app. Test quarterly.</p>'},
-  ]},
-  'co-det':{issues:[
-    {q:'CO detector going off with no apparent source.',a:'<p>CO detectors are sensitive to fuel-burning appliances. Check for running vehicles in attached garage, gas furnace issues, or blocked vents. <strong>If CO is suspected, leave the building immediately and call 911.</strong> Once outside, text me to schedule an inspection.</p>'},
-    {q:'Chirping or low battery alert.',a:'<p>Replace batteries immediately. CO detectors should be replaced every 5–7 years regardless of battery status.</p>'},
-  ]},
-  'smoke-co-combo':{issues:[
-    {q:'Alarm going off with no visible smoke or CO source.',a:'<p>For smoke: check cooking, steam, dust. For CO: check fuel-burning appliances and ventilation. <strong>For CO alarms — evacuate first, then investigate.</strong> Text me to inspect after the all-clear.</p>'},
-    {q:'Chirping.',a:'<p>Low battery. Replace batteries. If chirping continues after fresh batteries, the unit may be at end of life — text me for a replacement.</p>'},
-  ]},
-  'smoke-co-monitor':{issues:[
-    {q:'Monitor showing an alert in the app with no alarm.',a:'<p>The monitor tracks air quality and may alert before the alarm threshold. Check for nearby smoke sources, cooking, or HVAC issues. Clear the alert in app if environment is safe.</p>'},
-    {q:'Device offline.',a:'<p>Reboot panel. Check power connection. If battery-operated, replace batteries.</p>'},
-  ]},
-  'water-sensor':{issues:[
-    {q:'Water sensor triggered but no water visible.',a:'<p>High humidity can trigger water sensors — common in bathrooms, laundry, or near AC units. Elevate the sensor slightly off the floor. Adjust sensitivity in app if needed.</p>'},
-    {q:'Sensor offline.',a:'<p>Water sensors use a small coin battery (CR2032). Replace battery — they drain faster due to humidity detection circuitry. Reboot panel after replacing.</p>'},
-    {q:'Where is the best place for it?',a:'<p>Best spots: in front of water heater, under kitchen sink, under bathroom sinks, next to washer, near refrigerator water line. Place flat on the floor — water pools at the lowest point first.</p>'},
-  ]},
-  'flood-freeze':{issues:[
-    {q:'Sensor triggered with no flood or freezing.',a:'<p>The freeze function triggers at around 41°F (5°C). If placed near an air conditioning vent or in an uninsulated space, temperature drops can trigger it. Reposition away from cold air sources.</p>'},
-    {q:'Sensor offline.',a:'<p>Check and replace the battery. Reboot the panel. Flood/freeze sensors can drain faster in cold environments.</p>'},
-  ]},
-  'key-fob':{issues:[
-    {q:'Key fob not arming or disarming.',a:'<ol><li>Check battery (CR2032) — replace if over a year old</li><li>Press and hold button 1–2 seconds, not just a tap</li><li>Stand within range of panel — typically 100 feet</li><li>Verify key fob is active in app: Settings → Devices → Key Fobs</li></ol>'},
-    {q:'Key fob was lost — how do I deactivate it?',a:'<p>App → Settings → Devices → Key Fobs → select the lost fob → Delete or Disable. This immediately prevents it from arming or disarming your system. Text me if you need help.</p>'},
-    {q:'Key fob showing offline.',a:'<p>Key fobs only communicate when a button is pressed — no constant connection. "Offline" just means it has not been used recently. Test it by pressing a button.</p>'},
-  ]},
-  'panic-pendant':{issues:[
-    {q:'Accidentally triggered the panic button.',a:'<p>Call Vivint monitoring immediately at the number on your panel to cancel the dispatch. They will ask for your verbal passcode. Act fast — if not cancelled in about 30 seconds, police may be dispatched.</p>'},
-    {q:'Pendant not triggering the alarm when pressed.',a:'<ol><li>Put system in Test Mode first</li><li>Press and hold button 2–3 seconds — a quick tap may not register</li><li>Check battery (CR2032)</li><li>Make sure you are within range of the panel</li></ol>'},
-    {q:'Battery draining too fast.',a:'<p>If pendant is in an area with weak signal, it constantly tries to maintain connection and drains faster. Keep it closer to the panel.</p>'},
-  ]},
-  // ── Locks ────────────────────────────────────────────────────
-  'lock-892':{issues:[
-    {q:"Lock won't respond to the app.",a:'<ol><li>Make sure door is fully closed — lock will not engage if latch does not align</li><li>Reboot the panel</li><li>Check battery — replace with fresh AAs</li><li>Remove and re-add the lock in app if still unresponsive</li></ol>'},
-    {q:'PIN code not working.',a:'<p>Codes can get wiped after firmware updates. Re-add through app: Settings → Users → select user → set door lock code. If keypad does not respond, check the battery.</p>'},
-  ]},
-  'lock-910':{issues:[
-    {q:"Lock not responding to app commands.",a:'<ol><li>Verify door is fully closed</li><li>Reboot panel</li><li>Replace batteries</li><li>Re-add lock in app if still not responding</li></ol>'},
-    {q:'Access code stopped working.',a:'<p>Re-add through app: Settings → Users → select user → set lock code. Text me if lock is showing an error code on the keypad.</p>'},
-  ]},
-  'lock-888':{issues:[
-    {q:"Lock unresponsive.",a:'<ol><li>Check door is fully closed</li><li>Reboot panel</li><li>Replace batteries with fresh AAs</li><li>Re-add lock in app if needed</li></ol>'},
-    {q:'Code not accepted.',a:'<p>Re-add through app. Each user should have their own unique code. If the keypad display shows an error, text me.</p>'},
-  ]},
-  'garage-ctrl':{issues:[
-    {q:"Garage won't open or close from app.",a:'<ol><li>Check tilt sensor on door is aligned properly</li><li>Verify controller has power — LED should be visible</li><li>Check car is not blocking the sensor beam at bottom of door</li><li>If app shows wrong status, tilt sensor may need repositioning</li></ol>'},
-    {q:'App shows wrong door status.',a:'<p>Tilt sensor has shifted. Re-seat it flat and level against the door panel. Open and close door manually once to recalibrate.</p>'},
-  ]},
-  'myq-basic':{issues:[
-    {q:'myQ not connecting or syncing with Vivint.',a:'<p>The myQ controller needs to be paired to your Vivint system through the app. Go to app → Devices → Add Device → follow myQ pairing steps. If already paired and not working, remove and re-add it.</p>'},
-    {q:'Garage status wrong in app.',a:'<p>The myQ uses a door sensor to detect open/close state. Check that the sensor on the door is properly seated and the magnet is aligned. Remove and re-pair if still showing wrong status.</p>'},
-  ]},
-  'myq-smart':{issues:[
-    {q:'myQ Smart not responding in app.',a:'<p>Try removing and re-adding in app. Verify the myQ hub has power and is connected to your WiFi. The app will guide you through re-pairing.</p>'},
-    {q:'Garage door opens/closes on its own.',a:'<p>Check your automations in the Vivint app — there may be a rule triggering it. Also check if any schedules are set in the myQ app directly. Disable any unexpected rules.</p>'},
-  ]},
-  // ── Thermostats ──────────────────────────────────────────────
-  'vivint-thermo':{issues:[
-    {q:"Thermostat not controlling temperature correctly.",a:'<p>Check your schedule in app — a schedule override may be fighting manual settings. Verify mode is set correctly (Heat/Cool/Auto). In Texas, most people run Cool mode year-round. Auto mode can cause issues if system is not calibrated for it.</p>'},
-    {q:'Thermostat offline in app.',a:'<ol><li>Check thermostat screen is on and responsive</li><li>Reboot router and panel</li><li>On thermostat: Settings → WiFi → reconnect to your network</li><li>Still offline — text me</li></ol>'},
-  ]},
-  'nest-thermo':{issues:[
-    {q:'Nest not syncing with Vivint app.',a:'<p>Nest integration requires the Google Home app to be linked. In Vivint app: Settings → Integrations → Google Nest → follow linking steps. If already linked, remove and re-link.</p>'},
-    {q:'Nest not responding to Vivint automations.',a:'<p>Automations that control Nest work through the Google integration. Verify the integration is active in Vivint app and that the Nest app itself has no conflicting schedules set.</p>'},
-  ]},
-  // ── Lighting ────────────────────────────────────────────────
-  'smart-plug-dev':{issues:[
-    {q:"Device plugged in won't turn on or off from app.",a:'<ol><li>Check smart plug LED is lit</li><li>Toggle plug off and on from app</li><li>Unplug plug, wait 10 seconds, plug back in</li><li>Reboot panel if still unresponsive</li></ol>'},
-    {q:'Smart plug shows offline.',a:'<p>Unplug completely, wait 15 seconds, plug back in. Give it 2 minutes to reconnect. If keeps dropping, try a different outlet closer to panel or router.</p>'},
-  ]},
-  'philips-hue':{issues:[
-    {q:'Hue lights not responding in Vivint app.',a:'<p>The Hue integration works through the Vivint Smart Lighting Bridge or direct app integration. Check that the Hue Bridge has power and is on the same WiFi network. Remove and re-add the integration in Vivint app if needed.</p>'},
-    {q:'Lights not responding to automations.',a:'<p>Test the lights in the Philips Hue app first to confirm they are working independently. If they work in the Hue app but not Vivint, the integration may need to be refreshed — remove and re-add in app settings.</p>'},
-  ]},
-  // ── App ─────────────────────────────────────────────────────
-  'vivint-app':{issues:[
-    {q:'App not sending notifications.',a:'<ol><li>iOS: Settings → Vivint → Notifications → enable all</li><li>Android: Settings → Apps → Vivint → Notifications → enable</li><li>Check Do Not Disturb and Focus modes</li><li>Toggle each notification type off and back on in Vivint app settings</li><li>Sign out and back in if still not working</li></ol>'},
-    {q:'App showing devices offline even though system seems fine.',a:'<p>This is usually a sync issue. Pull down to refresh on the main screen. If devices still show offline, sign out and back in. If the issue persists, reboot your panel — the app reflects the panel\'s last known state.</p>'},
-    {q:'Live camera feeds not loading.',a:'<p>Camera streams require a stable internet connection with decent upload speed. Check your WiFi or switch to cellular data to test. If streams load on cellular but not WiFi, your router may need a reboot.</p>'},
-    {q:'App keeps crashing or freezing.',a:'<ol><li>Force close and reopen the app</li><li>Check for app updates in the App Store or Google Play</li><li>Clear app cache (Android: Settings → Apps → Vivint → Clear Cache)</li><li>Uninstall and reinstall if still crashing</li></ol>'},
-  ]},
-  // ── Integrations ────────────────────────────────────────────
-  'google-home':{issues:[
-    {q:'Google Home not controlling Vivint devices.',a:'<p>Re-link the integration: In Google Home app → Settings → Works with Google → find Vivint → unlink then re-link. You will need your Vivint login credentials.</p>'},
-    {q:'Voice commands not working.',a:'<p>Say "Hey Google, sync my devices" to force a sync. If Vivint devices still do not respond, check that the Google Home integration is active in the Vivint app under Settings → Integrations.</p>'},
-  ]},
-  'amazon-echo':{issues:[
-    {q:'Alexa not controlling Vivint devices.',a:'<p>In Alexa app → Skills & Games → search Vivint → enable skill → link your Vivint account. Then say "Alexa, discover devices." If already linked, disable and re-enable the skill.</p>'},
-    {q:'Alexa voice commands not working.',a:'<p>Say "Alexa, discover my devices" to sync. Check that the Vivint skill is still active and your account is still linked in the Alexa app.</p>'},
-  ]},
+
+// ── APP ─────────────────────────────────────────────────────
+'vivint-app':{issues:[
+  {q:'Not receiving notifications.',a:'<ol><li>iOS: Settings → Vivint → Notifications → enable all. Android: Settings → Apps → Vivint → Notifications → enable</li><li>Inside the app: Menu → Notifications → make sure alerts are toggled on for each type</li><li>Check that Do Not Disturb or Focus mode is not blocking Vivint</li><li>Sign out of the app and back in</li><li>Uninstall and reinstall as a last resort</li></ol>'},
+  {q:'Cannot log in or forgot my password.',a:'<ol><li>Tap "Forgot Password" on the login screen — a reset link goes to your email on file</li><li>Check spam if you don\'t see the email within 2 minutes</li><li>If you don\'t know which email is on file, text Adam — he can look it up on the account</li><li>If you see "Too many attempts," wait 15 minutes before trying again</li></ol>'},
+  {q:'Live camera view won\'t load.',a:'<ol><li>Check your internet connection — switch between WiFi and cellular to test</li><li>Force close the app and reopen</li><li>If on WiFi, reboot your router</li><li>If streams load on cellular but not WiFi, your home network may be blocking the stream port — reboot the router</li><li>Reboot the panel — the app streams through the panel</li></ol>'},
+  {q:'App shows devices offline even though system seems fine.',a:'<p>Usually a sync issue, not an actual problem. Try:</p><ol><li>Pull down on the main screen to force a refresh</li><li>Sign out and back in</li><li>Reboot the panel — the app reflects the panel\'s last known state and re-syncs after a reboot</li></ol>'},
+  {q:'Cannot arm or disarm through the app.',a:'<ol><li>Check that your account has arm/disarm permissions — some user accounts are view-only</li><li>Make sure your phone has internet — the command goes through the cloud</li><li>Verify the panel is online (green light). If the panel is offline, app commands won\'t reach it</li><li>Try disarming from the panel itself with your PIN to confirm the system is responding</li></ol>'},
+  {q:'Clips and history not loading.',a:'<ol><li>Make sure Clip Storage is active on your account — this is a plan feature. Check in app: Menu → Cameras → Clip Storage</li><li>Clips take 1-2 minutes to process after the event before they appear</li><li>Pull to refresh on the clips screen</li><li>Filter is sometimes set to a specific camera — clear filters and check all</li></ol>'},
+  {q:'App is slow or keeps crashing.',a:'<ol><li>Force close and reopen</li><li>Check for updates in the App Store or Google Play</li><li>Android: Settings → Apps → Vivint → Clear Cache</li><li>Ensure your phone OS is up to date — older iOS/Android versions can cause instability</li><li>Uninstall and reinstall the app</li></ol>'},
+]},
+
+// ── OUTDOOR CAMERAS ─────────────────────────────────────────
+'outdoor-pro-3':{issues:[
+  {q:'Camera is offline or showing a gray screen.',a:'<ol><li>Cut power to the camera — flip the breaker or unplug the outlet it uses</li><li>Wait 30 seconds and restore power</li><li>Give it 2-3 minutes to reconnect — the camera boots slowly</li><li>Reboot the panel</li><li>If still offline after 5 minutes, check the physical cable connection at the camera and at the panel/switch</li><li>Still nothing — text Adam, may need a replacement</li></ol>'},
+  {q:'Night vision looks blurry, foggy, or washed out.',a:'<ol><li>Clean the camera lens with a dry microfiber cloth — dust, spider webs, and pollen are the #1 cause of bad night vision</li><li>Check for a spider web directly over the IR lights (the small LEDs around the lens) — even a thin web causes major glare</li><li>Make sure the camera is not pointing directly at a bright light source like a porch light or street lamp</li><li>If the dome cover is scratched or cracked, that will permanently affect night vision — text Adam for a replacement</li></ol>'},
+  {q:'Too many false motion alerts.',a:'<ol><li>In the app: tap the camera → Settings → Activity Zones. Draw a zone that covers only the area you care about — exclude sidewalks, streets, and moving trees</li><li>Lower motion sensitivity one notch in camera settings</li><li>Trees and bushes blowing in wind are a very common trigger — exclude them from your activity zone</li><li>If alerts are coming at night from nothing, insects flying past the IR are the likely cause — lower sensitivity and reduce zone size</li></ol>'},
+  {q:'Video quality is poor, pixelated, or constantly buffering.',a:'<ol><li>Check WiFi signal strength in the app: tap camera → Settings → WiFi Signal. Below 2 bars — consider a WiFi extender closer to the camera</li><li>Make sure no one is streaming 4K video or running large downloads inside the house at the same time</li><li>Clean the lens — water spots and grime cause soft/blurry video</li><li>Power cycle the camera</li></ol>'},
+  {q:'Camera is not recording motion events.',a:'<ol><li>Check that clip recording is enabled: app → camera → Settings → Motion Recording must be ON</li><li>Verify your activity zone is set up correctly — if the zone doesn\'t cover the area of movement, no clip is saved</li><li>Make sure your plan includes Clip Storage</li><li>Check that the camera is not in Privacy Mode</li></ol>'},
+  {q:'Camera keeps going offline randomly throughout the day.',a:'<p>Intermittent offline = WiFi instability. The camera connects but the signal is not strong enough to maintain a constant stream.</p><ol><li>Run a speed test on your phone near the camera location — upload should be at least 5Mbps</li><li>A WiFi extender or access point near the camera fixes this in most cases</li><li>If the camera uses PoE (wired ethernet), reseat the cable at both ends</li></ol>'},
+]},
+'outdoor-pro-2':{issues:[
+  {q:'Camera offline.',a:'<ol><li>Power cycle at the breaker or outlet — wait 30 seconds, restore power</li><li>Give 2-3 minutes to reconnect</li><li>Reboot panel</li><li>Still offline — check cable connections and text Adam</li></ol>'},
+  {q:'Night vision blurry or foggy.',a:'<ol><li>Wipe lens with a dry microfiber cloth</li><li>Check for spider webs over the IR sensors</li><li>Ensure camera is not aimed at a bright light</li></ol>'},
+  {q:'Excessive false motion alerts.',a:'<ol><li>Set activity zones in app to exclude streets, trees, and sidewalks</li><li>Lower sensitivity one notch</li><li>Night false alerts are usually insects — shrink the zone near the lens</li></ol>'},
+  {q:'Poor video quality.',a:'<ol><li>Check WiFi signal in camera settings — below 2 bars, add a WiFi extender</li><li>Clean the lens</li><li>Power cycle the camera</li></ol>'},
+]},
+'outdoor-pro-1':{issues:[
+  {q:'Camera offline or gray screen.',a:'<ol><li>Power cycle at breaker or outlet, wait 30 seconds</li><li>Reboot panel</li><li>Check cable connections</li><li>Still offline after 5 minutes — text Adam</li></ol>'},
+  {q:'Poor night vision.',a:'<ol><li>Clean lens with microfiber cloth</li><li>Remove any spider webs from around the lens</li><li>Reposition camera away from direct light sources</li></ol>'},
+  {q:'False motion alerts.',a:'<ol><li>Draw activity zones in app to cover only the area you care about</li><li>Lower sensitivity</li><li>Exclude moving trees and bushes from zone</li></ol>'},
+]},
+'outdoor-cam':{issues:[
+  {q:'Camera offline.',a:'<ol><li>Power cycle at outlet or breaker</li><li>Wait 30 seconds and restore</li><li>Reboot panel</li><li>Still offline — text Adam</li></ol>'},
+  {q:'Too many false alerts.',a:'<ol><li>Set activity zones to focus on specific areas</li><li>Lower sensitivity</li><li>Exclude moving objects like trees from the zone</li></ol>'},
+  {q:'Video quality poor.',a:'<ol><li>Clean lens</li><li>Check WiFi signal — add extender if weak</li><li>Power cycle camera</li></ol>'},
+]},
+'spotlight-pro':{issues:[
+  {q:'Spotlights not triggering when motion is detected.',a:'<ol><li>App → tap camera → Settings → Lighting. Make sure "Trigger lights on motion" is enabled</li><li>Check the time schedule — some setups restrict lights to night-only hours. Adjust the schedule if needed</li><li>Make sure your activity zone actually covers the area where motion is happening</li><li>Power cycle the camera</li></ol>'},
+  {q:'Spotlight stays on constantly.',a:'<ol><li>App → camera settings → Lighting → check the duration setting. Reduce it from the default if it feels too long</li><li>If the light never turns off, try disabling motion-triggered lighting and re-enabling it</li><li>Power cycle the camera to reset the light state</li></ol>'},
+  {q:'Camera offline.',a:'<ol><li>Check the outlet or junction box the camera is powered from</li><li>Power cycle by cutting and restoring power — wait 30 seconds</li><li>Reboot panel</li><li>Still offline after 5 minutes — text Adam</li></ol>'},
+  {q:'Too many false motion alerts.',a:'<ol><li>Draw activity zones that exclude the immediate area in front of the lens — insects fly close and trigger sensors</li><li>Lower motion sensitivity</li><li>Exclude streets, trees, and areas with frequent movement you don\'t care about</li></ol>'},
+  {q:'Color night vision not activating.',a:'<ol><li>Color night vision requires the spotlight to be on — if spotlights are disabled, the camera falls back to standard IR night vision</li><li>Enable motion-triggered lighting in app → camera settings → Lighting</li><li>Make sure it\'s actually dark enough — the camera automatically switches modes based on available light</li></ol>'},
+]},
+
+// ── DOORBELL CAMERAS ────────────────────────────────────────
+'doorbell-pro-2':{issues:[
+  {q:'Not getting notifications when someone rings.',a:'<ol><li>iOS: Settings → Vivint → Notifications → enable all. Android: Settings → Apps → Vivint → Notifications</li><li>Inside the Vivint app: Menu → Notifications → Doorbell → make sure ring alerts are on</li><li>Check Do Not Disturb and Focus modes on your phone</li><li>Sign out of the app and back in</li><li>Make sure the doorbell itself is online — if it\'s offline, no ring is sent</li></ol>'},
+  {q:'Video is choppy or there\'s a significant lag when I answer.',a:'<p>Almost always a WiFi signal issue at the front door.</p><ol><li>App → tap doorbell → Settings → check WiFi signal strength. Below 2 bars is the problem</li><li>A WiFi extender or mesh node near the front door significantly improves this</li><li>Also check upload speed — you need at least 5Mbps upload for smooth two-way video</li><li>Make sure your router isn\'t set to 5GHz only — the doorbell uses 2.4GHz</li></ol>'},
+  {q:'Doorbell camera is offline.',a:'<ol><li>Press the doorbell button — if it lights up, it has power but may have lost WiFi</li><li>Reboot your router</li><li>Reboot the panel</li><li>Check the wiring connections at the doorbell and at the chime/transformer inside the house</li><li>Measure voltage at the doorbell wires — needs to be between 16V-24V AC. Low voltage causes offline issues</li><li>Text Adam if still offline — may be a wiring or transformer issue</li></ol>'},
+  {q:'I can\'t hear the visitor / they can\'t hear me.',a:'<ol><li>Two-way audio requires a stable WiFi connection — check signal strength first</li><li>Make sure your phone microphone is not muted</li><li>Check that the Vivint app has microphone permission: iOS: Settings → Vivint → Microphone. Android: Settings → Apps → Vivint → Permissions</li><li>Force close and reopen the app, then try live view again</li><li>Power cycle the doorbell by disconnecting power at the breaker for 30 seconds</li></ol>'},
+  {q:'Indoor chime is not sounding when doorbell is pressed.',a:'<ol><li>Check that your chime is on the list of compatible chimes — mechanical chimes work, some digital chimes do not</li><li>Inside the app: Menu → Devices → Doorbell → Chime settings. Make sure the indoor chime is enabled</li><li>Check the wiring at the chime box — a loose connection stops the chime from ringing</li><li>If you have a Vivint Chime Extender, check that it\'s plugged in and online</li></ol>'},
+  {q:'Pre-roll / quick history not working.',a:'<ol><li>Pre-roll requires a Smart Drive or Playback subscription — check your plan</li><li>Pre-roll is brief (a few seconds before the trigger) and only appears in the clip, not in live view</li><li>Make sure clip recording is enabled for the doorbell in app settings</li></ol>'},
+]},
+'doorbell-pro-1':{issues:[
+  {q:'Not receiving ring alerts.',a:'<ol><li>Check app notification permissions on your phone (iOS: Settings → Vivint → Notifications)</li><li>Toggle doorbell alerts off and back on in the Vivint app under Notifications</li><li>Check Do Not Disturb mode</li><li>Sign out and back in to the app</li></ol>'},
+  {q:'Live video laggy or choppy.',a:'<ol><li>Check WiFi signal at the front door — 2.4GHz signal needs to be strong</li><li>Add a WiFi extender near the front door</li><li>Verify upload speed is at least 5Mbps</li></ol>'},
+  {q:'Camera offline.',a:'<ol><li>Check if doorbell lights up when pressed — has power but lost WiFi</li><li>Reboot router and panel</li><li>Check wiring voltage (needs 16-24V AC)</li><li>Text Adam if still offline</li></ol>'},
+  {q:'Indoor chime not working.',a:'<ol><li>App → Devices → Doorbell → Chime — verify indoor chime is enabled</li><li>Check chime box wiring for loose connections</li><li>Verify chime is compatible (mechanical chimes work, many digital chimes do not)</li></ol>'},
+]},
+'doorbell-cam':{issues:[
+  {q:'Not getting ring notifications.',a:'<ol><li>Check app notification settings and phone permissions</li><li>Toggle alerts off/on in Vivint app → Notifications</li><li>Verify doorbell is online in the app</li></ol>'},
+  {q:'Video quality poor or lagging.',a:'<ol><li>WiFi signal at the front door is almost always the cause</li><li>Check signal strength in app, add a WiFi extender if below 2 bars</li><li>Ensure upload speed is at least 5Mbps</li></ol>'},
+  {q:'Doorbell offline.',a:'<ol><li>Reboot router and panel</li><li>Check wiring voltage — needs 16-24V AC</li><li>Text Adam if still offline after troubleshooting</li></ol>'},
+]},
+'chime-ext':{issues:[
+  {q:'Chime extender is not chiming when the doorbell is pressed.',a:'<ol><li>Check that the chime extender is plugged into an outlet and the LED is lit</li><li>In the app: Menu → Devices → Doorbell → make sure "Indoor Chime" is enabled and the chime extender is selected</li><li>Try unplugging the chime extender, waiting 10 seconds, and plugging it back in</li><li>Move the chime extender closer to the panel — if it\'s too far away it may lose its connection</li></ol>'},
+  {q:'Chime extender shows offline in the app.',a:'<ol><li>Unplug and plug back in</li><li>Reboot the panel</li><li>If still offline, try a different outlet closer to the panel</li><li>Text Adam — may need to re-pair</li></ol>'},
+  {q:'Chime volume is too quiet.',a:'<ol><li>App → Devices → Doorbell → Chime Extender → Volume. Increase to max</li><li>If still too quiet, the chime extender may need to be moved to a more central location in the house</li></ol>'},
+]},
+
+// ── INDOOR CAMERAS ───────────────────────────────────────────
+'indoor-pro':{issues:[
+  {q:'Camera offline or showing a gray screen.',a:'<ol><li>Unplug the camera from the outlet, wait 15 seconds, plug back in</li><li>Give it 2 minutes to reconnect</li><li>Check that your WiFi is working on other devices</li><li>Reboot the panel</li><li>If still offline, try moving the camera to an outlet closer to your router to test if it\'s a signal issue</li></ol>'},
+  {q:'Image is blurry or pixelated.',a:'<ol><li>Check WiFi signal in app → camera settings. Below 2 bars causes quality issues</li><li>Move camera closer to router or add a WiFi extender</li><li>Clean the lens with a microfiber cloth — fingerprints and dust affect image clarity</li><li>Power cycle the camera</li></ol>'},
+  {q:'Camera keeps dropping offline throughout the day.',a:'<p>Intermittent offline is almost always WiFi instability — signal is strong enough to connect but not maintain a stream.</p><ol><li>A 2.4GHz WiFi extender in the same room as the camera fixes this in most cases</li><li>Check if your router is set to 5GHz only — indoor cameras use 2.4GHz</li><li>Try a different outlet in the room — some outlets are on circuits that interfere with WiFi</li></ol>'},
+  {q:'Privacy mode is not working correctly.',a:'<ol><li>App → tap camera → Privacy Mode. Toggle off and back on</li><li>If the camera should be in privacy when you are home, set up a location-based automation: When you arrive home → enable Privacy Mode</li><li>If it\'s stuck in privacy mode, sign out and back into the app</li></ol>'},
+  {q:'Night vision looks poor.',a:'<ol><li>Indoor cameras need complete darkness to use IR night vision effectively — even a small amount of light from a TV or LED power indicator affects quality</li><li>Clean the lens</li><li>Make sure no objects are directly in front of the camera reflecting IR light back</li></ol>'},
+]},
+'indoor-cam':{issues:[
+  {q:'Camera offline.',a:'<ol><li>Unplug, wait 15 seconds, plug back in</li><li>Check WiFi is working on other devices nearby</li><li>Reboot panel</li><li>Re-add camera in app if still not appearing after 5 minutes</li></ol>'},
+  {q:'Drops connection intermittently.',a:'<p>WiFi instability — signal is connecting but not holding.</p><ol><li>Place a WiFi extender in the same room</li><li>Ensure router broadcasts on 2.4GHz — this camera uses 2.4GHz only</li></ol>'},
+  {q:'Blurry or pixelated image.',a:'<ol><li>Check signal strength in camera settings</li><li>Clean lens with microfiber cloth</li><li>Power cycle camera</li></ol>'},
+]},
+
+// ── STORAGE & PLAYBACK ───────────────────────────────────────
+'vivint-playback':{issues:[
+  {q:'Clips are not showing in Playback.',a:'<ol><li>Playback requires an active Vivint Playback subscription — verify this is included on your plan</li><li>Clips take 1-2 minutes to process before appearing — wait a moment after the event</li><li>Check the camera is online and clip recording is enabled (app → camera → Settings → Motion Recording ON)</li><li>Filter settings may be hiding clips — clear all filters</li></ol>'},
+  {q:'Playback won\'t load or shows a spinning wheel.',a:'<ol><li>Check your internet speed — Playback streaming requires a stable connection</li><li>Switch from WiFi to cellular to test if it loads</li><li>Force close the app and reopen</li><li>Reboot the panel — Playback streams through the panel</li></ol>'},
+  {q:'There are gaps in the recordings.',a:'<ol><li>Gaps happen when the camera was offline, lost WiFi, or was in Privacy Mode during that time</li><li>Check the camera\'s connection history in the app</li><li>Continuous recording (not just motion-triggered) requires a higher tier plan — verify what your plan includes</li></ol>'},
+  {q:'Older recordings are missing.',a:'<ol><li>Playback stores footage based on your plan — typically 7, 14, or 30 days. Older than your plan\'s window is automatically deleted</li><li>Download and save important clips before they expire: tap clip → download icon</li></ol>'},
+]},
+'vivint-smart-drive':{issues:[
+  {q:'Smart Drive is offline or not showing in the app.',a:'<ol><li>Check that the Smart Drive is plugged into a USB port on the back of the panel — it should show a solid LED</li><li>Reboot the panel — unplug from wall, wait 30 seconds, plug back in</li><li>If no LED on the drive after reboot, try a different USB port on the panel</li><li>Text Adam — the drive may need to be reformatted or replaced</li></ol>'},
+  {q:'Smart Drive storage is full.',a:'<ol><li>When storage is full, the oldest footage is automatically overwritten — this is normal behavior</li><li>To keep specific footage permanently, download it to your phone through the Vivint app before it gets overwritten</li><li>Upgrading to a larger Smart Drive is an option — text Adam to discuss</li></ol>'},
+  {q:'Cannot find older recordings on the Smart Drive.',a:'<ol><li>The Smart Drive stores footage locally on a loop — when full, oldest footage is overwritten</li><li>Local storage retention depends on how many cameras you have and how much motion activity — more cameras = shorter retention</li><li>Download important clips to your phone immediately after events you care about</li></ol>'},
+  {q:'Smart Drive is making clicking or grinding sounds.',a:'<p>Clicking or grinding means the drive is failing. This is a hardware issue.</p><ol><li>Download any clips you need immediately — the drive may stop working soon</li><li>Text Adam — the drive needs to be replaced</li></ol>'},
+]},
+
+// ── PANELS & TOUCHSCREENS ────────────────────────────────────
+'smart-hub-pro2':{issues:[
+  {q:'Panel is offline or showing a red light.',a:'<ol><li>Unplug the panel from the wall outlet</li><li>If there is a battery backup: hold the power button on the panel for 10 seconds until it powers off completely</li><li>Wait 30 seconds</li><li>Plug back in and wait 2-3 minutes for the panel to reconnect</li><li>The status light should cycle: red → yellow → solid green. Green = online</li><li>If it stays red or yellow after 5 minutes, reboot your router too</li></ol>'},
+  {q:'Panel is beeping or making alarm sounds.',a:'<p>Identify the beep pattern:</p><ul><li><strong>Rapid continuous beeping</strong> — alarm is triggered. Disarm with your PIN or in the app</li><li><strong>Slow beep every 30-60 seconds</strong> — low battery on the panel backup battery. Needs replacement (every 3-5 years)</li><li><strong>3 beeps repeatedly</strong> — communication issue. Reboot the panel</li><li><strong>Beeping during power outage</strong> — normal, panel is on battery backup. Will stop when power returns</li><li><strong>Tamper alert beep</strong> — press panel cover firmly until it clicks fully into place</li></ul>'},
+  {q:'Touchscreen is unresponsive or frozen.',a:'<ol><li>Try a soft reset: hold the power button on the side of the panel for 3 seconds until it restarts</li><li>If frozen and unresponsive: unplug from wall, hold power button 10 seconds, wait 30 seconds, plug back in</li><li>Clean the screen with a dry cloth — a wet or dirty screen can prevent touch from registering</li><li>Screen stays black after reboot — text Adam, may need a panel replacement</li></ol>'},
+  {q:'Panel says "Not Ready to Arm" — won\'t arm.',a:'<ol><li>This means at least one sensor is open, offline, or in a fault state</li><li>On the panel, tap the "Not Ready" message — it will list exactly which sensor is causing the issue</li><li>Close any open doors or windows that have sensors</li><li>If a sensor shows as offline, reboot the panel — sensors sometimes disconnect and reconnect after a reboot</li><li>To arm with a problem sensor, you can bypass it: on the panel, select the sensor → Bypass. This arms everything else while ignoring that one sensor. Text Adam to properly fix the sensor</li></ol>'},
+  {q:'Sensors are not communicating with the panel.',a:'<ol><li>Reboot the panel first — most communication drops resolve on their own after a reboot</li><li>Check the sensor battery — low battery is the #1 cause of dropped sensors</li><li>If multiple sensors dropped at once, it is likely the panel lost its connection rather than individual sensor issues</li><li>Walk the sensors through open/close cycles after the reboot to force re-communication</li></ol>'},
+  {q:'Panel won\'t connect to WiFi.',a:'<ol><li>On the panel: Menu → Settings → Network → WiFi. Select your network and re-enter the password</li><li>Make sure your WiFi password hasn\'t changed recently</li><li>The panel connects to 2.4GHz only — if your router shows two networks (2.4GHz and 5GHz), select the 2.4GHz one</li><li>If the network doesn\'t appear, move the panel closer to the router temporarily to set up, then move it back</li><li>Reboot the router if the panel still cannot find the network</li></ol>'},
+  {q:'Can\'t add or pair a new device to the panel.',a:'<ol><li>Put the panel in pairing mode: Menu → Devices → Add Device, then follow the on-screen steps</li><li>Make sure the new device has fresh batteries or is powered on</li><li>Hold the new device within 5 feet of the panel during pairing</li><li>Text Adam — some devices need to be professionally paired</li></ol>'},
+]},
+'smart-hub':{issues:[
+  {q:'Panel offline or showing a red light.',a:'<ol><li>Unplug panel from wall</li><li>If battery backup: hold power button 10 seconds</li><li>Wait 30 seconds, plug back in</li><li>Status light: red → yellow → green means online</li><li>If stuck after 5 minutes, reboot your router too</li></ol>'},
+  {q:'Panel beeping.',a:'<ul><li><strong>Rapid beeping</strong> — alarm triggered, disarm with PIN or app</li><li><strong>Slow beep every 30-60 sec</strong> — low backup battery, needs replacement</li><li><strong>Beeping during power outage</strong> — normal, running on battery</li><li><strong>Tamper beep</strong> — press panel cover firmly until it clicks</li></ul>'},
+  {q:'Touchscreen frozen or unresponsive.',a:'<ol><li>Hold power button 3 seconds for soft restart</li><li>Full cycle: unplug, hold power 10 sec, wait 30 sec, plug back in</li><li>Clean screen with dry cloth</li><li>Stays black after reboot — text Adam</li></ol>'},
+  {q:'Panel won\'t arm — says "Not Ready".',a:'<ol><li>Tap "Not Ready" on panel — it lists which sensor is causing it</li><li>Close any open doors or windows with sensors</li><li>Reboot panel if a sensor shows offline</li><li>Bypass the problem sensor temporarily to arm everything else while you get it fixed</li></ol>'},
+  {q:'Panel won\'t connect to WiFi.',a:'<ol><li>Menu → Settings → Network → WiFi. Re-select network and enter password</li><li>Panel uses 2.4GHz only — select 2.4GHz network specifically</li><li>Reboot router if network doesn\'t appear</li></ol>'},
+  {q:'Sensors dropping off panel.',a:'<ol><li>Reboot panel — most drops resolve after reboot</li><li>Check sensor batteries — low battery is #1 cause</li><li>If multiple sensors dropped at once, it is the panel connection, not the sensors</li></ol>'},
+]},
+'skycontrol':{issues:[
+  {q:'SkyControl offline.',a:'<ol><li>Unplug from wall, wait 30 seconds, plug back in</li><li>Check cellular connectivity indicator on panel — if no signal, the panel may be in a dead zone</li><li>Reboot your home router — SkyControl uses both WiFi and cellular</li><li>Text Adam if still offline — may need cellular module checked</li></ol>'},
+  {q:'Touchscreen unresponsive.',a:'<ol><li>Hold power button 3 seconds for soft restart</li><li>Full cycle: unplug, hold power 10 sec, wait 30 sec, plug back in</li><li>Screen stays black — text Adam</li></ol>'},
+  {q:'Panel beeping.',a:'<ul><li><strong>Alarm triggered</strong> — disarm with PIN or app</li><li><strong>Low battery</strong> — backup battery needs replacing</li><li><strong>Tamper</strong> — press panel cover firmly</li></ul>'},
+  {q:'Cannot arm — "Not Ready".',a:'<ol><li>Tap "Not Ready" to see which sensor is open or faulted</li><li>Close all doors and windows with sensors</li><li>Reboot panel to clear dropped sensor connections</li><li>Bypass faulted sensor temporarily to arm the rest</li></ol>'},
+]},
+'keypad-std':{issues:[
+  {q:'Keypad not responding to button presses.',a:'<ol><li>Check battery if battery-powered — keypad batteries (usually AA or AAA) last 1-2 years</li><li>If hardwired, check the connection at the back of the keypad — vibration can loosen it</li><li>Reboot the panel</li><li>If locked out after too many wrong PIN attempts, wait 5 minutes — the keypad auto-unlocks</li></ol>'},
+  {q:'My PIN stopped working.',a:'<ol><li>PINs can get wiped after panel firmware updates or full reboots</li><li>Re-add your PIN through the Vivint app: Menu → Users → select user → Door/Keypad Code</li><li>Make sure you are entering your personal PIN, not the master code — they may be different</li><li>Text Adam if keypad shows an error code — may need re-pairing</li></ol>'},
+  {q:'Keypad shows offline in the app.',a:'<ol><li>Reboot the panel</li><li>Replace batteries — even if the keypad still lights up, weak batteries cause connectivity drops</li><li>Keypad needs to be within 100 feet of the panel with clear signal path</li><li>Text Adam if still offline after reboot — may need re-pairing</li></ol>'},
+  {q:'Keypad entry delay not working — alarm goes off immediately.',a:'<ol><li>Entry delay is a system setting, not a keypad setting</li><li>App → Alarm Settings → Entry Delay. Set it to 30 or 45 seconds so you have time to disarm</li><li>Make sure the sensor on the entry door that you use is actually set as an "Entry/Exit" type, not "Instant"</li></ol>'},
+  {q:'Keypad keeps beeping.',a:'<ul><li>If beeping while you enter — wrong PIN entered, just try again</li><li>If beeping continuously — an alarm may be triggered, check the panel</li><li>Low battery causes intermittent chirping — replace batteries</li></ul>'},
+]},
+'keypad-lr':{issues:[
+  {q:'Long range keypad losing connection.',a:'<ol><li>Long range keypads still have practical limits — try to stay within 300 feet of the panel with a clear line of sight</li><li>Walls, metal doors, and concrete significantly reduce range</li><li>Reboot the panel</li><li>If it keeps dropping, text Adam — may need a Z-Wave repeater between the keypad and panel</li></ol>'},
+  {q:'PIN not accepted.',a:'<ol><li>Re-add through app: Menu → Users → select user → Door/Keypad Code</li><li>If keypad shows an error code, text Adam — may need re-pairing</li></ol>'},
+  {q:'Keypad offline.',a:'<ol><li>Replace batteries first — long range keypads drain faster due to extended radio range</li><li>Reboot panel</li><li>Text Adam if still offline — may need re-pairing or a Z-Wave repeater</li></ol>'},
+]},
+'security-hub-pnl':{issues:[
+  {q:'Security Hub offline.',a:'<ol><li>Unplug from wall, wait 30 seconds, plug back in</li><li>Reboot router</li><li>Security Hub relies on WiFi — check signal strength at its location</li><li>Text Adam if still offline</li></ol>'},
+  {q:'Panel beeping.',a:'<ul><li><strong>Alarm beeping</strong> — disarm with PIN</li><li><strong>Slow chirp</strong> — low battery, needs replacement</li><li><strong>Tamper beep</strong> — check panel cover is seated</li></ul>'},
+  {q:'Cannot arm system.',a:'<ol><li>Check for open sensors — tap "Not Ready" on panel to see which one</li><li>Close all protected doors and windows</li><li>Reboot panel if sensors dropped off</li></ol>'},
+]},
+
+// ── SMART LOCKS ──────────────────────────────────────────────
+'lock-892':{issues:[
+  {q:'Lock won\'t respond to the app.',a:'<ol><li>Make sure the door is fully closed — the lock will not engage if the latch does not align with the strike plate</li><li>Check battery level in the app — replace with fresh AA batteries if below 20%</li><li>Reboot the panel</li><li>Remove and re-add the lock in the app if still unresponsive: Menu → Devices → select lock → Remove, then re-pair</li></ol>'},
+  {q:'PIN code not working at the keypad.',a:'<ol><li>PINs can get wiped after panel updates — re-add through app: Menu → Users → select user → Door Lock Code</li><li>Make sure you are pressing the keys firmly — the touch keypad can be finicky with light touches</li><li>If the lock displays an error light, check the app for a specific error message</li><li>Low batteries cause keypad recognition issues — replace batteries</li></ol>'},
+  {q:'Lock is jamming or feels stiff to operate.',a:'<ol><li>The lock needs physical alignment — the door and frame must be perfectly aligned for the deadbolt to throw cleanly</li><li>Check if the door is sagging — look for daylight around the frame, feel for resistance when closing</li><li>Apply graphite lubricant (not oil-based) to the deadbolt mechanism — oil attracts dust and makes it worse over time</li><li>Text Adam — physical installation adjustment may be needed</li></ol>'},
+  {q:'Battery draining too quickly.',a:'<ol><li>Use fresh name-brand AA batteries — cheap batteries drain fast in smart locks</li><li>Avoid alkaline batteries in extreme temperatures — lithium AAs last significantly longer in Texas summers</li><li>If the lock has high traffic, budget for battery replacement every 3-4 months</li><li>Auto-lock set to very short intervals increases battery drain — adjust in app: Menu → Devices → Lock → Auto-lock</li></ol>'},
+  {q:'Auto-lock not working.',a:'<ol><li>App → Devices → select lock → Auto-lock. Make sure it\'s enabled and the timer is set</li><li>Auto-lock only works when the door is properly closed — if the door is open or ajar, the lock won\'t auto-engage</li><li>Replace batteries — low battery can prevent auto-lock from firing</li></ol>'},
+]},
+'lock-910':{issues:[
+  {q:'Lock unresponsive in app.',a:'<ol><li>Check door is fully closed</li><li>Replace batteries with fresh AAs</li><li>Reboot panel</li><li>Remove and re-add lock in app if needed</li></ol>'},
+  {q:'PIN not working.',a:'<ol><li>Re-add PIN: app → Users → select user → Door Lock Code</li><li>Replace batteries — low power affects keypad sensitivity</li><li>Text Adam if lock shows an error code</li></ol>'},
+  {q:'Lock feels stiff or is jamming.',a:'<ol><li>Check door/frame alignment — deadbolt needs clean path to throw</li><li>Apply graphite lubricant to the deadbolt</li><li>Text Adam for physical installation adjustment</li></ol>'},
+  {q:'Auto-lock not engaging.',a:'<ol><li>App → Devices → Lock → Auto-lock. Verify it is enabled</li><li>Door must be fully closed for auto-lock to engage</li><li>Replace batteries</li></ol>'},
+]},
+'lock-888':{issues:[
+  {q:'Lock not responding.',a:'<ol><li>Check door alignment and battery level</li><li>Reboot panel</li><li>Re-add lock in app if still unresponsive</li></ol>'},
+  {q:'Code not accepted.',a:'<ol><li>Re-enter code through app: Users → select user → Door Lock Code</li><li>Replace batteries</li><li>Text Adam if keypad shows an error</li></ol>'},
+  {q:'Physical lock feels stiff.',a:'<ol><li>Apply graphite lubricant to deadbolt</li><li>Check door frame alignment</li><li>Text Adam for installation adjustment if alignment is off</li></ol>'},
+]},
+'garage-ctrl':{issues:[
+  {q:'Garage won\'t open or close from the app.',a:'<ol><li>Check that the garage controller has power — look for a LED light on the unit</li><li>Make sure the garage door safety sensors (the small sensors at the bottom of the tracks) are aligned and unobstructed — a misaligned safety sensor will prevent the door from closing</li><li>Verify the tilt sensor on the door is properly attached and level — it reads the door position and sends status to the app</li><li>Reboot the panel</li><li>Try operating the garage manually from the wall button — if that doesn\'t work, the issue is with the garage opener itself, not the Vivint controller</li></ol>'},
+  {q:'App shows wrong door status (open when closed, or closed when open).',a:'<ol><li>The tilt sensor on the door has shifted out of position</li><li>Find the tilt sensor (a small rectangular device attached to the door panel) and re-seat it flat and level</li><li>Open and close the door manually once — this recalibrates the sensor\'s position reading</li><li>If the sensor is damaged or cracked, text Adam for a replacement</li></ol>'},
+  {q:'Garage controller offline.',a:'<ol><li>Reboot the panel</li><li>Check the physical connection between the controller and the garage opener board</li><li>The controller connects via two wires to the same terminals as your wall button — check those connections</li><li>Text Adam if still offline — may need rewiring</li></ol>'},
+  {q:'Garage door auto-close not working.',a:'<ol><li>App → Devices → Garage → Auto-Close. Make sure it\'s enabled and the timer is set</li><li>Auto-close requires the door status to read as "Open" — if the tilt sensor is misread, auto-close won\'t trigger</li><li>Make sure the garage controller is online — it must be connected to send the close command</li></ol>'},
+  {q:'Garage door closes partially then reverses back up.',a:'<p>This is a garage door opener safety issue, not a Vivint issue.</p><ol><li>Check that the safety sensors at the bottom of the tracks are aligned — misalignment causes reversal</li><li>Remove any obstructions in the door\'s path</li><li>The door\'s down-force sensitivity may need adjustment — refer to your garage door opener manual</li></ol>'},
+]},
+'myq-basic':{issues:[
+  {q:'myQ not connecting or syncing with Vivint.',a:'<ol><li>In the Vivint app: Menu → Connected Services → myQ → Remove, then re-add</li><li>Make sure your myQ account credentials are current — log into the myQ app directly to verify</li><li>The myQ hub must be on the same WiFi network as your panel</li></ol>'},
+  {q:'Garage status wrong in Vivint app.',a:'<ol><li>The door position sensor (attached to the door) needs to be properly seated and level</li><li>In the myQ app, check if the status is correct there — if it\'s wrong in myQ too, the sensor needs adjustment</li><li>Remove and re-add the myQ integration in Vivint app</li></ol>'},
+  {q:'myQ hub offline.',a:'<ol><li>Unplug myQ hub, wait 15 seconds, plug back in</li><li>Check WiFi connection on the hub — it needs to be on your home network</li><li>Reboot your router</li></ol>'},
+]},
+'myq-smart':{issues:[
+  {q:'myQ Smart not responding in Vivint app.',a:'<ol><li>Remove and re-add the myQ integration: Vivint app → Menu → Connected Services → myQ</li><li>Verify myQ account is active by opening the standalone myQ app</li><li>Reboot the myQ hub</li></ol>'},
+  {q:'Garage opens or closes on its own.',a:'<ol><li>Check Vivint automations: app → Automations. Look for any rules triggering the garage unexpectedly</li><li>Check the myQ app for any schedules set directly in myQ</li><li>Disable any unexpected automation rules</li></ol>'},
+]},
+
+// ── ENTRY SENSORS ────────────────────────────────────────────
+'door-window-sensor':{issues:[
+  {q:'Showing "Open" when the door or window is closed.',a:'<ol><li>The magnet and sensor must be within about 1 inch of each other to register as closed</li><li>Check that neither piece has shifted since install — they sometimes move after heavy door use</li><li>Open and close the door slowly and watch the gap between the two pieces</li><li>Adjust the magnet piece up or down by 1/8 inch and retest</li><li>If the door frame has shifted (common in Texas heat), the alignment changes — text Adam for a reinstall adjustment</li></ol>'},
+  {q:'Sensor is offline or not communicating.',a:'<ol><li>Reboot the panel first — most sensor drops reconnect after a reboot</li><li>If still offline, pull the sensor off the frame and check the battery (CR2032)</li><li>Press the tamper button on the back of the sensor — it should trigger a response on the panel. No response means the sensor is truly offline</li><li>Replace the battery even if it seems new — cheap or old batteries cause issues</li><li>Text Adam if still offline after battery replacement — may need re-pairing</li></ol>'},
+  {q:'Getting false alarms from this sensor.',a:'<ol><li>The most common cause is the door or window vibrating from HVAC airflow or wind, momentarily separating from the magnet</li><li>Check the weatherstripping — if the door vibrates or rattles, it can cause intermittent opens</li><li>Increase the entry delay in app settings so you have time to disarm before the alarm sounds</li><li>If it\'s a window sensor near an AC vent, the cold air can cause the window frame to slightly contract — adjust sensor placement</li></ol>'},
+  {q:'Sensor chime not playing when door opens.',a:'<ol><li>App → Alarm Settings → Door Chime. Make sure the chime is enabled for this specific sensor</li><li>Panel volume may be set too low — tap Menu on the panel → Audio → Volume</li><li>Chime only plays when the system is disarmed — if the system is armed, it will trigger the alarm instead of chiming</li></ol>'},
+  {q:'Sensor tamper alert.',a:'<ol><li>The tamper alert means the sensor was removed from its mount or the back cover was opened</li><li>Press the sensor firmly back onto its mount until it clicks</li><li>Open and close the sensor cover to reset the tamper — then press it shut firmly</li><li>Clear the tamper in the app or on the panel</li></ol>'},
+]},
+'door-window-lr':{issues:[
+  {q:'Showing open when door/window is closed.',a:'<ol><li>Magnet and sensor need to be within about 1 inch — check alignment</li><li>Long range sensors still need proper magnet placement — reposition the magnet piece if needed</li><li>Also verify the door is fully closing — gaps in the frame can prevent a clean read</li></ol>'},
+  {q:'Sensor dropping offline.',a:'<ol><li>Long range sensors extend the Z-Wave network but still have limits</li><li>Reboot panel</li><li>Replace battery (CR2032)</li><li>If in a metal door frame or near large metal objects, signal is significantly reduced — text Adam to assess placement</li></ol>'},
+  {q:'False alarms.',a:'<ol><li>Check door/window for vibration from HVAC or wind</li><li>Verify weatherstripping is in good condition</li><li>Increase alarm entry delay in app settings</li></ol>'},
+]},
+'door-sensor':{issues:[
+  {q:'Showing open when door is closed.',a:'<ol><li>Check magnet alignment — both pieces need to be within about 1 inch</li><li>Adjust magnet position slightly and retest</li><li>Text Adam if alignment keeps shifting — may need a remount</li></ol>'},
+  {q:'Sensor offline.',a:'<ol><li>Reboot panel</li><li>Replace battery (CR2032)</li><li>Text Adam if still offline — may need re-pairing</li></ol>'},
+  {q:'False alarms.',a:'<ol><li>Door vibrating from HVAC or wind is the most common cause</li><li>Tighten weatherstripping</li><li>Increase entry delay in app alarm settings</li></ol>'},
+]},
+'motion-sensor':{issues:[
+  {q:'Triggering constantly when no one is home.',a:'<p>First identify what is causing the trigger — common culprits:</p><ul><li><strong>Pets</strong> — enable Pet Immune mode in the app: Devices → Motion Sensor → Settings → Pet Immunity</li><li><strong>HVAC airflow</strong> — hot or cold air moving through the sensor\'s field of view triggers it. Reposition sensor away from vents</li><li><strong>Sunlight</strong> — afternoon sun moving across the sensor\'s view registers as motion. Tilt the sensor slightly downward</li><li><strong>Ceiling fans</strong> — if aimed where a fan is running, it can trigger. Adjust the angle</li><li><strong>Curtains moving</strong> — any movement near a window can trigger. Adjust position</li></ul>'},
+  {q:'Not detecting motion when someone walks by.',a:'<ol><li>Check for obstructions — furniture, shelving, or a spider web directly on the lens</li><li>Verify the sensor is not bypassed: app → Devices → Motion Sensor → Status should show Active</li><li>The sensor has a dead zone directly below it — if someone walks directly under it, it may not detect</li><li>Motion sensors have a "catch time" after triggering — they don\'t retrigger for 1-2 minutes after an event</li><li>Replace battery (CR2032) — low battery causes range reduction</li></ol>'},
+  {q:'Sensor offline.',a:'<ol><li>Reboot panel</li><li>Replace battery (CR2032)</li><li>Check for interference — large metal objects between the sensor and panel block Z-Wave signal</li><li>Text Adam if still offline after battery replacement</li></ol>'},
+  {q:'Pet immunity not working.',a:'<ol><li>Pet immunity only works for animals under the specified weight (usually 40-50 lbs) and only when the animal is low to the ground</li><li>A cat jumping on counters or a dog standing on hind legs will trigger the sensor even with pet immunity on</li><li>Angle the sensor slightly downward so it catches human height but misses a pet on the floor</li><li>Consider repositioning the sensor higher on the wall (above 6 feet) to create a human-detection zone that pets can\'t reach</li></ol>'},
+  {q:'Motion sensor causing alarm to trigger when I enter my own home.',a:'<ol><li>Make sure you\'re entering through a door that has an entry delay set — if you enter through a door without a delay, the motion sensor triggers the alarm immediately</li><li>App → Alarm Settings → Entry Delay → make sure the door you use is configured as an entry/exit zone</li><li>Increase the entry delay time — 30-45 seconds gives enough time to reach the panel or app</li></ol>'},
+]},
+'motion-lr':{issues:[
+  {q:'Frequent false triggers.',a:'<ol><li>Long range motion sensors cover a larger area and pick up more background movement</li><li>Lower sensitivity in the app: Devices → Motion Sensor → Sensitivity</li><li>Check for HVAC vents, ceiling fans, sunlight, and pets in the wider coverage area</li><li>Reposition to avoid high-traffic areas that aren\'t entry points</li></ol>'},
+  {q:'Sensor offline.',a:'<ol><li>Reboot panel</li><li>Replace battery</li><li>Long range sensors use more power — budget for more frequent battery changes</li><li>Text Adam if keeps dropping — may need a Z-Wave repeater</li></ol>'},
+  {q:'Not detecting motion at far edge of its range.',a:'<ol><li>At max range, detection is less reliable</li><li>Make sure nothing is blocking the sensor\'s line of sight</li><li>Clean the lens — even dust reduces range</li><li>Consider adding a second motion sensor if coverage at the far end is critical</li></ol>'},
+]},
+'tilt-sensor':{issues:[
+  {q:'Garage door shows wrong status in app.',a:'<ol><li>The tilt sensor has shifted off its level position — it reads the angle of the door to determine open vs. closed</li><li>Find the sensor on the door panel (small rectangular device) and re-seat it flat and level against the door</li><li>Open and close the door manually to recalibrate the reading</li><li>If the sensor was glued on and fell off, clean both surfaces and reattach with strong adhesive</li></ol>'},
+  {q:'Sensor offline.',a:'<ol><li>Reboot panel</li><li>Replace battery (CR2032) — garage door vibration drains batteries faster than other sensors</li><li>Check sensor is still attached to the door and hasn\'t fallen off</li></ol>'},
+  {q:'Sensor keeps falling off the door.',a:'<ol><li>Clean the door surface with rubbing alcohol before reattaching</li><li>Use a strong adhesive like 3M VHB tape</li><li>Make sure it\'s placed on a flat section of the door panel, not near edges or ridges</li><li>Text Adam — may need a screw-mount instead of adhesive</li></ol>'},
+]},
+'glass-break':{issues:[
+  {q:'Going off when no glass breaks.',a:'<p>Glass break detectors listen for high-frequency sounds similar to breaking glass. Common false triggers:</p><ul><li>TV audio with glass-shattering sound effects</li><li>Keys jingling or metal objects clanging</li><li>High-pitched music or instruments</li><li>Someone clapping loudly near the sensor</li><li>Dishes being dropped or stacked</li></ul><p>Fix: App → Devices → Glass Break → Sensitivity. Lower it one notch. If false alarms persist, lower it again.</p>'},
+  {q:'Sensor is offline.',a:'<ol><li>Reboot panel</li><li>Replace battery (CR123A)</li><li>Press the test button on the sensor — it should flash an LED. No response = dead battery</li><li>Text Adam if still offline after battery replacement</li></ol>'},
+  {q:'How do I test the glass break sensor?',a:'<ol><li>Put the system in Test Mode first: app → Menu → System Test → Start</li><li>You need a glass break tester (a small handheld device that mimics the sound of breaking glass)</li><li>Text Adam — he carries a glass break tester and can test it on the next visit</li><li>The crinkle test (crumpling a bag near the sensor) sometimes works but is not the official method</li></ol>'},
+  {q:'What is the coverage range?',a:'<p>Glass break detectors typically cover a 15-25 foot radius in open space. Coverage is reduced by:</p><ul><li>Walls and doorways</li><li>Furniture and curtains absorbing sound</li><li>Carpeting and soft surfaces</li></ul><p>One sensor usually covers an open-plan room. Each room with glass should have its own sensor. Text Adam to assess coverage for your space.</p>'},
+]},
+
+// ── SAFETY SENSORS ───────────────────────────────────────────
+'smoke-det':{issues:[
+  {q:'False alarm — went off for no reason.',a:'<p>Common causes of smoke detector false alarms:</p><ul><li><strong>Cooking smoke or steam</strong> — even light cooking can trigger it if the detector is near the kitchen. Consider moving it away from the kitchen</li><li><strong>Dust buildup</strong> — vacuum the detector gently with a brush attachment</li><li><strong>Insects</strong> — bugs inside the detection chamber. Tap the detector firmly a few times to dislodge</li><li><strong>Low or dying battery</strong> — a failing battery causes erratic sensor behavior. Replace even if the low battery light isn\'t on</li><li><strong>Steam from shower</strong> — detectors near bathrooms can trigger on steam. Relocate if this is recurring</li></ul>'},
+  {q:'Chirping or beeping periodically.',a:'<ol><li>A chirp every 30-60 seconds almost always means <strong>low battery</strong></li><li>Replace batteries even if the low battery indicator is not lit — indicators sometimes fail before the chirp starts</li><li>If it chirps after fresh batteries, the unit has reached end of life (10 years from manufacture date, printed on the back)</li><li>Text Adam — an end-of-life detector needs to be replaced</li></ol>'},
+  {q:'How do I test the smoke detector?',a:'<ol><li>Put system in Test Mode first: app → Menu → System Test → Start. This prevents the alarm from alerting the monitoring center</li><li>Hold the test button on the detector for 5 seconds — you should hear a loud alarm and see it register in the Vivint app</li><li>Test all detectors quarterly — January, April, July, October is an easy schedule to remember</li><li>Never use real smoke to test — spray can smoke detector test aerosol only</li></ol>'},
+  {q:'Detector offline in app.',a:'<ol><li>Reboot panel</li><li>Replace battery</li><li>If hardwired, check the wiring connection at the detector</li><li>Text Adam if still offline</li></ol>'},
+  {q:'Alarm went off but there is no smoke.',a:'<ol><li>Fan the area around the detector to clear any residual smoke or steam</li><li>Check all rooms for any signs of smoke, burning smell, or heat</li><li>If you are certain there is no actual smoke: disarm in the app or on the panel, then call Vivint monitoring to cancel the dispatch</li><li>Clean the detector — dust or insect contamination is the likely cause</li></ol>'},
+]},
+'co-det':{issues:[
+  {q:'CO detector alarmed — what do I do?',a:'<p><strong>Carbon monoxide is invisible and odorless. Take every alarm seriously.</strong></p><ol><li>Get everyone (people and pets) out of the house immediately</li><li>Leave the door open as you exit to ventilate</li><li>Call 911 from outside or from a neighbor\'s home</li><li>Do not re-enter until emergency services clear the building</li><li>Once cleared, text Adam to schedule an inspection of your Vivint equipment</li></ol>'},
+  {q:'CO detector is chirping.',a:'<ol><li>Chirping every 30-60 seconds = low battery. Replace immediately</li><li>CO detectors have a service life of 5-7 years from manufacture date (check sticker on back)</li><li>Chirping after fresh batteries = end of life, needs replacement</li><li>Text Adam — CO detectors must be replaced when they reach end of life</li></ol>'},
+  {q:'CO detector offline.',a:'<ol><li>Reboot panel</li><li>Replace battery</li><li>If hardwired, check the power connection</li><li>Text Adam if still offline — CO detection is critical and should not stay offline</li></ol>'},
+  {q:'CO detector alarmed but no one feels sick.',a:'<p>CO can be present at low levels before symptoms appear. Low-level exposure over hours causes headaches, nausea, and confusion — symptoms people often mistake for something else.</p><ol><li>Evacuate anyway and ventilate the home</li><li>Have a licensed HVAC technician inspect all fuel-burning appliances (furnace, water heater, stove)</li><li>Check that vehicles are not running in an attached garage</li><li>Inspect dryer venting — a blocked dryer vent can cause CO buildup</li></ol>'},
+]},
+'smoke-co-combo':{issues:[
+  {q:'Alarm went off — how do I know if it\'s smoke or CO?',a:'<ol><li>The Vivint app will show specifically whether it\'s a smoke or CO alarm — check immediately</li><li>On the panel, the alarm description will say "Smoke" or "CO"</li><li><strong>For CO alarms: evacuate immediately and call 911</strong></li><li>For smoke alarms: check for actual smoke and fan/ventilate the area if it was a false alarm</li></ol>'},
+  {q:'False alarm — went off with no smoke or CO.',a:'<p>Smoke side: cooking, steam, dust, insects, dying battery. CO side: very rare false positive — take all CO alarms seriously.<br>General fix: replace battery, vacuum detector, relocate away from kitchen/bathroom if recurring.</p>'},
+  {q:'Chirping periodically.',a:'<ol><li>Low battery — replace immediately</li><li>If chirping after fresh batteries: end of life (check manufacture date on back). Text Adam for replacement</li></ol>'},
+  {q:'Detector offline.',a:'<ol><li>Reboot panel</li><li>Replace battery</li><li>Check wiring if hardwired</li><li>Text Adam if still offline — safety devices should not stay offline</li></ol>'},
+]},
+'smoke-co-monitor':{issues:[
+  {q:'Monitor showing an alert in the app but no alarm sounding.',a:'<ol><li>The monitor tracks air quality and alerts at lower thresholds than the alarm — it is a warning, not an emergency trigger</li><li>Check for nearby sources: cooking, cleaning products, paint fumes, candles</li><li>Ventilate the area and see if the alert clears</li><li>If CO is detected at any level, treat it seriously — see CO alarm instructions above</li></ol>'},
+  {q:'Device offline.',a:'<ol><li>Reboot panel</li><li>Replace battery or check power connection</li><li>Text Adam if stays offline — safety monitor should not be down</li></ol>'},
+]},
+'water-sensor':{issues:[
+  {q:'Water sensor triggered but I can\'t find any water.',a:'<p>Two common causes:</p><ul><li><strong>High humidity</strong> — especially in bathrooms, laundry rooms, or near AC units. Even water vapor can trigger the sensor. Elevate the sensor slightly off the floor on a small piece of foam</li><li><strong>Condensation</strong> — cold pipes sweating in Texas summers can drip enough to trigger sensors placed directly against them</li></ul><p>Fix: Adjust sensor placement. If in a high-humidity area, lower sensitivity in app settings.</p>'},
+  {q:'Sensor offline.',a:'<ol><li>Water sensors use a CR2032 coin battery — replace it. They drain faster than other sensors due to continuous humidity monitoring</li><li>Reboot panel after replacing battery</li><li>Text Adam if still offline after battery replacement</li></ol>'},
+  {q:'I got a water alert but the app shows the sensor is now dry — was it real?',a:'<p>If the sensor briefly triggered and is now dry, it could be:</p><ul><li>A small amount of water that evaporated quickly</li><li>A pipe that briefly dripped then stopped</li><li>Condensation</li></ul><p>Take it seriously — check for pipe sweating, slow drips, and humidity sources in the area. A brief trigger is often the early warning before a bigger leak.</p>'},
+  {q:'Where is the best placement for the water sensor?',a:'<p>Place sensors on the floor directly in the path water would travel if a leak occurred:</p><ul><li>In front of the water heater (one of the most common leak sources)</li><li>Under kitchen and bathroom sinks</li><li>Behind the washing machine</li><li>Near the refrigerator water line</li><li>In utility closets with plumbing</li></ul><p>Keep sensors flat on the floor — water pools at the lowest point first.</p>'},
+]},
+'flood-freeze':{issues:[
+  {q:'Freeze alert triggered with no actual freezing conditions.',a:'<ol><li>The freeze sensor triggers at approximately 41°F (5°C)</li><li>If placed near an AC vent, in an uninsulated crawl space, or near an exterior wall, it may see temperatures below 41°F even when the house is comfortable</li><li>Reposition the sensor away from direct cold air sources</li><li>In summer, an AC vent blowing directly on the sensor will trigger it — move the sensor at least 3 feet from any vent</li></ol>'},
+  {q:'Flood sensor not alerting for water.',a:'<ol><li>The sensor must be placed flat on the floor — if elevated or tipped, the water contacts may not reach water</li><li>Replace battery — CR2032</li><li>Test by placing a damp cloth briefly on the sensor contacts (the metal prongs at the bottom)</li><li>Text Adam if no alert during test</li></ol>'},
+  {q:'Sensor offline.',a:'<ol><li>Replace battery — these sensors drain faster in cold environments</li><li>Reboot panel</li><li>Text Adam if still offline</li></ol>'},
+]},
+
+// ── REMOTES & PANIC ──────────────────────────────────────────
+'key-fob':{issues:[
+  {q:'Key fob not arming or disarming the system.',a:'<ol><li>Replace the battery (CR2032) — this is the most common fix. Even a fob that still lights up may have insufficient power to complete the command</li><li>Press and hold the button for 1-2 full seconds — a quick tap may not register</li><li>Stand within 100 feet of the panel — fobs have limited range</li><li>Make sure the fob is still active: app → Menu → Devices → Key Fobs. If it shows inactive, re-enable it</li><li>Try re-pairing the fob: text Adam for help</li></ol>'},
+  {q:'Key fob was lost — how do I deactivate it?',a:'<ol><li>App → Menu → Devices → Key Fobs → select the lost fob → Delete or Disable</li><li>This immediately prevents the lost fob from being able to arm or disarm your system</li><li>Order a replacement fob through Vivint or text Adam</li></ol>'},
+  {q:'Key fob shows "offline" in the app.',a:'<p>Key fobs only communicate when a button is pressed — they do not maintain a constant connection. "Offline" in the app just means the fob hasn\'t been used recently. This is normal.</p><p>Test it by pressing any button — if it responds, it is working fine.</p>'},
+  {q:'Key fob battery draining too fast.',a:'<ol><li>If the fob is in a pocket or bag with other items, it can get pressed accidentally and drain the battery. Consider a fob holder or separate pocket</li><li>Avoid storing the fob near strong magnets or metal objects</li><li>If battery dies within a few weeks, the fob may be in an area with weak signal and constantly tries to reach the panel — keep it closer to the home when not in use</li></ol>'},
+]},
+'panic-pendant':{issues:[
+  {q:'I accidentally triggered the panic button.',a:'<ol><li>Call Vivint monitoring immediately at the number listed on your panel — tell them it was accidental and give your verbal cancel passcode</li><li>Act fast — if you don\'t cancel within about 30 seconds, emergency services may be dispatched</li><li>If police are already dispatched, stay calm and let them arrive — explain it was accidental when they arrive. There is usually no penalty for a first accidental call</li></ol>'},
+  {q:'Panic pendant not triggering when I press it.',a:'<ol><li>Put the system in Test Mode first: app → System Test → Start</li><li>Press and hold the button for 2-3 full seconds — a brief tap may not register</li><li>Check the battery (CR2032)</li><li>Make sure you are within range of the panel — pendants work within about 100-150 feet</li><li>Text Adam if no response in test mode — may need re-pairing</li></ol>'},
+  {q:'Battery draining quickly.',a:'<ol><li>If the pendant is in an area with weak signal, it constantly tries to maintain connection and drains faster</li><li>Keep the pendant in areas closer to the panel — usually the main living areas are ideal</li><li>Avoid storing in areas far from the panel like detached garages or outer rooms</li></ol>'},
+  {q:'How far does the panic pendant work?',a:'<p>Panic pendants typically work up to 100-150 feet from the panel in open space. Walls, metal doors, and concrete reduce range significantly. If your home is large, consider keeping a pendant in multiple key locations or discussing an additional panel with Adam.</p>'},
+]},
+
+// ── THERMOSTATS ──────────────────────────────────────────────
+'vivint-thermo':{issues:[
+  {q:'Thermostat is not controlling the temperature correctly.',a:'<ol><li>Check the current mode on the thermostat: it must be set to Cool, Heat, or Auto depending on what you need. In Texas, most people run Cool mode year-round</li><li>Check for an active schedule overriding your manual setting: app → Thermostat → Schedule. If a schedule is running, it will override manual adjustments</li><li>Verify the thermostat is actually communicating: the display should show a connection icon</li><li>Auto mode can cause issues if the system swings between heating and cooling — switch to Cool only for summer months</li></ol>'},
+  {q:'Thermostat shows offline in the app.',a:'<ol><li>Check that the thermostat screen is powered on and responsive</li><li>Reboot your router</li><li>Reboot the panel</li><li>On the thermostat itself: Settings → Network → WiFi → reconnect to your home network and re-enter password</li><li>Text Adam if still offline — may be a wiring power issue</li></ol>'},
+  {q:'HVAC won\'t respond to thermostat commands.',a:'<ol><li>Check your HVAC filter — a severely clogged filter causes the system to shut itself down for protection</li><li>Check circuit breakers for your HVAC system — a tripped breaker stops the unit from responding</li><li>Make sure your HVAC is getting power: you should hear a click from the air handler when the thermostat calls for cooling</li><li>The thermostat wiring may have come loose — text Adam for an inspection</li></ol>'},
+  {q:'Schedule is not working as expected.',a:'<ol><li>App → Thermostat → Schedule → review each time slot for accuracy</li><li>Make sure the days are set correctly — weekday vs weekend can be configured separately</li><li>Check that "Hold" mode is not active — a hold overrides the schedule until manually canceled</li><li>Clear the hold: on the thermostat, tap "Cancel Hold" or in the app tap the hold status to remove it</li></ol>'},
+  {q:'Fan runs constantly.',a:'<ol><li>App → Thermostat → Fan Setting. Change from "Always On" to "Auto" — Auto only runs the fan when the system is actively heating or cooling</li><li>On the thermostat: tap Fan → set to Auto</li></ol>'},
+  {q:'Temperature reading seems inaccurate.',a:'<ol><li>Thermostat placement matters — if it\'s near a vent, window, or exterior wall, it reads a false temperature</li><li>Make sure the thermostat is not in direct sunlight during afternoon hours</li><li>Compare with a separate thermometer in the same room — if they differ by more than 2-3 degrees, text Adam for a calibration check</li></ol>'},
+]},
+'nest-thermo':{issues:[
+  {q:'Nest not syncing with the Vivint app.',a:'<ol><li>You must link your Google account: Vivint app → Menu → Connected Services → Google → link your account</li><li>Make sure your Nest device is added to your Google Home first before trying to link to Vivint</li><li>If already linked but not syncing: remove the integration and re-add it</li><li>Make sure both apps are updated to current versions</li></ol>'},
+  {q:'Vivint automations not controlling the Nest.',a:'<ol><li>Automations that control Nest work through the Google integration — verify it is active in Vivint app → Connected Services</li><li>Check that the Nest app itself has no conflicting schedules overriding the Vivint commands</li><li>Re-link the Google integration if automations stopped working after an app update</li></ol>'},
+  {q:'Nest is offline.',a:'<ol><li>Check the Nest display — it should show WiFi connection status</li><li>Go to Nest app → Settings → check connection status there first</li><li>Reboot your router</li><li>If the Nest display is dim or off, check the wiring — it charges from the HVAC system and may have lost power</li></ol>'},
+]},
+
+// ── LIGHTING & APPLIANCE ─────────────────────────────────────
+'smart-plug-dev':{issues:[
+  {q:'Device plugged in won\'t turn on or off from the app.',a:'<ol><li>Check that the smart plug LED is lit — if dark, the outlet has no power or the plug has failed</li><li>Toggle the plug off and on from the Vivint app</li><li>Unplug the smart plug from the outlet, wait 10 seconds, plug back in</li><li>Reboot the panel</li><li>If still unresponsive, try the plug in a different outlet closer to the panel to test if it\'s a signal issue</li></ol>'},
+  {q:'Smart plug shows offline in the app.',a:'<ol><li>Unplug completely, wait 15 seconds, plug back in</li><li>Give it 2 minutes to reconnect</li><li>Reboot the panel</li><li>If it keeps dropping, try a different outlet — some outlets have interference from other electronics nearby</li></ol>'},
+  {q:'Automations including the plug not firing.',a:'<ol><li>Check that the plug is online before testing automations — offline devices are skipped in automation rules</li><li>App → Automations → find the rule → test it manually by tapping Run</li><li>Make sure the automation schedule is set to the correct days and times, including the timezone</li></ol>'},
+  {q:'Plug is getting very warm.',a:'<p>Some warmth is normal for smart plugs. However, if it is hot to the touch:</p><ol><li>Check the wattage of the device plugged in — smart plugs typically max out at 1800W. Heaters, dryers, and large appliances often exceed this</li><li>Do not use smart plugs with high-draw appliances — use a dedicated smart outlet or heavy-duty smart switch instead</li><li>If it is hot and the device plugged in is well within the wattage limit, text Adam — the plug may be defective</li></ol>'},
+]},
+'philips-hue':{issues:[
+  {q:'Hue lights not responding in the Vivint app.',a:'<ol><li>Make sure the Philips Hue Bridge has power and is connected to your router via ethernet</li><li>In the Vivint app: Menu → Connected Services → Philips Hue. Remove and re-add the integration</li><li>Confirm the lights work in the native Philips Hue app first — if they don\'t work there, it\'s a Hue issue, not a Vivint issue</li></ol>'},
+  {q:'Hue lights not responding to Vivint automations.',a:'<ol><li>Test the lights in the Philips Hue app directly to confirm they work independently</li><li>Re-link the Hue integration in Vivint app</li><li>Make sure the Hue Bridge is on the same WiFi network as your Vivint panel</li></ol>'},
+  {q:'Hue Bridge offline.',a:'<ol><li>Check that the Bridge has power (LED should be solid blue)</li><li>Confirm the ethernet cable is plugged in — the Hue Bridge requires a wired connection to your router</li><li>Reboot your router</li><li>Reboot the Hue Bridge by unplugging and replugging</li></ol>'},
+]},
+'smart-bulbs':{issues:[
+  {q:'Smart bulbs not responding.',a:'<ol><li>Make sure the physical switch controlling those bulbs is in the ON position — smart bulbs need constant power to receive commands</li><li>If someone turned the physical switch off, the bulbs lose WiFi and need to be reset</li><li>Power cycle the bulbs: flip the switch off and on 5 times quickly to reset to factory, then re-add in the app</li></ol>'},
+  {q:'Bulbs flickering.',a:'<ol><li>Flickering is usually a dimmer switch compatibility issue — smart bulbs are not compatible with traditional dimmer switches</li><li>Replace any dimmer switch controlling smart bulbs with a standard on/off switch</li><li>If on a standard switch, the bulb may be failing — test with a replacement</li></ol>'},
+]},
+'light-switch':{issues:[
+  {q:'Switch not responding in the Vivint app.',a:'<ol><li>Check the switch has power — the LED indicator should be lit</li><li>Reboot the panel</li><li>At the switch itself, try turning it off and on manually to confirm it\'s receiving power</li><li>Text Adam if still unresponsive — may need to re-pair the switch to the panel</li></ol>'},
+  {q:'Physical switch no longer works after installation.',a:'<ol><li>Smart switches replace the physical switch function — you control them from the app or from the switch itself by pressing the paddle</li><li>If pressing the paddle doesn\'t work, check the wiring connection at the switch</li><li>Text Adam — wiring issue needs professional inspection</li></ol>'},
+  {q:'Switch offline.',a:'<ol><li>Reboot panel</li><li>Check the circuit breaker for that switch</li><li>Text Adam if still offline — may need re-pairing or inspection</li></ol>'},
+]},
+'lighting-bridge':{issues:[
+  {q:'Lighting Bridge is offline.',a:'<ol><li>Check that the bridge is plugged into an outlet and the LED is lit</li><li>Reboot panel</li><li>Text Adam if still offline — bridge may need re-pairing</li></ol>'},
+  {q:'Smart lights not being discovered through the bridge.',a:'<ol><li>Put the bridge in discovery mode: press the button on the bridge, then add devices in the Vivint app</li><li>Make sure smart bulbs or switches are powered on and within range</li><li>Text Adam for help with discovery — the process varies by device type</li></ol>'},
+]},
+
+// ── INTEGRATIONS ─────────────────────────────────────────────
+'google-home':{issues:[
+  {q:'Google Home not controlling Vivint devices.',a:'<ol><li>In the Google Home app: Settings → Works with Google → find Vivint → unlink, then re-link</li><li>You will need your Vivint login credentials to re-link</li><li>After re-linking, say "Hey Google, sync my devices" to force an update</li></ol>'},
+  {q:'Voice commands not working.',a:'<ol><li>Say "Hey Google, sync my devices" to refresh the device list</li><li>Make sure you are using the exact device names as they appear in the Vivint app</li><li>Check that the Google Home integration is still active in Vivint app → Connected Services</li></ol>'},
+  {q:'Integration keeps disconnecting.',a:'<ol><li>This often happens after a Vivint or Google password change</li><li>Re-link the integration in Google Home → Works with Google → Vivint</li><li>Enable two-step verification on your Google account if you haven\'t — it reduces disconnections</li></ol>'},
+]},
+'google-nest-int':{issues:[
+  {q:'Nest integration not working in Vivint app.',a:'<ol><li>Vivint app → Menu → Connected Services → Google → re-link your account</li><li>Make sure your Nest is added to Google Home before linking to Vivint</li><li>Both apps need to be on current versions</li></ol>'},
+  {q:'Vivint automations not controlling Nest.',a:'<ol><li>Re-link Google integration in Vivint app</li><li>Check for conflicting schedules in the Nest app itself</li><li>Test the automation manually by tapping Run in the app</li></ol>'},
+]},
+'hue-int':{issues:[
+  {q:'Hue lights not responding through Vivint.',a:'<ol><li>Vivint app → Menu → Connected Services → Philips Hue → remove and re-add</li><li>Confirm lights work in the Hue app directly first</li><li>Make sure Hue Bridge is powered and connected via ethernet to your router</li></ol>'},
+]},
+'amazon-echo':{issues:[
+  {q:'Alexa not controlling Vivint devices.',a:'<ol><li>In the Alexa app: More → Skills & Games → search "Vivint" → enable the skill and link your Vivint account</li><li>After linking, say "Alexa, discover my devices"</li><li>If already linked: disable the skill, then re-enable and re-link</li></ol>'},
+  {q:'Alexa commands not working after they were working fine.',a:'<ol><li>Say "Alexa, discover my devices" to resync</li><li>Check that the Vivint skill is still enabled in the Alexa app</li><li>If your Vivint password changed, you need to re-link the skill with the new credentials</li></ol>'},
+  {q:'Alexa can\'t find specific Vivint devices.',a:'<ol><li>Make sure the device name in Vivint app matches what you\'re telling Alexa</li><li>Use simple, short names without special characters in the Vivint app for Alexa compatibility</li><li>Run "Alexa, discover my devices" after any device name changes</li></ol>'},
+]},
+
 };
 
 // ── NAV STATE ─────────────────────────────────────────────────
