@@ -136,7 +136,18 @@ select.form-input{cursor:pointer;}
 .dev-card.selected{border-color:var(--g) !important;background:rgba(5,229,175,.15) !important;}
 .dev-icon{width:26px;height:26px;color:rgba(255,255,255,.5);}
 .dev-card.selected .dev-icon{color:var(--g);}
-.dev-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+/* ── UNIVERSAL SVG ICON REGISTRY ─────────────────────────────
+   All icons use [data-svg] containers. renderIcons() fills them.
+   One rule controls all rendering. Add new devices to SVGS only.
+   ─────────────────────────────────────────────────────────── */
+[data-svg]{display:flex;align-items:center;justify-content:center;}
+[data-svg] svg{width:100%;height:100%;}
+[data-svg] svg path,
+[data-svg] svg rect,
+[data-svg] svg circle,
+[data-svg] svg ellipse,
+[data-svg] svg polyline,
+[data-svg] svg polygon{fill:currentColor!important;stroke:none!important;}
 .dev-name{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:500;color:rgba(255,255,255,.45);line-height:1.2;}
 .dev-card.selected .dev-name{color:var(--g);}
 
@@ -148,7 +159,7 @@ select.form-input{cursor:pointer;}
 .int-card.on{border-color:var(--g) !important;background:rgba(5,229,175,.15) !important;}
 .int-card-icon{width:24px;height:24px;color:rgba(255,255,255,.5);}
 .int-card.on .int-card-icon{color:var(--g);}
-.int-card-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+
 .int-card-name{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:500;color:rgba(255,255,255,.45);line-height:1.2;}
 .int-card.on .int-card-name{color:var(--g);}
 
@@ -159,10 +170,11 @@ select.form-input{cursor:pointer;}
 .task-list{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
 .task-item{display:flex;align-items:center;gap:8px;background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.2);border-radius:8px;padding:9px 11px;}
 .task-item-icon{width:18px;height:18px;color:var(--g);flex-shrink:0;}
-.task-item-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+
 .task-item-text{flex:1;min-width:0;}
 .task-item-dev{font-family:'Rajdhani',sans-serif;font-size:10px;color:var(--g);font-weight:600;}
 .task-item-issue{font-size:12px;color:rgba(255,255,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
 .task-item-del{background:none;border:none;color:rgba(255,255,255,.25);cursor:pointer;font-size:16px;padding:2px 4px;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
 .task-empty{text-align:center;padding:14px;color:rgba(255,255,255,.25);font-size:12px;font-style:italic;border:1px dashed rgba(255,255,255,.1);border-radius:8px;margin-bottom:14px;}
 
@@ -215,27 +227,118 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
 .tips-cta{background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.2);border-radius:12px;padding:16px;text-align:center;margin-top:16px;}
 
 /* TROUBLESHOOT CONTENT */
-.ts-dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
-@media(max-width:340px){.ts-dev-grid{grid-template-columns:repeat(2,1fr);}}
-.ts-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;margin-bottom:8px;}
-.ts-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent;}
-.ts-q{font-size:13px;font-weight:500;color:var(--w);}
-.ts-arr{font-size:14px;color:var(--g);flex-shrink:0;transition:transform .3s;}
-.ts-btn.open .ts-arr{transform:rotate(180deg);}
-.ts-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;padding:0 16px;}
-.ts-body.open{max-height:500px;padding:0 16px 14px;}
-.ts-body p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;}
-.ts-body p+p{margin-top:8px;}
-.ts-body ol,.ts-body ul{padding-left:16px;margin-top:6px;}
-.ts-body li{font-size:12px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:3px;}
+
+@media(max-width:340px){}
+
+
+
+
+
+
+
+
+
+
+
 .ts-body strong{color:var(--g);font-weight:500;}
-.stuck-strip{background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.18);border-radius:12px;padding:16px;text-align:center;margin-top:16px;}
+
+
+
+
+
+
+
+
+
+/* PITCH SECTIONS */
+.pitch-hero{background:linear-gradient(135deg,rgba(5,229,175,.1) 0%,rgba(5,229,175,.03) 100%);border:1px solid rgba(5,229,175,.2);border-radius:14px;padding:20px;margin-bottom:18px;text-align:center;}
+.pitch-eyebrow{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:6px;}
+.pitch-headline{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--w);line-height:1.15;margin-bottom:8px;}
+.pitch-sub{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;}
+.pitch-stat{display:inline-flex;align-items:center;gap:6px;background:rgba(5,229,175,.12);border:1px solid rgba(5,229,175,.25);border-radius:20px;padding:6px 14px;margin-top:10px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;color:var(--g);letter-spacing:.04em;}
+.pitch-benefits{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.pitch-benefit{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:13px 14px;}
+.pitch-benefit-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.pitch-benefit-text{}
+.pitch-benefit-title{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--w);margin-bottom:3px;}
+.pitch-benefit-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;}
+.pitch-divider{display:flex;align-items:center;gap:10px;margin:18px 0;font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);}
+.pitch-divider::before,.pitch-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08);}
+.pitch-partner{font-size:11px;color:rgba(255,255,255,.3);line-height:1.6;padding:10px 12px;background:rgba(255,255,255,.03);border-radius:8px;margin-bottom:14px;}
+/* MORE SERVICES SECTION */
+.more-section{max-width:860px;margin:0 auto;padding:0 20px 64px;}
+.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.more-grid{grid-template-columns:1fr;}}
+.more-card{display:flex;align-items:flex-start;gap:12px;border-radius:14px;padding:18px;cursor:pointer;transition:all .2s;border:none;width:100%;text-align:left;color:inherit;-webkit-tap-highlight-color:transparent;}
+.more-card.solar{background:linear-gradient(135deg,rgba(255,180,0,.1) 0%,rgba(255,140,0,.05) 100%);border:1.5px solid rgba(255,180,0,.25);}
+.more-card.solar:hover,.more-card.solar:active{border-color:rgba(255,180,0,.5);background:linear-gradient(135deg,rgba(255,180,0,.15) 0%,rgba(255,140,0,.08) 100%);}
+.more-card.insurance{background:linear-gradient(135deg,rgba(100,160,255,.1) 0%,rgba(80,130,255,.05) 100%);border:1.5px solid rgba(100,160,255,.25);}
+.more-card.insurance:hover,.more-card.insurance:active{border-color:rgba(100,160,255,.5);background:linear-gradient(135deg,rgba(100,160,255,.15) 0%,rgba(80,130,255,.08) 100%);}
+.more-card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.more-card.solar .more-card-icon{background:rgba(255,180,0,.12);}
+.more-card.insurance .more-card-icon{background:rgba(100,160,255,.12);}
+.more-card-tag{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;}
+.more-card.solar .more-card-tag{color:rgba(255,180,0,.7);}
+.more-card.insurance .more-card-tag{color:rgba(100,160,255,.7);}
+.more-card-title{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--w);margin-bottom:3px;}
+.more-card-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.4;}
+
+
+/* ── TROUBLESHOOT NAVIGATION ─────────────────────────────────*/
+.ts-crumb{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(5,229,175,.1);}
+.ts-crumb-back{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:7px 12px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;display:flex;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent;flex-shrink:0;white-space:nowrap;}
+.ts-crumb-back:active{background:rgba(255,255,255,.1);}
+.ts-crumb-path{font-size:11px;color:rgba(255,255,255,.3);line-height:1.4;}
+.ts-crumb-path strong{color:rgba(255,255,255,.6);font-weight:500;}
+.ts-section-label{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(5,229,175,.55);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.ts-section-label::before{content:'';width:12px;height:1.5px;background:rgba(5,229,175,.4);}
+.ts-cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:340px){.ts-cat-grid{grid-template-columns:1fr;}}
+.ts-cat-card{display:flex;flex-direction:column;gap:3px;padding:14px 12px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);cursor:pointer;transition:all .18s;-webkit-tap-highlight-color:transparent;position:relative;text-align:left;}
+.ts-cat-card:active,.ts-cat-card:hover{background:rgba(5,229,175,.09);border-color:rgba(5,229,175,.35);}
+.ts-cat-icon{font-size:20px;margin-bottom:4px;}
+.ts-cat-label{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--w);line-height:1.2;}
+.ts-cat-count{font-size:10px;color:rgba(255,255,255,.3);}
+.ts-cat-chevron{position:absolute;top:11px;right:11px;font-size:12px;color:rgba(5,229,175,.45);}
+.ts-sub-list{display:flex;flex-direction:column;gap:8px;}
+.ts-sub-card{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);cursor:pointer;transition:all .18s;-webkit-tap-highlight-color:transparent;}
+.ts-sub-card:active,.ts-sub-card:hover{background:rgba(5,229,175,.09);border-color:rgba(5,229,175,.35);}
+.ts-sub-emoji{font-size:18px;flex-shrink:0;}
+.ts-sub-info{flex:1;}
+.ts-sub-label{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--w);}
+.ts-sub-count{font-size:11px;color:rgba(255,255,255,.3);margin-top:1px;}
+.ts-sub-chevron{font-size:14px;color:rgba(5,229,175,.45);}
+.ts-dev-list{display:flex;flex-direction:column;gap:7px;}
+.ts-dev-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);cursor:pointer;transition:all .18s;-webkit-tap-highlight-color:transparent;}
+.ts-dev-item:active,.ts-dev-item:hover{background:rgba(5,229,175,.07);border-color:rgba(5,229,175,.25);}
+.ts-dev-icon{width:22px;height:22px;flex-shrink:0;color:rgba(255,255,255,.5);}
+.ts-dev-label{flex:1;font-size:13px;color:var(--w);line-height:1.3;}
+.ts-dev-chevron{font-size:14px;color:rgba(5,229,175,.4);}
+.ts-issue-list{display:flex;flex-direction:column;gap:8px;}
+.ts-issue-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;}
+.ts-issue-btn{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent;}
+.ts-issue-btn:active{background:rgba(5,229,175,.04);}
+.ts-issue-q{font-size:13px;font-weight:500;color:var(--w);line-height:1.4;flex:1;}
+.ts-issue-arr{font-size:14px;color:var(--g);flex-shrink:0;margin-top:1px;transition:transform .3s;}
+.ts-issue-btn.open .ts-issue-arr{transform:rotate(180deg);}
+.ts-issue-body{max-height:0;overflow:hidden;transition:max-height .38s ease,padding .25s;padding:0 16px;}
+.ts-issue-body.open{max-height:800px;padding:0 16px 16px;}
+.ts-issue-body p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.75;}
+.ts-issue-body p+p{margin-top:8px;}
+.ts-issue-body ol,.ts-issue-body ul{padding-left:16px;margin-top:8px;}
+.ts-issue-body li{font-size:12px;color:rgba(255,255,255,.6);line-height:1.75;margin-bottom:3px;}
+.ts-issue-body strong{color:var(--g);font-weight:500;}
+.ts-placeholder{text-align:center;padding:30px 16px;color:rgba(255,255,255,.25);font-size:13px;font-style:italic;line-height:1.6;}
+.ts-dev-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(5,229,175,.1);}
+.ts-dev-header-icon{width:28px;height:28px;color:var(--g);flex-shrink:0;}
+.ts-dev-header-name{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:var(--w);}
+.stuck-strip{background:rgba(5,229,175,.07);border:1px solid rgba(5,229,175,.18);border-radius:12px;padding:16px;text-align:center;}
 .stuck-title{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;}
 .stuck-sub{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:12px;}
 .stuck-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
 .stuck-btn{padding:9px 16px;border-radius:20px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;cursor:pointer;border:none;-webkit-tap-highlight-color:transparent;}
 .stuck-btn-sms{background:var(--g);color:var(--dk);text-decoration:none;display:inline-block;}
-.stuck-btn-svc{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12) !important;}
+.stuck-btn-svc{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12)!important;}
 
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
@@ -356,6 +459,33 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
   </div>
 </section>
 
+
+<!-- MORE SERVICES -->
+<div class="more-section">
+  <div class="label" style="max-width:860px;margin:0 auto 14px;">More Ways I Can Help</div>
+  <div class="more-grid">
+
+    <button class="more-card solar" onclick="openPopup('popup-solar')">
+      <div class="more-card-icon">☀️</div>
+      <div>
+        <div class="more-card-tag">Vivint Solar</div>
+        <div class="more-card-title">Go Solar &amp; Start Saving</div>
+        <div class="more-card-desc">Lock in your energy rate. Quote in 5 minutes, design in 24 hours.</div>
+      </div>
+    </button>
+
+    <button class="more-card insurance" onclick="openPopup('popup-insurance')">
+      <div class="more-card-icon">🛡️</div>
+      <div>
+        <div class="more-card-tag">Vivint + Goosehead Insurance</div>
+        <div class="more-card-title">Shop Insurance, Smart</div>
+        <div class="more-card-desc">Your Vivint system could qualify for home insurance discounts.</div>
+      </div>
+    </button>
+
+  </div>
+</div>
+
 <footer>
   <div class="footer-brand">Authorized Vivint Pro · Austin TX</div>
   <div class="footer-contact">(801) 376-9296 &nbsp;·&nbsp; Adam.Beebe@vivint.com</div>
@@ -440,51 +570,104 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
       <div style="margin-bottom:14px;">
         <label class="form-label" style="margin-bottom:10px;">What are you interested in? <span style="color:rgba(255,255,255,.3);font-weight:400;text-transform:none;letter-spacing:0;">(select all that apply)</span></label>
         <div class="int-grid" id="quote-ints"><div class="int-card" data-id="doorbell" data-name="Doorbell Camera" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-icon" data-svg="doorbell"></div>
       <div class="int-card-name">Doorbell Camera</div>
     </div>
 <div class="int-card" data-id="outdoor" data-name="Outdoor Cameras" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-icon" data-svg="outdoor"></div>
       <div class="int-card-name">Outdoor Cameras</div>
     </div>
+<div class="int-card" data-id="spotlight" data-name="Spotlight Camera" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="spotlight"></div>
+      <div class="int-card-name">Spotlight Camera</div>
+    </div>
 <div class="int-card" data-id="indoor" data-name="Indoor Camera" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12.167" cy="9.247" r="2.872"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z"/></svg></div>
+      <div class="int-card-icon" data-svg="indoor"></div>
       <div class="int-card-name">Indoor Camera</div>
     </div>
-<div class="int-card" data-id="door" data-name="Door Protection" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z"/></svg></div>
-      <div class="int-card-name">Door Protection</div>
-    </div>
-<div class="int-card" data-id="window" data-name="Window Protection" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z"/></svg></div>
-      <div class="int-card-name">Window Protection</div>
-    </div>
-<div class="int-card" data-id="motion" data-name="Motion Detection" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z"/></svg></div>
-      <div class="int-card-name">Motion Detection</div>
-    </div>
-<div class="int-card" data-id="glass" data-name="Glass Break" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
-      <div class="int-card-name">Glass Break</div>
-    </div>
 <div class="int-card" data-id="lock" data-name="Smart Locks" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="3.25"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-icon" data-svg="lock"></div>
       <div class="int-card-name">Smart Locks</div>
     </div>
 <div class="int-card" data-id="thermo" data-name="Thermostat" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M9 9h3M9 12h3M9 15h6M14 9h1M14 12h1"/></svg></div>
+      <div class="int-card-icon" data-svg="thermo"></div>
       <div class="int-card-name">Thermostat</div>
     </div>
+<div class="int-card" data-id="plug" data-name="Smart Plug" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="plug"></div>
+      <div class="int-card-name">Smart Plug</div>
+    </div>
 <div class="int-card" data-id="garage" data-name="Garage Access" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3L20 7v1H4V7L12 3Z"/><rect x="4" y="8" width="16" height="13" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="15.5" x2="20" y2="15.5"/></svg></div>
+      <div class="int-card-icon" data-svg="garage"></div>
       <div class="int-card-name">Garage Access</div>
     </div>
+<div class="int-card" data-id="door" data-name="Door Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="door"></div>
+      <div class="int-card-name">Door Protection</div>
+    </div>
+<div class="int-card" data-id="window" data-name="Window Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="window"></div>
+      <div class="int-card-name">Window Protection</div>
+    </div>
+<div class="int-card" data-id="glass" data-name="Glass Break" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="glass"></div>
+      <div class="int-card-name">Glass Break</div>
+    </div>
+<div class="int-card" data-id="motion" data-name="Motion Detection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="motion"></div>
+      <div class="int-card-name">Motion Detection</div>
+    </div>
 <div class="int-card" data-id="smoke" data-name="Smoke / CO" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="3.25"/></svg></div>
+      <div class="int-card-icon" data-svg="smoke"></div>
       <div class="int-card-name">Smoke / CO</div>
     </div>
 <div class="int-card" data-id="water" data-name="Water Sensor" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3C12 3 5 10 5 15a7 7 0 0 0 14 0C19 10 12 3 12 3Z"/></svg></div>
+      <div class="int-card-icon" data-svg="water"></div>
+      <div class="int-card-name">Water Sensor</div>
+    </div></div>
+      </div>
+<div class="int-card" data-id="outdoor" data-name="Outdoor Cameras" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="outdoor"></div>
+      <div class="int-card-name">Outdoor Cameras</div>
+    </div>
+<div class="int-card" data-id="indoor" data-name="Indoor Camera" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="indoor"></div>
+      <div class="int-card-name">Indoor Camera</div>
+    </div>
+<div class="int-card" data-id="door" data-name="Door Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="door"></div>
+      <div class="int-card-name">Door Protection</div>
+    </div>
+<div class="int-card" data-id="window" data-name="Window Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="window"></div>
+      <div class="int-card-name">Window Protection</div>
+    </div>
+<div class="int-card" data-id="motion" data-name="Motion Detection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="motion"></div>
+      <div class="int-card-name">Motion Detection</div>
+    </div>
+<div class="int-card" data-id="glass" data-name="Glass Break" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="glass"></div>
+      <div class="int-card-name">Glass Break</div>
+    </div>
+<div class="int-card" data-id="lock" data-name="Smart Locks" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="lock"></div>
+      <div class="int-card-name">Smart Locks</div>
+    </div>
+<div class="int-card" data-id="thermo" data-name="Thermostat" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="thermo"></div>
+      <div class="int-card-name">Thermostat</div>
+    </div>
+<div class="int-card" data-id="garage" data-name="Garage Access" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="garage"></div>
+      <div class="int-card-name">Garage Access</div>
+    </div>
+<div class="int-card" data-id="smoke" data-name="Smoke / CO" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="smoke"></div>
+      <div class="int-card-name">Smoke / CO</div>
+    </div>
+<div class="int-card" data-id="water" data-name="Water Sensor" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="water"></div>
       <div class="int-card-name">Water Sensor</div>
     </div></div>
       </div>
@@ -499,15 +682,7 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
           <div id="q-no-code-msg" class="hint-text" style="display:none;">No worries! A referral code speeds things up, but if you don't have one I can help track down the right referral and make sure everyone who should get credit does.</div>
         </div>
       </div>
-      <div class="field-group">
-    <label class="form-label">Do you have the Vivint Protection Plan?</label>
-    <div class="radio-row">
-      <label class="radio-opt"><input type="radio" name="q-plan" value="yes"> Yes</label>
-      <label class="radio-opt"><input type="radio" name="q-plan" value="no"> No</label>
-      <label class="radio-opt"><input type="radio" name="q-plan" value="notsure" onchange="showPlanHint(this)"> Not Sure</label>
-    </div>
-    <div class="plan-hint" id="q-plan-hint">No worries — I can look that up on my end.</div>
-  </div>
+
       <button class="btn-primary" onclick="submitQuote()">Request Quote →</button>
     </div>
     <div id="quote-success" class="success-screen" style="display:none;">
@@ -637,72 +812,142 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
     <!-- STEP 1 -->
     <div id="svc-s1">
       <label class="form-label" style="margin-bottom:8px;">Which device is having issues?</label>
-      <div class="dev-grid" id="svc-dev-grid"><div class="dev-card" data-id="door" data-name="Door Sensor" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z"/></svg></div>
-      <div class="dev-name">Door Sensor</div>
-    </div>
-<div class="dev-card" data-id="window" data-name="Window Sensor" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z"/></svg></div>
-      <div class="dev-name">Window Sensor</div>
-    </div>
-<div class="dev-card" data-id="glass" data-name="Glass Break" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
-      <div class="dev-name">Glass Break</div>
-    </div>
-<div class="dev-card" data-id="motion" data-name="Motion Detector" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z"/></svg></div>
-      <div class="dev-name">Motion Detector</div>
+      <div class="dev-grid" id="svc-dev-grid"><div class="dev-card" data-id="hub" data-name="Smart Hub" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="hub"></div>
+      <div class="dev-name">Smart Hub</div>
     </div>
 <div class="dev-card" data-id="doorbell" data-name="Doorbell Camera" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z"/></svg></div>
+      <div class="dev-icon" data-svg="doorbell"></div>
       <div class="dev-name">Doorbell Camera</div>
     </div>
 <div class="dev-card" data-id="outdoor" data-name="Outdoor Camera" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z"/></svg></div>
+      <div class="dev-icon" data-svg="outdoor"></div>
       <div class="dev-name">Outdoor Camera</div>
     </div>
 <div class="dev-card" data-id="spotlight" data-name="Spotlight Camera" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M7.34 16.1a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Z"/><circle cx="12" cy="6.36" r="2.55"/><rect x="6.99" y=".95" width="10.02" height="10.2" rx="2"/></svg></div>
+      <div class="dev-icon" data-svg="spotlight"></div>
       <div class="dev-name">Spotlight Camera</div>
     </div>
 <div class="dev-card" data-id="indoor" data-name="Indoor Camera" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><circle cx="12.167" cy="9.247" r="2.872"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z"/></svg></div>
+      <div class="dev-icon" data-svg="indoor"></div>
       <div class="dev-name">Indoor Camera</div>
     </div>
 <div class="dev-card" data-id="lock" data-name="Smart Lock" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="3.25"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="dev-icon" data-svg="lock"></div>
       <div class="dev-name">Smart Lock</div>
     </div>
 <div class="dev-card" data-id="thermo" data-name="Thermostat" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M9 9h3M9 12h3M9 15h6M14 9h1M14 12h1"/></svg></div>
+      <div class="dev-icon" data-svg="thermo"></div>
       <div class="dev-name">Thermostat</div>
     </div>
 <div class="dev-card" data-id="plug" data-name="Smart Plug" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><rect x="2.75" y="4.75" width="18.5" height="14.5" rx="2.25"/><path d="M9 8v3M15 8v3M11 14.25h2"/></svg></div>
+      <div class="dev-icon" data-svg="plug"></div>
       <div class="dev-name">Smart Plug</div>
     </div>
 <div class="dev-card" data-id="garage" data-name="Garage Access" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M12 3L20 7v1H4V7L12 3Z"/><rect x="4" y="8" width="16" height="13" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="15.5" x2="20" y2="15.5"/></svg></div>
+      <div class="dev-icon" data-svg="garage"></div>
       <div class="dev-name">Garage Access</div>
     </div>
+<div class="dev-card" data-id="door" data-name="Door Sensor" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="door"></div>
+      <div class="dev-name">Door Sensor</div>
+    </div>
+<div class="dev-card" data-id="window" data-name="Window Sensor" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="window"></div>
+      <div class="dev-name">Window Sensor</div>
+    </div>
+<div class="dev-card" data-id="glass" data-name="Glass Break" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="glass"></div>
+      <div class="dev-name">Glass Break</div>
+    </div>
+<div class="dev-card" data-id="motion" data-name="Motion Detector" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="motion"></div>
+      <div class="dev-name">Motion Detector</div>
+    </div>
 <div class="dev-card" data-id="smoke" data-name="Smoke / CO" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="3.25"/></svg></div>
+      <div class="dev-icon" data-svg="smoke"></div>
       <div class="dev-name">Smoke / CO</div>
     </div>
 <div class="dev-card" data-id="water" data-name="Water Sensor" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><path d="M12 3C12 3 5 10 5 15a7 7 0 0 0 14 0C19 10 12 3 12 3Z"/></svg></div>
+      <div class="dev-icon" data-svg="water"></div>
       <div class="dev-name">Water Sensor</div>
     </div>
 <div class="dev-card" data-id="panic" data-name="Panic Pendant" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="4.75"/></svg></div>
+      <div class="dev-icon" data-svg="panic"></div>
       <div class="dev-name">Panic Pendant</div>
     </div>
 <div class="dev-card" data-id="keyfob" data-name="Key Fob" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><rect x="5.75" y="4.75" width="12.5" height="14.5" rx="3"/><circle cx="12" cy="10" r="2"/><line x1="12" y1="13" x2="12" y2="16"/></svg></div>
+      <div class="dev-icon" data-svg="keyfob"></div>
       <div class="dev-name">Key Fob</div>
     </div>
 <div class="dev-card" data-id="keypad" data-name="Keypad" onclick="selectSvcDev(this)">
-      <div class="dev-icon"><svg viewBox="0 0 24 24"><rect x="3" y="2" width="18" height="20" rx="2"/><circle cx="9" cy="7" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="15" cy="7" r="1"/><circle cx="9" cy="11" r="1"/><circle cx="12" cy="11" r="1"/><circle cx="15" cy="11" r="1"/><circle cx="9" cy="15" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="12" cy="19" r="1"/></svg></div>
+      <div class="dev-icon" data-svg="keypad"></div>
+      <div class="dev-name">Keypad</div>
+    </div></div>
+      <div class="dev-name">Door Sensor</div>
+    </div>
+<div class="dev-card" data-id="window" data-name="Window Sensor" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="window"></div>
+      <div class="dev-name">Window Sensor</div>
+    </div>
+<div class="dev-card" data-id="glass" data-name="Glass Break" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="glass"></div>
+      <div class="dev-name">Glass Break</div>
+    </div>
+<div class="dev-card" data-id="motion" data-name="Motion Detector" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="motion"></div>
+      <div class="dev-name">Motion Detector</div>
+    </div>
+<div class="dev-card" data-id="doorbell" data-name="Doorbell Camera" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="doorbell"></div>
+      <div class="dev-name">Doorbell Camera</div>
+    </div>
+<div class="dev-card" data-id="outdoor" data-name="Outdoor Camera" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="outdoor"></div>
+      <div class="dev-name">Outdoor Camera</div>
+    </div>
+<div class="dev-card" data-id="spotlight" data-name="Spotlight Camera" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="spotlight"></div>
+      <div class="dev-name">Spotlight Camera</div>
+    </div>
+<div class="dev-card" data-id="indoor" data-name="Indoor Camera" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="indoor"></div>
+      <div class="dev-name">Indoor Camera</div>
+    </div>
+<div class="dev-card" data-id="lock" data-name="Smart Lock" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="lock"></div>
+      <div class="dev-name">Smart Lock</div>
+    </div>
+<div class="dev-card" data-id="thermo" data-name="Thermostat" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="thermo"></div>
+      <div class="dev-name">Thermostat</div>
+    </div>
+<div class="dev-card" data-id="plug" data-name="Smart Plug" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="plug"></div>
+      <div class="dev-name">Smart Plug</div>
+    </div>
+<div class="dev-card" data-id="garage" data-name="Garage Access" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="garage"></div>
+      <div class="dev-name">Garage Access</div>
+    </div>
+<div class="dev-card" data-id="smoke" data-name="Smoke / CO" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="smoke"></div>
+      <div class="dev-name">Smoke / CO</div>
+    </div>
+<div class="dev-card" data-id="water" data-name="Water Sensor" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="water"></div>
+      <div class="dev-name">Water Sensor</div>
+    </div>
+<div class="dev-card" data-id="panic" data-name="Panic Pendant" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="panic"></div>
+      <div class="dev-name">Panic Pendant</div>
+    </div>
+<div class="dev-card" data-id="keyfob" data-name="Key Fob" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="keyfob"></div>
+      <div class="dev-name">Key Fob</div>
+    </div>
+<div class="dev-card" data-id="keypad" data-name="Keypad" onclick="selectSvcDev(this)">
+      <div class="dev-icon" data-svg="keypad"></div>
       <div class="dev-name">Keypad</div>
     </div></div>
       <label class="form-label">Describe the issue</label>
@@ -735,8 +980,8 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
       <div class="field-group">
     <label class="form-label">Do you have the Vivint Protection Plan?</label>
     <div class="radio-row">
-      <label class="radio-opt"><input type="radio" name="svc-plan" value="yes"> Yes</label>
-      <label class="radio-opt"><input type="radio" name="svc-plan" value="no"> No</label>
+      <label class="radio-opt"><input type="radio" name="svc-plan" value="yes" onchange="showPlanHint(this)"> Yes</label>
+      <label class="radio-opt"><input type="radio" name="svc-plan" value="no" onchange="showPlanHint(this)"> No</label>
       <label class="radio-opt"><input type="radio" name="svc-plan" value="notsure" onchange="showPlanHint(this)"> Not Sure</label>
     </div>
     <div class="plan-hint" id="svc-plan-hint">No worries — I can look that up on my end.</div>
@@ -818,17 +1063,30 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
 <!-- ── POPUP: TROUBLESHOOT ── -->
 <div id="popup-ts" class="popup">
   <div class="popup-header">
-    <div class="popup-title">Troubleshooting Guide</div>
+    <div class="popup-title" id="ts-popup-title">Troubleshooting Guide</div>
     <button class="popup-close" onclick="closePopup()">✕</button>
   </div>
-  <div class="popup-body">
-    <p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px;line-height:1.6;">Tap a device to see common issues and fixes.</p>
-    <div class="ts-dev-grid" id="ts-dev-grid"></div>
-    <div id="ts-issues-wrap"></div>
+  <div class="popup-body" id="ts-popup-body">
+    <!-- Breadcrumb — hidden on root view -->
+    <div id="ts-crumb" style="display:none;">
+      <button class="ts-crumb-back" onclick="tsDrillBack()">← Back</button>
+      <div class="ts-crumb-path" id="ts-crumb-text"></div>
+    </div>
+    <!-- All views render into this container -->
+    <div id="ts-content"></div>
+    <!-- Still Stuck strip — shown only on device issue view -->
+    <div class="stuck-strip" id="ts-stuck" style="display:none;margin-top:18px;">
+      <div class="stuck-title">Still stuck?</div>
+      <div class="stuck-sub">Text me directly or schedule a visit — I'll take care of it.</div>
+      <div class="stuck-btns">
+        <a class="stuck-btn stuck-btn-sms" href="sms:+18013769296">Text Adam →</a>
+        <button class="stuck-btn stuck-btn-svc" onclick="switchPopup('popup-ts','popup-service')">Schedule a Service Visit →</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ── POPUP: UPGRADE ── -->
+<!-- ── POPUP: UPGRADE<!-- ── POPUP: UPGRADE ── -->
 <div id="popup-upgrade" class="popup">
   <div class="popup-header">
     <div class="popup-title">Upgrade Your System</div>
@@ -837,52 +1095,64 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
   <div class="popup-body">
     <div id="upg-form">
       <p style="font-size:13px;color:rgba(255,255,255,.55);margin-bottom:14px;line-height:1.6;">Select what you're interested in — I'll reach out with options and pricing.</p>
-      <div class="int-grid" id="upg-ints"><div class="int-card" data-id="doorbell" data-name="Doorbell Camera" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z"/></svg></div>
+      <div class="int-grid" id="upg-ints"><div class="int-card" data-id="hub" data-name="Smart Hub" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="hub"></div>
+      <div class="int-card-name">Smart Hub</div>
+    </div>
+<div class="int-card" data-id="doorbell" data-name="Doorbell Camera" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="doorbell"></div>
       <div class="int-card-name">Doorbell Camera</div>
     </div>
 <div class="int-card" data-id="outdoor" data-name="Outdoor Cameras" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-icon" data-svg="outdoor"></div>
       <div class="int-card-name">Outdoor Cameras</div>
     </div>
+<div class="int-card" data-id="spotlight" data-name="Spotlight Camera" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="spotlight"></div>
+      <div class="int-card-name">Spotlight Camera</div>
+    </div>
 <div class="int-card" data-id="indoor" data-name="Indoor Camera" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12.167" cy="9.247" r="2.872"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z"/></svg></div>
+      <div class="int-card-icon" data-svg="indoor"></div>
       <div class="int-card-name">Indoor Camera</div>
     </div>
-<div class="int-card" data-id="door" data-name="Door Protection" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z"/></svg></div>
-      <div class="int-card-name">Door Protection</div>
-    </div>
-<div class="int-card" data-id="window" data-name="Window Protection" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z"/></svg></div>
-      <div class="int-card-name">Window Protection</div>
-    </div>
-<div class="int-card" data-id="motion" data-name="Motion Detection" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z"/></svg></div>
-      <div class="int-card-name">Motion Detection</div>
-    </div>
-<div class="int-card" data-id="glass" data-name="Glass Break" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
-      <div class="int-card-name">Glass Break</div>
-    </div>
 <div class="int-card" data-id="lock" data-name="Smart Locks" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="3.25"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg></div>
+      <div class="int-card-icon" data-svg="lock"></div>
       <div class="int-card-name">Smart Locks</div>
     </div>
 <div class="int-card" data-id="thermo" data-name="Thermostat" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M9 9h3M9 12h3M9 15h6M14 9h1M14 12h1"/></svg></div>
+      <div class="int-card-icon" data-svg="thermo"></div>
       <div class="int-card-name">Thermostat</div>
     </div>
+<div class="int-card" data-id="plug" data-name="Smart Plug" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="plug"></div>
+      <div class="int-card-name">Smart Plug</div>
+    </div>
 <div class="int-card" data-id="garage" data-name="Garage Access" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3L20 7v1H4V7L12 3Z"/><rect x="4" y="8" width="16" height="13" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="15.5" x2="20" y2="15.5"/></svg></div>
+      <div class="int-card-icon" data-svg="garage"></div>
       <div class="int-card-name">Garage Access</div>
     </div>
+<div class="int-card" data-id="door" data-name="Door Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="door"></div>
+      <div class="int-card-name">Door Protection</div>
+    </div>
+<div class="int-card" data-id="window" data-name="Window Protection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="window"></div>
+      <div class="int-card-name">Window Protection</div>
+    </div>
+<div class="int-card" data-id="glass" data-name="Glass Break" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="glass"></div>
+      <div class="int-card-name">Glass Break</div>
+    </div>
+<div class="int-card" data-id="motion" data-name="Motion Detection" onclick="toggleInt(this)">
+      <div class="int-card-icon" data-svg="motion"></div>
+      <div class="int-card-name">Motion Detection</div>
+    </div>
 <div class="int-card" data-id="smoke" data-name="Smoke / CO" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="3.25"/></svg></div>
+      <div class="int-card-icon" data-svg="smoke"></div>
       <div class="int-card-name">Smoke / CO</div>
     </div>
 <div class="int-card" data-id="water" data-name="Water Sensor" onclick="toggleInt(this)">
-      <div class="int-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3C12 3 5 10 5 15a7 7 0 0 0 14 0C19 10 12 3 12 3Z"/></svg></div>
+      <div class="int-card-icon" data-svg="water"></div>
       <div class="int-card-name">Water Sensor</div>
     </div></div>
       <div class="form-row" style="margin-bottom:0;">
@@ -949,8 +1219,8 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
       <div class="field-group">
     <label class="form-label">Do you have the Vivint Protection Plan?</label>
     <div class="radio-row">
-      <label class="radio-opt"><input type="radio" name="upg-plan" value="yes"> Yes</label>
-      <label class="radio-opt"><input type="radio" name="upg-plan" value="no"> No</label>
+      <label class="radio-opt"><input type="radio" name="upg-plan" value="yes" onchange="showPlanHint(this)"> Yes</label>
+      <label class="radio-opt"><input type="radio" name="upg-plan" value="no" onchange="showPlanHint(this)"> No</label>
       <label class="radio-opt"><input type="radio" name="upg-plan" value="notsure" onchange="showPlanHint(this)"> Not Sure</label>
     </div>
     <div class="plan-hint" id="upg-plan-hint">No worries — I can look that up on my end.</div>
@@ -966,29 +1236,35 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
 </div>
 
 <script>
+var tsNav = { view:'cats', cat:null, sub:null, dev:null };
 // ── CONSTANTS ─────────────────────────────────────────────────
 const W3KEY = 'c410be27-9cf8-48c5-9ec1-72c4652ad3ba';
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYWRhbWJlZWJlIiwiYSI6ImNtcm1ncWZzZDMyOWkyem9kZGxqbzI3aDYifQ.TzSOQU3Vfy8Zl-8KjohMLw';
 
 // ── SVG + DEVICE DATA ─────────────────────────────────────────
+// ── SVG REGISTRY ─────────────────────────────────────────────
+// Single source of truth. To add a device: add entry here only.
+// renderIcons() picks them up automatically everywhere.
+// ─────────────────────────────────────────────────────────────
 const SVGS = {
-  door:`<svg viewBox="0 0 24 24"><path d="M15 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM7 2.75A1.25 1.25 0 0 0 5.75 4v17.25h12.5V4A1.25 1.25 0 0 0 17 2.75H7Z"/></svg>`,
-  window:`<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M17 1.25A2.75 2.75 0 0 1 19.75 4v17.25H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h1.25V4A2.75 2.75 0 0 1 7 1.25h10ZM5.75 21.25h5.5v-8.5h-5.5v8.5Zm7 0h5.5v-8.5h-5.5v8.5ZM7 2.75A1.25 1.25 0 0 0 5.75 4v6.5h5.5V2.75H7Zm5.75 7.5h5.5V4A1.25 1.25 0 0 0 17 2.75h-4.25v7.5Z"/></svg>`,
-  glass:`<svg viewBox="0 0 24 24"><path d="M12 11.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V12a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg>`,
-  motion:`<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 5.25c1.737 0 3.085-.001 4.106.08 1.001.08 1.838.245 2.454.685.67.478.947 1.178 1.072 1.979.12.774.118 1.781.118 3.006s.002 2.232-.118 3.006c-.125.801-.402 1.501-1.072 1.979-.616.44-1.453.605-2.454.685-1.021.08-2.37.08-4.106.08s-3.085 0-4.106-.08c-1.001-.08-1.838-.245-2.454-.685-.67-.478-.948-1.178-1.072-1.979-.12-.774-.118-1.781-.118-3.006s-.002-2.232.118-3.006c.124-.801.402-1.501 1.072-1.979.616-.44 1.453-.605 2.454-.685C8.915 5.249 10.263 5.25 12 5.25Z"/><path fill-rule="evenodd" d="M12 1.25c2.482 0 4.407-.001 5.864.161 1.452.161 2.605.498 3.416 1.309.811.811 1.148 1.964 1.309 3.416.162 1.457.161 3.382.161 5.864s.001 4.407-.161 5.864c-.161 1.452-.498 2.605-1.309 3.416-.811.811-1.964 1.148-3.416 1.309C16.407 22.751 14.482 22.75 12 22.75s-4.407.001-5.864-.161c-1.452-.161-2.605-.498-3.416-1.309-.811-.811-1.148-1.964-1.309-3.416C1.249 16.407 1.25 14.482 1.25 12s-.001-4.407.161-5.864c.161-1.452.498-2.605 1.309-3.416.811-.811 1.964-1.148 3.416-1.309C7.593 1.249 9.518 1.25 12 1.25Z"/></svg>`,
-  doorbell:`<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 14.25A2.75 2.75 0 1 1 12 19.75 2.75 2.75 0 0 1 12 14.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.214 0 2.251-.005 3.054.174.42.093.816.244 1.165.495.354.255.624.589.828.996.388.776.547 1.853.625 3.262.08 1.432.078 3.332.078 5.823s.002 3.891-.078 5.323c-.078 1.409-.237 2.486-.625 3.262-.204.407-.474.74-.828.996a3.14 3.14 0 0 1-1.165.495C14.251 22.755 13.214 22.75 12 22.75s-2.251.005-3.054-.174a3.14 3.14 0 0 1-1.165-.495 3.085 3.085 0 0 1-.828-.996c-.388-.776-.547-1.853-.625-3.262C6.248 16.391 6.25 14.491 6.25 12s-.002-4.391.078-5.823c.078-1.409.237-2.486.625-3.262.204-.407.474-.74.828-.996A3.14 3.14 0 0 1 8.946 1.424C9.749 1.245 10.786 1.25 12 1.25Z"/></svg>`,
-  outdoor:`<svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 7.25A2.75 2.75 0 1 1 12 12.75 2.75 2.75 0 0 1 12 7.25Zm0 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z"/><path fill-rule="evenodd" d="M12 1.25c1.982 0 3.532-.001 4.708.13 1.171.13 2.136.404 2.822 1.09.686.686.96 1.651 1.09 2.822.131 1.176.13 2.726.13 4.708s.001 3.532-.13 4.708c-.13 1.171-.404 2.136-1.09 2.822a3.395 3.395 0 0 1-.751.561c0 .934.001 1.727-.103 2.346-.112.675-.368 1.281-.98 1.689-.55.366-1.286.498-2.142.562-.878.065-2.036.062-3.554.062s-2.676.003-3.554-.062c-.856-.064-1.592-.196-2.143-.562-.611-.408-.867-1.014-.98-1.689-.103-.619-.103-1.412-.102-2.346a3.4 3.4 0 0 1-.751-.561c-.686-.686-.96-1.651-1.09-2.822C3.249 13.532 3.25 11.982 3.25 10s-.001-3.532.13-4.708c.13-1.171.404-2.136 1.09-2.822.686-.686 1.651-.96 2.822-1.09C8.468 1.249 10.018 1.25 12 1.25Z"/></svg>`,
-  spotlight:`<svg viewBox="0 0 24 24"><path d="M7.34 16.1a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Zm4.66 0a.75.75 0 0 1 .75.75v1.72a.75.75 0 0 1-1.5 0v-1.72a.75.75 0 0 1 .75-.75Z"/><circle cx="12" cy="6.36" r="2.55"/><rect x="6.99" y=".95" width="10.02" height="10.2" rx="2"/></svg>`,
-  indoor:`<svg viewBox="0 0 24 24"><circle cx="12.167" cy="9.247" r="2.872"/><path fill-rule="evenodd" d="M12 1.762c1.653 0 2.956-.001 3.947.109.986.11 1.829.343 2.433.946.603.604.836 1.447.946 2.433.11.991.104 2.294.104 3.947s.006 2.956-.104 3.947c-.11.986-.343 1.829-.946 2.433-.572.572-1.36.808-2.28.925-.001 1.097-.005 1.977-.049 2.669-.038.593-.105 1.123-.258 1.566h1.68a.75.75 0 0 1 0 1.5H6.858a.75.75 0 0 1 0-1.5H8.54c-.153-.443-.22-.973-.258-1.566-.044-.692-.048-1.572-.049-2.669-.92-.117-1.708-.353-2.28-.925-.603-.604-.836-1.447-.946-2.433-.11-.991-.104-2.294-.104-3.947s-.006-2.956.104-3.947c.11-.986.343-1.829.946-2.433.604-.603 1.447-.836 2.433-.946.991-.11 2.294-.109 3.947-.109Z"/></svg>`,
-  lock:`<svg viewBox="0 0 24 24"><circle cx="12" cy="15" r="3.25"/><path d="M10 7.25a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8A.75.75 0 0 1 10 7.25Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Zm2 0a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-1.5 0V8a.75.75 0 0 1 .75-.75Z"/><path fill-rule="evenodd" d="M12 1.25c1.724 0 3.107-.003 4.164.165 1.087.173 1.974.547 2.575 1.405.562.803.789 1.919.899 3.34.111 1.443.111 3.332.111 5.84s.001 4.398-.111 5.84c-.11 1.421-.337 2.537-.899 3.34-.601.858-1.488 1.232-2.575 1.405-1.057.168-2.44.165-4.164.165s-3.107.003-4.164-.165c-1.087-.173-1.974-.547-2.575-1.405-.562-.803-.789-1.919-.899-3.34-.111-1.442-.11-3.332-.11-5.84s-.001-4.397.11-5.84c.11-1.421.337-2.537.899-3.34.601-.858 1.488-1.232 2.575-1.405C8.893 1.247 10.276 1.25 12 1.25Z"/></svg>`,
-  thermo:`<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M9 9h3M9 12h3M9 15h6M14 9h1M14 12h1"/></svg>`,
-  plug:`<svg viewBox="0 0 24 24"><rect x="2.75" y="4.75" width="18.5" height="14.5" rx="2.25"/><path d="M9 8v3M15 8v3M11 14.25h2"/></svg>`,
-  garage:`<svg viewBox="0 0 24 24"><path d="M12 3L20 7v1H4V7L12 3Z"/><rect x="4" y="8" width="16" height="13" rx="1"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="15.5" x2="20" y2="15.5"/></svg>`,
-  smoke:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="3.25"/></svg>`,
-  water:`<svg viewBox="0 0 24 24"><path d="M12 3C12 3 5 10 5 15a7 7 0 0 0 14 0C19 10 12 3 12 3Z"/></svg>`,
-  panic:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25"/><circle cx="12" cy="12" r="4.75"/></svg>`,
-  keyfob:`<svg viewBox="0 0 24 24"><rect x="5.75" y="4.75" width="12.5" height="14.5" rx="3"/><circle cx="12" cy="10" r="2"/><line x1="12" y1="13" x2="12" y2="16"/></svg>`,
-  keypad:`<svg viewBox="0 0 24 24"><rect x="3" y="2" width="18" height="20" rx="2"/><circle cx="9" cy="7" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="15" cy="7" r="1"/><circle cx="9" cy="11" r="1"/><circle cx="12" cy="11" r="1"/><circle cx="15" cy="11" r="1"/><circle cx="9" cy="15" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="12" cy="19" r="1"/></svg>`
+  hub:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M13.2128 8.46973C13.5058 8.17699 13.9806 8.17689 14.2734 8.46973C14.5661 8.76258 14.5661 9.23742 14.2734 9.53027L12.4443 11.3594C12.1514 11.6518 11.6765 11.652 11.3837 11.3594L10.4697 10.4443C10.1769 10.1514 10.1768 9.67664 10.4697 9.38379C10.7625 9.09105 11.2374 9.09105 11.5302 9.38379L11.914 9.76758L13.2128 8.46973Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.25C14.4889 3.25 16.3938 3.24989 17.831 3.3457C19.2453 3.43999 20.3437 3.63139 21.1357 4.10645C22.0028 4.62671 22.3998 5.41616 22.581 6.39453C22.7528 7.32232 22.75 8.53007 22.75 10C22.75 10.2958 22.7492 10.581 22.748 10.8555C22.7492 11.2204 22.75 11.6018 22.75 12C22.75 13.9772 22.752 15.5397 22.5869 16.7285C22.4198 17.9312 22.0631 18.9104 21.2187 19.5859C20.4099 20.233 19.278 20.4949 17.8476 20.6221C16.4002 20.7507 14.4852 20.75 12 20.75C9.51467 20.75 7.59973 20.7507 6.1523 20.6221C4.72194 20.4949 3.59006 20.233 2.78121 19.5859C1.93681 18.9104 1.58013 17.9312 1.41304 16.7285C1.24794 15.5397 1.24996 13.9772 1.24996 12C1.24996 11.6018 1.24972 11.2204 1.25093 10.8555C1.24972 10.581 1.24996 10.2958 1.24996 10C1.24996 8.53007 1.24709 7.32232 1.4189 6.39453C1.60011 5.41617 1.99712 4.62671 2.86422 4.10645C3.65617 3.63139 4.75461 3.43999 6.1689 3.3457C7.60612 3.24989 9.51106 3.25 12 3.25ZM21.1357 15.8936C20.3437 16.3686 19.2453 16.56 17.831 16.6543C16.3938 16.7501 14.4889 16.75 12 16.75C9.51106 16.75 7.60612 16.7501 6.1689 16.6543C4.75461 16.56 3.65617 16.3686 2.86422 15.8936C2.85288 15.8868 2.84219 15.879 2.83101 15.8721C2.84953 16.1032 2.87128 16.3192 2.89937 16.5215C3.04481 17.5686 3.31319 18.0896 3.71871 18.4141C4.15985 18.767 4.903 19.0051 6.28511 19.1279C7.65018 19.2493 9.48526 19.25 12 19.25C14.5147 19.25 16.3497 19.2493 17.7148 19.1279C19.0969 19.0051 19.8401 18.767 20.2812 18.4141C20.6867 18.0896 20.9551 17.5686 21.1005 16.5215C21.1286 16.3192 21.1494 16.1031 21.1679 15.8721C21.157 15.8788 21.1468 15.8869 21.1357 15.8936ZM12 4.75C9.48526 4.75 7.65018 4.75073 6.28511 4.87207C4.903 4.99493 4.15985 5.23303 3.71871 5.58594C3.31319 5.91036 3.04481 6.4314 2.89937 7.47852C2.78142 8.32796 2.75714 9.41863 2.75191 10.8574C2.75712 11.9338 2.78086 12.7236 2.89351 13.332C3.02478 14.0409 3.25304 14.3767 3.6357 14.6064C4.09372 14.8813 4.87054 15.065 6.26851 15.1582C7.64379 15.2499 9.48891 15.25 12 15.25C14.511 15.25 16.3561 15.2499 17.7314 15.1582C19.1294 15.065 19.9062 14.8813 20.3642 14.6064C20.7469 14.3767 20.9751 14.0409 21.1064 13.332C21.2119 12.7623 21.2396 12.0336 21.247 11.0596V10.5898C21.2395 9.28228 21.2111 8.27449 21.1005 7.47852C20.9551 6.43139 20.6867 5.91036 20.2812 5.58594C19.8401 5.23303 19.0969 4.99492 17.7148 4.87207C16.3497 4.75073 14.5147 4.75 12 4.75Z" fill="black"/> </svg>`,
+  door:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M15 11.25C15.4142 11.25 15.75 11.5858 15.75 12V12.0098C15.75 12.424 15.4142 12.7598 15 12.7598C14.5858 12.7598 14.25 12.424 14.25 12.0098V12C14.25 11.5858 14.5858 11.25 15 11.25Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M17 1.25C18.5188 1.25 19.75 2.48122 19.75 4V21.25H21C21.4142 21.25 21.75 21.5858 21.75 22C21.75 22.4142 21.4142 22.75 21 22.75H3C2.58579 22.75 2.25 22.4142 2.25 22C2.25 21.5858 2.58579 21.25 3 21.25H4.25V4C4.25 2.48122 5.48122 1.25 7 1.25H17ZM7 2.75C6.30964 2.75 5.75 3.30964 5.75 4V21.25H18.25V4C18.25 3.30964 17.6904 2.75 17 2.75H7Z" fill="black"/> </svg>`,
+  window:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M17 1.25C18.5188 1.25 19.75 2.48122 19.75 4V21.25H21C21.4142 21.25 21.75 21.5858 21.75 22C21.75 22.4142 21.4142 22.75 21 22.75H3C2.58579 22.75 2.25 22.4142 2.25 22C2.25 21.5858 2.58579 21.25 3 21.25H4.25V4C4.25 2.48122 5.48122 1.25 7 1.25H17ZM5.75 21.25H11.2959C11.268 21.1715 11.25 21.088 11.25 21V12.75H5.75V21.25ZM12.75 21C12.75 21.088 12.732 21.1715 12.7041 21.25H18.25V12.75H12.75V21ZM7 2.75C6.30964 2.75 5.75 3.30964 5.75 4V11.25H11.25V2.75H7ZM12.75 11.25H18.25V4C18.25 3.30964 17.6904 2.75 17 2.75H12.75V11.25Z" fill="black"/> </svg>`,
+  glass:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M12 11.25C12.4142 11.25 12.75 11.5858 12.75 12V12.0098C12.75 12.424 12.4142 12.7598 12 12.7598C11.5858 12.7598 11.25 12.424 11.25 12.0098V12C11.25 11.5858 11.5858 11.25 12 11.25Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C13.7238 1.25 15.1072 1.24735 16.1641 1.41504C17.2507 1.58753 18.1382 1.9616 18.7393 2.82032C19.3009 3.62285 19.5281 4.73888 19.6387 6.16016C19.7509 7.6025 19.75 9.51289 19.75 12C19.75 14.4871 19.7509 16.3975 19.6387 17.8398C19.5281 19.2611 19.3009 20.3771 18.7393 21.1797C18.1382 22.0384 17.2507 22.4125 16.1641 22.585C15.1072 22.7527 13.7238 22.75 12 22.75C10.2762 22.75 8.8928 22.7527 7.83594 22.585C6.74927 22.4125 5.86184 22.0384 5.26074 21.1797C4.69906 20.3771 4.4719 19.2611 4.36133 17.8398C4.24915 16.3975 4.25 14.4871 4.25 12C4.25 9.51289 4.24915 7.6025 4.36133 6.16016C4.4719 4.73888 4.69906 3.62285 5.26074 2.82032C5.86184 1.9616 6.74927 1.58753 7.83594 1.41504C8.8928 1.24735 10.2762 1.25 12 1.25ZM12 2.75C10.2241 2.75 8.98214 2.75273 8.07031 2.89746C7.18869 3.03747 6.76312 3.28859 6.48926 3.67969C6.1761 4.12706 5.9656 4.88644 5.85742 6.27735C5.75089 7.64746 5.75 9.48737 5.75 12C5.75 14.5126 5.75089 16.3525 5.85742 17.7227C5.9656 19.1136 6.1761 19.8729 6.48926 20.3203C6.76312 20.7114 7.18869 20.9625 8.07031 21.1025C8.98214 21.2473 10.2241 21.25 12 21.25C13.7759 21.25 15.0179 21.2473 15.9297 21.1025C16.8113 20.9625 17.2369 20.7114 17.5107 20.3203C17.8239 19.8729 18.0344 19.1136 18.1426 17.7227C18.2491 16.3525 18.25 14.5126 18.25 12C18.25 9.48737 18.2491 7.64746 18.1426 6.27735C18.0344 4.88644 17.8239 4.12706 17.5107 3.67969C17.2369 3.28859 16.8113 3.03747 15.9297 2.89746C15.0179 2.75273 13.7759 2.75 12 2.75Z" fill="black"/> </svg>`,
+  motion:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 5.25C13.7369 5.25 15.0853 5.24903 16.1064 5.33008C17.1071 5.40951 17.9443 5.57463 18.5605 6.01465C19.23 6.49282 19.5072 7.19265 19.6318 7.99414C19.7523 8.76841 19.75 9.77547 19.75 11C19.75 12.2245 19.7523 13.2316 19.6318 14.0059C19.5072 14.8073 19.23 15.5072 18.5605 15.9854C17.9443 16.4254 17.1071 16.5905 16.1064 16.6699C15.0853 16.751 13.7369 16.75 12 16.75C10.2631 16.75 8.91475 16.751 7.89355 16.6699C6.89292 16.5905 6.05566 16.4254 5.43945 15.9854C4.77002 15.5072 4.49284 14.8073 4.36816 14.0059C4.24773 13.2316 4.25 12.2245 4.25 11C4.25 9.77547 4.24773 8.76841 4.36816 7.99414C4.49284 7.19265 4.77002 6.49282 5.43945 6.01465C6.05566 5.57463 6.89292 5.40951 7.89355 5.33008C8.91475 5.24903 10.2631 5.25 12 5.25ZM12 6.75C10.237 6.75 8.96023 6.75098 8.0127 6.82617C7.04482 6.90299 6.56927 7.05055 6.31055 7.23535C6.10512 7.38219 5.94462 7.62017 5.85059 8.22461C5.75228 8.85658 5.75 9.72456 5.75 11C5.75 12.2754 5.75228 13.1434 5.85059 13.7754C5.94462 14.3798 6.10512 14.6178 6.31055 14.7646C6.56927 14.9495 7.04482 15.097 8.0127 15.1738C8.96023 15.249 10.237 15.25 12 15.25C13.763 15.25 15.0398 15.249 15.9873 15.1738C16.9552 15.097 17.4307 14.9495 17.6895 14.7646C17.8949 14.6178 18.0554 14.3798 18.1494 13.7754C18.2477 13.1434 18.25 12.2754 18.25 11C18.25 9.72456 18.2477 8.85659 18.1494 8.22461C18.0554 7.62017 17.8949 7.38219 17.6895 7.23535C17.4307 7.05055 16.9552 6.90299 15.9873 6.82617C15.0398 6.75098 13.763 6.75 12 6.75Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C14.4817 1.25 16.4067 1.24918 17.8643 1.41113C19.3162 1.57248 20.4694 1.9089 21.2803 2.71973C22.0911 3.53056 22.4275 4.68382 22.5889 6.13574C22.7508 7.59329 22.75 9.51832 22.75 12C22.75 14.4817 22.7508 16.4067 22.5889 17.8643C22.4275 19.3162 22.0911 20.4694 21.2803 21.2803C20.4694 22.0911 19.3162 22.4275 17.8643 22.5889C16.4067 22.7508 14.4817 22.75 12 22.75C9.51832 22.75 7.59329 22.7508 6.13574 22.5889C4.68382 22.4275 3.53056 22.0911 2.71973 21.2803C1.9089 20.4694 1.57248 19.3162 1.41113 17.8643C1.24918 16.4067 1.25 14.4817 1.25 12C1.25 9.51832 1.24918 7.59329 1.41113 6.13574C1.57248 4.68382 1.9089 3.53056 2.71973 2.71973C3.53056 1.9089 4.68382 1.57248 6.13574 1.41113C7.59329 1.24918 9.51832 1.25 12 1.25ZM12 2.75C9.48181 2.75 7.65669 2.75084 6.30176 2.90137C4.94128 3.05253 4.2194 3.34114 3.78027 3.78027C3.34114 4.2194 3.05253 4.94128 2.90137 6.30176C2.75084 7.65669 2.75 9.48181 2.75 12C2.75 14.5182 2.75084 16.3433 2.90137 17.6982C3.05253 19.0587 3.34114 19.7806 3.78027 20.2197C4.2194 20.6589 4.94128 20.9475 6.30176 21.0986C7.65669 21.2492 9.48181 21.25 12 21.25C14.5182 21.25 16.3433 21.2492 17.6982 21.0986C19.0587 20.9475 19.7806 20.6589 20.2197 20.2197C20.6589 19.7806 20.9475 19.0587 21.0986 17.6982C21.2492 16.3433 21.25 14.5182 21.25 12C21.25 9.48181 21.2492 7.65669 21.0986 6.30176C20.9475 4.94128 20.6589 4.2194 20.2197 3.78027C19.7806 3.34114 19.0587 3.05253 17.6982 2.90137C16.3433 2.75084 14.5182 2.75 12 2.75Z" fill="black"/> </svg>`,
+  doorbell:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 14.25C13.5188 14.25 14.75 15.4812 14.75 17C14.75 18.5188 13.5188 19.75 12 19.75C10.4812 19.75 9.25 18.5188 9.25 17C9.25001 15.4812 10.4812 14.25 12 14.25ZM12 15.75C11.3096 15.75 10.75 16.3097 10.75 17C10.75 17.6904 11.3096 18.25 12 18.25C12.6904 18.25 13.25 17.6904 13.25 17C13.25 16.3097 12.6904 15.75 12 15.75Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25001C13.2143 1.25001 14.2509 1.24544 15.0537 1.42384C15.4729 1.51703 15.8685 1.6675 16.2178 1.91896C16.572 2.1741 16.8423 2.50785 17.0459 2.91505C17.4339 3.69123 17.5926 4.76804 17.6709 6.17677C17.7505 7.60886 17.75 9.50924 17.75 12C17.75 14.4908 17.7505 16.3912 17.6709 17.8233C17.5926 19.232 17.4339 20.3088 17.0459 21.085C16.8423 21.4922 16.572 21.8259 16.2178 22.0811C15.8685 22.3325 15.4729 22.483 15.0537 22.5762C14.2509 22.7546 13.2143 22.75 12 22.75C10.7857 22.75 9.74908 22.7546 8.94629 22.5762C8.52707 22.483 8.13148 22.3325 7.78223 22.0811C7.42797 21.8259 7.1577 21.4922 6.9541 21.085C6.56614 20.3088 6.40738 19.232 6.3291 17.8233C6.24954 16.3912 6.25 14.4908 6.25 12C6.25 9.50924 6.24954 7.60886 6.3291 6.17677C6.40738 4.76804 6.56614 3.69123 6.9541 2.91505C7.1577 2.50785 7.42797 2.1741 7.78223 1.91896C8.13148 1.6675 8.52708 1.51703 8.94629 1.42384C9.74908 1.24544 10.7857 1.25001 12 1.25001ZM12 2.75001C10.7145 2.75001 9.87589 2.75465 9.27246 2.88868C8.98886 2.9517 8.7981 3.03581 8.65918 3.13575C8.52538 3.23209 8.40469 3.36751 8.2959 3.58497C8.05904 4.05869 7.90511 4.85741 7.82715 6.26075C7.75048 7.64112 7.75 9.49102 7.75 12C7.75 14.509 7.75048 16.3589 7.82715 17.7393C7.90511 19.1426 8.05904 19.9413 8.2959 20.4151C8.40469 20.6325 8.52538 20.7679 8.65918 20.8643C8.7981 20.9642 8.98886 21.0483 9.27246 21.1113C9.87589 21.2454 10.7145 21.25 12 21.25C13.2855 21.25 14.1241 21.2454 14.7275 21.1113C15.0111 21.0483 15.2019 20.9642 15.3408 20.8643C15.4746 20.7679 15.5953 20.6325 15.7041 20.4151C15.941 19.9413 16.0949 19.1426 16.1729 17.7393C16.2495 16.3589 16.25 14.509 16.25 12C16.25 9.49102 16.2495 7.64112 16.1729 6.26075C16.0949 4.85741 15.941 4.05869 15.7041 3.58497C15.5953 3.36751 15.4746 3.23209 15.3408 3.13575C15.2019 3.03581 15.0111 2.9517 14.7275 2.88868C14.1241 2.75465 13.2855 2.75001 12 2.75001Z" fill="black"/> </svg>`,
+  outdoor:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7.25C13.5188 7.25 14.75 8.48122 14.75 10C14.75 11.5188 13.5188 12.75 12 12.75C10.4812 12.75 9.25 11.5188 9.25 10C9.25 8.48122 10.4812 7.25 12 7.25ZM12 8.75C11.3096 8.75 10.75 9.30964 10.75 10C10.75 10.6904 11.3096 11.25 12 11.25C12.6904 11.25 13.25 10.6904 13.25 10C13.25 9.30964 12.6904 8.75 12 8.75Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.001 3.7207C13.3646 3.7207 14.4515 3.71944 15.2803 3.81152C16.1035 3.90304 16.8378 4.10047 17.3691 4.63184C17.9004 5.16329 18.098 5.89745 18.1895 6.7207C18.2815 7.54962 18.2803 8.63688 18.2803 10.001C18.2803 11.3648 18.2815 12.4515 18.1895 13.2803C18.098 14.1035 17.9004 14.8377 17.3691 15.3691C16.8378 15.9005 16.1035 16.0979 15.2803 16.1895C14.4515 16.2815 13.3646 16.2803 12.001 16.2803C10.6371 16.2803 9.54957 16.2815 8.7207 16.1895C7.89745 16.098 7.16329 15.9004 6.63184 15.3691C6.10037 14.8377 5.90302 14.1036 5.81152 13.2803C5.71943 12.4514 5.7207 11.3649 5.7207 10.001C5.7207 8.63686 5.71942 7.54963 5.81152 6.7207C5.90302 5.89734 6.10037 5.1633 6.63184 4.63184C7.16329 4.10055 7.89745 3.903 8.7207 3.81152C9.54957 3.71948 10.6371 3.7207 12.001 3.7207ZM12.001 5.2207C10.6007 5.2207 9.61297 5.22212 8.88672 5.30273C8.15524 5.38401 7.85219 5.53273 7.69238 5.69238C7.53265 5.85212 7.38405 6.1549 7.30273 6.88672C7.22206 7.61302 7.2207 8.60039 7.2207 10.001C7.2207 11.4013 7.22207 12.388 7.30273 13.1143C7.38405 13.8461 7.53265 14.1489 7.69238 14.3086C7.85219 14.4682 8.15524 14.617 8.88672 14.6982C9.61297 14.7789 10.6007 14.7803 12.001 14.7803C13.401 14.7803 14.3881 14.7789 15.1143 14.6982C15.8458 14.6169 16.1489 14.4683 16.3086 14.3086C16.4682 14.1488 16.617 13.8457 16.6982 13.1143C16.7789 12.388 16.7803 11.4013 16.7803 10.001C16.7803 8.60042 16.7789 7.61301 16.6982 6.88672C16.617 6.15524 16.4682 5.85219 16.3086 5.69238C16.1489 5.53268 15.8458 5.38406 15.1143 5.30273C14.3881 5.22208 13.401 5.2207 12.001 5.2207Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C13.9817 1.25 15.5317 1.24918 16.708 1.37988C17.8787 1.50998 18.8444 1.7839 19.5303 2.46973C20.2161 3.15555 20.49 4.12132 20.6201 5.29199C20.7508 6.46829 20.75 8.01832 20.75 10C20.75 11.9817 20.7508 13.5317 20.6201 14.708C20.49 15.8787 20.2161 16.8444 19.5303 17.5303C19.3006 17.7599 19.0386 17.9415 18.749 18.0889C18.7491 19.0229 18.7496 19.8166 18.6465 20.4355C18.534 21.1102 18.2784 21.7158 17.666 22.124C17.1165 22.4904 16.3808 22.6221 15.5244 22.6855C14.6463 22.7506 13.4877 22.75 12 22.75C10.5123 22.75 9.35372 22.7506 8.47559 22.6855C7.61916 22.6221 6.88354 22.4904 6.33398 22.124C5.72158 21.7158 5.46595 21.1102 5.35352 20.4355C5.2504 19.8166 5.24993 19.0229 5.25 18.0889C4.9607 17.9416 4.69917 17.7597 4.46973 17.5303C3.7839 16.8444 3.50998 15.8787 3.37988 14.708C3.24918 13.5317 3.25 11.9817 3.25 10C3.25 8.01832 3.24918 6.46829 3.37988 5.29199C3.50998 4.12132 3.7839 3.15555 4.46973 2.46973C5.15555 1.7839 6.12132 1.50998 7.29199 1.37988C8.46829 1.24918 10.0183 1.25 12 1.25ZM17.248 18.5439C17.0732 18.5728 16.8934 18.5995 16.708 18.6201C15.5317 18.7508 13.9817 18.75 12 18.75C10.0183 18.75 8.46829 18.7508 7.29199 18.6201C7.10627 18.5995 6.92609 18.5729 6.75098 18.5439C6.75403 19.275 6.76817 19.7946 6.83398 20.1895C6.90905 20.6396 7.02845 20.7843 7.16602 20.876C7.36641 21.0096 7.75594 21.1279 8.58691 21.1895C9.39625 21.2494 10.4879 21.25 12 21.25C13.5121 21.25 14.6037 21.2494 15.4131 21.1895C16.2441 21.1279 16.6336 21.0096 16.834 20.876C16.9715 20.7843 17.0909 20.6396 17.166 20.1895C17.2318 19.7946 17.245 19.275 17.248 18.5439ZM12 2.75C9.98181 2.75 8.53169 2.75084 7.45801 2.87012C6.37878 2.99003 5.8444 3.21614 5.53027 3.53027C5.21614 3.8444 4.99003 4.37878 4.87012 5.45801C4.75084 6.53169 4.75 7.98181 4.75 10C4.75 12.0182 4.75084 13.4683 4.87012 14.542C4.99003 15.6212 5.21614 16.1556 5.53027 16.4697C5.8444 16.7839 6.37878 17.01 7.45801 17.1299C8.53169 17.2492 9.98181 17.25 12 17.25C14.0182 17.25 15.4683 17.2492 16.542 17.1299C17.6212 17.01 18.1556 16.7839 18.4697 16.4697C18.7839 16.1556 19.01 15.6212 19.1299 14.542C19.2492 13.4683 19.25 12.0182 19.25 10C19.25 7.98181 19.2492 6.53169 19.1299 5.45801C19.01 4.37878 18.7839 3.8444 18.4697 3.53027C18.1556 3.21614 17.6212 2.99003 16.542 2.87012C15.4683 2.75084 14.0182 2.75 12 2.75Z" fill="black"/> </svg>`,
+  spotlight:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M7.33982 16.0996C7.75403 16.0996 8.08982 16.4354 8.08982 16.8496V18.5684C8.08982 18.9826 7.75403 19.3184 7.33982 19.3184C6.92562 19.3183 6.58982 18.9826 6.58982 18.5684V16.8496C6.58982 16.4354 6.92562 16.0996 7.33982 16.0996Z" fill="black"/> <path d="M12 16.0996C12.4142 16.0996 12.75 16.4354 12.75 16.8496V18.5684C12.75 18.9826 12.4142 19.3184 12 19.3184C11.5858 19.3183 11.25 18.9826 11.25 18.5684V16.8496C11.25 16.4354 11.5858 16.0996 12 16.0996Z" fill="black"/> <path d="M16.6611 16.0996C17.0753 16.0996 17.4111 16.4354 17.4111 16.8496V18.5684C17.4111 18.9826 17.0753 19.3184 16.6611 19.3184C16.2469 19.3183 15.9111 18.9826 15.9111 18.5684V16.8496C15.9111 16.4354 16.2469 16.0996 16.6611 16.0996Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.8125C13.4066 3.8125 14.5467 4.95276 14.5468 6.35938C14.5468 7.76611 13.4067 8.90625 12 8.90625C10.5934 8.90611 9.4531 7.76602 9.4531 6.35938C9.45323 4.95284 10.5934 3.81265 12 3.8125ZM12 5.3125C11.4219 5.31265 10.9532 5.78127 10.9531 6.35938C10.9531 6.93759 11.4218 7.40611 12 7.40625C12.5783 7.40625 13.0468 6.93768 13.0468 6.35938C13.0467 5.78118 12.5782 5.3125 12 5.3125Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0009 0.94922C13.1476 0.94922 14.0717 0.947858 14.7783 1.02637C15.4793 1.1043 16.1323 1.27489 16.6093 1.75195C17.0862 2.22908 17.2561 2.88202 17.334 3.58301C17.4124 4.28968 17.4111 5.21369 17.4111 6.36035C17.4111 7.50703 17.4125 8.43106 17.334 9.1377C17.256 9.83873 17.0864 10.4917 16.6093 10.9688C16.2663 11.3118 15.8318 11.4933 15.3545 11.5986C15.3643 11.6443 15.3701 11.6916 15.3701 11.7402C15.3701 12.373 15.3708 12.907 15.3232 13.3203C15.3097 13.4376 15.2901 13.557 15.2627 13.6758C15.9537 13.6831 16.5617 13.696 17.0947 13.7188C18.3253 13.7714 19.2472 13.8777 19.9082 14.1318C20.2527 14.2644 20.5528 14.4466 20.792 14.7022C21.0326 14.9594 21.181 15.2576 21.2724 15.5742C21.442 16.1614 21.4355 16.9076 21.4355 17.709C21.4355 18.5106 21.4421 19.2575 21.2724 19.8447C21.1809 20.1614 21.0327 20.4595 20.792 20.7168C20.5527 20.9724 20.2528 21.1545 19.9082 21.2871C19.2472 21.5413 18.3253 21.6466 17.0947 21.6992C15.8449 21.7526 14.1845 21.7529 12.0009 21.7529C9.81738 21.7529 8.157 21.7526 6.9072 21.6992C5.67667 21.6466 4.75477 21.5412 4.09372 21.2871C3.7492 21.1546 3.44916 20.9723 3.20993 20.7168C2.96922 20.4595 2.82099 20.1613 2.72947 19.8447C2.55983 19.2575 2.56638 18.5106 2.56638 17.709C2.56638 16.9076 2.5599 16.1614 2.72947 15.5742C2.82097 15.2575 2.96914 14.9595 3.20993 14.7022C3.44921 14.4465 3.74906 14.2644 4.09372 14.1318C4.7548 13.8777 5.6765 13.7714 6.9072 13.7188C7.44004 13.696 8.0475 13.6831 8.73825 13.6758C8.71085 13.557 8.69122 13.4375 8.67771 13.3203C8.63009 12.907 8.63083 12.373 8.63083 11.7402C8.63083 11.6917 8.63572 11.6443 8.64548 11.5986C8.16889 11.4932 7.73515 11.3112 7.39255 10.9688C6.91549 10.4917 6.74489 9.83873 6.66697 9.1377C6.58845 8.43106 6.58982 7.50703 6.58982 6.36035C6.58982 5.21371 6.58848 4.28967 6.66697 3.58301C6.74487 2.88183 6.9154 2.22912 7.39255 1.75195C7.86971 1.2748 8.52243 1.10428 9.22361 1.02637C9.93026 0.947889 10.8543 0.94922 12.0009 0.94922ZM12.0009 15.0137C9.80461 15.0137 8.17886 15.0136 6.96482 15.0654C5.73226 15.1181 5.01107 15.2228 4.57712 15.3897C4.37433 15.4677 4.26301 15.5497 4.19431 15.623C4.12731 15.6946 4.06972 15.7914 4.02439 15.9482C3.92035 16.3086 3.91404 16.8263 3.91404 17.709C3.91404 18.5919 3.92029 19.1104 4.02439 19.4707C4.06971 19.6273 4.12737 19.7244 4.19431 19.7959C4.26304 19.8692 4.37466 19.9514 4.57712 20.0293C5.01109 20.1961 5.73248 20.3008 6.96482 20.3535C8.17886 20.4054 9.80462 20.4053 12.0009 20.4053C14.1973 20.4053 15.8231 20.4054 17.0371 20.3535C18.2695 20.3008 18.9909 20.1962 19.4248 20.0293C19.6274 19.9513 19.7389 19.8693 19.8076 19.7959C19.8746 19.7243 19.9322 19.6275 19.9775 19.4707C20.0816 19.1104 20.0879 18.5919 20.0879 17.709C20.0879 16.8264 20.0815 16.3086 19.9775 15.9482C19.9322 15.7916 19.8745 15.6946 19.8076 15.623C19.7389 15.5497 19.6273 15.4676 19.4248 15.3897C18.9909 15.2228 18.2695 15.1181 17.0371 15.0654C15.8231 15.0136 14.1973 15.0137 12.0009 15.0137ZM14.0215 11.7441C13.4484 11.7679 12.7755 11.7705 12.0009 11.7705C11.2255 11.7705 10.5519 11.768 9.97849 11.7441C9.97849 12.4088 9.98004 12.8489 10.0166 13.166C10.0342 13.3187 10.057 13.4119 10.0781 13.4688C10.088 13.4953 10.0967 13.5108 10.1015 13.5186C10.1057 13.5252 10.1093 13.5293 10.1093 13.5293C10.1093 13.5293 10.1722 13.5923 10.5136 13.6289C10.8481 13.6647 11.3105 13.666 12 13.666C12.6896 13.666 13.1527 13.6647 13.4873 13.6289C13.8211 13.5931 13.8878 13.5329 13.8916 13.5293C13.8916 13.5293 13.8953 13.5251 13.8994 13.5186C13.9042 13.5108 13.9129 13.4952 13.9228 13.4688C13.944 13.4119 13.9667 13.3187 13.9843 13.166C14.0209 12.8489 14.0215 12.4088 14.0215 11.7441ZM12.0009 2.44922C10.8175 2.44922 9.99276 2.45046 9.38864 2.51758C8.77922 2.58532 8.55851 2.70709 8.4531 2.8125C8.34769 2.91792 8.22592 3.13863 8.15818 3.74805C8.09105 4.35216 8.08982 5.17685 8.08982 6.36035C8.08982 7.54365 8.09106 8.36763 8.15818 8.97168C8.22591 9.58124 8.34768 9.80278 8.4531 9.90821C8.55866 10.0135 8.78 10.1345 9.38864 10.2022C9.99276 10.2693 10.8175 10.2705 12.0009 10.2705C13.1842 10.2705 14.0082 10.2693 14.6123 10.2022C15.2218 10.1344 15.4434 10.0136 15.5488 9.90821C15.6542 9.80278 15.775 9.58125 15.8427 8.97168C15.9099 8.36763 15.9111 7.54365 15.9111 6.36035C15.9111 5.17685 15.9099 4.35217 15.8427 3.74805C15.7751 3.13938 15.6541 2.91807 15.5488 2.8125C15.4434 2.70708 15.2218 2.58532 14.6123 2.51758C14.0082 2.45047 13.1842 2.44922 12.0009 2.44922Z" fill="black"/> </svg>`,
+  indoor:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.167 6.375C13.7528 6.37537 15.0391 7.6612 15.0391 9.24707C15.039 10.8329 13.7527 12.1188 12.167 12.1191C10.581 12.1191 9.29503 10.8331 9.29492 9.24707C9.29492 7.66098 10.5809 6.375 12.167 6.375ZM12.167 7.875C11.4093 7.875 10.7949 8.4894 10.7949 9.24707C10.795 10.0047 11.4094 10.6191 12.167 10.6191C12.9243 10.6188 13.539 10.0044 13.5391 9.24707C13.5391 8.48963 12.9243 7.87537 12.167 7.875Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.76172C13.6528 1.76172 14.956 1.76096 15.9473 1.87109C16.9331 1.98063 17.7762 2.21372 18.3799 2.81738C18.9832 3.42101 19.2157 4.26346 19.3252 5.24902C19.4353 6.24034 19.4346 7.54349 19.4346 9.19629C19.4346 10.8491 19.4353 12.1522 19.3252 13.1436C19.2157 14.1294 18.9835 14.9725 18.3799 15.5762C17.8076 16.1484 17.0198 16.3844 16.0996 16.501C16.0985 17.5983 16.0945 18.4779 16.0508 19.1699C16.0133 19.7631 15.9458 20.2926 15.793 20.7363H17.4736C17.8878 20.7363 18.2236 21.0721 18.2236 21.4863C18.2236 21.9005 17.8878 22.2363 17.4736 22.2363H12.7236C12.5438 22.2377 12.3579 22.2373 12.167 22.2373C11.9759 22.2373 11.7894 22.2377 11.6094 22.2363H6.8584C6.44419 22.2363 6.1084 21.9005 6.1084 21.4863C6.1084 21.0721 6.44419 20.7363 6.8584 20.7363H8.54004C8.38695 20.2926 8.31969 19.7632 8.28223 19.1699C8.23903 18.4857 8.23436 17.6181 8.2334 16.5381C8.17213 16.5323 8.11179 16.528 8.05273 16.5215C7.06717 16.412 6.22472 16.1795 5.62109 15.5762C5.01743 14.9725 4.78434 14.1294 4.6748 13.1436C4.56467 12.1522 4.56543 10.849 4.56543 9.19629C4.56543 7.54349 4.56466 6.24034 4.6748 5.24902C4.78434 4.26323 5.01743 3.42104 5.62109 2.81738C6.22475 2.21372 7.06694 1.98063 8.05273 1.87109C9.04405 1.76095 10.3472 1.76172 12 1.76172ZM14.5996 16.6064C13.8529 16.6298 12.989 16.6309 12 16.6309C11.1547 16.6309 10.4009 16.6298 9.7334 16.6152C9.73468 17.6578 9.74009 18.4554 9.7793 19.0762C9.82865 19.8572 9.92466 20.2282 10.0312 20.416C10.0923 20.5234 10.1682 20.6053 10.4688 20.6641C10.7855 20.7259 11.2197 20.7349 11.8848 20.7363H12.4482C13.1132 20.7349 13.5475 20.726 13.8643 20.6641C14.1649 20.6052 14.2407 20.5235 14.3018 20.416C14.4084 20.2283 14.5044 19.8572 14.5537 19.0762C14.593 18.4537 14.5981 17.6533 14.5996 16.6064ZM12 3.26172C10.3108 3.26172 9.10742 3.26263 8.21875 3.36133C7.32449 3.46069 6.91356 3.64601 6.68164 3.87793C6.44972 4.10985 6.2644 4.52078 6.16504 5.41504C6.06634 6.30371 6.06543 7.50712 6.06543 9.19629C6.06543 10.8858 6.06629 12.0898 6.16504 12.9785C6.2644 13.8724 6.44979 14.2828 6.68164 14.5146C6.91356 14.7466 7.32449 14.9319 8.21875 15.0312C9.10743 15.1299 10.3108 15.1309 12 15.1309C13.6895 15.1309 14.8935 15.13 15.7822 15.0312C16.6762 14.9319 17.0865 14.7465 17.3184 14.5146C17.5502 14.2828 17.7356 13.8725 17.835 12.9785C17.9337 12.0898 17.9346 10.8858 17.9346 9.19629C17.9346 7.50711 17.9337 6.30371 17.835 5.41504C17.7356 4.52078 17.5503 4.10985 17.3184 3.87793C17.0865 3.64607 16.6761 3.46069 15.7822 3.36133C14.8935 3.26258 13.6895 3.26172 12 3.26172Z" fill="black"/> </svg>`,
+  lock:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 10.25C14.6234 10.25 16.75 12.3767 16.75 15C16.75 17.6234 14.6234 19.75 12 19.75C9.37665 19.75 7.25 17.6234 7.25 15C7.25 12.3767 9.37665 10.25 12 10.25ZM12 11.75C10.2051 11.75 8.75 13.2051 8.75 15C8.75 16.7949 10.2051 18.25 12 18.25C13.7949 18.25 15.25 16.7949 15.25 15C15.25 13.2051 13.7949 11.75 12 11.75Z" fill="black"/> <path d="M10 7.25C10.4142 7.25 10.75 7.58579 10.75 8V8.00977C10.75 8.42398 10.4142 8.75977 10 8.75977C9.58579 8.75977 9.25 8.42398 9.25 8.00977V8C9.25 7.58579 9.58579 7.25 10 7.25Z" fill="black"/> <path d="M12 7.25C12.4142 7.25 12.75 7.58579 12.75 8V8.00977C12.75 8.42398 12.4142 8.75977 12 8.75977C11.5858 8.75977 11.25 8.42398 11.25 8.00977V8C11.25 7.58579 11.5858 7.25 12 7.25Z" fill="black"/> <path d="M14 7.25C14.4142 7.25 14.75 7.58579 14.75 8V8.00977C14.75 8.42398 14.4142 8.75977 14 8.75977C13.5858 8.75977 13.25 8.42398 13.25 8.00977V8C13.25 7.58579 13.5858 7.25 14 7.25Z" fill="black"/> <path d="M10 5.25C10.4142 5.25 10.75 5.58579 10.75 6V6.00977C10.75 6.42398 10.4142 6.75977 10 6.75977C9.58579 6.75977 9.25 6.42398 9.25 6.00977V6C9.25 5.58579 9.58579 5.25 10 5.25Z" fill="black"/> <path d="M12 5.25C12.4142 5.25 12.75 5.58579 12.75 6V6.00977C12.75 6.42398 12.4142 6.75977 12 6.75977C11.5858 6.75977 11.25 6.42398 11.25 6.00977V6C11.25 5.58579 11.5858 5.25 12 5.25Z" fill="black"/> <path d="M14 5.25C14.4142 5.25 14.75 5.58579 14.75 6V6.00977C14.75 6.42398 14.4142 6.75977 14 6.75977C13.5858 6.75977 13.25 6.42398 13.25 6.00977V6C13.25 5.58579 13.5858 5.25 14 5.25Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C13.7238 1.25 15.1072 1.24735 16.1641 1.41504C17.2507 1.58753 18.1382 1.9616 18.7393 2.82032C19.3009 3.62285 19.5281 4.73888 19.6387 6.16016C19.7509 7.6025 19.75 9.51289 19.75 12C19.75 14.4871 19.7509 16.3975 19.6387 17.8398C19.5281 19.2611 19.3009 20.3771 18.7393 21.1797C18.1382 22.0384 17.2507 22.4125 16.1641 22.585C15.1072 22.7527 13.7238 22.75 12 22.75C10.2762 22.75 8.8928 22.7527 7.83594 22.585C6.74927 22.4125 5.86184 22.0384 5.26074 21.1797C4.69906 20.3771 4.4719 19.2611 4.36133 17.8398C4.24915 16.3975 4.25 14.4871 4.25 12C4.25 9.51289 4.24915 7.6025 4.36133 6.16016C4.4719 4.73888 4.69906 3.62285 5.26074 2.82032C5.86184 1.9616 6.74927 1.58753 7.83594 1.41504C8.8928 1.24735 10.2762 1.25 12 1.25ZM12 2.75C10.2241 2.75 8.98214 2.75273 8.07031 2.89746C7.18869 3.03747 6.76312 3.28859 6.48926 3.67969C6.1761 4.12706 5.9656 4.88644 5.85742 6.27735C5.75089 7.64746 5.75 9.48737 5.75 12C5.75 14.5126 5.75089 16.3525 5.85742 17.7227C5.9656 19.1136 6.1761 19.8729 6.48926 20.3203C6.76312 20.7114 7.18869 20.9625 8.07031 21.1025C8.98214 21.2473 10.2241 21.25 12 21.25C13.7759 21.25 15.0179 21.2473 15.9297 21.1025C16.8113 20.9625 17.2369 20.7114 17.5107 20.3203C17.8239 19.8729 18.0344 19.1136 18.1426 17.7227C18.2491 16.3525 18.25 14.5126 18.25 12C18.25 9.48737 18.2491 7.64746 18.1426 6.27735C18.0344 4.88644 17.8239 4.12706 17.5107 3.67969C17.2369 3.28859 16.8113 3.03747 15.9297 2.89746C15.0179 2.75273 13.7759 2.75 12 2.75Z" fill="black"/> </svg>`,
+  thermo:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.8711 10.1211C11.2426 10.6828 9.6709 12.3312 9.41211 15.333H7.89648C8.1716 11.8978 10.2758 10.0578 10.3086 10.0293H7V8.80371H11.8711V10.1211Z" fill="black"/> <path d="M14.6436 8.66602C16.0852 8.66621 17 9.64263 17 10.8027C16.9999 11.6313 16.5928 12.3314 15.7334 12.8193L14.4395 13.5557C14.1901 13.703 14.0056 13.8875 13.9502 14.1084H16.9814V15.333H12.2031C12.2124 14.1544 12.5358 13.178 13.7188 12.5059L14.7822 11.8984C15.3273 11.5854 15.54 11.2903 15.54 10.8301C15.54 10.3422 15.1609 9.96505 14.6436 9.96484C14.0428 9.96484 13.6544 10.3787 13.6543 10.9863C13.6543 11.0876 13.6632 11.226 13.7002 11.3457L12.3145 11.3086C12.2867 11.2073 12.2676 11.005 12.2676 10.8301C12.2676 9.67907 13.1647 8.66602 14.6436 8.66602Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C14.4817 1.25 16.4067 1.24918 17.8643 1.41113C19.3162 1.57248 20.4694 1.9089 21.2803 2.71973C22.0911 3.53056 22.4275 4.68382 22.5889 6.13574C22.7508 7.59329 22.75 9.51832 22.75 12C22.75 14.4817 22.7508 16.4067 22.5889 17.8643C22.4275 19.3162 22.0911 20.4694 21.2803 21.2803C20.4694 22.0911 19.3162 22.4275 17.8643 22.5889C16.4067 22.7508 14.4817 22.75 12 22.75C9.51832 22.75 7.59329 22.7508 6.13574 22.5889C4.68382 22.4275 3.53056 22.0911 2.71973 21.2803C1.9089 20.4694 1.57248 19.3162 1.41113 17.8643C1.24918 16.4067 1.25 14.4817 1.25 12C1.25 9.51832 1.24918 7.59329 1.41113 6.13574C1.57248 4.68382 1.9089 3.53056 2.71973 2.71973C3.53056 1.9089 4.68382 1.57248 6.13574 1.41113C7.59329 1.24918 9.51832 1.25 12 1.25ZM12 2.75C9.48181 2.75 7.65669 2.75084 6.30176 2.90137C4.94128 3.05253 4.2194 3.34114 3.78027 3.78027C3.34114 4.2194 3.05253 4.94128 2.90137 6.30176C2.75084 7.65669 2.75 9.48181 2.75 12C2.75 14.5182 2.75084 16.3433 2.90137 17.6982C3.05253 19.0587 3.34114 19.7806 3.78027 20.2197C4.2194 20.6589 4.94128 20.9475 6.30176 21.0986C7.65669 21.2492 9.48181 21.25 12 21.25C14.5182 21.25 16.3433 21.2492 17.6982 21.0986C19.0587 20.9475 19.7806 20.6589 20.2197 20.2197C20.6589 19.7806 20.9475 19.0587 21.0986 17.6982C21.2492 16.3433 21.25 14.5182 21.25 12C21.25 9.48181 21.2492 7.65669 21.0986 6.30176C20.9475 4.94128 20.6589 4.2194 20.2197 3.78027C19.7806 3.34114 19.0587 3.05253 17.6982 2.90137C16.3433 2.75084 14.5182 2.75 12 2.75Z" fill="black"/> </svg>`,
+  plug:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3.25C14.4142 3.25 14.75 3.58579 14.75 4C14.75 4.41421 14.4142 4.75 14 4.75H12C9.4853 4.75 7.65022 4.75073 6.28516 4.87207C4.90303 4.99493 4.15989 5.23302 3.71875 5.58594C3.31322 5.91036 3.04485 6.43139 2.89942 7.47852C2.75206 8.53971 2.75 9.97739 2.75 12C2.75 14.0226 2.75206 15.4603 2.89942 16.5215C3.04485 17.5686 3.31322 18.0896 3.71875 18.4141C4.15989 18.767 4.90303 19.0051 6.28516 19.1279C7.65022 19.2493 9.4853 19.25 12 19.25C14.5147 19.25 16.3498 19.2493 17.7148 19.1279C19.097 19.0051 19.8401 18.767 20.2813 18.4141C20.6868 18.0896 20.9552 17.5686 21.1006 16.5215C21.2479 15.4603 21.25 14.0226 21.25 12V10C21.25 9.58579 21.5858 9.25 22 9.25C22.4142 9.25 22.75 9.58579 22.75 10V12C22.75 13.9772 22.752 15.5397 22.5869 16.7285C22.4198 17.9312 22.0632 18.9104 21.2188 19.5859C20.4099 20.233 19.278 20.4949 17.8477 20.6221C16.4002 20.7507 14.4853 20.75 12 20.75C9.51471 20.75 7.59978 20.7507 6.15234 20.6221C4.72197 20.4949 3.59011 20.233 2.78125 19.5859C1.93685 18.9104 1.58017 17.9312 1.41309 16.7285C1.24798 15.5397 1.25 13.9772 1.25 12C1.25 10.0228 1.24798 8.46026 1.41309 7.27148C1.58017 6.06875 1.93685 5.08958 2.78125 4.41406C3.59011 3.76698 4.72197 3.50507 6.15234 3.37793C7.59978 3.24927 9.51471 3.25 12 3.25H14Z" fill="black"/><path d="M13 14.25C13.4142 14.25 13.75 14.5858 13.75 15C13.75 15.4142 13.4142 15.75 13 15.75H11C10.5858 15.75 10.25 15.4142 10.25 15C10.25 14.5858 10.5858 14.25 11 14.25H13Z" fill="black"/><path d="M9 8.25C9.41421 8.25 9.75 8.58579 9.75 9V11C9.75 11.4142 9.41421 11.75 9 11.75C8.58579 11.75 8.25 11.4142 8.25 11V9C8.25 8.58579 8.58579 8.25 9 8.25Z" fill="black"/><path d="M15 8.25C15.4142 8.25 15.75 8.58579 15.75 9V11C15.75 11.4142 15.4142 11.75 15 11.75C14.5858 11.75 14.25 11.4142 14.25 11V9C14.25 8.58579 14.5858 8.25 15 8.25Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M20 1.25C20.4142 1.25 20.75 1.58579 20.75 2C20.75 2.23549 20.7864 2.46245 20.8535 2.67578C20.9084 2.7501 20.9571 2.83291 20.9941 2.92676L21.0127 2.97363L21.0898 3.14258C21.289 3.526 21.6206 3.8272 22.0264 3.9873L22.0723 4.00586C22.1642 4.04213 22.2461 4.09011 22.3193 4.14355C22.5342 4.21172 22.7626 4.25 23 4.25C23.4142 4.25 23.75 4.58579 23.75 5C23.75 5.41421 23.4142 5.75 23 5.75C22.7627 5.75 22.5341 5.78736 22.3193 5.85547C22.246 5.90905 22.1654 5.9578 22.0732 5.99414L22.0264 6.0127C21.6206 6.17281 21.289 6.47399 21.0898 6.85742L21.0127 7.02637L20.9941 7.07227C20.9578 7.16439 20.9091 7.24603 20.8555 7.31934C20.7874 7.53412 20.75 7.76267 20.75 8C20.75 8.41421 20.4142 8.75 20 8.75C19.5858 8.75 19.25 8.41421 19.25 8C19.25 7.76257 19.2117 7.5342 19.1436 7.31934C19.0901 7.24615 19.0421 7.16517 19.0059 7.07324L18.9873 7.02637C18.8272 6.62063 18.526 6.28901 18.1426 6.08984L17.9736 6.0127L17.9268 5.99414C17.8344 5.95769 17.7532 5.90926 17.6797 5.85547C17.4652 5.78754 17.237 5.75 17 5.75C16.5858 5.75 16.25 5.41421 16.25 5C16.25 4.58579 16.5858 4.25 17 4.25C17.2371 4.25 17.4651 4.21154 17.6797 4.14355C17.753 4.08991 17.8346 4.04223 17.9268 4.00586L17.9736 3.9873L18.1426 3.91016C18.526 3.711 18.8272 3.37936 18.9873 2.97363L19.0059 2.92676L19.083 2.76758C19.1016 2.73601 19.1235 2.70739 19.1445 2.67871C19.2123 2.46444 19.25 2.23667 19.25 2C19.25 1.58579 19.5858 1.25 20 1.25ZM20 4.25C19.7867 4.53399 19.534 4.78667 19.25 5C19.5338 5.21318 19.7868 5.46528 20 5.74902C20.2131 5.46549 20.4655 5.21308 20.749 5C20.4653 4.78676 20.2132 4.53379 20 4.25Z" fill="black"/></svg>`,
+  garage:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.0527 4.63652C11.6733 4.47467 12.3248 4.47467 12.9453 4.63652L20.2529 6.54277C20.9132 6.7152 21.374 7.31147 21.374 7.99395V19.0389C21.374 19.4531 21.0382 19.7889 20.624 19.7889C20.2098 19.7889 19.874 19.4531 19.874 19.0389V9.28887C19.8738 8.87486 19.5381 8.53887 19.124 8.53887H4.87402C4.45995 8.53887 4.12426 8.87486 4.12402 9.28887V19.0389C4.12402 19.4531 3.78824 19.7889 3.37402 19.7889C2.95981 19.7889 2.62402 19.4531 2.62402 19.0389V7.99395C2.62402 7.31147 3.08482 6.7152 3.74512 6.54277L11.0527 4.63652Z" fill="black"/> <path d="M17.249 17.3777C17.6632 17.3777 17.9989 17.7136 17.999 18.1277C17.999 18.5419 17.6632 18.8777 17.249 18.8777H6.74902C6.33481 18.8777 5.99902 18.5419 5.99902 18.1277C5.99916 17.7136 6.33489 17.3777 6.74902 17.3777H17.249Z" fill="black"/> <path d="M17.249 14.0027C17.6632 14.0027 17.9989 14.3386 17.999 14.7527C17.999 15.1669 17.6632 15.5027 17.249 15.5027H6.74902C6.33481 15.5027 5.99902 15.1669 5.99902 14.7527C5.99916 14.3386 6.33489 14.0027 6.74902 14.0027H17.249Z" fill="black"/> <path d="M17.249 10.6277C17.6632 10.6277 17.9989 10.9636 17.999 11.3777C17.999 11.7919 17.6632 12.1277 17.249 12.1277H6.74902C6.33481 12.1277 5.99902 11.7919 5.99902 11.3777C5.99916 10.9636 6.33489 10.6277 6.74902 10.6277H17.249Z" fill="black"/> </svg>`,
+  smoke:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 5.25C12.4142 5.25 12.75 5.58579 12.75 6V7.30859C14.0277 7.51125 15.1346 8.22451 15.8584 9.23145L17.4316 8.44531C17.1962 8.10355 16.9066 7.81909 16.5801 7.59863C16.237 7.36693 16.1465 6.90086 16.3779 6.55762C16.6097 6.21446 17.0767 6.12379 17.4199 6.35547C17.9994 6.74672 18.5012 7.27295 18.873 7.91699C19.4875 8.98162 19.6426 10.1877 19.4004 11.3008C19.3121 11.7052 18.9124 11.9611 18.5078 11.873C18.1034 11.7848 17.8467 11.386 17.9346 10.9814C18.0149 10.6123 18.0294 10.2293 17.9775 9.84961L16.5303 10.5723C16.6722 11.023 16.75 11.5024 16.75 12C16.75 12.5306 16.6605 13.0401 16.5 13.5166L18.124 14.3291C18.4944 14.5143 18.6449 14.9646 18.46 15.335C18.2748 15.7053 17.8245 15.8558 17.4541 15.6709L15.8027 14.8447C15.0785 15.8114 13.9952 16.4929 12.75 16.6904V18.1982C13.2777 18.0735 13.7569 17.8239 14.1504 17.4766C14.461 17.203 14.9351 17.2326 15.209 17.543C15.4825 17.8534 15.4527 18.3276 15.1426 18.6016C14.3058 19.3401 13.2039 19.7889 12 19.7891C10.7708 19.7889 9.64858 19.3209 8.80566 18.5547C8.49928 18.276 8.47725 17.8016 8.75586 17.4951C9.03454 17.1889 9.50905 17.1658 9.81543 17.4443C10.2156 17.8081 10.7067 18.0687 11.25 18.1973V16.6904C9.9714 16.4876 8.86338 15.7747 8.13965 14.7666C8.13431 14.7694 8.12946 14.7736 8.12402 14.7764L6.33496 15.6709C5.96455 15.8558 5.51428 15.7053 5.3291 15.335C5.14416 14.9646 5.29469 14.5143 5.66504 14.3291L7.45312 13.4346C7.45828 13.432 7.46356 13.4292 7.46875 13.4268C7.32707 12.9763 7.25 12.4972 7.25 12C7.25 11.6378 7.29138 11.2853 7.36816 10.9463C7.32259 10.9336 7.2773 10.9174 7.2334 10.8955L5.58984 10.0732C5.53782 10.4532 5.55342 10.8367 5.63379 11.2061C5.72167 11.6107 5.46416 12.0096 5.05957 12.0977C4.65498 12.1856 4.25522 11.9299 4.16699 11.5254C3.92478 10.4122 4.08076 9.20627 4.69531 8.1416C5.06722 7.49744 5.56883 6.97135 6.14844 6.58008C6.49169 6.3484 6.95767 6.43907 7.18945 6.78223C7.4211 7.12553 7.33058 7.59152 6.9873 7.82324C6.66082 8.04368 6.37013 8.32725 6.13477 8.66895L7.90332 9.55371C7.90946 9.55678 7.91585 9.56026 7.92188 9.56348C8.62938 8.38184 9.83568 7.53292 11.25 7.30859V6C11.25 5.58579 11.5858 5.25 12 5.25ZM12 8.75C10.2051 8.75 8.75 10.2051 8.75 12C8.75 13.7949 10.2051 15.25 12 15.25C13.7949 15.25 15.25 13.7949 15.25 12C15.25 10.2051 13.7949 8.75 12 8.75Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z" fill="black"/> </svg>`,
+  water:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M10.998 3.24974C11.412 3.24888 11.7488 3.58389 11.75 3.99779C11.7509 4.41187 11.416 4.74867 11.002 4.74974C9.23933 4.75339 7.98588 4.77816 7.06836 4.92064C6.16002 5.06172 5.71676 5.29955 5.44922 5.61791C5.16323 5.95839 4.96131 6.52593 4.85547 7.5974C4.7506 8.65931 4.75 10.0711 4.75 11.9997C4.75 14.0178 4.75087 15.4681 4.87012 16.5417C4.99001 17.6208 5.21622 18.1553 5.53027 18.4695C5.8444 18.7836 6.3788 19.0097 7.45801 19.1296C8.53169 19.2489 9.98181 19.2497 12 19.2497C13.5962 19.2497 14.8422 19.249 15.834 19.1882C16.8341 19.1269 17.4933 19.0073 17.9463 18.8113C18.358 18.633 18.608 18.3894 18.7891 17.9978C18.9894 17.5643 19.1156 16.9268 19.1816 15.949C19.2098 15.536 19.5674 15.2238 19.9805 15.2517C20.3936 15.2797 20.7055 15.6374 20.6777 16.0505C20.6087 17.0722 20.4699 17.9354 20.1504 18.6267C19.8115 19.3598 19.286 19.8665 18.543 20.1882C17.8411 20.4921 16.9652 20.6226 15.9258 20.6863C14.8777 20.7505 13.5786 20.7497 12 20.7497C10.0183 20.7497 8.46829 20.7506 7.29199 20.6199C6.12133 20.4898 5.15555 20.2158 4.46973 19.53C3.784 18.8442 3.50997 17.8783 3.37988 16.7077C3.24921 15.5315 3.25 13.9813 3.25 11.9997C3.25 10.1028 3.24941 8.603 3.36328 7.44994C3.47622 6.30667 3.71186 5.3542 4.30078 4.65306C4.90821 3.93016 5.77804 3.60383 6.83789 3.43919C7.88901 3.27594 9.26102 3.25334 10.998 3.24974Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0088 2.36693C17.3189 2.21037 17.6811 2.21037 17.9912 2.36693L18.1416 2.45873L18.5225 2.74681C18.9759 3.10522 19.6198 3.66885 20.2109 4.38646C20.9907 5.33304 21.7498 6.63413 21.75 8.1433C21.75 10.6172 19.9139 12.7497 17.5 12.7497C15.086 12.7497 13.25 10.6172 13.25 8.1433C13.2502 6.63413 14.0093 5.33304 14.7891 4.38646C15.5771 3.42984 16.4586 2.74673 16.8584 2.45873L17.0088 2.36693ZM17.5 3.85326C17.1046 4.15842 16.4946 4.6762 15.9473 5.34056C15.2657 6.16803 14.7502 7.13607 14.75 8.1433C14.75 9.92885 16.048 11.2497 17.5 11.2497C18.952 11.2497 20.25 9.92885 20.25 8.1433C20.2498 7.13607 19.7343 6.16803 19.0527 5.34056C18.5054 4.6762 17.8954 4.15842 17.5 3.85326Z" fill="black"/> </svg>`,
+  panic:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7.25C14.6234 7.25 16.75 9.37665 16.75 12C16.75 14.6234 14.6234 16.75 12 16.75C9.37665 16.75 7.25 14.6234 7.25 12C7.25 9.37665 9.37665 7.25 12 7.25ZM12 8.75C10.2051 8.75 8.75 10.2051 8.75 12C8.75 13.7949 10.2051 15.25 12 15.25C13.7949 15.25 15.25 13.7949 15.25 12C15.25 10.2051 13.7949 8.75 12 8.75Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C13.9772 1.25 15.5397 1.24798 16.7285 1.41309C17.9312 1.58017 18.9104 1.93685 19.5859 2.78125C20.233 3.59011 20.4949 4.72197 20.6221 6.15234C20.7507 7.59978 20.75 9.51471 20.75 12C20.75 14.4853 20.7507 16.4002 20.6221 17.8477C20.4949 19.278 20.233 20.4099 19.5859 21.2188C18.9104 22.0632 17.9313 22.4198 16.7285 22.5869C15.5397 22.752 13.9772 22.75 12 22.75C10.0228 22.75 8.46026 22.752 7.27148 22.5869C6.06875 22.4198 5.08958 22.0632 4.41406 21.2188C3.76698 20.4099 3.50507 19.278 3.37793 17.8477C3.24927 16.4002 3.25 14.4853 3.25 12C3.25 9.51471 3.24927 7.59978 3.37793 6.15234C3.50507 4.72197 3.76698 3.59011 4.41406 2.78125C5.08958 1.93685 6.06875 1.58017 7.27148 1.41309C8.46026 1.24798 10.0228 1.25 12 1.25ZM12.75 4.5C12.75 4.91421 12.4142 5.25 12 5.25C11.5858 5.25 11.25 4.91421 11.25 4.5V2.75098C9.61471 2.75349 8.40357 2.77097 7.47852 2.89942C6.43139 3.04485 5.91036 3.31322 5.58594 3.71875C5.23302 4.15989 4.99493 4.90303 4.87207 6.28516C4.75073 7.65022 4.75 9.4853 4.75 12C4.75 14.5147 4.75073 16.3498 4.87207 17.7148C4.99493 19.097 5.23302 19.8401 5.58594 20.2813C5.91036 20.6868 6.43138 20.9552 7.47852 21.1006C8.40357 21.229 9.61471 21.2455 11.25 21.248V20C11.25 19.5858 11.5858 19.25 12 19.25C12.4142 19.25 12.75 19.5858 12.75 20V21.248C14.3853 21.2455 15.5964 21.229 16.5215 21.1006C17.5686 20.9552 18.0896 20.6868 18.4141 20.2813C18.767 19.8401 19.0051 19.097 19.1279 17.7148C19.2493 16.3498 19.25 14.5147 19.25 12C19.25 9.4853 19.2493 7.65022 19.1279 6.28516C19.0051 4.90303 18.767 4.15989 18.4141 3.71875C18.0896 3.31322 17.5686 3.04485 16.5215 2.89942C15.5964 2.77097 14.3853 2.75349 12.75 2.75098V4.5Z" fill="black"/> </svg>`,
+  keyfob:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 10.25C13.2445 10.25 14.1974 10.2495 14.916 10.2734C15.6167 10.2968 16.1748 10.3439 16.5908 10.4688C16.8094 10.5343 17.0276 10.6324 17.2168 10.79C17.4147 10.955 17.5449 11.156 17.625 11.3721C17.7269 11.6471 17.7467 11.965 17.75 12.2412V12.7588C17.7467 13.035 17.7269 13.3529 17.625 13.6279C17.5449 13.844 17.4147 14.045 17.2168 14.21C17.0276 14.3676 16.8094 14.4657 16.5908 14.5313C16.1748 14.6561 15.6167 14.7032 14.916 14.7266C14.1974 14.7505 13.2445 14.75 12 14.75C10.7555 14.75 9.80264 14.7505 9.08398 14.7266C8.38332 14.7032 7.82524 14.6561 7.40918 14.5313C7.19064 14.4657 6.97236 14.3676 6.7832 14.21C6.58527 14.045 6.45506 13.844 6.375 13.6279C6.27312 13.3529 6.25327 13.035 6.25 12.7588V12.2412C6.25327 11.965 6.27312 11.6471 6.375 11.3721C6.45506 11.156 6.58527 10.955 6.7832 10.79C6.97236 10.6324 7.19064 10.5343 7.40918 10.4688C7.82524 10.3439 8.38332 10.2968 9.08398 10.2734C9.80264 10.2495 10.7555 10.25 12 10.25ZM12 11.75C10.7447 11.75 9.82232 11.7505 9.13477 11.7734C8.42956 11.7969 8.04973 11.8436 7.84082 11.9063C7.80987 11.9155 7.78728 11.924 7.77148 11.9307C7.7575 12.0017 7.75 12.1461 7.75 12.5C7.75 12.8523 7.75762 12.997 7.77148 13.0684C7.78729 13.075 7.80964 13.0844 7.84082 13.0938C8.04973 13.1564 8.42956 13.2031 9.13477 13.2266C9.82232 13.2495 10.7447 13.25 12 13.25C13.2553 13.25 14.1777 13.2495 14.8652 13.2266C15.5704 13.2031 15.9503 13.1564 16.1592 13.0938C16.1898 13.0846 16.2118 13.0749 16.2275 13.0684C16.2414 12.9971 16.25 12.8526 16.25 12.5C16.25 12.1458 16.2415 12.0016 16.2275 11.9307C16.2118 11.9241 16.1896 11.9154 16.1592 11.9063C15.9503 11.8436 15.5704 11.7969 14.8652 11.7734C14.1777 11.7505 13.2553 11.75 12 11.75Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.25C13.2445 4.25 14.1974 4.24948 14.916 4.27344C15.6167 4.2968 16.1748 4.34393 16.5908 4.46875C16.8094 4.53433 17.0276 4.63241 17.2168 4.79004C17.4147 4.95504 17.5449 5.15605 17.625 5.37207C17.7269 5.64715 17.7467 5.96499 17.75 6.24121V6.75879C17.7467 7.03501 17.7269 7.35285 17.625 7.62793C17.5449 7.84395 17.4147 8.04496 17.2168 8.20996C17.0276 8.36759 16.8094 8.46567 16.5908 8.53125C16.1748 8.65607 15.6167 8.7032 14.916 8.72656C14.1974 8.75052 13.2445 8.75 12 8.75C10.7555 8.75 9.80264 8.75052 9.08398 8.72656C8.38332 8.7032 7.82524 8.65607 7.40918 8.53125C7.19064 8.46567 6.97236 8.36759 6.7832 8.20996C6.58527 8.04496 6.45506 7.84395 6.375 7.62793C6.27312 7.35285 6.25327 7.03501 6.25 6.75879V6.24121C6.25327 5.96499 6.27312 5.64715 6.375 5.37207C6.45506 5.15605 6.58527 4.95504 6.7832 4.79004C6.97236 4.63241 7.19064 4.53433 7.40918 4.46875C7.82524 4.34393 8.38332 4.2968 9.08398 4.27344C9.80264 4.24948 10.7555 4.25 12 4.25ZM12 5.75C10.7447 5.75 9.82232 5.75053 9.13477 5.77344C8.42956 5.79695 8.04973 5.84362 7.84082 5.90625C7.80987 5.91554 7.78728 5.92405 7.77148 5.93067C7.7575 6.00166 7.75 6.14615 7.75 6.5C7.75 6.8523 7.75762 6.99703 7.77148 7.06836C7.78729 7.075 7.80964 7.0844 7.84082 7.09375C8.04973 7.15638 8.42956 7.20306 9.13477 7.22656C9.82232 7.24947 10.7447 7.25 12 7.25C13.2553 7.25 14.1777 7.24947 14.8652 7.22656C15.5704 7.20306 15.9503 7.15638 16.1592 7.09375C16.1898 7.08456 16.2118 7.07494 16.2275 7.06836C16.2414 6.99709 16.25 6.8526 16.25 6.5C16.25 6.14584 16.2415 6.0016 16.2275 5.93067C16.2118 5.92411 16.1896 5.91537 16.1592 5.90625C15.9503 5.84362 15.5704 5.79695 14.8652 5.77344C14.1777 5.75053 13.2553 5.75 12 5.75Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C13.9772 1.25 15.5397 1.24798 16.7285 1.41309C17.9312 1.58017 18.9104 1.93685 19.5859 2.78125C20.233 3.59011 20.4949 4.72197 20.6221 6.15234C20.7507 7.59978 20.75 9.51471 20.75 12C20.75 14.4853 20.7507 16.4002 20.6221 17.8477C20.4949 19.278 20.233 20.4099 19.5859 21.2188C18.9104 22.0632 17.9313 22.4198 16.7285 22.5869C15.5397 22.752 13.9772 22.75 12 22.75C10.0228 22.75 8.46026 22.752 7.27148 22.5869C6.06875 22.4198 5.08958 22.0632 4.41406 21.2188C3.76698 20.4099 3.50507 19.278 3.37793 17.8477C3.24927 16.4002 3.25 14.4853 3.25 12C3.25 9.51471 3.24927 7.59978 3.37793 6.15234C3.50507 4.72197 3.76698 3.59011 4.41406 2.78125C5.08958 1.93685 6.06875 1.58017 7.27148 1.41309C8.46026 1.24798 10.0228 1.25 12 1.25ZM5.00684 18.75C5.14161 19.4965 5.33378 19.9661 5.58594 20.2813C5.91036 20.6868 6.43138 20.9552 7.47852 21.1006C8.53971 21.2479 9.97739 21.25 12 21.25C14.0226 21.25 15.4603 21.2479 16.5215 21.1006C17.5686 20.9552 18.0896 20.6868 18.4141 20.2813C18.6662 19.9661 18.8584 19.4965 18.9932 18.75H5.00684ZM12 2.75C9.97739 2.75 8.53971 2.75206 7.47852 2.89942C6.43139 3.04485 5.91036 3.31322 5.58594 3.71875C5.23302 4.15989 4.99493 4.90303 4.87207 6.28516C4.75073 7.65022 4.75 9.4853 4.75 12C4.75 14.2504 4.75081 15.9565 4.83789 17.2686C4.89016 17.257 4.94427 17.25 5 17.25H19C19.0554 17.25 19.1092 17.2572 19.1611 17.2686C19.2482 15.9565 19.25 14.2504 19.25 12C19.25 9.4853 19.2493 7.65022 19.1279 6.28516C19.0051 4.90303 18.767 4.15989 18.4141 3.71875C18.0896 3.31322 17.5686 3.04485 16.5215 2.89942C15.4603 2.75206 14.0226 2.75 12 2.75Z" fill="black"/> </svg>`,
+  keypad:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.9922 15.25C12.4064 15.25 12.7422 15.5858 12.7422 16V16.0146C12.7422 16.4289 12.4064 16.7646 11.9922 16.7646C11.578 16.7646 11.2422 16.4289 11.2422 16.0146V16C11.2422 15.5858 11.578 15.25 11.9922 15.25Z" fill="black"/> <path d="M9 12.2344C9.41421 12.2344 9.75 12.5702 9.75 12.9844V12.999C9.75 13.4132 9.41421 13.749 9 13.749C8.58579 13.749 8.25 13.4132 8.25 12.999V12.9844C8.25 12.5702 8.58579 12.2344 9 12.2344Z" fill="black"/> <path d="M11.9922 12.2344C12.4064 12.2344 12.7422 12.5702 12.7422 12.9844V12.999C12.7422 13.4132 12.4064 13.749 11.9922 13.749C11.578 13.749 11.2422 13.4132 11.2422 12.999V12.9844C11.2422 12.5702 11.578 12.2344 11.9922 12.2344Z" fill="black"/> <path d="M14.9854 12.2344C15.3996 12.2344 15.7354 12.5702 15.7354 12.9844V12.999C15.7354 13.4132 15.3996 13.749 14.9854 13.749C14.5711 13.749 14.2354 13.4132 14.2354 12.999V12.9844C14.2354 12.5702 14.5711 12.2344 14.9854 12.2344Z" fill="black"/> <path d="M9 9.24219C9.41421 9.24219 9.75 9.57798 9.75 9.99219V10.0068C9.75 10.4211 9.41421 10.7568 9 10.7568C8.58579 10.7568 8.25 10.4211 8.25 10.0068V9.99219C8.25 9.57798 8.58579 9.24219 9 9.24219Z" fill="black"/> <path d="M11.9922 9.24219C12.4064 9.24219 12.7422 9.57798 12.7422 9.99219V10.0068C12.7422 10.4211 12.4064 10.7568 11.9922 10.7568C11.578 10.7568 11.2422 10.4211 11.2422 10.0068V9.99219C11.2422 9.57798 11.578 9.24219 11.9922 9.24219Z" fill="black"/> <path d="M14.9854 9.24219C15.3996 9.24219 15.7354 9.57798 15.7354 9.99219V10.0068C15.7354 10.4211 15.3996 10.7568 14.9854 10.7568C14.5711 10.7568 14.2354 10.4211 14.2354 10.0068V9.99219C14.2354 9.57798 14.5711 9.24219 14.9854 9.24219Z" fill="black"/> <path d="M9 6.25C9.41421 6.25 9.75 6.58579 9.75 7V7.01465C9.75 7.42886 9.41421 7.76465 9 7.76465C8.58579 7.76465 8.25 7.42886 8.25 7.01465V7C8.25 6.58579 8.58579 6.25 9 6.25Z" fill="black"/> <path d="M11.9922 6.25C12.4064 6.25 12.7422 6.58579 12.7422 7V7.01465C12.7422 7.42886 12.4064 7.76465 11.9922 7.76465C11.578 7.76465 11.2422 7.42886 11.2422 7.01465V7C11.2422 6.58579 11.578 6.25 11.9922 6.25Z" fill="black"/> <path d="M14.9854 6.25C15.3996 6.25 15.7354 6.58579 15.7354 7V7.01465C15.7354 7.42886 15.3996 7.76465 14.9854 7.76465C14.5711 7.76465 14.2354 7.42886 14.2354 7.01465V7C14.2354 6.58579 14.5711 6.25 14.9854 6.25Z" fill="black"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C13.9772 1.25 15.5397 1.24798 16.7285 1.41309C17.9312 1.58017 18.9104 1.93685 19.5859 2.78125C20.233 3.59011 20.4949 4.72197 20.6221 6.15234C20.7507 7.59978 20.75 9.51471 20.75 12C20.75 14.4853 20.7507 16.4002 20.6221 17.8477C20.4949 19.278 20.233 20.4099 19.5859 21.2188C18.9104 22.0632 17.9313 22.4198 16.7285 22.5869C15.5397 22.752 13.9772 22.75 12 22.75C10.0228 22.75 8.46026 22.752 7.27148 22.5869C6.06875 22.4198 5.08958 22.0632 4.41406 21.2188C3.76698 20.4099 3.50507 19.278 3.37793 17.8477C3.24927 16.4002 3.25 14.4853 3.25 12C3.25 9.51471 3.24927 7.59978 3.37793 6.15234C3.50507 4.72197 3.76698 3.59011 4.41406 2.78125C5.08958 1.93685 6.06875 1.58017 7.27148 1.41309C8.46026 1.24798 10.0228 1.25 12 1.25ZM12 2.75C9.97739 2.75 8.53971 2.75206 7.47852 2.89942C6.43139 3.04485 5.91036 3.31322 5.58594 3.71875C5.23302 4.15989 4.99493 4.90303 4.87207 6.28516C4.75073 7.65022 4.75 9.4853 4.75 12C4.75 14.5147 4.75073 16.3498 4.87207 17.7148C4.99493 19.097 5.23302 19.8401 5.58594 20.2813C5.91036 20.6868 6.43138 20.9552 7.47852 21.1006C8.53971 21.2479 9.97739 21.25 12 21.25C14.0226 21.25 15.4603 21.2479 16.5215 21.1006C17.5686 20.9552 18.0896 20.6868 18.4141 20.2813C18.767 19.8401 19.0051 19.097 19.1279 17.7148C19.2493 16.3498 19.25 14.5147 19.25 12C19.25 9.4853 19.2493 7.65022 19.1279 6.28516C19.0051 4.90303 18.767 4.15989 18.4141 3.71875C18.0896 3.31322 17.5686 3.04485 16.5215 2.89942C15.4603 2.75206 14.0226 2.75 12 2.75Z" fill="black"/> </svg>`
 };
 const DEVICES = [
   {id:'door',name:'Door Sensor'},
@@ -1044,6 +1320,7 @@ function openPopup(id) {
   document.body.style.overflow = 'hidden';
   if (id === 'popup-service') initService();
   if (id === 'popup-ts') initTS();
+  setTimeout(() => renderIcons(), 10);
 }
 function closePopup() {
   if (!currentPopup) return;
@@ -1140,14 +1417,16 @@ function renderTasks() {
   const list = document.getElementById('task-list');
   const empty = document.getElementById('task-empty-msg');
   empty.style.display = tasks.length ? 'none' : 'block';
-  list.innerHTML = tasks.map((t,i) => `
+  const listHtml = tasks.map((t,i) => `
     <div class="task-item">
-      <div class="task-item-icon">${SVGS[t.id]||''}</div>
+      <div class="task-item-icon" data-svg="${t.id}"></div>
       <div class="task-item-text"><div class="task-item-dev">${t.name}</div><div class="task-item-issue">${t.issue}</div></div>
       <button class="task-item-del" onclick="removeTask(${i})">✕</button>
     </div>`).join('');
+  renderIcons();
+  renderIcons();
   const rev = document.getElementById('task-review');
-  if (rev) rev.innerHTML = tasks.length ? '<div style="font-family:Rajdhani,sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:8px;">Issues to address</div>' + tasks.map(t=>`<div class="task-item" style="margin-bottom:6px;"><div class="task-item-icon">${SVGS[t.id]||''}</div><div class="task-item-text"><div class="task-item-dev">${t.name}</div><div class="task-item-issue">${t.issue}</div></div></div>`).join('') : '';
+  if (rev) rev.innerHTML = tasks.length ? '<div style="font-family:Rajdhani,sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(5,229,175,.6);margin-bottom:8px;">Issues to address</div>' + tasks.map(t=>`<div class="task-item" style="margin-bottom:6px;"><div class="task-item-icon" data-svg="${t.id}"></div><div class="task-item-text"><div class="task-item-dev">${t.name}</div><div class="task-item-issue">${t.issue}</div></div></div>`).join('') : '';
 }
 
 function svcGo(n) {
@@ -1183,87 +1462,13 @@ function toggleTime(el) {
 }
 
 // ── TROUBLESHOOT ──────────────────────────────────────────────
-const TS_DATA = {
-  door:{title:'Door Sensor',issues:[
-    {q:'Shows "Open" when door is closed.',a:'<p>Magnet and sensor are misaligned — need to be within about 1 inch of each other. Open/close slowly and feel if the magnet is catching. Adjust the magnet piece up or down slightly. Still not working? Text me — easy fix in person.</p>'},
-    {q:'Shows "Offline" or not communicating.',a:'<p>Try a <strong>panel reboot</strong> first — unplug, wait 30 seconds, plug back in. Give it 2 minutes. If still offline, pull the sensor and check the battery (CR2032).</p>'},
-    {q:'Getting false alarms.',a:'<p>Usually the door vibrating from HVAC or wind. Check if weatherstripping is tight. Try increasing alarm delay in settings. If the door is warped or drafty, that is the root cause.</p>'},
-  ]},
-  window:{title:'Window Sensor',issues:[
-    {q:'Shows "Open" when window is closed.',a:'<p>Alignment issue — same as door sensors. Window frames shift in older homes, especially after Texas summers. Re-seat the magnet piece closer to the sensor. Check the track for debris on sliding windows.</p>'},
-    {q:'Sensor keeps dropping offline.',a:'<p>May be too far from the panel or interference. Reboot the panel first. If it keeps happening, a range extender may help — text me and I can assess signal strength.</p>'},
-  ]},
-  motion:{title:'Motion Detector',issues:[
-    {q:'Triggers constantly when no one is home.',a:'<p>Common causes: <strong>pets</strong> (enable Pet Immune mode), HVAC air flow, afternoon sunlight shifting across the sensor, or curtains/plants near a window. Try repositioning slightly.</p>'},
-    {q:'Not detecting motion when someone walks by.',a:'<p>Check for obstructions — furniture, shelving, or cobwebs on the lens. Also verify the sensor is not bypassed in the app under device status.</p>'},
-  ]},
-  doorbell:{title:'Doorbell Camera',issues:[
-    {q:'Not getting notifications when someone rings.',a:'<ol><li>Toggle doorbell alerts off and back on in app settings</li><li>Check Vivint app has notification permissions on your phone</li><li>Check for Do Not Disturb or Focus mode</li><li>Try signing out of the app and back in</li></ol>'},
-    {q:'Video is choppy or has a lag.',a:'<p>WiFi signal issue. Check signal strength in app → camera settings. Below 60% means your router is too far — a WiFi extender near the front door helps a lot. Also check that internet upload speed is at least 10Mbps.</p>'},
-    {q:'Camera is offline.',a:'<ol><li>Press the doorbell button — see if it lights up</li><li>Reboot your router</li><li>Reboot the panel</li><li>Still offline after 5 minutes — text me, may be a wiring issue</li></ol>'},
-  ]},
-  outdoor:{title:'Outdoor Camera',issues:[
-    {q:'Camera is offline or showing a gray screen.',a:'<ol><li>Power cycle the camera — unplug or flip the breaker</li><li>Wait 60 seconds and restore power</li><li>Reboot the panel</li><li>Still offline after 5 min — text me</li></ol>'},
-    {q:'Too many false motion alerts.',a:'<p>Draw <strong>activity zones</strong> in the app to limit detection to areas you care about. Also adjust motion sensitivity down one notch in camera settings. Trees/bushes in frame will trigger in the wind — try to exclude them from the zone.</p>'},
-    {q:'Night vision looks blurry or foggy.',a:'<p>Check for <strong>spider webs or dust</strong> on the lens — extremely common outdoors and ruins night vision. Wipe with a microfiber cloth. Also make sure the camera is not pointing directly at a bright outdoor light.</p>'},
-  ]},
-  lock:{title:'Smart Lock',issues:[
-    {q:"Lock won't respond to the app.",a:'<ol><li>Make sure the door is fully closed — lock will not engage if latch does not align</li><li>Reboot the panel</li><li>Check battery — replace with fresh AAs</li><li>Try removing and re-adding the lock in the app</li></ol>'},
-    {q:"My keypad code isn't working.",a:'<p>Codes can get wiped after firmware updates or panel reboots. Re-add your code: app → Settings → Users → select user → set door lock code. If the keypad does not respond at all, check the battery.</p>'},
-  ]},
-  thermo:{title:'Thermostat',issues:[
-    {q:"Thermostat isn't controlling temperature correctly.",a:'<p>First check your schedule in the app — a schedule override may be fighting manual settings. Also verify the thermostat is in the correct mode (Heat/Cool/Auto). In Texas, most people run Cool all year.</p>'},
-    {q:'Thermostat shows offline in the app.',a:'<ol><li>Check that the thermostat screen is on and responsive</li><li>Reboot your router and panel</li><li>On the thermostat, go to Settings → WiFi and reconnect to your network</li></ol>'},
-  ]},
-  smoke:{title:'Smoke / CO Detector',issues:[
-    {q:'False alarm — went off for no reason.',a:'<p>Common causes: cooking smoke or steam, dust buildup (vacuum gently), insects inside the chamber (tap the case), or low battery causing erratic behavior.</p>'},
-    {q:'Chirping or beeping periodically.',a:'<p>Periodic chirping (every 30-60 seconds) almost always means <strong>low battery</strong>. Replace batteries even if the low battery light is not on. If it chirps after fresh batteries, the unit may be at end of life (10 years) — text me and I can replace it.</p>'},
-    {q:'How do I test my smoke detector?',a:'<p>Put system in <strong>Test Mode</strong> first (app → Settings → Test Mode). Hold the test button on the detector for 5 seconds. You should hear an alarm and see it register in the app. Test quarterly — January, April, July, October.</p>'},
-  ]},
-};
 
-function initTS() {
-  const grid = document.getElementById('ts-dev-grid');
-  const tsDevices = ['door','window','motion','doorbell','outdoor','lock','thermo','smoke'];
-  const names = {door:'Door Sensor',window:'Window Sensor',motion:'Motion Detector',doorbell:'Doorbell Camera',outdoor:'Outdoor Camera',lock:'Smart Lock',thermo:'Thermostat',smoke:'Smoke / CO'};
-  grid.innerHTML = tsDevices.map(id => `
-    <div class="dev-card" data-id="${id}" onclick="selectTSDev('${id}',this)">
-      <div class="dev-icon">${SVGS[id]||''}</div>
-      <div class="dev-name">${names[id]}</div>
-    </div>`).join('');
-  document.getElementById('ts-issues-wrap').innerHTML = '';
-}
 
-function selectTSDev(id, el) {
-  document.querySelectorAll('#ts-dev-grid .dev-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
-  const data = TS_DATA[id];
-  if (!data) return;
-  const wrap = document.getElementById('ts-issues-wrap');
-  wrap.innerHTML = `
-    <div style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--g);margin-bottom:12px;">${data.title} — Common Issues</div>
-    ${data.issues.map((issue,i)=>`
-      <div class="ts-card">
-        <button class="ts-btn" onclick="toggleTS(this)"><span class="ts-q">${issue.q}</span><span class="ts-arr">↓</span></button>
-        <div class="ts-body">${issue.a}</div>
-      </div>`).join('')}
-    <div class="stuck-strip">
-      <div class="stuck-title">Still stuck?</div>
-      <div class="stuck-sub">Text me directly or schedule a visit — I'll take care of it.</div>
-      <div class="stuck-btns">
-        <a class="stuck-btn stuck-btn-sms" href="sms:+18013769296">Text Adam →</a>
-        <button class="stuck-btn stuck-btn-svc" onclick="switchPopup('popup-ts','popup-service')">Schedule a Service Visit →</button>
-      </div>
-    </div>`;
-  wrap.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
 
-function toggleTS(btn) {
-  const body = btn.nextElementSibling;
-  const open = !body.classList.contains('open');
-  btn.classList.toggle('open', open);
-  body.classList.toggle('open', open);
-}
+
+
+
+
 
 function toggleTip(btn) {
   const body = btn.nextElementSibling;
@@ -1327,17 +1532,26 @@ async function submitReferral() {
   const creditType = document.querySelector('input[name="ref-credit"]:checked').value;
   const refCode = document.getElementById('ref-code').value.trim();
   if (!yourName || !nbrName) { alert('Please enter your name and your neighbor\'s name.'); return; }
-  const data = {yourName, yourPhone, nbrName, nbrPhone, notes, creditType, refCode};
-  saveLocal('referral', data);
-  await sendW3('New Referral', `From: ${yourName} (${yourPhone})\nNeighbor: ${nbrName} (${nbrPhone})\nNotes: ${notes}\nCredit via: ${creditType === 'code' ? 'Code: ' + refCode : 'Address'}`);
-  document.getElementById('ref-form').style.display = 'none';
-  document.getElementById('ref-success').style.display = 'block';
-  // Auto-open pre-drafted SMS to neighbor
+
+  // ── Open SMS FIRST — must be synchronous within user gesture on iOS ──
   if (nbrPhone) {
     const rawPhone = nbrPhone.replace(/\D/g,'');
-    const msg = encodeURIComponent(`Hey ${nbrFirst || nbrName}! I just submitted your information for a Vivint referral. If you sign up, you get a big discount and I get referral credits. I submitted this to my alarm guy Adam and he will reach out to you shortly! His number is (801) 376-9296.`);
-    setTimeout(() => window.open(`sms:${rawPhone}?body=${msg}`), 800);
+    const greeting = nbrFirst || nbrName;
+    const msg = encodeURIComponent('Hey ' + greeting + '! I just submitted your information for a Vivint referral. If you sign up, you get a big discount and I get referral credits. I submitted this to my alarm guy Adam and he will reach out to you shortly! His number is (801) 376-9296.');
+    // iOS uses & as separator, Android uses ?
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const sep = isIOS ? '&' : '?';
+    window.open('sms:' + rawPhone + sep + 'body=' + msg, '_blank');
   }
+
+  // Show success immediately — don't make user wait for network
+  document.getElementById('ref-form').style.display = 'none';
+  document.getElementById('ref-success').style.display = 'block';
+
+  // Then async saves (user already sees success + SMS opened)
+  const data = {yourName, yourPhone, nbrName, nbrPhone, notes, creditType, refCode};
+  saveLocal('referral', data);
+  sendW3('New Referral', 'From: ' + yourName + ' (' + yourPhone + ')\nNeighbor: ' + nbrName + ' (' + nbrPhone + ')\nNotes: ' + notes + '\nCredit via: ' + (creditType === 'code' ? 'Code: ' + refCode : 'Address'));
 }
 
 async function submitService() {
@@ -1461,6 +1675,707 @@ map.on('load',()=>{
     new mapboxgl.Marker({element:el}).setLngLat([p.lng,p.lat]).setPopup(popup).addTo(map);
   });
 });
+
+// ── ICON RENDERER ─────────────────────────────────────────────
+// Fills every [data-svg] element from the central SVGS registry.
+// Call after any innerHTML update. Never paste SVGs elsewhere.
+function renderIcons(root) {
+  (root || document).querySelectorAll('[data-svg]').forEach(el => {
+    const id = el.getAttribute('data-svg');
+    if (id && SVGS[id]) el.innerHTML = SVGS[id];
+  });
+}
+document.addEventListener('DOMContentLoaded', () => renderIcons());
+
+// ── TROUBLESHOOT NAVIGATION ──────────────────────────────────
+// TS_TREE  = category/subcategory/device structure
+// TS_DATA  = issue content keyed by device id (Gemini data drops in here)
+// tsNav    = current navigation state
+// All rendering flows through tsRender() based on state
+
+const TS_TREE = [
+  {
+    id:'app', label:'Mobile & Web Access', icon:'📱', flat:true,
+    devices:[
+      {id:'vivint-app', label:'Vivint Smart Home App', svg:null},
+    ]
+  },
+  {
+    id:'cameras', label:'Cameras & Video', icon:'📷', flat:false,
+    subcategories:[
+      {
+        id:'outdoor-cams', label:'Outdoor Cameras', emoji:'🏠',
+        devices:[
+          {id:'outdoor-pro-3',  label:'Outdoor Camera Pro Gen 3', svg:'outdoor'},
+          {id:'outdoor-pro-2',  label:'Outdoor Camera Pro Gen 2', svg:'outdoor'},
+          {id:'outdoor-pro-1',  label:'Outdoor Camera Pro',       svg:'outdoor'},
+          {id:'outdoor-cam',    label:'Outdoor Camera',           svg:'outdoor'},
+          {id:'spotlight-pro',  label:'Vivint Spotlight Pro',     svg:'spotlight'},
+        ]
+      },
+      {
+        id:'doorbell-cams', label:'Doorbell Cameras', emoji:'🔔',
+        devices:[
+          {id:'doorbell-pro-2', label:'Doorbell Camera Pro Gen 2', svg:'doorbell'},
+          {id:'doorbell-pro-1', label:'Doorbell Camera Pro',       svg:'doorbell'},
+          {id:'doorbell-cam',   label:'Vivint Doorbell Camera',    svg:'doorbell'},
+          {id:'chime-ext',      label:'Vivint Chime Extender',     svg:null},
+        ]
+      },
+      {
+        id:'indoor-cams', label:'Indoor Cameras', emoji:'🏠',
+        devices:[
+          {id:'indoor-pro',  label:'Indoor Camera Pro',    svg:'indoor'},
+          {id:'indoor-cam',  label:'Vivint Indoor Camera', svg:'indoor'},
+        ]
+      },
+      {
+        id:'storage', label:'Storage & Playback', emoji:'💾',
+        devices:[
+          {id:'vivint-playback',    label:'Vivint Playback',    svg:null},
+          {id:'vivint-smart-drive', label:'Vivint Smart Drive', svg:null},
+        ]
+      },
+    ]
+  },
+  {
+    id:'panels', label:'Panels & Touchscreens', icon:'🖥️', flat:true,
+    devices:[
+      {id:'smart-hub-pro2',  label:'Smart Hub Pro 2',          svg:'hub'},
+      {id:'smart-hub',       label:'Vivint Smart Hub',         svg:'hub'},
+      {id:'skycontrol',      label:'SkyControl',               svg:'hub'},
+      {id:'keypad-std',      label:'Vivint Keypad',            svg:'keypad'},
+      {id:'keypad-lr',       label:'Vivint Keypad Long Range', svg:'keypad'},
+      {id:'security-hub-pnl',label:'Vivint Security Hub',      svg:'hub'},
+    ]
+  },
+  {
+    id:'locks', label:'Locks & Access', icon:'🔒', flat:false,
+    subcategories:[
+      {
+        id:'smart-locks', label:'Smart Locks', emoji:'🔑',
+        devices:[
+          {id:'lock-892', label:'Smart Lock 892', svg:'lock'},
+          {id:'lock-910', label:'Smart Lock 910', svg:'lock'},
+          {id:'lock-888', label:'Smart Lock 888', svg:'lock'},
+        ]
+      },
+      {
+        id:'garage-doors', label:'Garage Doors', emoji:'🚗',
+        devices:[
+          {id:'garage-ctrl',  label:'Smart Garage Door Controller',     svg:'garage'},
+          {id:'myq-basic',    label:'myQ Garage Door Controller',       svg:'garage'},
+          {id:'myq-smart',    label:'myQ Smart Garage Door Controller', svg:'garage'},
+        ]
+      },
+    ]
+  },
+  {
+    id:'sensors', label:'Sensors', icon:'📡', flat:false,
+    subcategories:[
+      {
+        id:'entry-sensors', label:'Security & Entry', emoji:'🚪',
+        devices:[
+          {id:'door-window-sensor', label:'Door and Window Sensor',          svg:'door'},
+          {id:'door-window-lr',     label:'Door and Window Sensor Long Range',svg:'window'},
+          {id:'door-sensor',        label:'Vivint Door Sensor',              svg:'door'},
+          {id:'motion-sensor',      label:'Vivint Motion Sensor',            svg:'motion'},
+          {id:'motion-lr',          label:'Motion Sensor Long Range',        svg:'motion'},
+          {id:'tilt-sensor',        label:'Tilt Sensor',                     svg:null},
+          {id:'glass-break',        label:'Glass Break Detector',            svg:'glass'},
+        ]
+      },
+      {
+        id:'safety-sensors', label:'Safety & Hazard', emoji:'🔥',
+        devices:[
+          {id:'smoke-det',       label:'Vivint Smoke Detector',     svg:'smoke'},
+          {id:'co-det',          label:'Vivint CO Detector',        svg:'smoke'},
+          {id:'smoke-co-combo',  label:'Combo Smoke and CO Detector',svg:'smoke'},
+          {id:'smoke-co-monitor',label:'Smoke and CO Monitor',      svg:'smoke'},
+          {id:'water-sensor',    label:'Vivint Water Sensor',       svg:'water'},
+          {id:'flood-freeze',    label:'Flood and Freeze Sensor',   svg:'water'},
+        ]
+      },
+      {
+        id:'remotes', label:'Remotes & Panic', emoji:'🆘',
+        devices:[
+          {id:'key-fob',       label:'Key Fob (V-SKEY1)',         svg:'keyfob'},
+          {id:'panic-pendant', label:'Vivint Emergency Pendant',  svg:'panic'},
+        ]
+      },
+    ]
+  },
+  {
+    id:'thermostats', label:'Thermostats', icon:'🌡️', flat:true,
+    devices:[
+      {id:'vivint-thermo', label:'Vivint Smart Thermostat', svg:'thermo'},
+      {id:'nest-thermo',   label:'Google Nest Thermostat',  svg:null},
+    ]
+  },
+  {
+    id:'lighting', label:'Lighting & Appliance', icon:'💡', flat:true,
+    devices:[
+      {id:'philips-hue',     label:'Philips Hue',                  svg:null},
+      {id:'smart-plug-dev',  label:'Vivint Smart Plug',            svg:'plug'},
+      {id:'smart-bulbs',     label:'Smart Light Bulbs',            svg:null},
+      {id:'light-switch',    label:'Vivint Smart Light Switch',    svg:null},
+      {id:'lighting-bridge', label:'Vivint Smart Lighting Bridge', svg:null},
+    ]
+  },
+  {
+    id:'integrations', label:'Smarter with Vivint', icon:'🔗', flat:true,
+    devices:[
+      {id:'google-home',    label:'Google Home',            svg:null},
+      {id:'google-nest-int',label:'Google Nest Thermostat', svg:null},
+      {id:'hue-int',        label:'Philips Hue',            svg:null},
+      {id:'amazon-echo',    label:'Amazon Echo',            svg:null},
+    ]
+  },
+];
+
+// ── ISSUE DATA ─────────────────────────────────────────────────
+// Keys match device ids in TS_TREE. Gemini content drops directly here.
+// Format per device: { issues: [{q:'Question?', a:'<p>HTML fix</p>'}] }
+const TS_DATA = {
+  // ── Panels ──────────────────────────────────────────────────
+  'smart-hub-pro2':{issues:[
+    {q:'Panel offline or showing a red light.',a:'<ol><li>Unplug the panel from the wall outlet</li><li>If it has a battery backup, hold the power button 10 seconds to fully power down</li><li>Wait 30 seconds</li><li>Plug back in — give it 2–3 minutes to reconnect</li><li>Status light should cycle red → yellow → solid green</li></ol>'},
+    {q:'Panel beeping or making noise.',a:'<p>Common causes:</p><ul><li><strong>Low battery</strong> — backup battery needs replacing (every 3–5 years)</li><li><strong>Power outage</strong> — running on battery backup, beeps until power restored</li><li><strong>Alarm triggered</strong> — disarm with your PIN on panel or in app</li><li><strong>Tamper alert</strong> — panel cover not fully seated, press firmly until it clicks</li></ul>'},
+    {q:'Touchscreen unresponsive or frozen.',a:'<ol><li>Hold power button 3 seconds for a soft reset</li><li>If still frozen: unplug from wall, hold power button 10 sec, wait 30 sec, plug back in</li><li>Screen stays black after restart — text me, may need a replacement panel</li></ol>'},
+  ]},
+  'smart-hub':{issues:[
+    {q:'Panel offline or showing a red light.',a:'<ol><li>Unplug from wall outlet</li><li>Hold power button 10 seconds if battery backup present</li><li>Wait 30 seconds, plug back in</li><li>Allow 2–3 minutes to reconnect — status should go red → yellow → green</li></ol>'},
+    {q:'Panel beeping or sounding an alert.',a:'<ul><li><strong>Low battery</strong> — backup battery needs replacing</li><li><strong>Power loss</strong> — running on battery, will resolve when power returns</li><li><strong>Alarm active</strong> — disarm with PIN or app</li><li><strong>Tamper</strong> — press panel cover firmly until seated</li></ul>'},
+    {q:'Touchscreen frozen or not responding.',a:'<ol><li>Hold power button 3 seconds for soft restart</li><li>Full cycle: unplug, hold power 10 sec, wait 30 sec, plug back in</li><li>Still black or frozen after restart — text me</li></ol>'},
+  ]},
+  'keypad-std':{issues:[
+    {q:'Keypad not responding to button presses.',a:'<ol><li>Check battery if battery-powered</li><li>If hardwired, check connection at back of keypad</li><li>Reboot the panel</li><li>Locked out after too many wrong attempts — usually unlocks in 5 minutes</li></ol>'},
+    {q:'PIN code stopped working.',a:'<p>Codes can wipe after panel firmware updates. Re-add through app: Settings → Users → select user → assign keypad code. Text me if keypad shows an error message — may need to re-pair.</p>'},
+  ]},
+  'keypad-lr':{issues:[
+    {q:'Long range keypad losing connection intermittently.',a:'<p>Long range keypads still have distance limits. If it keeps dropping, the panel may be too far or there is too much interference between them. Try repositioning the keypad closer to the panel, or text me to assess signal.</p>'},
+    {q:'PIN not accepted at the keypad.',a:'<p>Re-add the code through app: Settings → Users → select user → assign code. If keypad shows an error, it may need to be re-paired — text me.</p>'},
+  ]},
+  // ── Cameras ─────────────────────────────────────────────────
+  'outdoor-pro-3':{issues:[
+    {q:'Camera is offline or showing a gray screen.',a:'<ol><li>Power cycle the camera — cut power at the breaker or outlet, wait 60 seconds, restore</li><li>Reboot the panel</li><li>Still offline after 5 minutes — text me, may be a hardware issue</li></ol>'},
+    {q:'Too many false motion alerts.',a:'<p>Draw <strong>activity zones</strong> in the app to limit detection to areas you care about. Lower motion sensitivity one notch in camera settings. If trees or bushes are in frame, exclude them from the zone.</p>'},
+    {q:'Night vision looks blurry or foggy.',a:'<p>Check for <strong>spider webs or dust</strong> on the lens — extremely common outdoors and ruins night vision. Wipe with a microfiber cloth. Make sure the camera is not pointing directly at a bright outdoor light.</p>'},
+  ]},
+  'outdoor-pro-2':{issues:[
+    {q:'Camera offline or gray screen.',a:'<ol><li>Power cycle at breaker or outlet — wait 60 seconds</li><li>Reboot panel</li><li>Still offline after 5 minutes — text me</li></ol>'},
+    {q:'Excessive false motion triggers.',a:'<p>Set activity zones in app to target only relevant areas. Lower sensitivity one notch. Ensure the camera is not aimed at moving branches or street traffic.</p>'},
+  ]},
+  'outdoor-pro-1':{issues:[
+    {q:'Camera offline or gray screen.',a:'<ol><li>Power cycle at breaker or outlet — wait 60 seconds</li><li>Reboot panel</li><li>Still offline after 5 minutes — text me</li></ol>'},
+    {q:'Poor video quality.',a:'<p>Clean the lens with a microfiber cloth. Check WiFi signal strength in app — below 60% will cause quality issues. A WiFi extender near the camera helps if signal is weak.</p>'},
+  ]},
+  'outdoor-cam':{issues:[
+    {q:'Camera offline.',a:'<ol><li>Power cycle at outlet or breaker</li><li>Wait 60 seconds and restore power</li><li>Reboot panel</li><li>Still offline — text me</li></ol>'},
+    {q:'Too many false alerts.',a:'<p>Draw activity zones in the app. Lower sensitivity. Exclude areas with moving objects like trees or traffic.</p>'},
+  ]},
+  'spotlight-pro':{issues:[
+    {q:'Spotlights not triggering on motion.',a:'<p>In app → camera settings → Light Settings. Make sure spotlight is set to trigger on motion. Check that the time schedule is not restricting it to night-only if you want daytime triggers too.</p>'},
+    {q:'Camera offline.',a:'<ol><li>Check the outlet or junction box it is powered from</li><li>Power cycle by cutting and restoring power</li><li>Reboot panel</li><li>Still offline after 5 min — text me</li></ol>'},
+  ]},
+  'doorbell-pro-2':{issues:[
+    {q:'Not getting notifications when someone rings.',a:'<ol><li>Toggle doorbell alerts off/on in app notification settings</li><li>Check Vivint app has notification permissions on your phone (iOS: Settings → Vivint → Notifications)</li><li>Check for Do Not Disturb or Focus mode</li><li>Sign out of app and back in</li></ol>'},
+    {q:'Video choppy or lags when answering.',a:'<p>WiFi signal issue. Check signal strength in app → camera settings. Below 60% — router is too far. A WiFi extender near the front door makes a big difference. Upload speed should be at least 10Mbps.</p>'},
+    {q:'Camera offline.',a:'<ol><li>Press doorbell button — see if it lights up</li><li>Reboot router</li><li>Reboot panel</li><li>Still offline after 5 minutes — may be a wiring issue, text me</li></ol>'},
+  ]},
+  'doorbell-pro-1':{issues:[
+    {q:'Not receiving ring notifications.',a:'<ol><li>Check app notification permissions on your phone</li><li>Toggle doorbell alerts in app settings</li><li>Check Do Not Disturb mode</li><li>Sign out and back into the app</li></ol>'},
+    {q:'Live video laggy or choppy.',a:'<p>WiFi signal — check strength in app. Below 60% add a WiFi extender near the front door. Also verify upload speed is at least 10Mbps.</p>'},
+  ]},
+  'doorbell-cam':{issues:[
+    {q:'Not getting ring alerts.',a:'<ol><li>Check app notification permissions</li><li>Toggle alerts off/on in app settings</li><li>Restart the Vivint app</li></ol>'},
+    {q:'Video quality poor.',a:'<p>Clean lens with microfiber. Check WiFi signal in app. Below 60% — consider a WiFi extender near the front door.</p>'},
+  ]},
+  'indoor-pro':{issues:[
+    {q:'Camera offline or gray screen.',a:'<ol><li>Unplug and plug back in</li><li>Verify WiFi is working on other devices</li><li>Reboot panel</li><li>Re-add camera in app if still not appearing</li></ol>'},
+    {q:'Blurry or pixelated image.',a:'<p>WiFi signal issue. Check signal strength in app — below 60% causes video quality problems. Move camera closer to router or add a WiFi extender.</p>'},
+  ]},
+  'indoor-cam':{issues:[
+    {q:'Camera offline.',a:'<ol><li>Unplug camera, wait 15 seconds, plug back in</li><li>Reboot panel</li><li>If still offline, re-add in app under devices</li></ol>'},
+    {q:'Keeps dropping connection intermittently.',a:'<p>Almost always WiFi instability — signal is strong enough to connect but not maintain a stream. A 2.4GHz extender in the same room helps significantly.</p>'},
+  ]},
+  // ── Sensors ─────────────────────────────────────────────────
+  'door-window-sensor':{issues:[
+    {q:'Shows Open when door or window is closed.',a:'<p>Magnet and sensor are misaligned — need to be within about 1 inch of each other. Open and close slowly, feel if the magnet is catching. Adjust the magnet piece slightly. Still not working — text me, easy in-person fix.</p>'},
+    {q:'Showing offline.',a:'<p>Reboot panel. Still offline — pull the sensor and check the battery (CR2032). The sensor should flash an LED when you press the test button. No response means replace battery.</p>'},
+  ]},
+  'door-window-lr':{issues:[
+    {q:'Shows Open when closed.',a:'<p>Long range sensor still needs the magnet within about 1 inch. Check alignment. Also verify the door or window is fully closing — gaps in the frame can prevent a clean read.</p>'},
+    {q:'Keeps dropping offline.',a:'<p>Long range sensors extend the network but can still have signal gaps. Reboot panel. If it keeps dropping, text me — may need a range extender or repositioning.</p>'},
+  ]},
+  'door-sensor':{issues:[
+    {q:'Shows Open when door is closed.',a:'<p>Magnet misalignment. The two pieces need to be within about 1 inch. Adjust up or down slightly. Still wrong — text me.</p>'},
+    {q:'False alarms.',a:'<p>Usually the door vibrating from HVAC or wind. Check if weatherstripping is tight. Try increasing alarm delay in settings. If the door is warped or drafty, that is the root cause.</p>'},
+  ]},
+  'motion-sensor':{issues:[
+    {q:'Triggers constantly when no one is home.',a:'<p>Common causes: <strong>pets</strong> (enable Pet Immune mode), HVAC airflow blowing across sensor, afternoon sunlight shifting across field of view, curtains or plants near a window. Try repositioning slightly.</p>'},
+    {q:'Not detecting motion.',a:'<p>Check for obstructions — furniture, shelving, or cobwebs on the lens. Verify sensor is not bypassed in app under device status.</p>'},
+  ]},
+  'motion-lr':{issues:[
+    {q:'Frequent false triggers.',a:'<p>Long range motion sensors cover a larger area and can pick up more background movement. Lower sensitivity in app settings. Set activity zones if available. Common culprits: HVAC vents, pets, sunlight movement.</p>'},
+    {q:'Sensor offline.',a:'<p>Reboot panel. Check battery. Long range sensors communicate differently — if they keep dropping, the path to the panel may need a repeater. Text me to assess.</p>'},
+  ]},
+  'glass-break':{issues:[
+    {q:'Going off when no glass broke.',a:'<p>Glass break detectors are sensitive to frequencies similar to breaking glass. Common false triggers: TV audio with glass sounds, jingling keys, high-pitched music, clanging dishes. Lower sensitivity in app if false alarms are frequent.</p>'},
+    {q:'Sensor offline.',a:'<p>Reboot panel. Check battery (CR123A). Sensor should flash LED when you press test button. No response — replace battery.</p>'},
+    {q:'How do I test it?',a:'<p>Put system in <strong>Test Mode</strong> (app → Settings → Test Mode). A glass break tester (small clapper device) will confirm it is working. Text me — I carry them and can test on my next visit.</p>'},
+  ]},
+  'tilt-sensor':{issues:[
+    {q:'Garage door showing wrong status in app.',a:'<p>The tilt sensor has shifted. It sits flat on the door panel. Re-seat it level against the door, then open and close the door manually once to recalibrate the status.</p>'},
+    {q:'Sensor offline.',a:'<p>Reboot panel. Check battery (CR2032). Vibration from the garage door can drain batteries faster than other sensors — replace more frequently if needed.</p>'},
+  ]},
+  'smoke-det':{issues:[
+    {q:'False alarm — went off for no reason.',a:'<p>Common causes: cooking smoke or steam near detector, dust buildup (vacuum gently), insects inside the chamber (tap case), low battery causing erratic behavior.</p>'},
+    {q:'Chirping periodically.',a:'<p>Almost always <strong>low battery</strong>. Replace batteries even if the low battery indicator is not on. Chirps after fresh batteries — unit may be at end of life (10 years). Text me and I can replace it.</p>'},
+    {q:'How do I test it?',a:'<p>Put system in <strong>Test Mode</strong> (app → Settings → Test Mode). Hold test button on detector 5 seconds — you should hear alarm and see it register in app. Test quarterly.</p>'},
+  ]},
+  'co-det':{issues:[
+    {q:'CO detector going off with no apparent source.',a:'<p>CO detectors are sensitive to fuel-burning appliances. Check for running vehicles in attached garage, gas furnace issues, or blocked vents. <strong>If CO is suspected, leave the building immediately and call 911.</strong> Once outside, text me to schedule an inspection.</p>'},
+    {q:'Chirping or low battery alert.',a:'<p>Replace batteries immediately. CO detectors should be replaced every 5–7 years regardless of battery status.</p>'},
+  ]},
+  'smoke-co-combo':{issues:[
+    {q:'Alarm going off with no visible smoke or CO source.',a:'<p>For smoke: check cooking, steam, dust. For CO: check fuel-burning appliances and ventilation. <strong>For CO alarms — evacuate first, then investigate.</strong> Text me to inspect after the all-clear.</p>'},
+    {q:'Chirping.',a:'<p>Low battery. Replace batteries. If chirping continues after fresh batteries, the unit may be at end of life — text me for a replacement.</p>'},
+  ]},
+  'smoke-co-monitor':{issues:[
+    {q:'Monitor showing an alert in the app with no alarm.',a:'<p>The monitor tracks air quality and may alert before the alarm threshold. Check for nearby smoke sources, cooking, or HVAC issues. Clear the alert in app if environment is safe.</p>'},
+    {q:'Device offline.',a:'<p>Reboot panel. Check power connection. If battery-operated, replace batteries.</p>'},
+  ]},
+  'water-sensor':{issues:[
+    {q:'Water sensor triggered but no water visible.',a:'<p>High humidity can trigger water sensors — common in bathrooms, laundry, or near AC units. Elevate the sensor slightly off the floor. Adjust sensitivity in app if needed.</p>'},
+    {q:'Sensor offline.',a:'<p>Water sensors use a small coin battery (CR2032). Replace battery — they drain faster due to humidity detection circuitry. Reboot panel after replacing.</p>'},
+    {q:'Where is the best place for it?',a:'<p>Best spots: in front of water heater, under kitchen sink, under bathroom sinks, next to washer, near refrigerator water line. Place flat on the floor — water pools at the lowest point first.</p>'},
+  ]},
+  'flood-freeze':{issues:[
+    {q:'Sensor triggered with no flood or freezing.',a:'<p>The freeze function triggers at around 41°F (5°C). If placed near an air conditioning vent or in an uninsulated space, temperature drops can trigger it. Reposition away from cold air sources.</p>'},
+    {q:'Sensor offline.',a:'<p>Check and replace the battery. Reboot the panel. Flood/freeze sensors can drain faster in cold environments.</p>'},
+  ]},
+  'key-fob':{issues:[
+    {q:'Key fob not arming or disarming.',a:'<ol><li>Check battery (CR2032) — replace if over a year old</li><li>Press and hold button 1–2 seconds, not just a tap</li><li>Stand within range of panel — typically 100 feet</li><li>Verify key fob is active in app: Settings → Devices → Key Fobs</li></ol>'},
+    {q:'Key fob was lost — how do I deactivate it?',a:'<p>App → Settings → Devices → Key Fobs → select the lost fob → Delete or Disable. This immediately prevents it from arming or disarming your system. Text me if you need help.</p>'},
+    {q:'Key fob showing offline.',a:'<p>Key fobs only communicate when a button is pressed — no constant connection. "Offline" just means it has not been used recently. Test it by pressing a button.</p>'},
+  ]},
+  'panic-pendant':{issues:[
+    {q:'Accidentally triggered the panic button.',a:'<p>Call Vivint monitoring immediately at the number on your panel to cancel the dispatch. They will ask for your verbal passcode. Act fast — if not cancelled in about 30 seconds, police may be dispatched.</p>'},
+    {q:'Pendant not triggering the alarm when pressed.',a:'<ol><li>Put system in Test Mode first</li><li>Press and hold button 2–3 seconds — a quick tap may not register</li><li>Check battery (CR2032)</li><li>Make sure you are within range of the panel</li></ol>'},
+    {q:'Battery draining too fast.',a:'<p>If pendant is in an area with weak signal, it constantly tries to maintain connection and drains faster. Keep it closer to the panel.</p>'},
+  ]},
+  // ── Locks ────────────────────────────────────────────────────
+  'lock-892':{issues:[
+    {q:"Lock won't respond to the app.",a:'<ol><li>Make sure door is fully closed — lock will not engage if latch does not align</li><li>Reboot the panel</li><li>Check battery — replace with fresh AAs</li><li>Remove and re-add the lock in app if still unresponsive</li></ol>'},
+    {q:'PIN code not working.',a:'<p>Codes can get wiped after firmware updates. Re-add through app: Settings → Users → select user → set door lock code. If keypad does not respond, check the battery.</p>'},
+  ]},
+  'lock-910':{issues:[
+    {q:"Lock not responding to app commands.",a:'<ol><li>Verify door is fully closed</li><li>Reboot panel</li><li>Replace batteries</li><li>Re-add lock in app if still not responding</li></ol>'},
+    {q:'Access code stopped working.',a:'<p>Re-add through app: Settings → Users → select user → set lock code. Text me if lock is showing an error code on the keypad.</p>'},
+  ]},
+  'lock-888':{issues:[
+    {q:"Lock unresponsive.",a:'<ol><li>Check door is fully closed</li><li>Reboot panel</li><li>Replace batteries with fresh AAs</li><li>Re-add lock in app if needed</li></ol>'},
+    {q:'Code not accepted.',a:'<p>Re-add through app. Each user should have their own unique code. If the keypad display shows an error, text me.</p>'},
+  ]},
+  'garage-ctrl':{issues:[
+    {q:"Garage won't open or close from app.",a:'<ol><li>Check tilt sensor on door is aligned properly</li><li>Verify controller has power — LED should be visible</li><li>Check car is not blocking the sensor beam at bottom of door</li><li>If app shows wrong status, tilt sensor may need repositioning</li></ol>'},
+    {q:'App shows wrong door status.',a:'<p>Tilt sensor has shifted. Re-seat it flat and level against the door panel. Open and close door manually once to recalibrate.</p>'},
+  ]},
+  'myq-basic':{issues:[
+    {q:'myQ not connecting or syncing with Vivint.',a:'<p>The myQ controller needs to be paired to your Vivint system through the app. Go to app → Devices → Add Device → follow myQ pairing steps. If already paired and not working, remove and re-add it.</p>'},
+    {q:'Garage status wrong in app.',a:'<p>The myQ uses a door sensor to detect open/close state. Check that the sensor on the door is properly seated and the magnet is aligned. Remove and re-pair if still showing wrong status.</p>'},
+  ]},
+  'myq-smart':{issues:[
+    {q:'myQ Smart not responding in app.',a:'<p>Try removing and re-adding in app. Verify the myQ hub has power and is connected to your WiFi. The app will guide you through re-pairing.</p>'},
+    {q:'Garage door opens/closes on its own.',a:'<p>Check your automations in the Vivint app — there may be a rule triggering it. Also check if any schedules are set in the myQ app directly. Disable any unexpected rules.</p>'},
+  ]},
+  // ── Thermostats ──────────────────────────────────────────────
+  'vivint-thermo':{issues:[
+    {q:"Thermostat not controlling temperature correctly.",a:'<p>Check your schedule in app — a schedule override may be fighting manual settings. Verify mode is set correctly (Heat/Cool/Auto). In Texas, most people run Cool mode year-round. Auto mode can cause issues if system is not calibrated for it.</p>'},
+    {q:'Thermostat offline in app.',a:'<ol><li>Check thermostat screen is on and responsive</li><li>Reboot router and panel</li><li>On thermostat: Settings → WiFi → reconnect to your network</li><li>Still offline — text me</li></ol>'},
+  ]},
+  'nest-thermo':{issues:[
+    {q:'Nest not syncing with Vivint app.',a:'<p>Nest integration requires the Google Home app to be linked. In Vivint app: Settings → Integrations → Google Nest → follow linking steps. If already linked, remove and re-link.</p>'},
+    {q:'Nest not responding to Vivint automations.',a:'<p>Automations that control Nest work through the Google integration. Verify the integration is active in Vivint app and that the Nest app itself has no conflicting schedules set.</p>'},
+  ]},
+  // ── Lighting ────────────────────────────────────────────────
+  'smart-plug-dev':{issues:[
+    {q:"Device plugged in won't turn on or off from app.",a:'<ol><li>Check smart plug LED is lit</li><li>Toggle plug off and on from app</li><li>Unplug plug, wait 10 seconds, plug back in</li><li>Reboot panel if still unresponsive</li></ol>'},
+    {q:'Smart plug shows offline.',a:'<p>Unplug completely, wait 15 seconds, plug back in. Give it 2 minutes to reconnect. If keeps dropping, try a different outlet closer to panel or router.</p>'},
+  ]},
+  'philips-hue':{issues:[
+    {q:'Hue lights not responding in Vivint app.',a:'<p>The Hue integration works through the Vivint Smart Lighting Bridge or direct app integration. Check that the Hue Bridge has power and is on the same WiFi network. Remove and re-add the integration in Vivint app if needed.</p>'},
+    {q:'Lights not responding to automations.',a:'<p>Test the lights in the Philips Hue app first to confirm they are working independently. If they work in the Hue app but not Vivint, the integration may need to be refreshed — remove and re-add in app settings.</p>'},
+  ]},
+  // ── App ─────────────────────────────────────────────────────
+  'vivint-app':{issues:[
+    {q:'App not sending notifications.',a:'<ol><li>iOS: Settings → Vivint → Notifications → enable all</li><li>Android: Settings → Apps → Vivint → Notifications → enable</li><li>Check Do Not Disturb and Focus modes</li><li>Toggle each notification type off and back on in Vivint app settings</li><li>Sign out and back in if still not working</li></ol>'},
+    {q:'App showing devices offline even though system seems fine.',a:'<p>This is usually a sync issue. Pull down to refresh on the main screen. If devices still show offline, sign out and back in. If the issue persists, reboot your panel — the app reflects the panel\'s last known state.</p>'},
+    {q:'Live camera feeds not loading.',a:'<p>Camera streams require a stable internet connection with decent upload speed. Check your WiFi or switch to cellular data to test. If streams load on cellular but not WiFi, your router may need a reboot.</p>'},
+    {q:'App keeps crashing or freezing.',a:'<ol><li>Force close and reopen the app</li><li>Check for app updates in the App Store or Google Play</li><li>Clear app cache (Android: Settings → Apps → Vivint → Clear Cache)</li><li>Uninstall and reinstall if still crashing</li></ol>'},
+  ]},
+  // ── Integrations ────────────────────────────────────────────
+  'google-home':{issues:[
+    {q:'Google Home not controlling Vivint devices.',a:'<p>Re-link the integration: In Google Home app → Settings → Works with Google → find Vivint → unlink then re-link. You will need your Vivint login credentials.</p>'},
+    {q:'Voice commands not working.',a:'<p>Say "Hey Google, sync my devices" to force a sync. If Vivint devices still do not respond, check that the Google Home integration is active in the Vivint app under Settings → Integrations.</p>'},
+  ]},
+  'amazon-echo':{issues:[
+    {q:'Alexa not controlling Vivint devices.',a:'<p>In Alexa app → Skills & Games → search Vivint → enable skill → link your Vivint account. Then say "Alexa, discover devices." If already linked, disable and re-enable the skill.</p>'},
+    {q:'Alexa voice commands not working.',a:'<p>Say "Alexa, discover my devices" to sync. Check that the Vivint skill is still active and your account is still linked in the Alexa app.</p>'},
+  ]},
+};
+
+// ── NAV STATE ─────────────────────────────────────────────────
+// tsNav declared at top of script
+
+// ── HELPERS ───────────────────────────────────────────────────
+function tsGetCat(id)   { return TS_TREE.find(c=>c.id===id); }
+function tsGetSub(cat,subId) { return cat.subcategories?.find(s=>s.id===subId); }
+function tsDevCount(cat) {
+  if (cat.flat) return cat.devices.length;
+  return cat.subcategories.reduce((n,s)=>n+s.devices.length, 0);
+}
+
+// ── MAIN ENTRY ────────────────────────────────────────────────
+function initTS() {
+  tsNav = { view:'cats', cat:null, sub:null, dev:null };
+  tsRender();
+}
+
+function tsRender() {
+  const body = document.getElementById('ts-popup-body');
+  if (body) body.scrollTop = 0;
+  tsCrumbUpdate();
+  switch(tsNav.view) {
+    case 'cats':   tsRenderCats();   break;
+    case 'subs':   tsRenderSubs();   break;
+    case 'devs':   tsRenderDevs();   break;
+    case 'issues': tsRenderIssues(); break;
+  }
+}
+
+// ── BREADCRUMB ────────────────────────────────────────────────
+function tsCrumbUpdate() {
+  const crumb = document.getElementById('ts-crumb');
+  const crumbText = document.getElementById('ts-crumb-text');
+  const stuck = document.getElementById('ts-stuck');
+  if (tsNav.view === 'cats') {
+    crumb.style.display = 'none';
+    if (stuck) stuck.style.display = 'none';
+    return;
+  }
+  crumb.style.display = 'flex';
+  if (stuck) stuck.style.display = tsNav.view === 'issues' ? 'block' : 'none';
+  const cat = tsGetCat(tsNav.cat);
+  let path = `<strong>${cat?.label||''}</strong>`;
+  if (tsNav.sub) {
+    const sub = tsGetSub(cat, tsNav.sub);
+    path += ` / <strong>${sub?.label||''}</strong>`;
+  }
+  if (tsNav.dev) {
+    const devs = tsNav.sub
+      ? tsGetSub(cat, tsNav.sub)?.devices
+      : cat?.devices;
+    const dev = devs?.find(d=>d.id===tsNav.dev);
+    if (dev) path += ` / <strong>${dev.label}</strong>`;
+  }
+  crumbText.innerHTML = path;
+}
+
+// ── BACK ──────────────────────────────────────────────────────
+function tsDrillBack() {
+  if (tsNav.view === 'issues') {
+    tsNav.dev = null;
+    tsNav.view = 'devs';
+  } else if (tsNav.view === 'devs') {
+    tsNav.dev = null;
+    const cat = tsGetCat(tsNav.cat);
+    if (cat && !cat.flat) {
+      tsNav.sub = null;
+      tsNav.view = 'subs';
+    } else {
+      tsNav.cat = null;
+      tsNav.view = 'cats';
+    }
+  } else if (tsNav.view === 'subs') {
+    tsNav.cat = null;
+    tsNav.view = 'cats';
+  }
+  tsRender();
+}
+
+// ── DRILL-IN ──────────────────────────────────────────────────
+function tsDrillCat(catId) {
+  const cat = tsGetCat(catId);
+  if (!cat) return;
+  tsNav.cat = catId;
+  tsNav.view = cat.flat ? 'devs' : 'subs';
+  tsRender();
+}
+function tsDrillSub(subId) {
+  tsNav.sub = subId;
+  tsNav.view = 'devs';
+  tsRender();
+}
+function tsDrillDev(devId) {
+  tsNav.dev = devId;
+  tsNav.view = 'issues';
+  tsRender();
+}
+
+// ── RENDER: CATEGORIES ────────────────────────────────────────
+function tsRenderCats() {
+  const c = document.getElementById('ts-content');
+  c.innerHTML = `
+    <p style="font-size:13px;color:rgba(255,255,255,.45);margin-bottom:16px;line-height:1.6;">Select a category to get started.</p>
+    <div class="ts-cat-grid">
+      ${TS_TREE.map(cat=>`
+        <div class="ts-cat-card" onclick="tsDrillCat('${cat.id}')">
+          <div class="ts-cat-chevron">›</div>
+          <div class="ts-cat-icon">${cat.icon}</div>
+          <div class="ts-cat-label">${cat.label}</div>
+          <div class="ts-cat-count">${tsDevCount(cat)} device${tsDevCount(cat)!==1?'s':''}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// ── RENDER: SUBCATEGORIES ─────────────────────────────────────
+function tsRenderSubs() {
+  const cat = tsGetCat(tsNav.cat);
+  const c = document.getElementById('ts-content');
+  c.innerHTML = `
+    <div class="ts-section-label">${cat.label}</div>
+    <div class="ts-sub-list">
+      ${cat.subcategories.map(sub=>`
+        <div class="ts-sub-card" onclick="tsDrillSub('${sub.id}')">
+          <div class="ts-sub-emoji">${sub.emoji||'📁'}</div>
+          <div class="ts-sub-info">
+            <div class="ts-sub-label">${sub.label}</div>
+            <div class="ts-sub-count">${sub.devices.length} device${sub.devices.length!==1?'s':''}</div>
+          </div>
+          <div class="ts-sub-chevron">›</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// ── RENDER: DEVICE LIST ───────────────────────────────────────
+function tsRenderDevs() {
+  const cat = tsGetCat(tsNav.cat);
+  const devices = tsNav.sub
+    ? tsGetSub(cat, tsNav.sub)?.devices
+    : cat?.devices;
+  const subCat = tsNav.sub ? tsGetSub(cat, tsNav.sub) : null;
+  const c = document.getElementById('ts-content');
+  c.innerHTML = `
+    <div class="ts-section-label">${subCat?.label || cat?.label}</div>
+    <div class="ts-dev-list">
+      ${(devices||[]).map(dev=>`
+        <div class="ts-dev-item" onclick="tsDrillDev('${dev.id}')">
+          ${dev.svg
+            ? `<div class="ts-dev-icon" data-svg="${dev.svg}"></div>`
+            : `<div class="ts-dev-icon" style="opacity:.3;font-size:16px;">○</div>`
+          }
+          <div class="ts-dev-label">${dev.label}</div>
+          <div class="ts-dev-chevron">›</div>
+        </div>`).join('')}
+    </div>`;
+  renderIcons(c);
+}
+
+// ── RENDER: ISSUES ────────────────────────────────────────────
+function tsRenderIssues() {
+  const cat = tsGetCat(tsNav.cat);
+  const devices = tsNav.sub
+    ? tsGetSub(cat, tsNav.sub)?.devices
+    : cat?.devices;
+  const dev = devices?.find(d=>d.id===tsNav.dev);
+  const data = TS_DATA[tsNav.dev];
+  const c = document.getElementById('ts-content');
+
+  const issuesHtml = data?.issues?.length
+    ? `<div class="ts-issue-list">
+        ${data.issues.map(issue=>`
+          <div class="ts-issue-card">
+            <button class="ts-issue-btn" onclick="tsTglIssue(this)">
+              <span class="ts-issue-q">${issue.q}</span>
+              <span class="ts-issue-arr">↓</span>
+            </button>
+            <div class="ts-issue-body">${issue.a}</div>
+          </div>`).join('')}
+       </div>`
+    : `<div class="ts-placeholder">Detailed troubleshooting for this device is coming soon.<br>Text Adam for immediate help — he responds fast.</div>`;
+
+  c.innerHTML = `
+    <div class="ts-dev-header">
+      ${dev?.svg
+        ? `<div class="ts-dev-header-icon" data-svg="${dev.svg}"></div>`
+        : `<div class="ts-dev-header-icon" style="opacity:.3;font-size:18px;">○</div>`
+      }
+      <div class="ts-dev-header-name">${dev?.label || 'Device'}</div>
+    </div>
+    <div class="ts-section-label">Common Issues</div>
+    ${issuesHtml}`;
+  renderIcons(c);
+}
+
+// ── ACCORDION ────────────────────────────────────────────────
+function tsTglIssue(btn) {
+  const body = btn.nextElementSibling;
+  const open = !body.classList.contains('open');
+  btn.classList.toggle('open', open);
+  body.classList.toggle('open', open);
+}
 </script>
+
+<!-- ── POPUP: SOLAR ── -->
+<div id="popup-solar" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">☀️ Smart Solar</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <div id="solar-form-wrap">
+
+      <div class="pitch-hero">
+        <div class="pitch-eyebrow">Vivint Solar</div>
+        <div class="pitch-headline">Go Solar.<br>Start Saving.</div>
+        <div class="pitch-sub">Replace your electric bill with a fixed, predictable solar payment — and lock in your rate before the next Austin summer hits.</div>
+        <div class="pitch-stat">⚡ Quote in 5 min &nbsp;·&nbsp; Design in 24 hours</div>
+      </div>
+
+      <div class="pitch-benefits">
+        <div class="pitch-benefit">
+          <div class="pitch-benefit-icon">💰</div>
+          <div class="pitch-benefit-text">
+            <div class="pitch-benefit-title">Replace Your Electric Bill</div>
+            <div class="pitch-benefit-desc">Offset up to 100% of your energy usage with solar. One fixed monthly payment replaces your utility bill — no more variable charges or rate hikes.</div>
+          </div>
+        </div>
+        <div class="pitch-benefit">
+          <div class="pitch-benefit-icon">📈</div>
+          <div class="pitch-benefit-text">
+            <div class="pitch-benefit-title">Fixed Costs for 25+ Years</div>
+            <div class="pitch-benefit-desc">Utility companies raise their rates every year. Your solar payment stays the same. You'll know exactly what to expect every single month.</div>
+          </div>
+        </div>
+        <div class="pitch-benefit">
+          <div class="pitch-benefit-icon">⚡</div>
+          <div class="pitch-benefit-text">
+            <div class="pitch-benefit-title">Power You Control</div>
+            <div class="pitch-benefit-desc">Add battery storage to maximize energy independence. Keep the lights on when the grid goes down — something Austinites know matters.</div>
+          </div>
+        </div>
+        <div class="pitch-benefit">
+          <div class="pitch-benefit-icon">🌱</div>
+          <div class="pitch-benefit-text">
+            <div class="pitch-benefit-title">Clean, Renewable Energy</div>
+            <div class="pitch-benefit-desc">Solar is one of the most abundant energy sources on earth. Reduce your footprint while locking in savings — no tradeoff required.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pitch-divider">Get Your Free Quote</div>
+
+      <div class="form-row" style="margin-bottom:0;">
+        <div><label class="form-label">First Name</label><input class="form-input" id="sol-first" placeholder="First"></div>
+        <div><label class="form-label">Last Name</label><input class="form-input" id="sol-last" placeholder="Last"></div>
+      </div>
+      <label class="form-label">Phone</label>
+      <input class="form-input" id="sol-phone" placeholder="(512) 000-0000" inputmode="tel" oninput="fmtPhone(this)">
+      <label class="form-label">Email</label>
+      <input class="form-input" id="sol-email" placeholder="your@email.com" inputmode="email" type="email">
+      <label class="form-label">Street Address</label>
+      <input class="form-input" id="sol-street" placeholder="123 Main St">
+      <div class="form-row">
+        <div><label class="form-label">City</label><input class="form-input" id="sol-city" placeholder="City"></div>
+        <div><label class="form-label">State</label><select class="form-input" id="sol-state"><option value="TX" selected>Texas</option><option value="AL">Alabama</option><option value="AZ">Arizona</option><option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="NV">Nevada</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="SC">South Carolina</option><option value="TN">Tennessee</option><option value="UT">Utah</option><option value="VA">Virginia</option><option value="WA">Washington</option></select></div>
+      </div>
+      <label class="form-label">ZIP Code</label>
+      <input class="form-input" id="sol-zip" placeholder="78701" maxlength="5" oninput="this.value=this.value.replace(/\D/g,'')">
+      <p style="font-size:11px;color:rgba(255,255,255,.25);line-height:1.6;margin:10px 0 14px;">By submitting, you agree to be contacted by Adam regarding Vivint Solar. Have your electric bill handy for the most accurate quote.</p>
+      <button class="btn-primary" style="background:linear-gradient(135deg,#FFB400,#FF8C00);color:#10201F;" onclick="submitSolar()">See My Savings →</button>
+    </div>
+    <div id="solar-success" class="success-screen" style="display:none;">
+      <div class="success-icon">☀️</div>
+      <div class="success-title">Quote Request Received!</div>
+      <div class="success-sub">I'll reach out shortly to walk you through your savings estimate and design options.<br><br><strong style="color:#FFB400;">— Adam</strong></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── POPUP: INSURANCE ── -->
+<div id="popup-insurance" class="popup">
+  <div class="popup-header">
+    <div class="popup-title">🛡️ Home Insurance</div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+  <div class="popup-body">
+    <div id="ins-form-wrap">
+
+      <div class="pitch-hero">
+        <div class="pitch-eyebrow">Vivint + Goosehead Insurance</div>
+        <div class="pitch-headline">Secure Your Home.<br>Save on Insurance.</div>
+        <div class="pitch-sub">You've already invested in a smart security system. Now let it work for you — your Vivint setup could qualify you for meaningful insurance discounts.</div>
+        <div class="pitch-stat">🏠 150+ carriers &nbsp;·&nbsp; Home, Auto &amp; More</div>
+      </div>
+
+      <div class="pitch-benefits">
+        <div class="pitch-benefit">
+          <div class="pitch-benefit-icon">🏠</div>
+          <div class="pitch-benefit-text">
+            <div class="pitch-benefit-title">Smart Home Discounts</div>
+            <div class="pitch-benefit-desc">A Vivint-equipped home deters damage and prevents theft. Goosehead agents know how to use that to find you better rates across 150+ carriers.</div>
+          </div>
+        </div>
+        <div class="pitch-benefit">
+          <div class="pitch-benefit-icon">🚗</div>
+          <div class="pitch-benefit-text">
+            <div class="pitch-benefit-title">Bundle Home + Auto</div>
+            <div class="pitch-benefit-desc">Combining home and auto policies saves time and money. One agent, one call, better rates. Goosehead handles both.</div>
+          </div>
+        </div>
+        <div class="pitch-benefit">
+          <div class="pitch-benefit-icon">📋</div>
+          <div class="pitch-benefit-text">
+            <div class="pitch-benefit-title">More Than Home + Auto</div>
+            <div class="pitch-benefit-desc">Motorcycle, flood, earthquake, and more. Goosehead covers your personal lines — all in one place, with one independent agent shopping the market for you.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pitch-partner">
+        <strong style="color:rgba(255,255,255,.7);">About Goosehead Insurance</strong> — An independent insurance agency (NASDAQ: GSHD) that represents 150+ carriers. They're not tied to one company, which means they shop the market to find the best rate for your specific situation.
+      </div>
+
+      <div class="pitch-divider">Get Your Free Quote</div>
+
+      <div class="form-row" style="margin-bottom:0;">
+        <div><label class="form-label">First Name</label><input class="form-input" id="ins-first" placeholder="First"></div>
+        <div><label class="form-label">Last Name</label><input class="form-input" id="ins-last" placeholder="Last"></div>
+      </div>
+      <label class="form-label">Phone</label>
+      <input class="form-input" id="ins-phone" placeholder="(512) 000-0000" inputmode="tel" oninput="fmtPhone(this)">
+      <label class="form-label">Email</label>
+      <input class="form-input" id="ins-email" placeholder="your@email.com" inputmode="email" type="email">
+      <label class="form-label">Street Address</label>
+      <input class="form-input" id="ins-street" placeholder="123 Main St">
+      <div class="form-row">
+        <div><label class="form-label">City</label><input class="form-input" id="ins-city" placeholder="City"></div>
+        <div><label class="form-label">State</label><select class="form-input" id="ins-state"><option value="TX" selected>Texas</option><option value="AL">Alabama</option><option value="AZ">Arizona</option><option value="CA">California</option><option value="CO">Colorado</option><option value="FL">Florida</option><option value="GA">Georgia</option><option value="ID">Idaho</option><option value="IL">Illinois</option><option value="MD">Maryland</option><option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="NV">Nevada</option><option value="NJ">New Jersey</option><option value="NY">New York</option><option value="NC">North Carolina</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option><option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="SC">South Carolina</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option><option value="VA">Virginia</option><option value="WA">Washington</option></select></div>
+      </div>
+      <label class="form-label">ZIP Code</label>
+      <input class="form-input" id="ins-zip" placeholder="78701" maxlength="5" oninput="this.value=this.value.replace(/\D/g,'')">
+      <button class="btn-primary" style="background:linear-gradient(135deg,#6480FF,#4050DD);margin-top:14px;" onclick="submitInsurance()">Find My Rates →</button>
+    </div>
+    <div id="ins-success" class="success-screen" style="display:none;">
+      <div class="success-icon">🛡️</div>
+      <div class="success-title">Quote Request Received!</div>
+      <div class="success-sub">I'll connect you with a Goosehead agent who will shop 150+ carriers to find your best rates.<br><br><strong style="color:#6480FF;">— Adam</strong></div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
