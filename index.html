@@ -2004,34 +2004,34 @@ const TS_TREE = [
       {
         id:'outdoor-cams', label:'Outdoor Cameras', svg:'outdoor-cam',
         devices:[
-          {id:'outdoor-pro-3',  label:'Outdoor Camera Pro Gen 3', svg:'outdoor'},
-          {id:'outdoor-pro-2',  label:'Outdoor Camera Pro Gen 2', svg:'outdoor'},
-          {id:'outdoor-pro-1',  label:'Outdoor Camera Pro',       svg:'outdoor'},
-          {id:'outdoor-cam',    label:'Outdoor Camera',           svg:'outdoor'},
+          {id:'outdoor-pro-3',  label:'Outdoor Camera Pro Gen 3', svg:'outdoor-camera'},
+          {id:'outdoor-pro-2',  label:'Outdoor Camera Pro Gen 2', svg:'outdoor-camera'},
+          {id:'outdoor-pro-1',  label:'Outdoor Camera Pro',       svg:'outdoor-camera'},
+          {id:'outdoor-cam',    label:'Outdoor Camera',           svg:'outdoor-camera'},
           {id:'spotlight-pro',  label:'Vivint Spotlight Pro',     svg:'spotlight'},
         ]
       },
       {
         id:'doorbell-cams', label:'Doorbell Cameras', svg:'doorbell',
         devices:[
-          {id:'doorbell-pro-2', label:'Doorbell Camera Pro Gen 2', svg:'doorbell'},
-          {id:'doorbell-pro-1', label:'Doorbell Camera Pro',       svg:'doorbell'},
-          {id:'doorbell-cam',   label:'Vivint Doorbell Camera',    svg:'doorbell'},
-          {id:'chime-ext',      label:'Vivint Chime Extender',     svg:null},
+          {id:'doorbell-pro-2', label:'Doorbell Camera Pro Gen 2', svg:'doorbell-camera'},
+          {id:'doorbell-pro-1', label:'Doorbell Camera Pro',       svg:'doorbell-camera'},
+          {id:'doorbell-cam',   label:'Vivint Doorbell Camera',    svg:'doorbell-camera'},
+          {id:'chime-ext',      label:'Vivint Chime Extender',     svg:'chime-extender'},
         ]
       },
       {
         id:'indoor-cams', label:'Indoor Cameras', svg:'cam-indoor',
         devices:[
-          {id:'indoor-pro',  label:'Indoor Camera Pro',    svg:'indoor'},
-          {id:'indoor-cam',  label:'Vivint Indoor Camera', svg:'indoor'},
+          {id:'indoor-pro',  label:'Indoor Camera Pro',    svg:'camera-indoor'},
+          {id:'indoor-cam',  label:'Vivint Indoor Camera', svg:'camera-indoor'},
         ]
       },
       {
         id:'storage', label:'Storage & Playback', svg:'vid-clip',
         devices:[
-          {id:'vivint-playback',    label:'Vivint Playback',    svg:null},
-          {id:'vivint-smart-drive', label:'Vivint Smart Drive', svg:'vid-clip'},
+          {id:'vivint-playback',    label:'Vivint Playback',    svg:'video-clip'},
+          {id:'vivint-smart-drive', label:'Vivint Smart Drive', svg:'clips-film'},
         ]
       },
     ]
@@ -2039,12 +2039,12 @@ const TS_TREE = [
   {
     id:'panels', label:'Panels & Touchscreens', svg:'hub', flat:true,
     devices:[
-      {id:'smart-hub-pro2',  label:'Smart Hub Pro 2',          svg:'hub'},
-      {id:'smart-hub',       label:'Vivint Smart Hub',         svg:'hub'},
-      {id:'skycontrol',      label:'SkyControl',               svg:'hub'},
+      {id:'smart-hub-pro2',  label:'Smart Hub Pro 2',          svg:'smart-hub'},
+      {id:'smart-hub',       label:'Vivint Smart Hub',         svg:'smart-hub'},
+      {id:'skycontrol',      label:'SkyControl',               svg:'smart-hub'},
       {id:'keypad-std',      label:'Vivint Keypad',            svg:'keypad'},
       {id:'keypad-lr',       label:'Vivint Keypad Long Range', svg:'keypad'},
-      {id:'security-hub-pnl',label:'Vivint Security Hub',      svg:'hub'},
+      {id:'security-hub-pnl',label:'Vivint Security Hub',      svg:'security-hub'},
     ]
   },
   {
@@ -2053,17 +2053,17 @@ const TS_TREE = [
       {
         id:'smart-locks', label:'Smart Locks', svg:'lock-locked',
         devices:[
-          {id:'lock-892', label:'Smart Lock 892', svg:'lock'},
-          {id:'lock-910', label:'Smart Lock 910', svg:'lock'},
-          {id:'lock-888', label:'Smart Lock 888', svg:'lock'},
+          {id:'lock-892', label:'Smart Lock 892', svg:'smart-lock'},
+          {id:'lock-910', label:'Smart Lock 910', svg:'smart-lock'},
+          {id:'lock-888', label:'Smart Lock 888', svg:'smart-lock'},
         ]
       },
       {
         id:'garage-doors', label:'Garage Doors', svg:'garage-icon',
         devices:[
-          {id:'garage-ctrl',  label:'Smart Garage Door Controller',     svg:'garage'},
-          {id:'myq-basic',    label:'myQ Garage Door Controller',       svg:'garage'},
-          {id:'myq-smart',    label:'myQ Smart Garage Door Controller', svg:'garage'},
+          {id:'garage-ctrl',  label:'Smart Garage Door Controller',     svg:'garage-closed'},
+          {id:'myq-basic',    label:'myQ Garage Door Controller',       svg:'garage-closed'},
+          {id:'myq-smart',    label:'myQ Smart Garage Door Controller', svg:'garage-closed'},
         ]
       },
     ]
@@ -2074,31 +2074,31 @@ const TS_TREE = [
       {
         id:'entry-sensors', label:'Security & Entry', svg:'door-icon',
         devices:[
-          {id:'door-window-sensor', label:'Door and Window Sensor',          svg:'door'},
-          {id:'door-window-lr',     label:'Door and Window Sensor Long Range',svg:'window'},
-          {id:'door-sensor',        label:'Vivint Door Sensor',              svg:'door'},
-          {id:'motion-sensor',      label:'Vivint Motion Sensor',            svg:'motion'},
-          {id:'motion-lr',          label:'Motion Sensor Long Range',        svg:'motion'},
-          {id:'tilt-sensor',        label:'Tilt Sensor',                     svg:null},
-          {id:'glass-break',        label:'Glass Break Detector',            svg:'glass'},
+          {id:'door-window-sensor', label:'Door and Window Sensor',          svg:'door-window-sensor'},
+          {id:'door-window-lr',     label:'Door and Window Sensor Long Range',svg:'door-window-sensor'},
+          {id:'door-sensor',        label:'Vivint Door Sensor',              svg:'door-window-sensor'},
+          {id:'motion-sensor',      label:'Vivint Motion Sensor',            svg:'motion-sensor'},
+          {id:'motion-lr',          label:'Motion Sensor Long Range',        svg:'motion-sensor'},
+          {id:'tilt-sensor',        label:'Tilt Sensor',                     svg:'garage-open'},
+          {id:'glass-break',        label:'Glass Break Detector',            svg:'glass-break-sensor'},
         ]
       },
       {
         id:'safety-sensors', label:'Safety & Hazard', svg:'smoke-co',
         devices:[
-          {id:'smoke-det',       label:'Vivint Smoke Detector',     svg:'smoke'},
-          {id:'co-det',          label:'Vivint CO Detector',        svg:'smoke'},
-          {id:'smoke-co-combo',  label:'Combo Smoke and CO Detector',svg:'smoke'},
-          {id:'smoke-co-monitor',label:'Smoke and CO Monitor',      svg:'smoke'},
-          {id:'water-sensor',    label:'Vivint Water Sensor',       svg:'water'},
-          {id:'flood-freeze',    label:'Flood and Freeze Sensor',   svg:'water'},
+          {id:'smoke-det',       label:'Vivint Smoke Detector',     svg:'smoke-detector-2'},
+          {id:'co-det',          label:'Vivint CO Detector',        svg:'carbon-monoxide-co'},
+          {id:'smoke-co-combo',  label:'Combo Smoke and CO Detector',svg:'smoke-co-detector'},
+          {id:'smoke-co-monitor',label:'Smoke and CO Monitor',      svg:'smoke-co-detector'},
+          {id:'water-sensor',    label:'Vivint Water Sensor',       svg:'water-sensor'},
+          {id:'flood-freeze',    label:'Flood and Freeze Sensor',   svg:'water-sensor'},
         ]
       },
       {
         id:'remotes', label:'Remotes & Panic', svg:'panic',
         devices:[
-          {id:'key-fob',       label:'Key Fob (V-SKEY1)',         svg:'keyfob'},
-          {id:'panic-pendant', label:'Vivint Emergency Pendant',  svg:'panic'},
+          {id:'key-fob',       label:'Key Fob (V-SKEY1)',         svg:'key-fob'},
+          {id:'panic-pendant', label:'Vivint Emergency Pendant',  svg:'panic-pendant'},
         ]
       },
     ]
@@ -2106,27 +2106,27 @@ const TS_TREE = [
   {
     id:'thermostats', label:'Thermostats', svg:'smart-thermo', flat:true,
     devices:[
-      {id:'vivint-thermo', label:'Vivint Smart Thermostat', svg:'thermo'},
-      {id:'nest-thermo',   label:'Google Nest Thermostat',  svg:null},
+      {id:'vivint-thermo', label:'Vivint Smart Thermostat', svg:'smart-thermostat'},
+      {id:'nest-thermo',   label:'Google Nest Thermostat',  svg:'smart-thermostat'},
     ]
   },
   {
     id:'lighting', label:'Lighting & Appliance', svg:'light-icon', flat:true,
     devices:[
-      {id:'philips-hue',     label:'Philips Hue',                  svg:null},
-      {id:'smart-plug-dev',  label:'Vivint Smart Plug',            svg:'plug'},
-      {id:'smart-bulbs',     label:'Smart Light Bulbs',            svg:null},
-      {id:'light-switch',    label:'Vivint Smart Light Switch',    svg:null},
-      {id:'lighting-bridge', label:'Vivint Smart Lighting Bridge', svg:'light-icon'},
+      {id:'philips-hue',     label:'Philips Hue',                  svg:'light-on'},
+      {id:'smart-plug-dev',  label:'Vivint Smart Plug',            svg:'smart-plug'},
+      {id:'smart-bulbs',     label:'Smart Light Bulbs',            svg:'light-on'},
+      {id:'light-switch',    label:'Vivint Smart Light Switch',    svg:'light-switch'},
+      {id:'lighting-bridge', label:'Vivint Smart Lighting Bridge', svg:'smart-speaker'},
     ]
   },
   {
     id:'integrations', label:'Smarter with Vivint', svg:'speaker-icon', flat:true,
     devices:[
-      {id:'google-home',    label:'Google Home',            svg:null},
-      {id:'google-nest-int',label:'Google Nest Thermostat', svg:null},
-      {id:'hue-int',        label:'Philips Hue',            svg:null},
-      {id:'amazon-echo',    label:'Amazon Echo',            svg:null},
+      {id:'google-home',    label:'Google Home',            svg:'smart-speaker'},
+      {id:'google-nest-int',label:'Google Nest Thermostat', svg:'smart-thermostat'},
+      {id:'hue-int',        label:'Philips Hue',            svg:'light-on'},
+      {id:'amazon-echo',    label:'Amazon Echo',            svg:'smart-speaker'},
     ]
   },
 ];
