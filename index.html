@@ -340,6 +340,12 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
 .stuck-btn-sms{background:var(--g);color:var(--dk);text-decoration:none;display:inline-block;}
 .stuck-btn-svc{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12)!important;}
 
+
+.tips-cat-icon-svg{flex-shrink:0;}
+.tips-cat-icon-svg svg{width:100%;height:100%;}
+.tips-cat-icon-svg svg path,.tips-cat-icon-svg svg rect,.tips-cat-icon-svg svg circle,.tips-cat-icon-svg svg ellipse,.tips-cat-icon-svg svg polyline,.tips-cat-icon-svg svg polygon{fill:currentColor!important;stroke:none!important;}
+.tips-cat-title{display:flex;align-items:center;gap:8px;}
+
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
@@ -912,41 +918,493 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
     <div class="popup-title">Tips &amp; Tricks</div>
     <button class="popup-close" onclick="closePopup()">✕</button>
   </div>
+  
   <div class="popup-body">
-    <p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;line-height:1.6;">Tips to get the most out of your Vivint system. Tap any question to expand.</p>
+    <p style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:24px;">Most people use about 20% of what their Vivint system can actually do. This is the other 80%.</p>
 
+    <!-- ── AUTOMATIONS ───────────────────────────────────────── -->
     <div class="tips-cat">
-      <div class="tips-cat-title">📱 The App</div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I arm and disarm remotely?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Open the Vivint app → tap the <strong>shield icon</strong>. You'll see Disarmed, Away, and Stay. Away arms everything including motion. Stay arms perimeter only — perfect for nighttime when you're home.</p></div></div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I add a family member?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Settings → Users → Add User. Set permission levels — Full Control, Arm/Disarm only, or Guest. Give each person their own unique PIN so you can track who armed and when.</p></div></div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I save camera clips?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Tap the camera → Clips. Filter by camera or date. Tap any clip → download icon to save to your phone. Clips are stored for <strong>30 days</strong> — download anything important before then.</p></div></div>
+      <div class="tips-cat-title" data-svg="devices-icon" style="display:flex;align-items:center;gap:10px;">
+        <span class="tips-cat-icon-svg" data-svg="devices-icon" style="width:18px;height:18px;display:inline-block;color:var(--g);"></span>
+        Automations That Make Your System Feel Intelligent
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Doorbell detects someone at night → porch light turns on automatically.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>This one impresses everyone. Set it up in app → <strong>Automations → Add Rule</strong>:</p>
+          <ul>
+            <li><strong>Trigger:</strong> Doorbell Camera detects motion</li>
+            <li><strong>Condition:</strong> Between sunset and sunrise</li>
+            <li><strong>Action 1:</strong> Turn on porch light (Z-Wave switch or smart plug)</li>
+            <li><strong>Action 2:</strong> After 5 minutes → turn porch light off</li>
+          </ul>
+          <p>Result: your porch lights up every time someone approaches at night, then automatically shuts off. Deters lurkers, lights the way for guests, and you never touch the switch.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Arm Away → lock every door + save energy automatically.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Every time you leave and arm Away, this fires automatically:</p>
+          <ul>
+            <li>Lock all Z-Wave smart locks</li>
+            <li>Set thermostat to energy-saving mode (78°F in summer)</li>
+            <li>Turn off any lights left on</li>
+          </ul>
+          <p>Set it up: <strong>Automations → Trigger: System Armed Away → add each action.</strong> You leave the house one time and everything handles itself. In Texas summers, the thermostat adjustment alone saves real money.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Welcome Home — system disarms, door unlocks, lights on, thermostat adjusts.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p><strong>Trigger: System Disarmed →</strong></p>
+          <ul>
+            <li>Unlock front door (so you're not fumbling for keys after entering your code)</li>
+            <li>Set thermostat back to comfort temp</li>
+            <li>Turn on entry lights if between sunset and sunrise</li>
+          </ul>
+          <p>Feels like your house is waiting for you every time you come home.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Bedtime automation — one tap arms the house and sets everything.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Create a scene called <strong>"Good Night"</strong> that runs one tap in the app:</p>
+          <ul>
+            <li>Arm to Stay (perimeter armed, motion off — you can move inside)</li>
+            <li>Lock all doors</li>
+            <li>Set thermostat to sleeping temp (usually 68-70°F)</li>
+            <li>Turn off all lights</li>
+          </ul>
+          <p>Or set it on a schedule — <strong>11pm every night → run Good Night routine</strong> — and you never have to think about it again.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Glass break detected → every light in the house turns on instantly.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>This is a pure deterrent move. <strong>Trigger: Glass Break Sensor → Action: Turn on all Z-Wave lights.</strong></p>
+          <p>Someone breaks a window to enter — suddenly every light in the house floods on. Most burglars are gone before the alarm even sounds. Combine with the siren and a notification to your phone and you have a three-layer response to a break-in attempt.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Garage left open for 10 minutes → alert + auto-close.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>One of the most common things people forget. Set up:</p>
+          <ul>
+            <li><strong>Trigger:</strong> Garage door open for 10 minutes</li>
+            <li><strong>Action 1:</strong> Push notification to your phone ("Garage has been open 10 min")</li>
+            <li><strong>Action 2:</strong> Close garage (optional — or let the notification remind you to close manually)</li>
+          </ul>
+          <p>You can also set a hard auto-close at 10pm every night regardless of state. Set it and forget it.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Motion in driveway at night → record + spotlight on + notification.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Chain three things off a single motion trigger:</p>
+          <ul>
+            <li>Camera starts recording clip (happens automatically)</li>
+            <li>Spotlight camera lights up the area</li>
+            <li>Push notification with camera quick-view</li>
+          </ul>
+          <p>You see exactly who is in your driveway in real time, they get lit up, and it's all recorded. Set the condition "between sunset and sunrise" so you only get these at night when it matters.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">CO alarm triggers → all smart locks unlock automatically.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>This is a safety automation most people don't think about. <strong>Trigger: CO Detector → Action: Unlock all doors.</strong></p>
+          <p>If CO is detected while your family is sleeping, every door unlocks so emergency responders can enter immediately without breaking anything down. This one could genuinely save lives. Set it up and never think about it again.</p>
+        </div>
+      </div>
+
     </div>
 
+    <!-- ── Z-WAVE UPGRADES ────────────────────────────────────── -->
     <div class="tips-cat">
-      <div class="tips-cat-title">📹 Cameras</div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Camera triggers at night for no reason.</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Almost always insects flying past the IR glow. Fix: lower motion sensitivity slightly, draw a custom <strong>activity zone</strong> that excludes the area closest to the lens, or move the camera away from outdoor lights.</p></div></div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I set up activity zones?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Tap a camera → gear icon → Activity Zones. Draw a box around the area you care about — driveway, front door, etc. Camera only triggers clips within that zone. This is the biggest thing you can do to reduce false alerts.</p></div></div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Doorbell camera lags when I answer it.</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>WiFi signal issue. The doorbell needs strong 2.4GHz signal.<ul><li>Check signal strength under camera settings</li><li>Below 60%? Consider a WiFi extender near the front door</li><li>Make sure internet upload is at least 10Mbps</li></ul></p></div></div>
+      <div class="tips-cat-title">
+        <span class="tips-cat-icon-svg" data-svg="lightning-energy" style="width:18px;height:18px;display:inline-block;color:var(--g);flex-shrink:0;"></span>
+        Z-Wave Devices You Can Add Yourself
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Z-Wave in-wall light switches — the smartest upgrade in the house.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>I recommend Z-Wave light switches to almost every customer. Here's why they're better than smart bulbs:</p>
+          <ul>
+            <li>The physical switch still works — guests don't need an app</li>
+            <li>Works with any standard bulb — no special bulbs needed</li>
+            <li>Controlled from the Vivint app just like any device</li>
+            <li>Used in automations — turn on at sunset, off at midnight, etc.</li>
+            <li>Mesh network — every Z-Wave device extends the range for all others</li>
+          </ul>
+          <p><strong>Best brands:</strong> GE/Jasco (most popular), Leviton, Zooz (budget-friendly, great compatibility). Make sure it's Z-Wave Plus certified. I can help you pair any of these to your panel on a visit.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Third-party Z-Wave locks — Schlage, Yale, Kwikset all work.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Vivint's panel speaks standard Z-Wave, so you're not locked into Vivint branded hardware for locks. Schlage Connect, Yale Assure, and Kwikset SmartCode all pair directly to the Vivint panel.</p>
+          <p>This matters for upgrades, rekeying, or if you prefer a specific style. <strong>Key requirement:</strong> must be Z-Wave Plus, not Z-Wave or Zigbee. Always check the spec sheet before buying. Text me before you buy — I can confirm compatibility.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Z-Wave outlets and plug-in modules — add smart control to anything.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Z-Wave in-wall outlets replace a standard outlet with a smart one. Every plug on it becomes controllable. Great for:</p>
+          <ul>
+            <li>Lamps and floor lights</li>
+            <li>A TV you want on a schedule</li>
+            <li>Garage refrigerator monitoring</li>
+            <li>Anything you want to control remotely or with automations</li>
+          </ul>
+          <p>Also consider Z-Wave plug-in modules (like Aeotec Smart Switch) that just plug into any existing outlet. No wiring needed at all.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How to add a Z-Wave device yourself.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Most Z-Wave Plus devices pair the same way:</p>
+          <ol>
+            <li>Install the device (switch, lock, outlet — follow its instructions)</li>
+            <li>On the Vivint panel: <strong>Menu → Devices → Add Device → Z-Wave Device</strong></li>
+            <li>The panel enters inclusion mode and starts scanning</li>
+            <li>On your new device, press the inclusion button (usually press once, or hold — check your device manual)</li>
+            <li>The panel will find and name it — you can rename it in the app</li>
+          </ol>
+          <p>If it doesn't pair first try, exclude it first: <strong>Menu → Devices → Z-Wave Settings → Exclude</strong>, then try inclusion again. Text me if you get stuck — I do this all day.</p>
+        </div>
+      </div>
+
     </div>
 
+    <!-- ── CAMERA SMARTS ──────────────────────────────────────── -->
     <div class="tips-cat">
-      <div class="tips-cat-title">🚪 Sensors</div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I test sensors without triggering an alarm?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Put the system in <strong>Test Mode</strong> first: app → Settings → Test Mode. Walk through every door and window — the panel beeps to confirm each sensor. Auto-disables after 30 minutes.</p></div></div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Motion sensor triggers when no one is home.</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Common causes: <strong>pets</strong> (enable Pet Immune mode), HVAC air flow blowing across sensor, afternoon sunlight shifting across field of view, or curtains moving near a window. Try repositioning slightly.</p></div></div>
+      <div class="tips-cat-title">
+        <span class="tips-cat-icon-svg" data-svg="outdoor-camera" style="width:18px;height:18px;display:inline-block;color:var(--g);flex-shrink:0;"></span>
+        Getting More From Your Cameras
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Activity zones kill 90% of false alerts.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>The single biggest improvement you can make to any camera. <strong>App → tap camera → gear icon → Activity Zones.</strong> Draw a zone around only what you care about — your front door, driveway entrance, gate.</p>
+          <p>The camera ignores motion outside the zone. Exclude the street, sidewalk, swaying trees, and the neighbor's driveway. Most people who set this up go from 20+ daily alerts to 2-3 that actually matter.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Smart detection — filter alerts by person, vehicle, animal, or package.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Vivint's newer cameras (Outdoor Camera Pro, Doorbell Pro) have AI detection. In camera settings, you can set which types of motion send you alerts:</p>
+          <ul>
+            <li><strong>Person detection</strong> — only alerts for humans, ignores cars and animals</li>
+            <li><strong>Vehicle detection</strong> — alerts for cars in the driveway</li>
+            <li><strong>Package detection</strong> — doorbell alerts when a package is left</li>
+            <li><strong>Animal detection</strong> — if you want to know when wildlife or pets are outside</li>
+          </ul>
+          <p>Set person detection on, everything else off, and your notifications become dramatically more useful.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Set quick responses on your doorbell so you don't have to talk every time.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Doorbell Camera Pro has pre-recorded quick response messages. In the app under doorbell settings, you can record short messages like:</p>
+          <ul>
+            <li>"Leave the package at the door, thanks!"</li>
+            <li>"We'll be right there."</li>
+            <li>"No soliciting please."</li>
+          </ul>
+          <p>When someone rings and you're busy, tap the message instead of answering. They hear it, you don't have to fumble with the phone. Works while you're in a meeting, driving, or just don't want to deal with it.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Set cameras to only record when the system is armed.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Indoor cameras especially — you probably don't need clips of yourself walking around the house all day. In camera settings, you can set recording to only trigger when the system is in Away mode.</p>
+          <p>This gives you privacy when you're home and full surveillance when you're not. Your clip library becomes 100% relevant footage instead of noise.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">View multiple cameras at once with the grid view.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>In the Vivint app, tap Cameras → tap the grid icon in the top corner. You get a split view of all your cameras simultaneously — great for a quick house check without opening each one individually.</p>
+          <p>On a tablet, this view is particularly useful as a real-time monitor. Leave a spare iPad propped up in the kitchen showing the grid view.</p>
+        </div>
+      </div>
+
     </div>
 
+    <!-- ── LOCK & ACCESS ──────────────────────────────────────── -->
     <div class="tips-cat">
-      <div class="tips-cat-title">🔒 Smart Home</div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Can I set locks to auto-lock at a certain time?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Yes — Automations → Add Rule → Smart Lock. Set it to lock at a specific time, or trigger when system arms Away. Recommended: <strong>when system arms Away → lock all doors</strong>. You'll never leave the house unlocked.</p></div></div>
-      <div class="tip-card"><button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">How do I use the thermostat to save energy?</span><span class="tip-arr">↓</span></button><div class="tip-body"><p>Set a schedule: cooler when away, comfortable when home. Link it to the security system — when you arm Away, it adjusts automatically. In Austin summers, 78-80°F away and 72-74°F home adds up to real savings.</p></div></div>
+      <div class="tips-cat-title">
+        <span class="tips-cat-icon-svg" data-svg="smart-lock" style="width:18px;height:18px;display:inline-block;color:var(--g);flex-shrink:0;"></span>
+        Lock & Access Control You're Probably Not Using
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Give everyone their own PIN — see exactly who came and went.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>The lock history in the Vivint app shows which PIN was used and when. If everyone shares one code, the history is useless. Give each person their own:</p>
+          <ul>
+            <li>Family members — individual codes</li>
+            <li>Housekeeper — unique code (you can see when they arrived and left)</li>
+            <li>Dog walker, contractor, anyone with regular access</li>
+          </ul>
+          <p><strong>App → Menu → Users → Add User → assign a door lock code.</strong> Each code can also have time restrictions — the housekeeper's code only works Monday through Friday 9-5, for example.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Temporary access codes — create one and set it to expire.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>When a contractor or guest needs access for a few days, create a temporary user with an expiring code. <strong>App → Users → Add User → set start and end date.</strong></p>
+          <p>The code works only during that window and automatically deactivates. No awkward "can you send me the code back" conversations. No rekeying. No worrying about who still has your code.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Lock notifications — know the moment your kids get home.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p><strong>App → Notifications → Lock Events → enable.</strong> You'll get a push notification every time the front door is unlocked, with which code was used.</p>
+          <p>If your kid has their own code, you know exactly when they get home from school without having to text them. The notification also tells you if someone tried to enter with a wrong code.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Auto-lock set to 1 minute — never leave the house unlocked again.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Most people set auto-lock to 5-30 minutes. Set it to <strong>1 minute</strong> and your lock becomes effectively self-securing — the moment a door closes, it relocks almost immediately.</p>
+          <p>Combined with the "Arm Away → lock all doors" automation, you have a layered system: you arm, and even if you forgot to manually lock, the automation locks and the auto-lock catches anything after that.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── SECURITY DEEPER ────────────────────────────────────── -->
+    <div class="tips-cat">
+      <div class="tips-cat-title">
+        <span class="tips-cat-icon-svg" data-svg="shield-check" style="width:18px;height:18px;display:inline-block;color:var(--g);flex-shrink:0;"></span>
+        Making Your Security Actually Work
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Set a duress code — disarms the system but silently alerts monitoring.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>A duress code is a secondary PIN that looks like a normal disarm but secretly sends a panic signal to the monitoring center. If someone forces you to disarm at your door, you enter the duress code — the system appears to disarm normally, and police are dispatched without the threat knowing.</p>
+          <p><strong>App → Menu → Security → Duress Code.</strong> Set it to something you'll remember but won't accidentally use. Never tell anyone this code exists.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Arm Stay every single night automatically — stop forgetting.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Most burglaries and home invasions happen while people are asleep and the system is off. Set a schedule: <strong>Automations → Time-based → 10:30pm → Arm to Stay.</strong></p>
+          <p>Stay mode arms the perimeter (all doors and windows) without triggering motion sensors, so you can move around inside freely. You wake up every morning in a protected house without having to remember to arm it yourself.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Bypass individual sensors to arm with a known open door.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>If the back patio door is open because it's a nice day, you can bypass that one sensor and arm everything else. On the panel: tap <strong>Not Ready → select the open sensor → Bypass.</strong></p>
+          <p>The bypass clears the next time you disarm, so it's just for that one arm session. You're not permanently disabling anything. Great for parties, nice weather days, or when a sensor needs a battery but you still want the house armed.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Entry delay: set per door, not globally.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Most people don't know entry and exit delays can be set per zone. Your front door might need 30 seconds. A side door you only use occasionally might need 45. A back door that has no path to the panel might need 60.</p>
+          <p><strong>App → Security → Zones → select a door sensor → Entry Delay.</strong> Set each door based on how you actually use it. This stops false alarms when you're rushing and gives you enough time to disarm through your natural path.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Test mode — run through every sensor without triggering an alarm.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p><strong>App → Menu → System Test → Start.</strong> This gives you 30 minutes to open every door, trigger every motion sensor, and test every glass break — all without alerting monitoring or sounding the full alarm.</p>
+          <p>Do this quarterly. Walk the whole house. Open every door and window. Walk past every motion sensor. The panel will confirm each one. You'll know exactly which sensors are working and which need attention before an actual event tells you.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── THERMOSTAT ─────────────────────────────────────────── -->
+    <div class="tips-cat">
+      <div class="tips-cat-title">
+        <span class="tips-cat-icon-svg" data-svg="smart-thermostat" style="width:18px;height:18px;display:inline-block;color:var(--g);flex-shrink:0;"></span>
+        Thermostat Tricks That Save Money
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Link the thermostat to your arm/disarm — stop paying to cool an empty house.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>The classic money-saver. <strong>Arm Away → set thermostat to 80°F. Disarm → set thermostat back to 74°F.</strong> In Texas summers this can cut your cooling bill significantly on workdays.</p>
+          <p>The thermostat starts cooling 30 minutes before you'd typically get home so the house is comfortable when you walk in. Combine this with a geofence trigger (if your system supports it) to start cooling when you're 15 minutes away.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Set a pre-cool before the hottest part of the day.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>In Austin, the grid peaks between 3-7pm in summer. Pre-cool your house to 70°F by 2pm, then let it drift up to 76°F during peak hours without the AC running hard. <strong>Thermostat → Schedule → set 2pm drop, then a 3pm hold.</strong></p>
+          <p>Your house stays comfortable through the hottest part of the day, your AC doesn't strain during peak demand, and you save on electricity costs when rates are highest.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Fan to Auto vs. On — a setting most people have wrong.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>If your thermostat fan is set to "On," the fan runs 24/7 even when not cooling — circulating unconditioned air and running up your electric bill. Set it to <strong>"Auto"</strong> and the fan only runs when the system is actively cooling.</p>
+          <p><strong>App → Thermostat → Fan → Auto.</strong> This one change reduces fan runtime by 60-70% for most households. Most people set this once when installed and never change it — check yours now.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── GOOGLE HOME ─────────────────────────────────────────── -->
+    <div class="tips-cat">
+      <div class="tips-cat-title">
+        <span class="tips-cat-icon-svg" data-svg="smart-speaker" style="width:18px;height:18px;display:inline-block;color:var(--g);flex-shrink:0;"></span>
+        Vivint + Google Home: What You Can Actually Do
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Voice arm and disarm — "Hey Google, arm my security system."</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>After linking Vivint to Google Home (<strong>Google Home app → Add → Works with Google → Vivint</strong>), you can use voice to arm and disarm:</p>
+          <ul>
+            <li>"Hey Google, arm my security system" → Arms to Away</li>
+            <li>"Hey Google, arm my security system to Stay" → Arms to Stay</li>
+            <li>"Hey Google, disarm my security system" → you'll be prompted for PIN</li>
+          </ul>
+          <p>This is particularly useful when your hands are full coming in with groceries.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Build Google Routines that chain Vivint into your day.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Google Home Routines can trigger Vivint actions based on voice commands or schedules. Examples:</p>
+          <ul>
+            <li>"Hey Google, I'm leaving" → arm Vivint Away + lock doors + set thermostat</li>
+            <li>"Hey Google, good night" → arm Vivint Stay + lock doors + dim lights</li>
+            <li>"Hey Google, good morning" → disarm Vivint + set thermostat to day mode + turn on kitchen lights</li>
+          </ul>
+          <p>Set these up in <strong>Google Home → Routines → Add Routine.</strong> One phrase, five things happen instantly.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">View Vivint cameras on a Nest Hub display.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>If you have a Nest Hub or Nest Hub Max, you can pull up your Vivint cameras on the screen: <strong>"Hey Google, show me the front door camera."</strong></p>
+          <p>The camera streams directly to the display. Great for a kitchen Nest Hub — someone rings the doorbell and you glance at the screen without picking up your phone. Keep a Nest Hub Mini with display in the entryway for a permanent camera monitor.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── NOTIFICATION STRATEGY ──────────────────────────────── -->
+    <div class="tips-cat">
+      <div class="tips-cat-title">
+        <span class="tips-cat-icon-svg" data-svg="notification-bell" style="width:18px;height:18px;display:inline-block;color:var(--g);flex-shrink:0;"></span>
+        Notification Strategy — Signal vs. Noise
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Separate your critical from your informational alerts.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Most people either get every notification (overwhelming) or turn them all off (useless). The right setup:</p>
+          <ul>
+            <li><strong>Always on:</strong> Alarm triggered, CO/smoke detected, panic button, lock code errors</li>
+            <li><strong>Daytime only:</strong> Motion in driveway, doorbell ring, door opened while away</li>
+            <li><strong>Off:</strong> Arm/disarm confirmations (you know when you armed it)</li>
+          </ul>
+          <p><strong>App → Menu → Notifications</strong> lets you control each type individually. Spend 10 minutes setting this up and your phone becomes useful again.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Set notifications to only fire when system is Armed Away.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>Motion alerts at home are useless — you're there. In camera and motion sensor notification settings, set the condition to <strong>"Only when system is Armed Away."</strong></p>
+          <p>Now you only get motion alerts when you're actually away from home. Every notification means something happened at your empty house. No more alerts about yourself walking past your own camera.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── QUICK WINS ──────────────────────────────────────────── -->
+    <div class="tips-cat">
+      <div class="tips-cat-title">
+        <span class="tips-cat-icon-svg" data-svg="sparkle-1" style="width:18px;height:18px;display:inline-block;color:var(--g);flex-shrink:0;"></span>
+        Small Settings, Big Impact
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Panel chime — know every time a door opens, without an alarm.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>The chime plays a tone through the panel speaker every time a door or window sensor opens while the system is disarmed. <strong>App → Security → Chime → enable per sensor.</strong></p>
+          <p>With kids in the house, this is invaluable — you hear instantly when the front door opens, the back gate is accessed, or the garage door goes up. It's quiet enough to not be annoying but impossible to miss.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Rename everything clearly — it matters more than you think.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>"Door Sensor 1" is useless. "Front Door," "Back Gate," "Garage Side Door" are useful. Take 10 minutes and rename every device in the app to exactly what it covers.</p>
+          <p>This matters for: alarm alerts that tell you exactly which window was breached, automation rules that make sense at a glance, voice commands to Google that work first time, and history logs you can actually understand.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Share access with your partner properly — they need their own account.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>If your partner is logging into your account on their phone, they can't have their own notification preferences, their own history, or their own settings. Set them up as a separate user:</p>
+          <p><strong>App → Menu → Users → Add User → Full Control.</strong> They get their own login, their own notification settings, and their own lock code. You still have admin control over the account.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Low battery alerts — enable these and stop finding dead sensors.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p><strong>App → Notifications → Device Health → Low Battery.</strong> Turn this on for all devices. You'll get a push notification when any sensor, lock, or remote drops below 20% battery.</p>
+          <p>This gives you weeks of warning before a battery dies. A dead sensor is an offline sensor, which is a gap in your security. Five minutes replacing a battery beats finding out your motion sensor has been offline for a month during an actual incident.</p>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <button class="tip-btn" onclick="toggleTip(this)"><span class="tip-q">Set a vacation hold on the thermostat, not just a schedule.</span><span class="tip-arr">↓</span></button>
+        <div class="tip-body">
+          <p>When you leave for a trip, don't just turn the thermostat up — set a <strong>Vacation Hold</strong>: App → Thermostat → Schedule → Vacation Mode. Set your away temperature and return date.</p>
+          <p>The thermostat stays at your set temp the entire time and automatically resumes your normal schedule the day you return. No coming home to a 90°F house because you forgot to switch it back.</p>
+        </div>
+      </div>
+
     </div>
 
     <div class="tips-cta">
-      <div style="font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;">Have a question not covered here?</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.45);margin-bottom:12px;">Text me directly — I respond to all customers.</div>
+      <div style="font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;">Want help setting any of this up?</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.45);margin-bottom:12px;">Most of these take under 5 minutes. Text me and I'll walk you through it.</div>
       <a style="display:inline-block;background:var(--g);color:var(--dk);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;padding:10px 20px;border-radius:20px;text-decoration:none;" href="sms:+18013769296">Text Adam →</a>
     </div>
   </div>
+
 </div>
 
 <!-- ── POPUP: TROUBLESHOOT ── -->
