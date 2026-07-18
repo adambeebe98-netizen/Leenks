@@ -318,9 +318,7 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
 .ts-dev-badge-disc{color:rgba(255,120,120,.85);background:rgba(255,80,80,.1);border-color:rgba(255,80,80,.3);}
 .ts-show-more-btn{width:100%;margin-top:10px;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.15);color:rgba(255,255,255,.45);font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .18s;}
 .ts-show-more-btn:active,.ts-show-more-btn:hover{background:rgba(5,229,175,.06);border-color:rgba(5,229,175,.3);color:rgba(255,255,255,.7);}
-.ts-legacy-tabs{display:flex;gap:6px;margin:12px 0 8px;}
-.ts-legacy-tab{flex:1;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.45);font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .18s;}
-.ts-legacy-tab.active{background:rgba(5,229,175,.12);border-color:rgba(5,229,175,.4);color:var(--g);}
+
 .ts-issue-list{display:flex;flex-direction:column;gap:8px;}
 .ts-issue-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;}
 .ts-issue-btn{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent;}
@@ -1577,7 +1575,7 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
 </div>
 
 <script>
-var tsNav = { view:'cats', cat:null, sub:null, dev:null, showOlder:false, legacyOnly:false };
+var tsNav = { view:'cats', cat:null, sub:null, dev:null, showOlder:false };
 // ── CONSTANTS ─────────────────────────────────────────────────
 const W3KEY = 'c410be27-9cf8-48c5-9ec1-72c4652ad3ba';
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYWRhbWJlZWJlIiwiYSI6ImNtcm1ncWZzZDMyOWkyem9kZGxqbzI3aDYifQ.TzSOQU3Vfy8Zl-8KjohMLw';
@@ -2350,7 +2348,7 @@ const TS_TREE = [
           {id:'outdoor-pro-3',  label:'Outdoor Camera Pro Gen 3', svg:'outdoor-camera', year:2025},
           {id:'outdoor-pro-2',  label:'Outdoor Camera Pro Gen 2', svg:'outdoor-camera', year:2022},
           {id:'outdoor-pro-1',  label:'Outdoor Camera Pro',       svg:'outdoor-camera', year:2019},
-          {id:'outdoor-cam',    label:'Outdoor Camera',           svg:'outdoor-camera'},
+          {id:'outdoor-cam',    label:'Outdoor Camera',           svg:'outdoor-camera', year:2014},
           {id:'spotlight-pro',  label:'Vivint Spotlight Pro',     svg:'spotlight', year:2022},
         ]
       },
@@ -2382,8 +2380,8 @@ const TS_TREE = [
   {
     id:'panels', label:'Panels & Touchscreens', svg:'hub', flat:true,
     devices:[
-      {id:'smart-hub-pro2',  label:'Smart Hub Pro 2',          svg:'smart-hub', year:2026},
-      {id:'smart-hub',       label:'Vivint Smart Hub',         svg:'smart-hub', year:2018},
+      {id:'smart-hub-pro2',  label:'Smart Hub Gen 2',          svg:'smart-hub', year:2026, alwaysCurrent:true},
+      {id:'smart-hub',       label:'Smart Hub',                svg:'smart-hub', year:2018, alwaysCurrent:true},
       {id:'skycontrol',      label:'SkyControl',               svg:'smart-hub', year:2014},
       {id:'keypad-std',      label:'Vivint Keypad',            svg:'keypad', year:2021},
       {id:'keypad-lr',       label:'Vivint Keypad Long Range', svg:'keypad', year:2022},
@@ -2820,25 +2818,20 @@ function tsDevCount(cat) {
   return cat.subcategories.reduce((n,s)=>n+s.devices.length, 0);
 }
 
-// ── DEVICE AGE / LEGACY TIERS ───────────────────────────────────
+// ── DEVICE AGE TIERS ─────────────────────────────────────────
 function tsDeviceAge(dev) {
   if (!dev.year) return null;
   return new Date().getFullYear() - dev.year;
 }
 function tsDeviceTier(dev) {
-  if (dev.discontinued) return 'current';
+  if (dev.discontinued || dev.alwaysCurrent) return 'current';
   const age = tsDeviceAge(dev);
   if (age === null) return 'current';
-  if (age >= 10) return 'legacy';
   if (age >= 5) return 'older';
   return 'current';
 }
 function tsToggleOlder() {
   tsNav.showOlder = !tsNav.showOlder;
-  tsRender();
-}
-function tsSetLegacyOnly(val) {
-  tsNav.legacyOnly = val;
   tsRender();
 }
 
@@ -2916,14 +2909,12 @@ function tsDrillCat(catId) {
   if (!cat) return;
   tsNav.cat = catId;
   tsNav.showOlder = false;
-  tsNav.legacyOnly = false;
   tsNav.view = cat.flat ? 'devs' : 'subs';
   tsRender();
 }
 function tsDrillSub(subId) {
   tsNav.sub = subId;
   tsNav.showOlder = false;
-  tsNav.legacyOnly = false;
   tsNav.view = 'devs';
   tsRender();
 }
@@ -2977,7 +2968,7 @@ function tsDevItemHtml(dev) {
   if (dev.discontinued) {
     badge = `<span class="ts-dev-badge ts-dev-badge-disc">Discontinued ${dev.discontinued}</span>`;
   } else if (age !== null) {
-    badge = `<span class="ts-dev-badge">${dev.year}${age>=10?' · Legacy':''}</span>`;
+    badge = `<span class="ts-dev-badge">${dev.year}</span>`;
   }
   return `
         <div class="ts-dev-item" onclick="tsDrillDev('${dev.id}')">
@@ -2999,7 +2990,6 @@ function tsRenderDevs() {
 
   const current = (devices||[]).filter(d=>tsDeviceTier(d)==='current');
   const older   = (devices||[]).filter(d=>tsDeviceTier(d)!=='current');
-  const olderVisible = tsNav.legacyOnly ? older.filter(d=>tsDeviceTier(d)==='legacy') : older;
 
   c.innerHTML = `
     <div class="ts-section-label">${subCat?.label || cat?.label}</div>
@@ -3009,12 +2999,8 @@ function tsRenderDevs() {
     ${older.length ? `
       <button class="ts-show-more-btn" onclick="tsToggleOlder()">${tsNav.showOlder ? 'Hide older equipment ↑' : `Show older equipment (${older.length}) ↓`}</button>
       ${tsNav.showOlder ? `
-        <div class="ts-legacy-tabs">
-          <button class="ts-legacy-tab ${!tsNav.legacyOnly?'active':''}" onclick="tsSetLegacyOnly(false)">All older (5+ yrs)</button>
-          <button class="ts-legacy-tab ${tsNav.legacyOnly?'active':''}" onclick="tsSetLegacyOnly(true)">Legacy only (10+ yrs)</button>
-        </div>
         <div class="ts-dev-list">
-          ${olderVisible.map(tsDevItemHtml).join('')}
+          ${older.map(tsDevItemHtml).join('')}
         </div>
       ` : ''}
     ` : ''}`;
