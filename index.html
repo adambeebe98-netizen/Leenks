@@ -314,6 +314,13 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
 .ts-dev-icon{width:22px;height:22px;flex-shrink:0;color:rgba(255,255,255,.5);}
 .ts-dev-label{flex:1;font-size:13px;color:var(--w);line-height:1.3;}
 .ts-dev-chevron{font-size:14px;color:rgba(5,229,175,.4);}
+.ts-dev-badge{display:inline-block;margin-left:8px;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:2px 6px;vertical-align:middle;}
+.ts-dev-badge-disc{color:rgba(255,120,120,.85);background:rgba(255,80,80,.1);border-color:rgba(255,80,80,.3);}
+.ts-show-more-btn{width:100%;margin-top:10px;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.15);color:rgba(255,255,255,.45);font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .18s;}
+.ts-show-more-btn:active,.ts-show-more-btn:hover{background:rgba(5,229,175,.06);border-color:rgba(5,229,175,.3);color:rgba(255,255,255,.7);}
+.ts-legacy-tabs{display:flex;gap:6px;margin:12px 0 8px;}
+.ts-legacy-tab{flex:1;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.45);font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .18s;}
+.ts-legacy-tab.active{background:rgba(5,229,175,.12);border-color:rgba(5,229,175,.4);color:var(--g);}
 .ts-issue-list{display:flex;flex-direction:column;gap:8px;}
 .ts-issue-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;}
 .ts-issue-btn{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent;}
@@ -1570,7 +1577,7 @@ details summary{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600
 </div>
 
 <script>
-var tsNav = { view:'cats', cat:null, sub:null, dev:null };
+var tsNav = { view:'cats', cat:null, sub:null, dev:null, showOlder:false, legacyOnly:false };
 // ── CONSTANTS ─────────────────────────────────────────────────
 const W3KEY = 'c410be27-9cf8-48c5-9ec1-72c4652ad3ba';
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYWRhbWJlZWJlIiwiYSI6ImNtcm1ncWZzZDMyOWkyem9kZGxqbzI3aDYifQ.TzSOQU3Vfy8Zl-8KjohMLw';
@@ -2340,34 +2347,34 @@ const TS_TREE = [
       {
         id:'outdoor-cams', label:'Outdoor Cameras', svg:'outdoor-cam',
         devices:[
-          {id:'outdoor-pro-3',  label:'Outdoor Camera Pro Gen 3', svg:'outdoor-camera'},
-          {id:'outdoor-pro-2',  label:'Outdoor Camera Pro Gen 2', svg:'outdoor-camera'},
-          {id:'outdoor-pro-1',  label:'Outdoor Camera Pro',       svg:'outdoor-camera'},
+          {id:'outdoor-pro-3',  label:'Outdoor Camera Pro Gen 3', svg:'outdoor-camera', year:2025},
+          {id:'outdoor-pro-2',  label:'Outdoor Camera Pro Gen 2', svg:'outdoor-camera', year:2022},
+          {id:'outdoor-pro-1',  label:'Outdoor Camera Pro',       svg:'outdoor-camera', year:2019},
           {id:'outdoor-cam',    label:'Outdoor Camera',           svg:'outdoor-camera'},
-          {id:'spotlight-pro',  label:'Vivint Spotlight Pro',     svg:'spotlight'},
+          {id:'spotlight-pro',  label:'Vivint Spotlight Pro',     svg:'spotlight', year:2022},
         ]
       },
       {
         id:'doorbell-cams', label:'Doorbell Cameras', svg:'doorbell',
         devices:[
-          {id:'doorbell-pro-2', label:'Doorbell Camera Pro Gen 2', svg:'doorbell-camera'},
-          {id:'doorbell-pro-1', label:'Doorbell Camera Pro',       svg:'doorbell-camera'},
-          {id:'doorbell-cam',   label:'Vivint Doorbell Camera',    svg:'doorbell-camera'},
-          {id:'chime-ext',      label:'Vivint Chime Extender',     svg:'chime-extender'},
+          {id:'doorbell-pro-2', label:'Doorbell Camera Pro Gen 2', svg:'doorbell-camera', year:2022},
+          {id:'doorbell-pro-1', label:'Doorbell Camera Pro',       svg:'doorbell-camera', year:2020},
+          {id:'doorbell-cam',   label:'Vivint Doorbell Camera',    svg:'doorbell-camera', year:2015},
+          {id:'chime-ext',      label:'Vivint Chime Extender',     svg:'chime-extender', year:2024},
         ]
       },
       {
         id:'indoor-cams', label:'Indoor Cameras', svg:'cam-indoor',
         devices:[
-          {id:'indoor-pro',  label:'Indoor Camera Pro',    svg:'camera-indoor'},
-          {id:'indoor-cam',  label:'Vivint Indoor Camera', svg:'camera-indoor'},
+          {id:'indoor-pro',  label:'Indoor Camera Pro',    svg:'camera-indoor', year:2022},
+          {id:'indoor-cam',  label:'Vivint Indoor Camera', svg:'camera-indoor', year:2016},
         ]
       },
       {
         id:'storage', label:'Storage & Playback', svg:'vid-clip',
         devices:[
-          {id:'vivint-playback',    label:'Vivint Playback',    svg:'video-playback'},
-          {id:'vivint-smart-drive', label:'Vivint Smart Drive', svg:'smart-drive'},
+          {id:'vivint-playback',    label:'Vivint Playback',    svg:'video-playback', year:2022},
+          {id:'vivint-smart-drive', label:'Vivint Smart Drive', svg:'smart-drive', year:2014},
         ]
       },
     ]
@@ -2375,12 +2382,12 @@ const TS_TREE = [
   {
     id:'panels', label:'Panels & Touchscreens', svg:'hub', flat:true,
     devices:[
-      {id:'smart-hub-pro2',  label:'Smart Hub Pro 2',          svg:'smart-hub'},
-      {id:'smart-hub',       label:'Vivint Smart Hub',         svg:'smart-hub'},
-      {id:'skycontrol',      label:'SkyControl',               svg:'smart-hub'},
-      {id:'keypad-std',      label:'Vivint Keypad',            svg:'keypad'},
-      {id:'keypad-lr',       label:'Vivint Keypad Long Range', svg:'keypad'},
-      {id:'security-hub-pnl',label:'Vivint Security Hub',      svg:'security-hub'},
+      {id:'smart-hub-pro2',  label:'Smart Hub Pro 2',          svg:'smart-hub', year:2026},
+      {id:'smart-hub',       label:'Vivint Smart Hub',         svg:'smart-hub', year:2018},
+      {id:'skycontrol',      label:'SkyControl',               svg:'smart-hub', year:2014},
+      {id:'keypad-std',      label:'Vivint Keypad',            svg:'keypad', year:2021},
+      {id:'keypad-lr',       label:'Vivint Keypad Long Range', svg:'keypad', year:2022},
+      {id:'security-hub-pnl',label:'Vivint Security Hub',      svg:'security-hub', year:2022},
     ]
   },
   {
@@ -2389,17 +2396,17 @@ const TS_TREE = [
       {
         id:'smart-locks', label:'Smart Locks', svg:'lock-locked',
         devices:[
-          {id:'lock-892', label:'Smart Lock 892', svg:'smart-lock'},
-          {id:'lock-910', label:'Smart Lock 910', svg:'smart-lock'},
-          {id:'lock-888', label:'Smart Lock 888', svg:'smart-lock'},
+          {id:'lock-892', label:'Smart Lock 892', svg:'smart-lock', year:2014},
+          {id:'lock-910', label:'Smart Lock 910', svg:'smart-lock', year:2017},
+          {id:'lock-888', label:'Smart Lock 888', svg:'smart-lock', year:2022},
         ]
       },
       {
         id:'garage-doors', label:'Garage Doors', svg:'garage-icon',
         devices:[
-          {id:'garage-ctrl',  label:'Smart Garage Door Controller',     svg:'garage-closed'},
-          {id:'myq-basic',    label:'myQ Garage Door Controller',       svg:'garage-closed'},
-          {id:'myq-smart',    label:'myQ Smart Garage Door Controller', svg:'garage-closed'},
+          {id:'garage-ctrl',  label:'Smart Garage Door Controller',     svg:'garage-closed', year:2014},
+          {id:'myq-basic',    label:'myQ Garage Door Controller',       svg:'garage-closed', year:2020},
+          {id:'myq-smart',    label:'myQ Smart Garage Door Controller', svg:'garage-closed', year:2020},
         ]
       },
     ]
@@ -2442,27 +2449,27 @@ const TS_TREE = [
   {
     id:'thermostats', label:'Thermostats', svg:'smart-thermo', flat:true,
     devices:[
-      {id:'vivint-thermo', label:'Vivint Smart Thermostat', svg:'smart-thermostat'},
-      {id:'nest-thermo',   label:'Google Nest Thermostat',  svg:'smart-thermostat'},
+      {id:'vivint-thermo', label:'Vivint Smart Thermostat', svg:'smart-thermostat', year:2016},
+      {id:'nest-thermo',   label:'Google Nest Thermostat',  svg:'smart-thermostat', year:2016},
     ]
   },
   {
     id:'lighting', label:'Lighting & Appliance', svg:'light-icon', flat:true,
     devices:[
       {id:'philips-hue',     label:'Philips Hue',                  svg:'light-on'},
-      {id:'smart-plug-dev',  label:'Vivint Smart Plug',            svg:'smart-plug'},
-      {id:'smart-bulbs',     label:'Smart Light Bulbs',            svg:'light-on'},
-      {id:'light-switch',    label:'Vivint Smart Light Switch',    svg:'light-switch'},
-      {id:'lighting-bridge', label:'Vivint Smart Lighting Bridge', svg:'smart-speaker'},
+      {id:'smart-plug-dev',  label:'Vivint Smart Plug',            svg:'smart-plug', year:2014},
+      {id:'smart-bulbs',     label:'Smart Light Bulbs',            svg:'light-on', year:2024},
+      {id:'light-switch',    label:'Vivint Smart Light Switch',    svg:'light-switch', year:2024},
+      {id:'lighting-bridge', label:'Vivint Smart Lighting Bridge', svg:'smart-speaker', year:2024},
     ]
   },
   {
     id:'integrations', label:'Smarter with Vivint', svg:'speaker-icon', flat:true,
     devices:[
       {id:'google-home',    label:'Google Home',            svg:'smart-speaker'},
-      {id:'google-nest-int',label:'Google Nest Thermostat', svg:'smart-thermostat'},
+      {id:'google-nest-int',label:'Google Nest Thermostat', svg:'smart-thermostat', year:2016},
       {id:'hue-int',        label:'Philips Hue',            svg:'light-on'},
-      {id:'amazon-echo',    label:'Amazon Echo',            svg:'smart-speaker'},
+      {id:'amazon-echo',    label:'Amazon Echo',            svg:'smart-speaker', year:2016, discontinued:'Nov 2025'},
     ]
   },
 ];
@@ -2813,6 +2820,28 @@ function tsDevCount(cat) {
   return cat.subcategories.reduce((n,s)=>n+s.devices.length, 0);
 }
 
+// ── DEVICE AGE / LEGACY TIERS ───────────────────────────────────
+function tsDeviceAge(dev) {
+  if (!dev.year) return null;
+  return new Date().getFullYear() - dev.year;
+}
+function tsDeviceTier(dev) {
+  if (dev.discontinued) return 'current';
+  const age = tsDeviceAge(dev);
+  if (age === null) return 'current';
+  if (age >= 10) return 'legacy';
+  if (age >= 5) return 'older';
+  return 'current';
+}
+function tsToggleOlder() {
+  tsNav.showOlder = !tsNav.showOlder;
+  tsRender();
+}
+function tsSetLegacyOnly(val) {
+  tsNav.legacyOnly = val;
+  tsRender();
+}
+
 // ── MAIN ENTRY ────────────────────────────────────────────────
 function initTS() {
   tsNav = { view:'cats', cat:null, sub:null, dev:null };
@@ -2886,11 +2915,15 @@ function tsDrillCat(catId) {
   const cat = tsGetCat(catId);
   if (!cat) return;
   tsNav.cat = catId;
+  tsNav.showOlder = false;
+  tsNav.legacyOnly = false;
   tsNav.view = cat.flat ? 'devs' : 'subs';
   tsRender();
 }
 function tsDrillSub(subId) {
   tsNav.sub = subId;
+  tsNav.showOlder = false;
+  tsNav.legacyOnly = false;
   tsNav.view = 'devs';
   tsRender();
 }
@@ -2938,6 +2971,24 @@ function tsRenderSubs() {
 }
 
 // ── RENDER: DEVICE LIST ───────────────────────────────────────
+function tsDevItemHtml(dev) {
+  const age = tsDeviceAge(dev);
+  let badge = '';
+  if (dev.discontinued) {
+    badge = `<span class="ts-dev-badge ts-dev-badge-disc">Discontinued ${dev.discontinued}</span>`;
+  } else if (age !== null) {
+    badge = `<span class="ts-dev-badge">${dev.year}${age>=10?' · Legacy':''}</span>`;
+  }
+  return `
+        <div class="ts-dev-item" onclick="tsDrillDev('${dev.id}')">
+          ${dev.svg
+            ? `<div class="ts-dev-icon" data-svg="${dev.svg}"></div>`
+            : `<div class="ts-dev-icon" style="opacity:.3;font-size:16px;">○</div>`
+          }
+          <div class="ts-dev-label">${dev.label}${badge}</div>
+          <div class="ts-dev-chevron">›</div>
+        </div>`;
+}
 function tsRenderDevs() {
   const cat = tsGetCat(tsNav.cat);
   const devices = tsNav.sub
@@ -2945,19 +2996,28 @@ function tsRenderDevs() {
     : cat?.devices;
   const subCat = tsNav.sub ? tsGetSub(cat, tsNav.sub) : null;
   const c = document.getElementById('ts-content');
+
+  const current = (devices||[]).filter(d=>tsDeviceTier(d)==='current');
+  const older   = (devices||[]).filter(d=>tsDeviceTier(d)!=='current');
+  const olderVisible = tsNav.legacyOnly ? older.filter(d=>tsDeviceTier(d)==='legacy') : older;
+
   c.innerHTML = `
     <div class="ts-section-label">${subCat?.label || cat?.label}</div>
     <div class="ts-dev-list">
-      ${(devices||[]).map(dev=>`
-        <div class="ts-dev-item" onclick="tsDrillDev('${dev.id}')">
-          ${dev.svg
-            ? `<div class="ts-dev-icon" data-svg="${dev.svg}"></div>`
-            : `<div class="ts-dev-icon" style="opacity:.3;font-size:16px;">○</div>`
-          }
-          <div class="ts-dev-label">${dev.label}</div>
-          <div class="ts-dev-chevron">›</div>
-        </div>`).join('')}
-    </div>`;
+      ${current.map(tsDevItemHtml).join('')}
+    </div>
+    ${older.length ? `
+      <button class="ts-show-more-btn" onclick="tsToggleOlder()">${tsNav.showOlder ? 'Hide older equipment ↑' : `Show older equipment (${older.length}) ↓`}</button>
+      ${tsNav.showOlder ? `
+        <div class="ts-legacy-tabs">
+          <button class="ts-legacy-tab ${!tsNav.legacyOnly?'active':''}" onclick="tsSetLegacyOnly(false)">All older (5+ yrs)</button>
+          <button class="ts-legacy-tab ${tsNav.legacyOnly?'active':''}" onclick="tsSetLegacyOnly(true)">Legacy only (10+ yrs)</button>
+        </div>
+        <div class="ts-dev-list">
+          ${olderVisible.map(tsDevItemHtml).join('')}
+        </div>
+      ` : ''}
+    ` : ''}`;
   renderIcons(c);
 }
 
